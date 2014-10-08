@@ -12,7 +12,7 @@
 		{
 			$array = Input::all();
 			$customers = new Customers;
-			$customers->saveCutomers($array);
+			$customers->saveCustomers($array);
 
 		}
 	}

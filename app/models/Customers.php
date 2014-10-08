@@ -12,7 +12,7 @@
 			$result = $customers->get();
 			return $result;
 		}
-		public function saveCutomers($array)
+		public function saveCustomers($array)
 		{
 			$customers  = new Customers;
 			$result = $customers->insert([
@@ -20,7 +20,6 @@
 					'customers_address' => $array['cutomers_address'],
 					'customers_tel' =>$array['cutomers_tel'],
 				]);
-	
-			return $result;
+
 		}
 	}
