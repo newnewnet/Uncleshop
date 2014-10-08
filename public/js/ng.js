@@ -1,5 +1,5 @@
-angular.module('upcleshopApp', [])
-.controller('upcleshopController', ['$scope','bill', function($scope,bill) 
+angular.module('uncleshopApp', [])
+.controller('uncleshopController', ['$scope','bill', function($scope,bill) 
 {
 	bill.getBill(function(data, status, headers, config)
 	{
@@ -11,7 +11,7 @@ angular.module('upcleshopApp', [])
 	return {
 		getBill:function(callback)
 		{
-			$http({method: 'GET', url: '/bill'}).
+			$http({method: 'GET', url: '/cutomers'}).
 		  success(callback).
 		  error(function(data, status, headers, config) {
 		  });

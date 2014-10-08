@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="upcleshopApp">
+<html lang="en" ng-app="uncleshopApp">
 	<head>
 		<meta charset="UTF-8">
 		<title>Upcleshop</title>
@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="css/main.css">
 	</head>
 
-	<body ng-controller="upcleshopController">
+	<body ng-controller="uncleshopController">
 		<div >		
 		</div>
 	</body>
