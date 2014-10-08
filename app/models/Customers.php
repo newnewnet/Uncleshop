@@ -8,6 +8,12 @@
 
 		public function getCustomers()
 		{
-			return "555";
+			$customers  = new Customers;
+			$result = $customers->get();
+			return $result;
+		}
+		public function saveCutomers($array)
+		{
+			
 		}
 	}
