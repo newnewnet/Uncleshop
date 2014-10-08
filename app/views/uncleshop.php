@@ -23,7 +23,7 @@
 		    rootpath: ":/a.com/"
 		  };
 		</script>
-		<script src="js/less/less.js" type="text/javascript"></script>
+		<script src="js/less.js" type="text/javascript"></script>
 		<!--script src="less.js"></script-->
 	
 	</head>
