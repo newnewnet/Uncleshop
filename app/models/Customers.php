@@ -14,6 +14,13 @@
 		}
 		public function saveCutomers($array)
 		{
-			
+			$customers  = new Customers;
+			$result = $customers->insert([
+					'customers_name' => $array['cutomers_name'],
+					'customers_address' => $array['cutomers_address'],
+					'customers_tel' =>$array['cutomers_tel'],
+				]);
+	
+			return $result;
 		}
 	}

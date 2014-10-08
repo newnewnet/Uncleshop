@@ -2,17 +2,17 @@
 
 	class UncleshopApiController extends Controller
 	{
-		public function getCutomers()
+		public function getCustomers()
 		{	
 			$customers = new Customers;
 			$result = $customers->getCustomers();
 			return $result;
 		}
-		public function saveCutomers()
+		public function saveCustomers()
 		{
 			$array = Input::all();
 			$customers = new Customers;
-			$result = $customers->saveCutomers($array);
-			return $result;
+			$customers->saveCutomers($array);
+
 		}
 	}

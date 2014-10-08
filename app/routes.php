@@ -16,6 +16,6 @@ Route::get('/', function()
 	return View::make('uncleshop');
 });
 
-Route::get('cutomers','UncleshopApiController@getCutomers');
+Route::get('customers','UncleshopApiController@getCustomers');
 
-Route::get('saveCutomers','UncleshopApiController@saveCutomers');
+Route::get('saveCustomers','UncleshopApiController@saveCustomers');
