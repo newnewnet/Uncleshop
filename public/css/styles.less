@@ -1,0 +1,103 @@
+@color-bg: #EEEEEE;
+@color-element: #00B16A;
+@color-responsive: yellow; /*just for test only*/
+@font-content: 'Roboto Condensed', sans-serif;
+html, body{
+	margin: 0;
+	padding: 0;
+	background-color: @color-bg;
+}
+
+.TEXT-LFET {
+	text-align: left;
+}
+
+.TEXT-CENTER {
+	text-align: center;
+}
+
+.TEXT-RIGHT {
+	text-align: right;
+}
+
+.TEXT-VERTICAL-MIDDLE {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.LFET {
+	left: 0px;
+}
+
+.RIGHT {
+	right: 0px;
+}
+
+.FLOAT-LEFT {
+	float: left;
+}
+
+.FLOAT-RIGHT {
+	float: right;
+}
+
+.COLOR-BG{
+	background-color: @color-element;
+}
+
+/* Extra Small devices (phones, less than 768px) */
+@screen-xs-max: 767px;
+@media (max-width: @screen-xs-max) {
+
+	.warp_tab_hide {
+		position: absolute;
+		height: 100%;
+		width: 150px;
+		
+		color: white;
+		background-color: red;
+
+	    transition-property: left;
+	    transition-duration: 0.3s, .3s;
+	    transition-timing-function: ease, ease;
+	    transition-delay: 0s, 0s;
+	    left: -150px;
+	    z-index: 200;
+	}
+
+	.warp_tap_show {
+	    transition-property: left;
+	    transition-duration: 0.3s, .3s;
+	    transition-timing-function: ease, ease;
+	    transition-delay: 0s, 0s;
+	    left: 0px;
+	    z-index: 200;
+	}
+
+	.container-top-label {
+		width: 50%;
+		font-family: @font-content;
+		font-size: 1em;
+	}
+
+}
+
+/* Small devices (tablets, 768px and up) */
+/*Portrait Tablet (ex. ipad)*/
+@screen-sm-min: 768px;
+@media (min-width: @screen-sm-min) { 
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+/*Landscape Tablet (ex. ipad)*/
+@screen-md-min: 992px;
+@media (min-width: @screen-md-min) { 
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@screen-lg-min: 1200px;
+@media (min-width: @screen-lg-min) { 
+
+}
