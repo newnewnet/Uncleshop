@@ -12,7 +12,13 @@
 		{
 			$array = Input::all();
 			$customers = new Customers;
-			$customers->saveCustomers($array);
+			$customers->insertCustomers($array);
 
+		}
+		public function saveAdmin()
+		{
+			$array = Input::all();
+			$admin = new Admin;
+			$admin->insertAdmin($array);
 		}
 	}

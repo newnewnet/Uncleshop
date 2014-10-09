@@ -12,7 +12,7 @@
 			$result = $customers->get();
 			return $result;
 		}
-		public function saveCustomers($array)
+		public function insertCustomers($array)
 		{
 			$customers  = new Customers;
 			$result = $customers->insert([
