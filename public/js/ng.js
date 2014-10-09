@@ -4,6 +4,13 @@ angular.module('uncleshopApp', [])
 	$scope.WarpTab = false;
 	$scope.WarpTabSlide = function(){
 		$scope.WarpTab = !$scope.WarpTab;
+		if($scope.WarpTab)
+		{
+			$scope.WarpTab = 'slile'
+		}
+		else{
+			$scope.WarpTab = ''
+		}
 		console.log($scope.WarpTab);
 	};
 

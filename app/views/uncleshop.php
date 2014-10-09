@@ -56,7 +56,7 @@
 			</div>
 		</div>
 
-		<div class="warp_tab_hide" ng-class="{warp_tab_show: WarpTab}">
+		<div class="warp_tab_hide" ng-class="WarpTab">
 			asddf
 		</div>
 
