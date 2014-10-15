@@ -6,7 +6,7 @@ angular.module('uncleshopApp', [])
 		$scope.WarpTab = !$scope.WarpTab;
 		if($scope.WarpTab)
 		{
-			$scope.WarpTab = 'slile'
+			$scope.WarpTab = 'slide'
 		}
 		else{
 			$scope.WarpTab = ''
