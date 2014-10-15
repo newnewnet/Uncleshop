@@ -2,6 +2,17 @@
 @color-element: #00B16A;
 @color-responsive: yellow; /*just for test only*/
 @font-content: 'Roboto Condensed', sans-serif;
+
+@font-face {
+  font-family: 'thaisans_semibold';
+  src: url('/fonts/thaisansneue-semibold-webfont.eot');
+  src: url('/fonts/thaisansneue-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/thaisansneue-semibold-webfont.woff') format('woff'),
+       url('/fonts/thaisansneue-semibold-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html, body{
 	margin: 0;
 	padding: 0;
@@ -44,6 +55,228 @@ html, body{
 .COLOR-BG{
 	background-color: @color-element;
 }
+
+@body-bg: #fff;
+@border-radius-small:3px;
+
+.container-fluid {
+  min-width: 748px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 30px;
+}
+
+header { 
+	background-color: #FFF;
+	width: 100%;
+	height: 52px;
+  .wrapper {
+    max-width: 1170px;
+    margin: auto;
+  	.separate {
+  	  padding: 9px 30px 0 30px;
+  		#logo {
+  			position:relative;
+  		  width: 148px;
+  		  height: 33px;
+				img {
+					float:left;
+					width :35px;
+				}
+				.text {
+					line-height: 38px;
+					margin-left: 40px;
+					font-size: 22px;
+				}
+  		}
+  	}
+  }
+}
+
+.tabmenu {
+	margin-top: 20px;
+	padding:20px;
+	background-color: #fff;
+	.titile-menu {
+		font: 24px/18px 'thaisans_semibold';
+		color: #555;
+		height: 41px;
+		padding: 12px 0px 3px 15px;
+		margin-bottom: 18px;
+		border-bottom: solid 2px #ddd;
+		box-sizing: border-box;
+		img{
+			width: 23px;
+			margin-right: 4px;
+			float: left;
+		}
+	}
+	.box {
+		font-family: 'thaisans_semibold';
+		font-size:20px;
+		cursor:pointer;
+		background-color: @body-bg;
+		/*width: 250px;*/
+		height: 44px;
+		border-top: 1px solid #dcdcdc;
+		border-left: 1px solid #dcdcdc;
+		/*border-right: 1px solid #dcdcdc;*/
+		&:first-child {
+			-webkit-border-top-left-radius: @border-radius-small;
+			-moz-border-top-left-radius: @border-radius-small;
+			border-top-left-radius: @border-radius-small;
+		}
+		&:last-child {
+			border-bottom: 1px solid #dcdcdc;
+		}
+		&.save-bill {
+			-webkit-box-shadow: -10px 0 0 0 #1196d1 inset;
+			-moz-box-shadow: -10px 0 0 0 #1196d1 inset;
+			box-shadow: -10px 0 0 0 #1196d1 inset;
+			&:hover, &:focus {
+				-webkit-box-shadow: -10px 0 0 0 #0a9fe1 inset;
+				-moz-box-shadow: -10px 0 0 0 #0a9fe1 inset;
+				box-shadow: -10px 0 0 0 #0a9fe1 inset;
+			}
+			&.none {
+				box-shadow: 0;
+			}
+		}
+		&.amount-bill {
+			-webkit-box-shadow: -10px 0 0 0 #FBA01E inset;
+			-moz-box-shadow: -10px 0 0 0 #FBA01E inset;
+			box-shadow: -10px 0 0 0 #FBA01E inset;
+			&:hover, &:focus {
+				-webkit-box-shadow: -10px 0 0 0 #FBA01E inset;
+				-moz-box-shadow: -10px 0 0 0 #FBA01E inset;
+				box-shadow: -10px 0 0 0 #FBA01E inset;
+			}
+			&.none {
+				box-shadow: 0;
+			}
+		}
+		&.pays-who  {
+			-webkit-box-shadow: -10px 0 0 0 #bdc72a inset;
+			-moz-box-shadow: -10px 0 0 0 #bdc72a inset;
+			box-shadow: -10px 0 0 0 #bdc72a inset;
+			&:hover, &:focus {
+				-webkit-box-shadow: -10px 0 0 0 #cdd81c inset;
+				-moz-box-shadow: -10px 0 0 0 #cdd81c inset;
+				box-shadow: -10px 0 0 0 #cdd81c inset;
+				.icon2 {
+					background: url(/img/menu-1.png) no-repeat -50px -50px;
+				}
+			}
+			&.none {
+				box-shadow: 0;
+			}
+		}
+		.icon {
+			width: 44px;
+			height: 44px;
+			float: left;
+			&.icon1 {
+				background-color: #1196d1;
+				border-top-left-radius: @border-radius-small;
+				img {
+					width: 100%;
+					height:100%;
+				}
+				&:hover, &:focus {
+					background-color: #0a9fe1;
+				}
+			}
+			&.icon2 {
+				background-color: #FBA01E;
+				border-top-left-radius: @border-radius-small;
+				img {
+					width: 100%;
+					height:100%;
+				}
+				&:hover, &:focus {
+					background-color:#FBA001;
+				}
+			}
+			&.icon3 {
+				background-color: #bdc72a;
+				border-top-left-radius: @border-radius-small;
+				img {
+					width: 100%;
+					height:100%;
+				}
+				&:hover, &:focus {
+					background-color:#cdd81c;
+				}
+			}
+		}
+		span {
+			display: block;
+	    float: left;
+	    padding: 0px 0 0 0px;
+		}
+		.text {
+			padding: 16px 0px 0px 0px;
+			line-height: 13px;
+			margin-left: 66px;
+		}
+	}
+}
+.box-save-bill {
+	margin-top: 20px;
+	.titile {
+		font: 24px/18px 'thaisans_semibold';
+		color: #555;
+		height: 41px;
+		padding: 12px 0px 3px 15px;
+		margin-bottom: 18px;
+		border-bottom: solid 2px #ddd;
+		box-sizing: border-box;
+	}
+	.box-bill {
+		height: 80px;
+		background-color: #fff;
+	}
+}
+
+
+.box-amount-bill {
+	margin-top: 20px;
+	.titile {
+		font: 24px/18px 'thaisans_semibold';
+		color: #555;
+		height: 41px;
+		padding: 12px 0px 3px 15px;
+		margin-bottom: 18px;
+		border-bottom: solid 2px #ddd;
+		box-sizing: border-box;
+	}
+	.box-bill {
+		height: 80px;
+		background-color: #fff;
+	}
+}
+
+
+.box-pays-bill{
+	margin-top: 20px;
+	.titile {
+		font: 24px/18px 'thaisans_semibold';
+		color: #555;
+		height: 41px;
+		padding: 12px 0px 3px 15px;
+		margin-bottom: 18px;
+		border-bottom: solid 2px #ddd;
+		box-sizing: border-box;
+	}
+	.box-bill {
+		height: 80px;
+		background-color: #fff;
+	}
+}
+
+
 
 /* Extra Small devices (phones, less than 768px) */
 @screen-xs-max: 767px;
