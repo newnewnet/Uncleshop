@@ -1,5 +1,5 @@
-angular.module('uncleshopApp', [])
-.controller('uncleshopController', ['$scope','bill', function($scope,bill) 
+angular.module('uncleshopApp')
+.controller('uncleshopController', ['$scope','bill','$rootScope', function($scope,bill,$rootScope) 
 {
 	$scope.WarpTab = false;
 	$scope.WarpTabSlide = function(){

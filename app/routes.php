@@ -17,9 +17,16 @@ Route::get('/', function()
 });
 
 
+
 Route::get('customers','UncleshopApiController@getCustomers');
+
+
 Route::get('saveCustomers','UncleshopApiController@saveCustomers');
 
 Route::get('saveAdmin','UncleshopApiController@saveAdmin');
+
+Route::post('login','UncleshopApiController@loginAdmin');
+
+
 
 
