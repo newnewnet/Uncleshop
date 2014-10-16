@@ -6,10 +6,10 @@ angular.module('uncleshopApp', [])
 		$scope.WarpTab = !$scope.WarpTab;
 		if($scope.WarpTab)
 		{
-			$scope.WarpTab = 'slide'
+			$scope.WarpTab = 'slide';
 		}
 		else{
-			$scope.WarpTab = ''
+			$scope.WarpTab = '';
 		}
 		console.log($scope.WarpTab);
 	};

@@ -48,14 +48,15 @@
 	<body ng-controller="uncleshopController">
 
 		<header >
-      <div class="wrapper">
-        <div class="separate">
-          <div id="logo">
-          	<img src="img/icon-bill.png"/>
-          	<div class="text">Uncloshop</div>
-          </div>
-        </div> 
-    </header>
+	      <div class="wrapper">
+	        <div class="separate">
+	          <div id="logo">
+	          	<img src="img/icon-bill.png"/>
+	          	<div class="text">Uncleshop</div>
+	          </div>
+	        </div> 
+	    </header>
+	    
 		<div class="container">
 			<!-- <div class="container-top-label FLOAT-LEFT TEXT-LEFT">
 				<i class="fa fa-bars" ng-click="WarpTabSlide()"></i>
@@ -64,27 +65,29 @@
 				Nuttapon
 			</div> -->
 			<div class="col-xs-12 col-sm-12 col-md-3" ng-init="tabColor=1">
-		    <div class="tabmenu">
-		    	<div class="titile-menu"><img src="https://cdn4.iconfinder.com/data/icons/finance-3/512/14-512.png"/><span style="line-height: 24px;">เมนูการทำบิล</span></div>	
-		    	<div class="box"  data-ng-class="{'save-bill':tabColor==1}"  data-ng-click="changeColor(tabColor=1)">
-		    		<span class="icon icon1" >
-		    			<img src="img/icon-bill.png"/>
-		    		</span>
-		    		<div class="text">เพิ่มบิล</div>
-		    	</div>
-		    	<div class="box"  data-ng-click="tabColor=2" data-ng-class="{'amount-bill ':tabColor==2}">
-		    		<span class="icon icon2" >
-		    			<img src="img/icon-taxes.png"/>
-		    		</span>
-		    		<div class="text">จำนวนบิลของวันนี้</div>
-		    	</div>
-		    	<div class="box"  data-ng-click="tabColor=3" data-ng-class="{'pays-who':tabColor==3}">
-		    		<span class="icon icon3" >
-		    			<img src="img/user-icon.png"/>
-		    		</span>
-		    		<div class="text">ใครมาจ่ายงวดบ้าง</div>
-		    	</div>
-		  	</div>
+			    <div class="tabmenu">
+			    	<div class="titile-menu"><img src="img/icon-title.png"/>
+			    		<span style="line-height: 1em;">เมนูการทำบิล</span>
+			    	</div>	
+			    	<div class="box"  data-ng-click="tabColor=1"  data-ng-class="{'save-bill':tabColor==1}">
+			    		<span class="icon icon1" >
+			    			<img src="img/icon-bill.png"/>
+			    		</span>
+			    		<div class="text">เพิ่มบิล</div>
+			    	</div>
+			    	<div class="box"  data-ng-click="tabColor=2" data-ng-class="{'amount-bill ':tabColor==2}">
+			    		<span class="icon icon2" >
+			    			<img src="img/icon-taxes.png"/>
+			    		</span>
+			    		<div class="text">จำนวนบิลของวันนี้</div>
+			    	</div>
+			    	<div class="box"  data-ng-click="tabColor=3" data-ng-class="{'pays-who':tabColor==3}">
+			    		<span class="icon icon3" >
+			    			<img src="img/user-icon.png"/>
+			    		</span>
+			    		<div class="text">ใครมาจ่ายงวดบ้าง</div>
+			    	</div>
+			  	</div>
 			</div>
 
 			<div class="col-xs-12 col-sm-12 col-md-9">
@@ -107,8 +110,8 @@
 		</div>
 
 		
-<!-- 
-		<div class="warp_tab_hide" ng-class="WarpTab">
+
+		<!-- <div class="warp_tab_hide" ng-class="WarpTab">
 			asddf
 		</div> -->
 
