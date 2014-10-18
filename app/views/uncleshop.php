@@ -56,7 +56,9 @@
 			  <div class="separate">
 			    <div id="logo" ng-click="switchMenu()">
 			    	<img src="img/icon-bill.png"/>
+
 			    	<div class="text">{{loginText}}</div>
+
 			    </div>
 			  </div>
 			  <div class="user" ng-show="pageFlug">
@@ -82,19 +84,25 @@
 				    	<div class="titile-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
 				    	</div>	
+
 				    	<div class="box"  data-ng-click="changTab(1); switchMenu();"  data-ng-class="{'save-bill':tabColor==1}">
+
 				    		<span class="icon icon1" >
 				    			<img src="img/icon-bill.png"/>
 				    		</span>
 				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
+
 				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill ':tabColor==2}">
+
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-taxes.png"/>
 				    		</span>
 				    		<div class="text">ตรวจสอบบิล</div>
 				    	</div>
+
 				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
+
 				    		<span class="icon icon3" >
 				    			<img src="img/user-icon.png"/>
 				    		</span>
@@ -105,17 +113,44 @@
 
 				<div class="col-xs-12 col-sm-12 col-md-9">
 					<div class="box-save-bill" ng-show="tabColor==1">
-						<div class="titile">เพิ่มบิล</div>	
-						<div class="box-bill"></div>
+						<div class="titile">ข้อมูลลูกค้า</div>	
+						<div class="box-bill">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-3 col-md-3 control-label">เลขบัตรประชาชน</label>
+								    <div class="col-sm-5 col-md-5">
+								    	<input type="textbox" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 col-md-3 control-label">ชื่อ</label>
+								    <div class="col-sm-5 col-md-5">
+								    	<input type="textbox" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 col-md-3 control-label">สกุล</label>
+								    <div class="col-sm-5 col-md-5">
+								    	<input type="textbox" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 col-md-3 control-label">ที่อยู่</label>
+								    <div class="col-sm-5 col-md-5">
+								    	<input type="textbox" class="form-control">
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<div class="box-amount-bill" ng-show="tabColor==2">
-						<div class="titile">จำนวนบิลของวันนี้</div>	
+						<div class="titile">ตรวจสอบบิล</div>	
 						<div class="box-bill"></div>
 					</div>
 
 					<div class="box-pays-bill" ng-show="tabColor==3">
-						<div class="titile">ใครมาจ่ายงวดบ้าง</div>	
+						<div class="titile">ข้อมูลการจ่ายบิล</div>	
 						<div class="box-bill"></div>
 					</div>
 				</div>
