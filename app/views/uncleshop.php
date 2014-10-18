@@ -21,11 +21,9 @@
 	    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 
 		<!-- Javascript File -->
-		
 		<script src="js/index.js"></script>
 		<script src="js/constant/angular-local-storage.js"></script>
 		<script src="js/login.js"></script>
-		
 		<script src="js/ng.js"></script>
 
 
@@ -52,10 +50,10 @@
 	</head>
 
 	<body ng-controller="indexController">
-		<header >
+		<header>
 			<div class="wrapper">
 			  <div class="separate">
-			    <div id="logo">
+			    <div id="logo" ng-click="switchMenu()">
 			    	<img src="img/icon-bill.png"/>
 			    	<div class="text">Uncleshop</div>
 			    </div>
@@ -77,34 +75,28 @@
 			</div>
 
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
-				<!-- <div class="container-top-label FLOAT-LEFT TEXT-LEFT">
-					<i class="fa fa-bars" ng-click="WarpTabSlide()"></i>
-				</div>
-				<div class="container-top-label FLOAT-LEFT TEXT-RIGHT">
-					Nuttapon
-				</div> -->
-				<div class="col-xs-12 col-sm-12 col-md-3" ng-init="tabColor=1">
+				<div class="col-md-3 con-tabmenu" ng-init="tabColor=1" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="titile-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
 				    	</div>	
-				    	<div class="box"  data-ng-click="tabColor=1"  data-ng-class="{'save-bill':tabColor==1}">
+				    	<div class="box"  data-ng-click="tabColor=1; switchMenu()"  data-ng-class="{'save-bill':tabColor==1}">
 				    		<span class="icon icon1" >
 				    			<img src="img/icon-bill.png"/>
 				    		</span>
 				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
-				    	<div class="box"  data-ng-click="tabColor=2" data-ng-class="{'amount-bill ':tabColor==2}">
+				    	<div class="box"  data-ng-click="tabColor=2; switchMenu()" data-ng-class="{'amount-bill ':tabColor==2}">
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-taxes.png"/>
 				    		</span>
-				    		<div class="text">จำนวนบิลของวันนี้</div>
+				    		<div class="text">ตรวจสอบบิล</div>
 				    	</div>
-				    	<div class="box"  data-ng-click="tabColor=3" data-ng-class="{'pays-who':tabColor==3}">
+				    	<div class="box"  data-ng-click="tabColor=3; switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
 				    		<span class="icon icon3" >
 				    			<img src="img/user-icon.png"/>
 				    		</span>
-				    		<div class="text">ใครมาจ่ายงวดบ้าง</div>
+				    		<div class="text">ข้อมูลการจ่ายบิล</div>
 				    	</div>
 				  	</div>
 				</div>
@@ -124,7 +116,6 @@
 						<div class="titile">ใครมาจ่ายงวดบ้าง</div>	
 						<div class="box-bill"></div>
 					</div>
-
 				</div>
 			</div>
 

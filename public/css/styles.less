@@ -55,6 +55,11 @@ html, body{
 	background-color: @color-element;
 }
 
+.transition (@element: left, @time: .5s) {
+    -webkit-transition: @element @time; /* For Safari 3.1 to 6.0 */
+    transition: @element @time;
+}
+
 @body-bg: #fff;
 @border-radius-small:3px;
 
@@ -135,6 +140,10 @@ header {
 	background: #fff;
 	margin-top: 10%;
 	box-shadow: 0px 0px 3px #BDBDBD
+}
+
+.con-tabmenu {
+	.transition(left, .3s);	
 }
 
 .tabmenu {
@@ -257,7 +266,7 @@ header {
 		.text {
 			padding: 16px 0px 0px 0px;
 			line-height: 13px;
-			margin-left: 66px;
+			margin-left: 53px;
 		}
 	} /*end box*/
 }
@@ -320,30 +329,21 @@ header {
 @screen-xs-max: 767px;
 @media (max-width: @screen-xs-max) {
 
-	.warp_tab_hide {
-		position: absolute;
-		height: 100%;
-		width: 150px;
-		
-		color: white;
-		background-color: red;
-
-	    transition-property: left;
-	    transition-duration: 0.3s, .3s;
-	    transition-timing-function: ease, ease;
-	    transition-delay: 0s, 0s;
-	    left: -150px;
-	    z-index: 200;
-	    &.slide
-	    {
-	    	 left: 0px;
-	    }
-	}
-
 	.container-top-label {
 		width: 50%;
 		font-family: @font-content;
 		font-size: 1em;
+	}
+
+	.con-tabmenu {
+		position: absolute;
+		left: -300px;
+		z-index: 100;
+
+		&.con-tabmenu-slide {
+			.transition(left, .5s);
+			left: 0px;
+		}
 	}
 
 }
@@ -351,8 +351,17 @@ header {
 /* Small devices (tablets, 768px and up) */
 /*Portrait Tablet (ex. ipad)*/
 @screen-sm-min: 768px;
-@media (min-width: @screen-sm-min) { 
+@media (min-width: @screen-sm-min) and (max-width: 991px){ 
+	.con-tabmenu {
+		position: absolute;
+		left: -1024px;
+		z-index: 100;
 
+		&.con-tabmenu-slide {
+			.transition(left, .5s);
+			left: 0px;
+		}
+	}
 }
 
 /* Medium devices (desktops, 992px and up) */

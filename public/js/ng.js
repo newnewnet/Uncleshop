@@ -1,18 +1,20 @@
 angular.module('uncleshopApp')
 .controller('uncleshopController', ['$scope','bill','$rootScope', function($scope,bill,$rootScope) 
 {
-	$scope.WarpTab = false;
-	$scope.WarpTabSlide = function(){
-		$scope.WarpTab = !$scope.WarpTab;
-		if($scope.WarpTab)
-		{
-			$scope.WarpTab = 'slide';
-		}
-		else{
-			$scope.WarpTab = '';
-		}
-		console.log($scope.WarpTab);
-	};
+
+	
+	// $scope.WarpTab = false;
+	// $scope.WarpTabSlide = function(){
+	// 	$scope.WarpTab = !$scope.WarpTab;
+	// 	if($scope.WarpTab)
+	// 	{
+	// 		$scope.WarpTab = 'slide';
+	// 	}
+	// 	else{
+	// 		$scope.WarpTab = '';
+	// 	}
+	// 	console.log($scope.WarpTab);
+	// };
 
 	// $scope.WarpTab = 'warp-tab-hide';
 	// $scope.WarpTabSlide = function(){
