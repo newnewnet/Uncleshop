@@ -1,20 +1,17 @@
-angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
-
+angular.module('uncleshopApp',['LocalStorageModule','directive.format', 'directive.focusMe'])
 .controller('indexController', ['$scope','localStorageService','$rootScope', function($scope,localStorageService,$rootScope) 
 {
 	$rootScope.pageFlug = false;
 	$rootScope.admin = '';
-
 	$rootScope.loginText = 'Uncleshop';
+
+	$rootScope.userName_focus = true;
+
 	$scope.menu_slide = false;
 	$scope.currencyVal = 0;
-
-
-
-
 	$scope.popupLogoutFlug = false;
 
-	
+	console.log($rootScope.userName_focus);
 
 	if(localStorageService.get('admin_id') != null )
 	{
@@ -27,7 +24,6 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 			$scope.menu_slide = !$scope.menu_slide;
 		else
 			$scope.menu_slide = !$scope.menu_slide;
-		console.log($rootScope.logo_text);
 	};
 
 	$scope.popupLogout = function()

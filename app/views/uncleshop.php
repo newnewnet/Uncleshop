@@ -54,11 +54,8 @@
 		<header>
 			<div class="wrapper">
 			  <div class="separate">
-			    <div id="logo" ng-click="switchMenu()">
-			    	<img src="img/icon-bill.png"/>
-
-			    	<div class="text">{{loginText}}</div>
-
+			    <div id="logo">
+			    	<div class="text"><i class="fa fa-bars logo" ng-click="switchMenu()"></i>{{loginText}}</div>
 			    </div>
 			  </div>
 			  <div class="user" ng-show="pageFlug">
@@ -72,7 +69,7 @@
 		<div class="container">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
-				<input type="text" placeholder="username" ng-model="userName">
+				<input type="text" placeholder="username" ng-model="userName" focus-me="userName_focus">
 				<input type="password" placeholder="password" ng-model="passWord">
 				<input type="text" ng-model="test" format="number" />
 				<button type="button" class="btn btn-default" ng-click="login()">Login</button>
@@ -121,28 +118,42 @@
 						<div class="box-bill">
 							<div class="form-horizontal">
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">เลขบัตรประชาชน</label>
+									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
+								    	<input type="textbox" class="form-control" format="number">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" class="form-control">
+									</div>
+									<label class="col-sm-1 col-md-1 control-label">สกุล</label>
+								    <div class="col-sm-4 col-md-4">
 								    	<input type="textbox" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">ชื่อ</label>
-								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" class="form-control">
+									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" class="form-control" format="number">
 									</div>
+									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
+									<div class="col-sm-2 col-md-2">
+										<select class="form-control" ng-model="sex">
+								            <option value="male">ชาย</option>
+								        	<option value="female">หญิง</option>          
+								        </select>
+							        </div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">สกุล</label>
-								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" class="form-control">
+									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+								    <div class="col-sm-9 col-md-9">
+								    	<textarea class="form-control" rows="3"></textarea>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">ที่อยู่</label>
-								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" class="form-control">
-									</div>
+								<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
+									<button type="button" class="btn btn-primary">Test Submit</button>
 								</div>
 							</div>
 						</div>

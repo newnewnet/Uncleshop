@@ -84,13 +84,14 @@ header {
   	  float: left;
   		#logo {
   			position:relative;
-  		  width: 148px;
-  		  height: 33px;
-				img {
-					float:left;
-					width :35px;
-				}
+  		    width: 148px;
+  		    height: 33px;
+  		    text-align: left;
+  		    	.logo {
+  		    		margin-right: 10px;
+  		    	}
 				.text {
+					width: 130%;
 					line-height: 38px;
 					margin-left: 40px;
 					font-size: 22px;
@@ -302,6 +303,13 @@ header {
 /* Extra Small devices (phones, less than 768px) */
 @screen-xs-max: 767px;
 @media (max-width: @screen-xs-max) {
+	header { 
+	  .wrapper {
+	  	.separate {
+	  	  padding: 9px 0px 0px 0px;
+	  	}
+	  }
+	}
 
 	.container-top-label {
 		width: 50%;
