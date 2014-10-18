@@ -2,13 +2,13 @@ angular.module('uncleshopApp')
 .controller('uncleshopController', ['$scope','bill','$rootScope', function($scope,bill,$rootScope) 
 {
 
-
 	$scope.changTab = function(number)
 	{
 		var text = ['','เพิ่มบิล','ตรวจสอบบิล','ข้อมูลการจ่ายบิล']
 		$scope.tabColor=number;
 		$rootScope.loginText=text[number];
 	};
+
 
 
 	// $scope.WarpTab = false;

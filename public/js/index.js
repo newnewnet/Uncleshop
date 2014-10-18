@@ -11,6 +11,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 
 
 
+
 	$scope.popupLogoutFlug = false;
 
 	

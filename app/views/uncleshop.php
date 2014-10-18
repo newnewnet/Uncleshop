@@ -85,13 +85,16 @@
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
 				    	</div>	
 
+
 				    	<div class="box"  data-ng-click="changTab(1); switchMenu();"  data-ng-class="{'save-bill':tabColor==1}">
+
 
 				    		<span class="icon icon1" >
 				    			<img src="img/icon-bill.png"/>
 				    		</span>
 				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
+
 
 				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill ':tabColor==2}">
 
@@ -102,6 +105,7 @@
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
+
 
 				    		<span class="icon icon3" >
 				    			<img src="img/user-icon.png"/>
