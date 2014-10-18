@@ -22,6 +22,7 @@
 
 		<!-- Javascript File -->
 		<script src="js/index.js"></script>
+		<script src="js/directive.js"></script>
 		<script src="js/constant/angular-local-storage.js"></script>
 		<script src="js/login.js"></script>
 		<script src="js/ng.js"></script>
@@ -71,6 +72,7 @@
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
 				<input type="text" placeholder="username" ng-model="userName">
 				<input type="password" placeholder="password" ng-model="passWord">
+				<input type="text" ng-model="test" format="number" />
 				<button type="button" class="btn btn-default" ng-click="login()">Login</button>
 			</div>
 
