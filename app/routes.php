@@ -21,7 +21,7 @@ Route::get('/', function()
 Route::get('customers','UncleshopApiController@getCustomers');
 
 
-Route::get('saveCustomers','UncleshopApiController@saveCustomers');
+Route::get('saveBill','UncleshopApiController@saveBill');
 
 Route::get('saveAdmin','UncleshopApiController@saveAdmin');
 

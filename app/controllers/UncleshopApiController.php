@@ -5,14 +5,15 @@
 		public function getCustomers()
 		{	
 			$customers = new Customers;
-			$result = $customers->getCustomers();
-			return "$result";
+			$key = Input::get('customers_id');
+			$result = $customers->getCustomers($key);
+			return $result;
 		}
-		public function saveCustomers()
+		public function saveBill()
 		{
 			$array = Input::all();
-			$customers = new Customers;
-			$customers->insertCustomers($array);
+			$bill = new Bill;
+			$bill->insertBill($array);
 
 		}
 		public function saveAdmin()
