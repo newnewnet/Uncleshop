@@ -5,8 +5,10 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	$rootScope.pageFlug = false;
 	$scope.popupLogoutFlug = false;
 	$rootScope.admin = '';
+	$rootScope.loginText = 'Uncleshop';
 	$scope.menu_slide = false;
 	$scope.currencyVal = 0;
+
 
 	if(localStorageService.get('admin_id') != null )
 	{

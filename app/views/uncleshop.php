@@ -56,7 +56,7 @@
 			  <div class="separate">
 			    <div id="logo" ng-click="switchMenu()">
 			    	<img src="img/icon-bill.png"/>
-			    	<div class="text">Uncleshop</div>
+			    	<div class="text">{{loginText}}</div>
 			    </div>
 			  </div>
 			  <div class="user" ng-show="pageFlug">
@@ -77,24 +77,24 @@
 			</div>
 
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
-				<div class="col-md-3 con-tabmenu" ng-init="tabColor=1" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
+				<div class="col-md-3 con-tabmenu" ng-init="changTab(1)" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="titile-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
 				    	</div>	
-				    	<div class="box"  data-ng-click="tabColor=1; switchMenu()"  data-ng-class="{'save-bill':tabColor==1}">
+				    	<div class="box"  data-ng-click="changTab(1); switchMenu();"  data-ng-class="{'save-bill':tabColor==1}">
 				    		<span class="icon icon1" >
 				    			<img src="img/icon-bill.png"/>
 				    		</span>
 				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
-				    	<div class="box"  data-ng-click="tabColor=2; switchMenu()" data-ng-class="{'amount-bill ':tabColor==2}">
+				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill ':tabColor==2}">
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-taxes.png"/>
 				    		</span>
 				    		<div class="text">ตรวจสอบบิล</div>
 				    	</div>
-				    	<div class="box"  data-ng-click="tabColor=3; switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
+				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
 				    		<span class="icon icon3" >
 				    			<img src="img/user-icon.png"/>
 				    		</span>
