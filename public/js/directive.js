@@ -11,9 +11,7 @@ angular.module('directive.format',[])
             });
         }
     };
-}]);
-
-angular.module('directive.focusMe',[])
+}])
 .directive('focusMe', function($timeout, $parse) { //focusMe when give variable of focusMe that element will be focus
   return {
     //scope: true,   // optionally create a child scope

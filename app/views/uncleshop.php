@@ -69,9 +69,9 @@
 		<div class="container">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
-				<input type="text" placeholder="username" ng-model="userName" focus-me="userName_focus">
-				<input type="password" placeholder="password" ng-model="passWord">
-				<input type="text" ng-model="test" format="number" />
+				<input type="text" placeholder="username" ng-model="userName"  focus-me="test=true">
+				<input type="password" placeholder="password" ng-model="passWord" focus-me="test=fasle">
+				<!-- <input type="text" ng-model="test" format="number" /> -->
 				<button type="button" class="btn btn-default" ng-click="login()">Login</button>
 			</div>
 
@@ -120,7 +120,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" class="form-control" format="number">
+								    	<input type="textbox" class="form-control" format="number" ng-model="id">
 									</div>
 								</div>
 								<div class="form-group">
@@ -136,7 +136,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" class="form-control" format="number">
+								    	<input type="textbox" class="form-control" format="number" ng-model="tel">
 									</div>
 									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">

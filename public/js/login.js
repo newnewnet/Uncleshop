@@ -10,7 +10,7 @@ angular.module('uncleshopApp')
 				'username':$scope.userName,
 				'password':$scope.passWord
 			}
-			login.loginAdmin(data,function(data, status, headers, confi)
+			login.loginAdmin(data,function(data, status, headers, config)
 			{
 				if(data != '')
 				{

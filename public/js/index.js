@@ -1,4 +1,4 @@
-angular.module('uncleshopApp',['LocalStorageModule','directive.format', 'directive.focusMe'])
+angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 .controller('indexController', ['$scope','localStorageService','$rootScope', function($scope,localStorageService,$rootScope) 
 {
 	$rootScope.pageFlug = false;
@@ -11,7 +11,6 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format', 'directi
 	$scope.currencyVal = 0;
 	$scope.popupLogoutFlug = false;
 
-	console.log($rootScope.userName_focus);
 
 	if(localStorageService.get('admin_id') != null )
 	{

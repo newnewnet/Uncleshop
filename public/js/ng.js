@@ -1,4 +1,4 @@
-angular.module('uncleshopApp',['directive.format'])
+angular.module('uncleshopApp')
 .controller('uncleshopController', ['$scope','bill','$rootScope', function($scope,bill,$rootScope) 
 {
 
