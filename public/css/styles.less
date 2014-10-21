@@ -89,6 +89,7 @@ header {
   		    text-align: left;
   		    	.logo {
   		    		margin-right: 10px;
+  		    		float: left;
   		    	}
 				.text {
 					width: 130%;
@@ -307,9 +308,16 @@ header {
 	  .wrapper {
 	  	.separate {
 	  	  padding: 9px 0px 0px 0px;
+	  	  #logo {
+  			position:relative;
+  		    width: 148px;
+  		    height: 33px;
+  		    text-align: left;
+		  }
 	  	}
 	  }
 	}
+
 
 	.container-top-label {
 		width: 50%;
@@ -350,11 +358,31 @@ header {
 /*Landscape Tablet (ex. ipad)*/
 @screen-md-min: 992px;
 @media (min-width: @screen-md-min) { 
-
+	header { 
+	  .wrapper {
+	  	.separate {
+	  	  #logo {
+  		    	.logo {
+  		    		display: none;
+  		    	}
+		  }
+	  	}
+	  }
+	}
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @screen-lg-min: 1200px;
 @media (min-width: @screen-lg-min) { 
-
+	header { 
+	  .wrapper {
+	  	.separate {
+	  	  #logo {
+  		    	.logo {
+  		    		display: none;
+  		    	}
+		  }
+	  	}
+	  }
+	}
 }

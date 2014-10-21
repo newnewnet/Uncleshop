@@ -55,7 +55,14 @@
 			<div class="wrapper">
 			  <div class="separate">
 			    <div id="logo">
-			    	<div class="text"><i class="fa fa-bars logo" ng-click="switchMenu()"></i>{{loginText}}</div>
+			    	<div class="text">
+			    		<div class="logo">
+			    			<i class="fa fa-bars" ng-click="switchMenu()"></i>
+			    		</div>
+			    		<div>
+			    			{{loginText}}
+			    		</div>
+			    	</div>
 			    </div>
 			  </div>
 			  <div class="user" ng-show="pageFlug">
@@ -69,8 +76,8 @@
 		<div class="container">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
-				<input type="text" placeholder="username" ng-model="userName"  focus-me="test=true">
-				<input type="password" placeholder="password" ng-model="passWord" focus-me="test=fasle">
+				<input type="text" placeholder="username" ng-model="userName"  focus-me="userName_focus">
+				<input type="password" placeholder="password" ng-model="passWord" ng-enter="login()">
 				<!-- <input type="text" ng-model="test" format="number" /> -->
 				<button type="button" class="btn btn-default" ng-click="login()">Login</button>
 			</div>
@@ -98,7 +105,7 @@
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-taxes.png"/>
 				    		</span>
-				    		<div class="text">ตรวจสอบบิล</div>
+				    		<div class="text">ค้นหาบิล</div>
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
@@ -120,27 +127,27 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" class="form-control" format="number" ng-model="id">
+								    	<input type="textbox" ng-model="customers_id" class="form-control" format="number" ng-model="id">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" class="form-control">
+								    	<input type="textbox" ng-model="customers_name" class="form-control">
 									</div>
 									<label class="col-sm-1 col-md-1 control-label">สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" class="form-control">
+								    	<input type="textbox" ng-model="customers_surname" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" class="form-control" format="number" ng-model="tel">
+								    	<input type="textbox" ng-model="customers_tel" class="form-control" format="number" ng-model="tel">
 									</div>
 									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">
-										<select class="form-control" ng-model="sex">
+										<select class="form-control" ng-model="customers_sex">
 								            <option value="male">ชาย</option>
 								        	<option value="female">หญิง</option>          
 								        </select>
@@ -160,7 +167,7 @@
 					</div>
 
 					<div class="box-amount-bill" ng-show="tabColor==2">
-						<div class="titile">ตรวจสอบบิล</div>	
+						<div class="titile">ค้นหาบิล</div>	
 						<div class="box-bill"></div>
 					</div>
 

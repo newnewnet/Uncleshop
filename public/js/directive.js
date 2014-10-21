@@ -24,11 +24,19 @@ angular.module('directive.format',[])
           });
         }
       });
-      // to address @blesh's comment, set attribute value to 'false'
-      // on blur event:
-      element.bind('blur', function() {
-         scope.$apply(model.assign(scope, false));
-      });
     }
   };
+})
+.directive('ngEnter', function(){ //ngEnter when Enter the element can action
+    return function (scope, element, attrs){
+        element.bind("keydown", function(event){
+            if(event.which === 13) {
+                scope.$apply(function(){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        })
+    };
 });

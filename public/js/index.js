@@ -5,7 +5,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	$rootScope.admin = '';
 	$rootScope.loginText = 'Uncleshop';
 
-	$rootScope.userName_focus = true;
+	$scope.userName_focus = true;
 
 	$scope.menu_slide = false;
 	$scope.currencyVal = 0;

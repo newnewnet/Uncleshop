@@ -2,11 +2,11 @@ angular.module('uncleshopApp')
 .controller('uncleshopController', ['$scope','bill','$rootScope', function($scope,bill,$rootScope) 
 {
 
-	$scope.sex = 'male';
+	$scope.customers_sex = 'male';
 
 	$scope.changTab = function(number)
 	{
-		var text = ['','เพิ่มบิล','ตรวจสอบบิล','ข้อมูลการจ่ายบิล']
+		var text = ['','เพิ่มบิล','ค้นหาบิล','ข้อมูลการจ่ายบิล']
 		$scope.tabColor=number;
 		$rootScope.loginText=text[number];
 	};
