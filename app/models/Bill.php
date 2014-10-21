@@ -9,17 +9,17 @@
 		public function insertBill($array)
 		{
 			$customers  = new Customers;
-			$product = new Product;
-			$bill_detail = new Bill_detail;
+			// $product = new Product;
+			// $bill_detail = new Bill_detail;
 
-			if(isset($array['cutomers_name']))
+			if(isset($array['customers_name']))
 			{			
 				$customers->insert([
 					'customers_id' => $array['customers_id'],
-					'customers_name' => $array['cutomers_name'],
-					'customers_address' => $array['cutomers_address'],
+					'customers_name' => $array['customers_name'],
+					'customers_address' => $array['customers_address'],
 					'customers_sex' => $array['customers_sex'],
-					'customers_tel' =>$array['cutomers_tel'],
+					'customers_tel' =>$array['customers_tel'],
 				]);
 			}
 

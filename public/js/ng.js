@@ -11,13 +11,48 @@ angular.module('uncleshopApp')
 		$rootScope.loginText=text[number];
 	};
 
+	/////เวลาส่งทำงี้นะ
+
+	$scope.seachCustomers = function ()
+	{
+		var data = {
+			'customers_id':$scope.customers_id
+		}
+		bill.getCustomers(data,function(data, status, headers, config)
+		{
+			console.log(data);
+		});
+	};
+	$scope.savaBill = function()
+	{
+		var data = {
+		'customers_id' : $scope.customers_id,
+		'customers_name' : $scope.customers_name,
+		'customers_address' : $scope.customers_address,
+		'customers_sex' : $scope.customers_sex,
+		'customers_tel' :$scope.customers_tel
+		};
+
+		bill.saveBill(data,function(data, status, headers, config)
+		{
+
+		});
+	}
+
 }])
 .factory('bill', ['$http', function($http) 
 {
 	return {
-		getBill:function(callback)
+		saveBill:function(data,callback)
 		{
-			$http({method: 'GET', url: '/cutomers'}).
+			$http({method: 'GET', url: '/saveBill',params:data}).
+		  success(callback).
+		  error(function(data, status, headers, config) {
+		  });
+		},
+		getCustomers:function(data,callback)
+		{
+			$http({method: 'GET', url: '/customers',params:data}).
 		  success(callback).
 		  error(function(data, status, headers, config) {
 		  });

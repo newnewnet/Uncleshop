@@ -127,7 +127,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" ng-model="customers_id" class="form-control" format="number" ng-model="id">
+								    	<input type="textbox" ng-model="customers_id" class="form-control" format="number" ng-keyup="seachCustomers()" ng-model="id">
 									</div>
 								</div>
 								<div class="form-group">
@@ -156,11 +156,11 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-9 col-md-9">
-								    	<textarea class="form-control" rows="3"></textarea>
+								    	<textarea class="form-control" ng-model="customers_address" rows="3"></textarea>
 									</div>
 								</div>
 								<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
-									<button type="button" class="btn btn-primary">Test Submit</button>
+									<button type="button" class="btn btn-primary" ng-click="savaBill()">Test Submit</button>
 								</div>
 							</div>
 						</div>
