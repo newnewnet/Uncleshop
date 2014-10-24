@@ -16,6 +16,7 @@ html, body{
 	margin: 0;
 	padding: 0;
 	background-color: @color-bg;
+	/*background: url('img/bg.jpg');*/
 }
 
 .TEXT-LFET {
@@ -55,6 +56,21 @@ html, body{
 	background-color: @color-element;
 }
 
+.OFFER-TOP {
+	margin-top: 10%;
+}
+
+.OFFER-BOTTOM {
+	margin-bottom: 10%;
+}
+
+.font-logo{
+	/*font-family: 'Lobster', cursive;*/
+	font-family: 'Pacifico', cursive;
+	color: #e74c3c;
+	font-size: 3em;
+}
+
 .transition (@element: left, @time: .5s) {
     -webkit-transition: @element @time; /* For Safari 3.1 to 6.0 */
     transition: @element @time;
@@ -62,6 +78,38 @@ html, body{
 
 @body-bg: #fff;
 @border-radius-small:3px;
+
+.blur-container {
+	position: absolute;
+	margin-top: 52px;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+}
+
+.login {
+	position: fixed;
+	width: 400px;
+	height: 400px;
+	top: 50%;
+	left: 50%;
+	margin-top: -200px;
+	margin-left: -200px;
+	z-index: 100;
+}
+
+.container-login {
+	position: fixed;
+	width: 84%;
+	height: 180px;
+	top: 50%;
+	left: 50%;
+	margin-top: -90px;
+	margin-left: -42%;
+	background-color: white;
+	z-index: 110;
+	background-color: rgba(0,0,0,0.9);
+}
 
 .container-fluid {
   min-width: 748px;
@@ -84,18 +132,21 @@ header {
   	  float: left;
   		#logo {
   			position:relative;
-  		    width: 148px;
+  		    width: 248px;
   		    height: 33px;
   		    text-align: left;
   		    	.logo {
   		    		margin-right: 10px;
   		    		float: left;
   		    	}
+  		    	.logo-2 {
+
+  		    	}
 				.text {
 					width: 130%;
 					line-height: 38px;
 					margin-left: 40px;
-					font-size: 22px;
+					font-size: 2em;
 				}
   		}
   	}
@@ -132,16 +183,16 @@ header {
   }
 }
 
-
 .box-login {
-	width: 290px;
-	height: 340px;
-	border: 1px solid #E1E1E1;
+	width: 250px;
+	height: 280px;
 	margin: auto;
-	border-radius: 5px;
-	background: #fff;
 	margin-top: 10%;
-	box-shadow: 0px 0px 3px #BDBDBD
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px;
+	border: 1px solid #2ecc71;
+	box-shadow: 0px 0px 3px #BDBDBD;
 }
 
 .con-tabmenu {
@@ -152,6 +203,7 @@ header {
 	margin-top: 20px;
 	padding:20px;
 	background-color: #fff;
+	z-index: 110;
 	.titile-menu {
 		font: 24px/18px 'thaisans_semibold';
 		color: #555;
@@ -304,6 +356,7 @@ header {
 /* Extra Small devices (phones, less than 768px) */
 @screen-xs-max: 767px;
 @media (max-width: @screen-xs-max) {
+
 	header { 
 	  .wrapper {
 	  	.separate {
@@ -336,6 +389,21 @@ header {
 		}
 	}
 
+	header { 
+	  .wrapper {
+	  	.separate {
+	  	  #logo {
+  		    	.logo {
+  		    		display: inline;
+  		    	}
+  		    	.logo-2 {
+  		    		display: none;
+  		    	}
+		  }
+	  	}
+	  }
+	}
+
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -352,18 +420,41 @@ header {
 			left: 0px;
 		}
 	}
+
+	header { 
+	  .wrapper {
+	  	.separate {
+	  	  #logo {
+  		    	.logo {
+  		    		display: inline;
+  		    	}
+  		    	.logo-2 {
+  		    		display: none;
+  		    	}
+		  }
+	  	}
+	  }
+	}
 }
 
 /* Medium devices (desktops, 992px and up) */
 /*Landscape Tablet (ex. ipad)*/
 @screen-md-min: 992px;
 @media (min-width: @screen-md-min) { 
+
+	.blur-container{
+		display: none;
+	}
+
 	header { 
 	  .wrapper {
 	  	.separate {
 	  	  #logo {
   		    	.logo {
   		    		display: none;
+  		    	}
+  		    	.logo-2 {
+  		    		display: inline;
   		    	}
 		  }
 	  	}
@@ -374,12 +465,20 @@ header {
 /* Large devices (large desktops, 1200px and up) */
 @screen-lg-min: 1200px;
 @media (min-width: @screen-lg-min) { 
+	
+	.blur-container{
+		display: none;
+	}
+	
 	header { 
 	  .wrapper {
 	  	.separate {
 	  	  #logo {
   		    	.logo {
   		    		display: none;
+  		    	}
+  		    	.logo-2 {
+  		    		display: inline;
   		    	}
 		  }
 	  	}

@@ -19,6 +19,8 @@
 
 	    <!-- Google Font -->
 	    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+	    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 
 		<!-- Javascript File -->
 		<script src="js/index.js"></script>
@@ -47,21 +49,24 @@
 		</script>
 		<script src="js/less.js" type="text/javascript"></script>
 		<!--script src="less.js"></script-->
-	
 	</head>
 
 	<body ng-controller="indexController">
-		<header>
+		<div class="blur-container" ng-show="menu_slide" ng-click="switchMenu()">
+		</div>
+		<header ng-show="pageFlug">
 			<div class="wrapper">
 			  <div class="separate">
 			    <div id="logo">
-			    	<div class="text">
+			    	<div class="text" ng-show="pageFlug">
 			    		<div class="logo">
-			    			<i class="fa fa-bars" ng-click="switchMenu()"></i>
+			    			<div>
+			    				<i class="fa fa-bars" ng-click="switchMenu()" style="cursor: pointer; margin-right: 15px;"></i>{{loginText}}
+			    			</div>
 			    		</div>
-			    		<div>
-			    			{{loginText}}
-			    		</div>
+			    	</div>
+			    	<div class="text font-logo logo-2">
+			    		Uncleshop
 			    	</div>
 			    </div>
 			  </div>
@@ -73,13 +78,20 @@
 			</div>
 	  </header>
   
-		<div class="container">
+		<div class="container" style="margin-bottom: 50px;">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
-				<input type="text" placeholder="username" ng-model="userName"  focus-me="userName_focus">
-				<input type="password" placeholder="password" ng-model="passWord" ng-enter="login()">
-				<!-- <input type="text" ng-model="test" format="number" /> -->
-				<button type="button" class="btn btn-default" ng-click="login()">Login</button>
+				<div class="row-fluid TEXT-CENTER">
+		          <g class="font-logo">Uncleshop</g>
+		        </div>
+				<input style="margin-top: 5%; margin-bottom: 5px;" class="form-control" type="text" placeholder="Username" ng-model="userName" focus-me="userName_focus">
+				<input style="margin-bottom: 15px;" class="form-control" type="Password" placeholder="Password" ng-model="passWord" ng-enter="login()">
+				<div class="row-fluid TEXT-CENTER">
+					<button type="button" class="btn btn-success" ng-click="login()">LOGIN</button>
+				</div>
+				<div class="row-fluid TEXT-CENTER" style="position: relative; bottom: -10px; color: #3498db;">
+					© Champangam Electronic.
+				</div>
 			</div>
 
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
@@ -89,19 +101,14 @@
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
 				    	</div>	
 
-
 				    	<div class="box"  data-ng-click="changTab(1); switchMenu();"  data-ng-class="{'save-bill':tabColor==1}">
-
-
 				    		<span class="icon icon1" >
 				    			<img src="img/icon-bill.png"/>
 				    		</span>
 				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
 
-
 				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill ':tabColor==2}">
-
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-taxes.png"/>
 				    		</span>
@@ -109,8 +116,6 @@
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
-
-
 				    		<span class="icon icon3" >
 				    			<img src="img/user-icon.png"/>
 				    		</span>
@@ -127,7 +132,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" ng-model="customers_id" class="form-control" format="number" ng-keyup="seachCustomers()" ng-model="id">
+								    	<input type="textbox" ng-model="customers_id" maxlength="13" class="form-control" numbers-only="numbers-only" ng-keyup="seachCustomers()" focus-me="customers_id_focus">
 									</div>
 								</div>
 								<div class="form-group">
@@ -179,11 +184,5 @@
 			</div>
 
 		</div>
-
-
-		<!-- <div class="warp_tab_hide" ng-class="WarpTab">
-			asddf
-		</div> -->
-
 	</body>
 </html>
