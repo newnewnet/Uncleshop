@@ -18,7 +18,7 @@ angular.module('uncleshopApp')
 					$rootScope.admin = data;
 				}
 				localStorageService.add('admin_id',data);
-				$scope.focus('customers_id_focus');
+				$scope.focus('search_focus');
 				$scope.userName = '';
 				$scope.passWord = '';
 			});

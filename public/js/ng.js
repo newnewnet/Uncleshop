@@ -17,7 +17,7 @@ angular.module('uncleshopApp')
 	$scope.seachCustomers = function ()
 	{
 		var data = {
-			'customers_id':$scope.customers_id
+			'key':$scope.search
 		}
 		bill.getCustomers(data,function(data, status, headers, config)
 		{

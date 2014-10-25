@@ -104,23 +104,30 @@
 
 				    	<div class="box"  data-ng-click="changTab(1); switchMenu();"  data-ng-class="{'save-bill':tabColor==1}">
 				    		<span class="icon icon1" >
-				    			<img src="img/icon-bill.png"/>
+				    			<img src="img/icon-11.png"/>
 				    		</span>
 				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
 
-				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill ':tabColor==2}">
+				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill':tabColor==2}">
 				    		<span class="icon icon2" >
-				    			<img src="img/icon-taxes.png"/>
+				    			<img src="img/icon-22.png"/>
 				    		</span>
 				    		<div class="text">ค้นหาบิล</div>
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
 				    		<span class="icon icon3" >
-				    			<img src="img/user-icon.png"/>
+				    			<img src="img/icon-33.png"/>
 				    		</span>
-				    		<div class="text">ข้อมูลการจ่ายบิล</div>
+				    		<div class="text">การจ่ายบิล</div>
+				    	</div>
+
+				    	<div class="box"  data-ng-click="changTab(4); switchMenu()" data-ng-class="{'customer':tabColor==4}">
+				    		<span class="icon icon4" >
+				    			<img src="img/icon-44.png"/>
+				    		</span>
+				    		<div class="text">ข้อมูลลูกค้า</div>
 				    	</div>
 				  	</div>
 				</div>
@@ -131,9 +138,14 @@
 							<div class="TEXT-LEFT sub-title-left">
 								ข้อมูลลูกค้า
 							</div>
-							<div class="TEXT-RIGHT sub-title-right">
-								<i class="fa fa-plus-circle CURSOR" ng-click="switchDataCustomer()" ng-hide="DataCustomer_slide"></i>
-								<i class="fa fa-search CURSOR" style="color: #3498db" ng-click="switchDataCustomer()" ng-show="DataCustomer_slide"></i>
+							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-hide="DataCustomer_toggle">
+								<div class="plus-user CURSOR">
+									<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
+									<img src="img/icon-user.png"/>
+								</div>
+							</div>
+							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-show="DataCustomer_toggle">
+								<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
 							</div>
 						</div>	
 						<div class="box-bill">
@@ -142,7 +154,7 @@
 									<label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label>
 								    <div class="col-sm-5 col-md-5 input-group">
 									  <input type="text" ng-model="search" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus">
-									  <span class="input-group-addon" ng-click="seachCustomers()" style="cursor: pointer;"><i class="fa fa-search" style="color: #3498db"></i></span>
+									  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
 									</div>
 								</div>
 

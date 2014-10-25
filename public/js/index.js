@@ -17,6 +17,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
 			$scope.focus('customers_id_focus');
 		}
+		console.log($scope.DataCustomer_toggle);
 	};
 
 	$scope.popupLogout = function()
