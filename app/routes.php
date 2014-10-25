@@ -20,6 +20,7 @@ Route::get('/', function()
 
 Route::get('customers','UncleshopApiController@getCustomers');
 
+Route::get('updateCustomers','UncleshopApiController@updateCustomers');
 
 Route::get('saveBill','UncleshopApiController@saveBill');
 

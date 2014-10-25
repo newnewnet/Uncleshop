@@ -9,6 +9,13 @@
 			$result = $customers->getCustomers($key);
 			return $result;
 		}
+		public function updateCustomers()
+		{
+			$customers = new Customers;
+			$array = Input::all();
+			$result = $customers->updateCustomers($array);
+			return $result;
+		}
 		public function saveBill()
 		{
 			$array = Input::all();
