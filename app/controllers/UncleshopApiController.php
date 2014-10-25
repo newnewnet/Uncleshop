@@ -5,7 +5,7 @@
 		public function getCustomers()
 		{	
 			$customers = new Customers;
-			$key = Input::get('customers_id');
+			$key = Input::get('key');
 			$result = $customers->getCustomers($key);
 			return $result;
 		}
