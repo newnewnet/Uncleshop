@@ -64,6 +64,10 @@ html, body{
 	margin-bottom: 10%;
 }
 
+.CURSOR {
+	cursor: pointer;
+}
+
 .font-logo{
 	/*font-family: 'Lobster', cursive;*/
 	font-family: 'Pacifico', cursive;
@@ -204,7 +208,7 @@ header {
 	padding:20px;
 	background-color: #fff;
 	z-index: 110;
-	.titile-menu {
+	.title-menu {
 		font: 24px/18px 'thaisans_semibold';
 		color: #555;
 		height: 41px;
@@ -326,7 +330,7 @@ header {
 }
 .box-save-bill {
 	margin-top: 20px;
-	.titile {
+	.title {
 		font: 24px/18px 'thaisans_semibold';
 		color: #555;
 		height: 41px;
@@ -334,10 +338,19 @@ header {
 		margin-bottom: 18px;
 		border-bottom: solid 2px #ddd;
 		box-sizing: border-box;
+
+		.sub-title-left {
+			float: left;
+		}
+
+		.sub-title-right {
+			position: absolute; 
+			right: 30px; 
+			color: #1abc9c;
+		}
 	}
 	.box-bill {
 		height: auto;
-		/*background-color: #fff;*/
 	}
 }
 
@@ -366,6 +379,7 @@ header {
   		    width: 148px;
   		    height: 33px;
   		    text-align: left;
+  		    font-size: 10px;
 		  }
 	  	}
 	  }

@@ -61,7 +61,8 @@
 			    	<div class="text" ng-show="pageFlug">
 			    		<div class="logo">
 			    			<div>
-			    				<i class="fa fa-bars" ng-click="switchMenu()" style="cursor: pointer; margin-right: 15px;"></i>{{loginText}}
+			    				<i class="fa fa-bars" ng-click="switchMenu()" style="cursor: pointer; margin-right: 15px;"></i>
+			    				{{loginText}}
 			    			</div>
 			    		</div>
 			    	</div>
@@ -95,9 +96,9 @@
 			</div>
 
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
-				<div class="col-md-3 con-tabmenu" ng-init="changTab(1)" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
+				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1)" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
-				    	<div class="titile-menu"><img src="img/icon-title.png"/>
+				    	<div class="title-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
 				    	</div>	
 
@@ -126,58 +127,76 @@
 
 				<div class="col-xs-12 col-sm-12 col-md-9">
 					<div class="box-save-bill" ng-show="tabColor==1">
-						<div class="titile">ข้อมูลลูกค้า</div>	
+						<div class="title">
+							<div class="TEXT-LEFT sub-title-left">
+								ข้อมูลลูกค้า
+							</div>
+							<div class="TEXT-RIGHT sub-title-right">
+								<i class="fa fa-plus-circle CURSOR" ng-click="switchDataCustomer()" ng-hide="DataCustomer_slide"></i>
+								<i class="fa fa-search CURSOR" style="color: #3498db" ng-click="switchDataCustomer()" ng-show="DataCustomer_slide"></i>
+							</div>
+						</div>	
 						<div class="box-bill">
 							<div class="form-horizontal">
-								<div class="form-group">
-									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
-								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" ng-model="customers_id" maxlength="13" class="form-control" numbers-only="numbers-only" ng-keyup="seachCustomers()" focus-me="customers_id_focus">
+								<div class="form-group" ng-hide="DataCustomer_toggle">
+									<label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label>
+								    <div class="col-sm-5 col-md-5 input-group">
+									  <input type="text" ng-model="search" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus">
+									  <span class="input-group-addon" ng-click="seachCustomers()" style="cursor: pointer;"><i class="fa fa-search" style="color: #3498db"></i></span>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
-								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customers_name" class="form-control">
+
+								<div ng-show="DataCustomer_toggle">
+									<div class="form-group">
+										<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
+									    <div class="col-sm-5 col-md-5">
+									    	<input type="textbox" ng-model="customers_id" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus">
+										</div>
 									</div>
-									<label class="col-sm-1 col-md-1 control-label">สกุล</label>
-								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customers_surname" class="form-control">
+									<div class="form-group">
+										<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="textbox" ng-model="customers_name" class="form-control">
+										</div>
+										<label class="col-sm-1 col-md-1 control-label">สกุล</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="textbox" ng-model="customers_surname" class="form-control">
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
-								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customers_tel" class="form-control" format="number" ng-model="tel">
+									<div class="form-group">
+										<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="textbox" ng-model="customers_tel" class="form-control" format="number" ng-model="tel">
+										</div>
+										<label class="col-sm-1 col-md-1 control-label">เพศ</label>
+										<div class="col-sm-2 col-md-2">
+											<select class="form-control" ng-model="customers_sex">
+									            <option value="male">ชาย</option>
+									        	<option value="female">หญิง</option>          
+									        </select>
+								        </div>
 									</div>
-									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
-									<div class="col-sm-2 col-md-2">
-										<select class="form-control" ng-model="customers_sex">
-								            <option value="male">ชาย</option>
-								        	<option value="female">หญิง</option>          
-								        </select>
-							        </div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
-								    <div class="col-sm-9 col-md-9">
-								    	<textarea class="form-control" ng-model="customers_address" rows="3"></textarea>
+									<div class="form-group">
+										<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+									    <div class="col-sm-9 col-md-9">
+									    	<textarea class="form-control" ng-model="customers_address" rows="3"></textarea>
+										</div>
 									</div>
-								</div>
-								<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
-									<button type="button" class="btn btn-primary" ng-click="savaBill()">Test Submit</button>
+									<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
+										<button type="button" class="btn btn-primary" ng-click="savaBill()">Test Submit</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="box-amount-bill" ng-show="tabColor==2">
-						<div class="titile">ค้นหาบิล</div>	
+						<div class="title">ค้นหาบิล</div>	
 						<div class="box-bill"></div>
 					</div>
 
 					<div class="box-pays-bill" ng-show="tabColor==3">
-						<div class="titile">ข้อมูลการจ่ายบิล</div>	
+						<div class="title">ข้อมูลการจ่ายบิล</div>	
 						<div class="box-bill"></div>
 					</div>
 				</div>
