@@ -17,6 +17,7 @@
 				$customers->insert([
 					'customers_id' => $array['customers_id'],
 					'customers_name' => $array['customers_name'],
+					'customers_last_name' => $array['customers_last_name'],				
 					'customers_address' => $array['customers_address'],
 					'customers_sex' => $array['customers_sex'],
 					'customers_tel' =>$array['customers_tel'],

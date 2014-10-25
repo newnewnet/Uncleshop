@@ -14,6 +14,7 @@
 				$customers  = new Customers;
 				$result = $customers->orWhere('customers_id', 'LIKE', "%".$key."%")
 								->orWhere('customers_name', 'LIKE', "%".$key."%")
+								->orWhere('customers_last_name', 'LIKE', "%".$key."%")
 								->orWhere('customers_tel', 'LIKE', "%".$key."%")
 								->get();
 				
