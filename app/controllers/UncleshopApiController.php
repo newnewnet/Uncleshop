@@ -16,6 +16,13 @@
 			$result = $customers->updateCustomers($array);
 			return $result;
 		}
+		public function deleteCustomers()
+		{
+			$customers = new Customers;
+			$array = Input::all();
+			$result = $customers->deleteCustomers($array);
+			return $result;
+		}
 		public function saveBill()
 		{
 			$array = Input::all();

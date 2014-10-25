@@ -22,6 +22,8 @@ Route::get('customers','UncleshopApiController@getCustomers');
 
 Route::get('updateCustomers','UncleshopApiController@updateCustomers');
 
+Route::get('deleteCustomers','UncleshopApiController@deleteCustomers');
+
 Route::get('saveBill','UncleshopApiController@saveBill');
 
 Route::get('saveAdmin','UncleshopApiController@saveAdmin');
