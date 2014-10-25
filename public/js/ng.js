@@ -21,6 +21,7 @@ angular.module('uncleshopApp')
 		}
 		bill.getCustomers(data,function(data, status, headers, config)
 		{
+			$rootScope.CustomersData = data;
 			console.log(data);
 		});
 	};

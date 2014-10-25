@@ -151,12 +151,26 @@
 						<div class="box-bill">
 							<div class="form-horizontal">
 								<div class="form-group" ng-hide="DataCustomer_toggle">
-									<label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label>
-								    <div class="col-sm-5 col-md-5 input-group">
-									  <input type="text" ng-model="search" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus">
+									<!-- <label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label> -->
+								    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
+									  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
 									  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
 									</div>
 								</div>
+
+									<div ng-repeat="(key, data) in CustomersData">
+										<div class="resultUser"style="background-color: white;">
+											<div class="icon">
+												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> <!-- male -->
+												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> <!-- female -->
+											</div>
+											<div class="text">
+												<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
+												<span class="tel">tel.</span><span class="tel-data">{{data.customers_tel}}</span>
+												<span class="id">id.</span><span class="id-data">{{data.customers_id}}</span>																	
+											</div>
+										</div>
+									</div>
 
 								<div ng-show="DataCustomer_toggle">
 									<div class="form-group">
