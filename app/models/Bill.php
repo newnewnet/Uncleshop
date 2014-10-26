@@ -12,6 +12,12 @@
 			$product = new Product;
 			$bill_detail = new Bill_detail;
 
+			$count = $this->where('customers_id','=',$array['customers']->customers_id)->count();
+			if($count != 0)
+			{
+				return "error";
+			}
+
 			if(isset($array['customers']->customers_name))
 			{			
 				$customers->insert([

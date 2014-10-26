@@ -9,6 +9,11 @@
 
 		public function insertAdmin($array)
 		{
+			$count = $this->where('admin_id','=',$array['admin_id'])->count();
+			if($count != 0)
+			{
+				return "error";
+			}
 			$this->insert([
 					'admin_id' => $array['admin_id'],
 					'admin_name' => $array['admin_name'],

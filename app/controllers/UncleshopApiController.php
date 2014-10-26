@@ -34,7 +34,8 @@
 		{
 			$array = Input::all();
 			$admin = new Admin;
-			$admin->insertAdmin($array);
+			$result = $admin->insertAdmin($array);
+			return $result;
 
 		}
 		public function checkUser()
