@@ -66,7 +66,6 @@
 					'customers_tel' : $array['customers_tel'],
 		}
 
-
 		/deleteCustomers  : get
 		data = {
 			'customers_id' : $array['customers_id']

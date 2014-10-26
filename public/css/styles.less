@@ -391,20 +391,25 @@ header {
 		font-family: 'thaisans_semibold';
 		font-size:20px;
 		.resultUser {
+			margin-bottom: 5px;
 			cursor:pointer;
 			background-color: @body-bg;
-			/*width: 250px;*/
 			height: 44px;
-			border-top: 1px solid #dcdcdc;
-			border-left: 1px solid #dcdcdc;
+			border: 1px solid #dcdcdc;
+			/*border-left: 1px solid #dcdcdc;*/
+			&:hover, &:focus {
+				
+				border: 1px solid #f1c40f;
+			}
+
 			&:first-child {
 				-webkit-border-top-left-radius: @border-radius-small;
 				-moz-border-top-left-radius: @border-radius-small;
 				border-top-left-radius: @border-radius-small;
-			}
+			}/*
 			&:last-child {
 				border-bottom: 1px solid #dcdcdc;
-			}
+			}*/
 			.icon {
 				float: left;
 				width: 44px;

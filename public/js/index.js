@@ -17,7 +17,8 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
 			$scope.focus('customers_id_focus');
 		}
-		console.log($scope.DataCustomer_toggle);
+		$rootScope.DataCustomers = null;
+		$rootScope.search.data = null;
 	};
 
 	$scope.popupLogout = function()
@@ -51,8 +52,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 		}
 	};
 
-	/*----------------------------------------------------------------*/
-
+	/*-------------------- When Loading Site Finish----------------------*/
 	$rootScope.pageFlug = false;
 	$rootScope.admin = '';
 	$rootScope.loginText = '';
@@ -60,6 +60,9 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	$scope.DataCustomer_slide = false;
 	$scope.currencyVal = 0;
 	$scope.popupLogoutFlug = false;
+	$rootScope.search = {
+		data: ''
+	}
 
 	if(localStorageService.get('admin_id') != null ){
 		$rootScope.pageFlug = true;
@@ -69,5 +72,6 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	else {
 		$scope.focus('userName_focus');
 	}
+	/*----------------------------------------------------------------*/
 
 }]);

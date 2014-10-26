@@ -9,7 +9,6 @@ angular.module('uncleshopApp')
 		var text = ['','เพิ่มบิล','ค้นหาบิล','ข้อมูลการจ่ายบิล']
 		$scope.tabColor=number;
 		$rootScope.loginText=text[number];
-		console.log($rootScope.loginText);
 	};
 
 	/////เวลาส่งทำงี้นะ
@@ -17,12 +16,11 @@ angular.module('uncleshopApp')
 	$scope.seachCustomers = function ()
 	{
 		var data = {
-			'key':$scope.search
+			'key':$rootScope.search.data
 		}
 		bill.getCustomers(data,function(data, status, headers, config)
 		{
-			$rootScope.CustomersData = data;
-			console.log(data);
+			$rootScope.DataCustomers = data;
 		});
 	};
 

@@ -153,12 +153,12 @@
 								<div class="form-group" ng-hide="DataCustomer_toggle">
 									<!-- <label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label> -->
 								    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
-									  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
+									  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
 									  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
 									</div>
 								</div>
 
-									<div ng-repeat="(key, data) in CustomersData">
+									<div ng-repeat="(key, data) in DataCustomers">
 										<div class="resultUser"style="background-color: white;">
 											<div class="icon">
 												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> <!-- male -->
