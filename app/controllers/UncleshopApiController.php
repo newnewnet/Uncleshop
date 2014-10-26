@@ -35,6 +35,14 @@
 			$array = Input::all();
 			$admin = new Admin;
 			$admin->insertAdmin($array);
+
+		}
+		public function checkUser()
+		{
+			$array = Input::all();
+			$admin = new Admin;
+			$result = $admin->getAdmin($array);
+			return $result;
 		}
 		public function loginAdmin()
 		{
@@ -49,5 +57,19 @@
 			
 			return $result;
 
+		}
+		public function updateAdmin()
+		{
+			$admin = new Admin;
+			$array = Input::all();
+			$result = $admin->updateAdmin($array);
+			return $result;
+		}
+		public function deleteAdmin()
+		{
+			$admin = new Admin;
+			$array = Input::all();
+			$result = $admin->deleteAdmin($array);
+			return $result;
 		}
 	}

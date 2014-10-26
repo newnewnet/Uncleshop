@@ -1,10 +1,32 @@
 <?php
 	/* /saveAdmin  : get
 		data = {
-			admin_name' : array['admin_name'],
-			admin_user' : $array['admin_user'],
-			admin_password : $array['admin_password'],
+			'admin_id' : $array['admin_id'],
+			'admin_name' :  $array['admin_name'],
+			'admin_last_name' : $array['admin_last_name'],
+			'admin_user' :  $array['admin_user'],
+			'admin_password' : $array['admin_password'],
+			'admin_sex' : $array['admin_sex'],
+			'admin_tel' :  $array['admin_tel'],
+			'admin_address' :  $array['admin_address'],
 		}
+
+		/checkUser : get
+		data = {
+			'username' : $scope.username
+		}
+
+		/deleteAdmin   : get
+		data = {
+			'admin_id' : $scope.admin_id
+		}
+
+		/updateAdmin  : get
+		data = {
+			'admin_id' : $scope.admin_id,
+			'admin_password' : ,,
+		}
+
 
 
 		/saveBill   : get
