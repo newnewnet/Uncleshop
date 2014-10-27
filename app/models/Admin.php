@@ -40,7 +40,7 @@
 			return $result;
 
 		}
-		public function getAdmin($array)
+		public function getCountUser($array)
 		{	
 			if(isset($array['username']))
 			{	
@@ -55,7 +55,13 @@
 			{
 					$result = $this->where('admin_id','=',$array['admin_id'])
 											->update(array(
+												'admin_name' => $array['admin_name'],
+												'admin_last_name' => $array['admin_last_name'],
+												'admin_user' => $array['admin_user'],
 												'admin_password' =>$array['admin_password'],
+												'admin_sex' =>$array['admin_sex'],
+												'admin_tel' =>$array['admin_tel'],
+												'admin_address' =>$array['admin_address']
 											));			
 				return $result;
 			}
@@ -67,5 +73,10 @@
 				$result = $this->where('admin_id', '=', $array['admin_id'])->delete();
 				return $result;
 			}
+		}
+		public function getAdmin()
+		{
+			$result = $this->where('admin_status','=',0)->get();
+			return  $result;
 		}
 	}

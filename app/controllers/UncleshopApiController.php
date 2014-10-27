@@ -42,7 +42,7 @@
 		{
 			$array = Input::all();
 			$admin = new Admin;
-			$result = $admin->getAdmin($array);
+			$result = $admin->getCountUser($array);
 			return $result;
 		}
 		public function loginAdmin()
@@ -71,6 +71,12 @@
 			$admin = new Admin;
 			$array = Input::all();
 			$result = $admin->deleteAdmin($array);
+			return $result;
+		}
+		public function getAdmin()
+		{
+			$admin = new Admin;
+			$result = $admin->getAdmin();
 			return $result;
 		}
 	}

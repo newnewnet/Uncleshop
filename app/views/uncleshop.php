@@ -78,7 +78,8 @@
 			  </div>
 			</div>
 	  </header>
-  
+
+
 		<div class="container" style="margin-bottom: 50px;">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
@@ -95,8 +96,9 @@
 				</div>
 			</div>
 
+
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
-				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1)" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
+				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1);getAdmin();default()" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="title-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
@@ -128,6 +130,13 @@
 				    			<img src="img/icon-44.png"/>
 				    		</span>
 				    		<div class="text">ข้อมูลลูกค้า</div>
+				    	</div>
+
+				    	<div class="box"  data-ng-click="changTab(5); switchMenu()" ng-show="adminStatus==1" data-ng-class="{'customer':tabColor==5}">
+				    		<span class="icon icon4" >
+				    			<img src="img/icon-44.png"/>
+				    		</span>
+				    		<div class="text">super admin</div>
 				    	</div>
 				  	</div>
 				</div>
@@ -197,7 +206,7 @@
 										<label class="col-sm-1 col-md-1 control-label">เพศ</label>
 										<div class="col-sm-2 col-md-2">
 											<select class="form-control" ng-model="customers_sex">
-									            <option value="male">ชาย</option>
+									          <option value="male">ชาย</option>
 									        	<option value="female">หญิง</option>          
 									        </select>
 								        </div>
@@ -225,6 +234,95 @@
 						<div class="title">ข้อมูลการจ่ายบิล</div>	
 						<div class="box-bill"></div>
 					</div>
+
+					<div class="box-super-admin" ng-show="tabColor==5">
+						<div class="title">
+							<div class="TEXT-LEFT sub-title-left">
+								super admin
+							</div>
+							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataAdmin()" ng-hide="adminToggle">
+								<div class="plus-user CURSOR">
+									<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
+									<img src="img/icon-user.png"/>
+								</div>
+							</div>
+							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataAdmin()" ng-show="adminToggle">
+								<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
+							</div>
+						</div>		
+						<div class="box-bill" >
+							<div class="form-horizontal">
+								<div ng-repeat="admin in admins" ng-hide="adminToggle">
+									<div class="resultUser"style="background-color: white;" ng-click="editAdmin($index)">
+										<div class="icon">
+											<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> <!-- male -->
+											<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> <!-- female -->
+										</div>
+										<div class="text">
+											<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
+											<span class="tel">tel.</span><span class="tel-data">{{admin.admin_tel}}</span>
+											<span class="id">id.</span><span class="id-data">{{admin.admin_id}}</span>																	
+										</div>
+									</div>
+								</div>
+
+								<div ng-show="adminToggle">
+									<div class="form-group">
+										<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
+								    <div class="col-sm-5 col-md-5">
+								    <input type="textbox" ng-model="adminId" maxlength="13" class="form-control"ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdmin(1)" ng-disabled="adminIdDisabled">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-md-2 control-label">username</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="textbox" ng-model="adminUser" class="form-control " ng-keyup="checkAdmin(2)" ng-class="adminError[1]">
+										</div>
+										<label class="col-sm-1 col-md-1 control-label">password</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="password" ng-model="adminPassword" class="form-control" ng-class="adminError[2]" ng-keyup="checkAdmin(3)">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="textbox" ng-model="adminName" class="form-control">
+										</div>
+										<label class="col-sm-1 col-md-1 control-label">สกุล</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="textbox" ng-model="adminLastName" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
+									    <div class="col-sm-4 col-md-4">
+									    	<input type="textbox" ng-model="adminTel" class="form-control" format="number" ng-model="tel">
+										</div>
+										<label class="col-sm-1 col-md-1 control-label">เพศ</label>
+										<div class="col-sm-2 col-md-2">
+											<select class="form-control" ng-model="adminSex">
+									          <option value="male">ชาย</option>
+									        	<option value="female">หญิง</option>          
+									        </select>
+								        </div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+									    <div class="col-sm-9 col-md-9">
+									    	<textarea class="form-control" ng-model="adminAddress" rows="3"></textarea>
+										</div>
+									</div>
+									<div class="col-sm-offset-10  col-sm-4 col-md-offset-10">
+										<button type="button" class="btn btn-danger" ng-click="deleteAdmin()" ng-hide="editFlug">ลบ</button>
+										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>	
+										<button type="button" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิมผู้ใช้รับบ</button>
+									</div>
+	
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 

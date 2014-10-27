@@ -20,7 +20,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 		$rootScope.DataCustomers = null;
 		$rootScope.search.data = null;
 	};
-
+	
 	$scope.popupLogout = function()
 	{
 		$scope.popupLogoutFlug = !$scope.popupLogoutFlug ;
@@ -30,6 +30,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	{
 		$rootScope.pageFlug = false;
 		$scope.popupLogoutFlug = false;
+		$rootScope.tabColor=1;
 		localStorageService.add('admin_id',null);
 		$scope.focus('userName_focus');
 	};
@@ -51,8 +52,12 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 				break;
 		}
 	};
-
+	
+	
 	/*-------------------- When Loading Site Finish----------------------*/
+
+
+
 	$rootScope.pageFlug = false;
 	$rootScope.admin = '';
 	$rootScope.loginText = '';
@@ -66,7 +71,9 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 
 	if(localStorageService.get('admin_id') != null ){
 		$rootScope.pageFlug = true;
+		$rootScope.adminStatus = $rootScope.admin.admin_status;
 		$rootScope.admin = localStorageService.get('admin_id');
+		$rootScope.adminStatus = $rootScope.admin.admin_status;
 		$scope.focus('search_focus');
 	}
 	else {
@@ -74,4 +81,4 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	}
 	/*----------------------------------------------------------------*/
 
-}]);
+}])
