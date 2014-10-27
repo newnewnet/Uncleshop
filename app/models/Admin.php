@@ -41,11 +41,26 @@
 		}
 		public function getCountUser($array)
 		{	
+			$result = 'success';
 			if(isset($array['username']))
 			{	
-				$result = $this->where('admin_user','=',$array['username'])->count();
-				return $result;
+				$count = $this->where('admin_user','=',$array['username'])->count();
+				if($count != 0)
+				{
+					$result = 'userName-same';
+				}
+
 			}
+			if(isset($array['admin_id']))
+			{	
+				$count = $this->where('admin_id','=',$array['admin_id'])->count();
+				if($count != 0)
+				{
+					$result = 'adminId-same';
+				}
+				
+			}
+			return $result;
 		}
 
 		public function updateAdmin($array)

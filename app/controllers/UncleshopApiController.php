@@ -9,6 +9,20 @@
 			$result = $customers->getCustomers($key);
 			return $result;
 		}
+		public function saveCustomers()
+		{
+			$customers = new Customers;
+			$array = Input::all();
+			$result = $customers->insertCustomers($array);
+			return $result;
+		}
+		public function checkCustomersId()
+		{
+			$customers = new Customers;
+			$array = Input::all();
+			$result = $customers->checkCustomersId($array);
+			return $result;
+		}
 		public function updateCustomers()
 		{
 			$customers = new Customers;

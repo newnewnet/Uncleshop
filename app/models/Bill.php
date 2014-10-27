@@ -8,28 +8,7 @@
 
 		public function insertBill($array)
 		{
-			$customers  = new Customers;
-			$product = new Product;
-			$bill_detail = new Bill_detail;
-
-			$count = $this->where('customers_id','=',$array['customers']->customers_id)->count();
-			if($count != 0)
-			{
-				return "error";
-			}
-
-			if(isset($array['customers']->customers_name))
-			{			
-				$customers->insert([
-					'customers_id' => $array['customers']->customers_id,
-					'customers_name' => $array['customers']->customers_name,
-					'customers_last_name' => $array['customers']->customers_last_name,				
-					'customers_address' => $array['customers_address']->customers_address,
-					'customers_sex' => $array['customers']->customers_sex,
-					'customers_tel' =>$array['customers']->customers_tel,
-				]);
-			}
-
+		
 			$billCode = $this->randomBill();
 
 			$day = 0;

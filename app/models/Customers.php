@@ -44,5 +44,30 @@
 				return $result;
 			}
 		}
+		public function insertCustomers($array)
+		{
+
+			if(isset($array['customers_id']))
+			{			
+				$this->insert([
+					'customers_id' => $array['customers_id'],
+					'customers_name' => $array['customers_name'],
+					'customers_last_name' => $array['customers_last_name'],		
+					'customers_address' => $array['customers_address'],
+					'customers_sex' => $array['customers_sex'],
+					'customers_tel' =>$array['customers_tel']
+				]);
+			}
+		}
+		public function checkCustomersId($array)
+		{
+			$result = "success";
+			$count = $this->where('customers_id','=',$array['customers_id'])->count();
+			if($count != 0)
+			{
+				$result = "customers-same";
+			}
+			return $result;
+		}
 		
 	}
