@@ -8,19 +8,6 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 			$scope.menu_slide = !$scope.menu_slide;
 	};
 
-	$scope.switchDataCustomer = function(){
-		if($scope.DataCustomer_toggle){
-			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
-			$scope.focus('search_focus');
-		}
-		else{
-			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
-			$scope.focus('customers_id_focus');
-		}
-		$rootScope.DataCustomers = null;
-		$rootScope.search.data = null;
-	};
-	
 	$scope.popupLogout = function()
 	{
 		$scope.popupLogoutFlug = !$scope.popupLogoutFlug ;
@@ -56,8 +43,6 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	
 	/*-------------------- When Loading Site Finish----------------------*/
 
-
-
 	$rootScope.pageFlug = false;
 	$rootScope.admin = '';
 	$rootScope.loginText = '';
@@ -66,7 +51,6 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	}
 
 	$scope.menu_slide = false;
-	$scope.DataCustomer_slide = false;
 	$scope.currencyVal = 0;
 	$scope.popupLogoutFlug = false;
 	

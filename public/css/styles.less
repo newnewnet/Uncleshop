@@ -2,6 +2,12 @@
 @color-element: #00B16A;
 @font-content: 'Roboto Condensed', sans-serif;
 
+/*color*/
+@color-red: #e05b49;
+@color-green: #45B39C;
+@color-blue: #1196d1;
+/*-----*/
+
 @font-face {
   font-family: 'thaisans_semibold';
   src: url('/fonts/thaisansneue-semibold-webfont.eot');
@@ -78,6 +84,32 @@ html, body {
 .transition (@element: left, @time: .5s) {
     -webkit-transition: @element @time; /* For Safari 3.1 to 6.0 */
     transition: @element @time;
+}
+
+&.btn-primary {
+	background-color: @color-blue;
+	border: none;
+	/*width: 53px;
+	height: 40px;*/
+	&:hover, &:focus {
+		background-color: #0a9fe1;
+	}
+}
+
+&.btn-danger {
+	.btn-primary;
+	background-color: @color-red;
+	&:hover, &:focus {
+		background-color: #ed7c6d;
+	}
+}
+
+&.btn-success {
+	.btn-primary;
+	background-color: @color-green;
+	&:hover, &:focus {
+		background-color: #67d3bc;
+	}
 }
 
 @body-bg: #fff;
@@ -241,9 +273,9 @@ header {
 			border-bottom: 1px solid #dcdcdc;
 		}
 		&.save-bill {
-			-webkit-box-shadow: -10px 0 0 0 #1196d1 inset;
-			-moz-box-shadow: -10px 0 0 0 #1196d1 inset;
-			box-shadow: -10px 0 0 0 #1196d1 inset;
+			-webkit-box-shadow: -10px 0 0 0 @color-blue inset;
+			-moz-box-shadow: -10px 0 0 0 @color-blue inset;
+			box-shadow: -10px 0 0 0 @color-blue inset;
 			&:hover, &:focus {
 				-webkit-box-shadow: -10px 0 0 0 #0a9fe1 inset;
 				-moz-box-shadow: -10px 0 0 0 #0a9fe1 inset;
@@ -295,11 +327,24 @@ header {
 				box-shadow: 0;
 			}
 		}
+		&.admin  {
+			-webkit-box-shadow: -10px 0 0 0 @color-green inset;
+			-moz-box-shadow: -10px 0 0 0 @color-green inset;
+			box-shadow: -10px 0 0 0 @color-green inset;
+			&:hover, &:focus {
+				-webkit-box-shadow: -10px 0 0 0 #67d3bc inset;
+				-moz-box-shadow: -10px 0 0 0 #67d3bc inset;
+				box-shadow: -10px 0 0 0 #67d3bc inset;
+			}
+			&.none {
+				box-shadow: 0;
+			}
+		}
 		.icon {
 			width: 44px;
 			height: 100%;
 			&.icon1 {
-				background-color: #1196d1;
+				background-color: @color-blue;
 				img {
 					margin-left: 7.5%;
 					margin-top: 7.5%;
@@ -331,7 +376,7 @@ header {
 				}
 			}
 			&.icon4 {
-				background-color: #e05b49;
+				background-color: @color-red;
 				img {
 					margin-left: 7.5%;
 					margin-top: 7.5%;
@@ -343,7 +388,7 @@ header {
 			}
 			
 			&.icon5 {
-				background-color: #45B39C;
+				background-color: @color-green;
 				img {
 					margin-left: 7.5%;
 					margin-top: 7.5%;
@@ -402,6 +447,10 @@ header {
 		height: auto;
 		font-family: 'thaisans_semibold';
 		font-size:20px;
+
+		input, button, select, textarea {
+			font-size:20px;
+		}
 		.resultUser {
 			margin-bottom: 5px;
 			cursor:pointer;
@@ -477,10 +526,7 @@ header {
 }
 
 .input-error {
-	border: 1px solid red;
-	&:hover, &:focus {
-		border: 1px solid red;
-	}
+	border: 1px solid @color-red;
 }
 
 

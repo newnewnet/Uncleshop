@@ -1,26 +1,7 @@
 angular.module('uncleshopApp')
-.controller('uncleshopController', ['$scope','bill','$rootScope','register', function($scope,bill,$rootScope,register) 
+.controller('uncleshopController', ['$scope','bill','$rootScope','manageAdmin','manageCustomer', function($scope,bill,$rootScope,manageAdmin,manageCustomer) 
 {
-
-	
-	$scope.default = function()
-	{
-		$scope.customers_sex = 'male';
-		$scope.adminLastName = '';
-		$scope.adminSex = 'male';
-		$scope.adminTel = '';
-		$scope.adminName = '';
-		$scope.adminAddress = '';
-		$scope.adminLastName = '';
-		$scope.userError = '';
-		$scope.adminId = '';
-		$scope.adminUser = '';
-		$scope.adminPassword = '';
-		$scope.adminError = [];
-		$scope.adminIdDisabled = false;
-	};
-
-
+		
 	$scope.changTab = function(number)
 	{
 		var text = ['','เพิ่มบิล','ค้นหาบิล','ข้อมูลการจ่ายบิล']
@@ -44,11 +25,12 @@ angular.module('uncleshopApp')
 	$scope.savaBill = function()
 	{
 		var data = {
-			'customers_id' : $scope.customers_id,
-			'customers_name' : $scope.customers_name,
-			'customers_address' : $scope.customers_address,
-			'customers_sex' : $scope.customers_sex,
-			'customers_tel' :$scope.customers_tel
+			'customers_id' : $scope.customersId,
+			'customers_name' : $scope.customersName,
+			'customers_tel' : $scope.customersLastName,
+			'customers_address' : $scope.customersAddress,
+			'customers_sex' : $scope.customersSex,
+			'customers_tel' :$scope.customersTel									
 		};
 
 		bill.saveBill(data,function(data, status, headers, config)
@@ -57,11 +39,58 @@ angular.module('uncleshopApp')
 		});
 	};
 
+	/*----------------------------  bill  ---------------------------------*/
+	$scope.nextBill = function() {
+
+	};
+
+	/*---------------------------- bill-->customer  ---------------------------------*/
+	$scope.switchDataCustomer = function(){
+		$scope.customersDefault();
+		if($scope.DataCustomer_toggle){
+			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
+			$scope.focus('search_focus');
+		}
+		else{
+			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
+			$scope.focus('customers_id_focus');
+		}
+		$rootScope.DataCustomers = null;
+		$rootScope.search.data = null;
+	};
+
+	$scope.customersDefault = function()
+	{
+		
+		$scope.customersId = null;
+		$scope.customersName = null;
+		$scope.customersLastName = null;
+		$scope.customersTel = null;
+		$scope.customersSex = 'male';
+		$scope.customersAddress = null;
+
+	};
 
 	/*----------------------------  super  admin---------------------------------*/
+	$scope.adminDefault = function()
+	{
+		$scope.adminLastName = '';
+		$scope.adminSex = 'male';
+		$scope.adminTel = '';
+		$scope.adminName = '';
+		$scope.adminAddress = '';
+		$scope.adminLastName = '';
+		$scope.userError = '';
+		$scope.adminId = '';
+		$scope.adminUser = '';
+		$scope.adminPassword = '';
+		$scope.adminError = [];
+		$scope.adminIdDisabled = false;
+	};
+
 	$scope.switchDataAdmin = function()
 	{
-		$scope.default();
+		$scope.adminDefault();
 		if($scope.adminToggle){
 			$scope.adminToggle = !$scope.adminToggle;
 			$scope.editFlug = false;
@@ -75,7 +104,7 @@ angular.module('uncleshopApp')
 
 	$scope.getAdmin = function ()
 	{
-		register.getAdmin(function(data, status, headers, config)
+		manageAdmin.getAdmin(function(data, status, headers, config)
 		{
 			$scope.admins = data;
 		});
@@ -96,34 +125,42 @@ angular.module('uncleshopApp')
 				'admin_tel' : $scope.adminTel,
 				'admin_address' :  $scope.adminAddress
 			};
+
 			if(value == 1)
 			{
-				register.saveAdmin(data,function(data, status, headers, config)
+				manageAdmin.saveAdmin(data,function(data, status, headers, config)
 				{
-					$scope.getAdmin();
-					$scope.adminToggle = false;
+					console.log('saveAdmin');
+					console.log(data);
+
+					if(data != 'error'){
+						$scope.getAdmin();
+						$scope.adminToggle = false;
+					}
+
 				});
 			}
+
 			else if(value == 2)
 			{
-				register.updateAdmin(data,function(data, status, headers, config)
+				manageAdmin.updateAdmin(data,function(data, status, headers, config)
 				{
 					$scope.getAdmin();
 					$scope.adminToggle = false;
 				});
 			}
+
 		}
 		else
 		{
 			if($scope.adminId == '')
-				$scope.adminError[0] = 'input-error';
+				$scope.adminError[0] = 'input-error'; //input adminID
 			if($scope.adminUser == '')
-				$scope.adminError[1] = 'input-error';
+				$scope.adminError[1] = 'input-error'; //input adminUserName
 			if($scope.adminPassword == '')
-				$scope.adminError[2] = 'input-error';
+				$scope.adminError[2] = 'input-error'; //input adminPassword
 		}
 	};
-
 
 	$scope.checkAdmin = function(value)
 	{
@@ -139,7 +176,7 @@ angular.module('uncleshopApp')
 				var data = {
 					'username' : $scope.adminUser
 				};
-				register.checkUserName(data,function(data, status, headers, config)
+				manageAdmin.checkUserName(data,function(data, status, headers, config)
 				{
 					console.log(data);
 					$scope.adminError[1] = '';
@@ -157,6 +194,7 @@ angular.module('uncleshopApp')
 		}
 
 	};
+
 	$scope.editAdmin = function(index)
 	{
 		$scope.adminToggle = true;
@@ -171,20 +209,21 @@ angular.module('uncleshopApp')
 		$scope.adminTel =  $scope.admins[index].admin_tel;
 		$scope.adminAddress =  $scope.admins[index].admin_address;
 	};
+
 	$scope.deleteAdmin = function()
 	{
 		var data = {
 			'admin_id' : $scope.adminId
 		};
-		register.deleteAdmin(data,function(data, status, headers, config)
+		manageAdmin.deleteAdmin(data,function(data, status, headers, config)
 		{
 			$scope.getAdmin();
 			$scope.adminToggle = false;
 		});
 	};
 	
-
 }])
+
 .factory('bill', ['$http', function($http) 
 {
 	return {
@@ -204,7 +243,8 @@ angular.module('uncleshopApp')
 		}
 	};
 }])
-.factory('register', ['$http', function($http) 
+
+.factory('manageAdmin', ['$http', function($http) 
 {
 	return {
 		saveAdmin:function(data,callback)
@@ -243,4 +283,45 @@ angular.module('uncleshopApp')
 		  });
 		},
 	};
-}]);
+}])
+
+// .factory('manageCustomer', ['$http', function($http) 
+// {
+// 	return {
+// 		saveCustomer:function(data,callback)
+// 		{
+// 			$http({method: 'GET', url: '/saveAdmin',params:data})
+// 		  .success(callback)
+// 		  .error(function(data, status, headers, config) {
+// 		  });
+// 		},
+// 		checkUserName:function(data,callback)
+// 		{
+// 			$http({method: 'GET', url: '/checkUser',params:data})
+// 		  .success(callback)
+// 		  .error(function(data, status, headers, config) {
+// 		  });
+// 		},
+// 		getAdmin:function(callback)
+// 		{
+// 			$http({method: 'GET', url: '/admin'})
+// 		  .success(callback)
+// 		  .error(function(data, status, headers, config) {
+// 		  });
+// 		},
+// 		deleteAdmin:function(data,callback)
+// 		{
+// 			$http({method: 'GET', url: '/deleteAdmin',params:data})
+// 		  .success(callback)
+// 		  .error(function(data, status, headers, config) {
+// 		  });
+// 		},
+// 		updateAdmin:function(data,callback)
+// 		{
+// 			$http({method: 'GET', url: '/updateAdmin',params:data})
+// 		  .success(callback)
+// 		  .error(function(data, status, headers, config) {
+// 		  });
+// 		},
+// 	};
+// }]);

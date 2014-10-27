@@ -132,7 +132,7 @@
 				    		<div class="text">ข้อมูลลูกค้า</div>
 				    	</div>
 
-				    	<div class="box"  data-ng-click="changTab(5); switchMenu()" ng-show="admin.admin_status==1" data-ng-class="{'customer':tabColor==5}">
+				    	<div class="box"  data-ng-click="changTab(5); switchMenu()" ng-show="admin.admin_status==1" data-ng-class="{'admin':tabColor==5}">
 				    		<span class="icon icon5" >
 				    			<img src="img/icon-user.png"/>
 				    		</span>
@@ -175,8 +175,8 @@
 											</div>
 											<div class="text">
 												<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
-												<span class="tel">tel.</span><span class="tel-data">{{data.customers_tel}}</span>
-												<span class="id">id.</span><span class="id-data">{{data.customers_id}}</span>																	
+												<span class="tel">TEL.</span><span class="tel-data">{{data.customers_tel}}</span>
+												<span class="id">ID.</span><span class="id-data">{{data.customers_id}}</span>																	
 											</div>
 										</div>
 									</div>
@@ -185,28 +185,28 @@
 									<div class="form-group">
 										<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 									    <div class="col-sm-5 col-md-5">
-									    	<input type="textbox" ng-model="customers_id" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus">
+									    	<input type="textbox" ng-model="customersId" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
 									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="customers_name" class="form-control">
+									    	<input type="textbox" ng-model="customersName" class="form-control">
 										</div>
 										<label class="col-sm-1 col-md-1 control-label">สกุล</label>
 									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="customers_surname" class="form-control">
+									    	<input type="textbox" ng-model="customersLastName" class="form-control">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="customers_tel" class="form-control" format="number" ng-model="tel">
+									    	<input type="textbox" ng-model="customersTel" class="form-control" format="number" ng-model="tel">
 										</div>
 										<label class="col-sm-1 col-md-1 control-label">เพศ</label>
 										<div class="col-sm-2 col-md-2">
-											<select class="form-control" ng-model="customers_sex">
-									          <option value="male">ชาย</option>
+											<select class="form-control" ng-model="customersSex">
+									          	<option value="male">ชาย</option>
 									        	<option value="female">หญิง</option>          
 									        </select>
 								        </div>
@@ -214,11 +214,11 @@
 									<div class="form-group">
 										<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 									    <div class="col-sm-9 col-md-9">
-									    	<textarea class="form-control" ng-model="customers_address" rows="3"></textarea>
+									    	<textarea class="form-control" ng-model="customersAddress" rows="3"></textarea>
 										</div>
 									</div>
 									<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
-										<button type="button" class="btn btn-primary" ng-click="savaBill()">Test Submit</button>
+										<button type="button" class="btn btn-primary button-primary" ng-click="nextBill()">ต่อไป</button>
 									</div>
 								</div>
 							</div>
@@ -255,13 +255,13 @@
 								<div ng-repeat="admin in admins" ng-hide="adminToggle">
 									<div class="resultUser"style="background-color: white;" ng-click="editAdmin($index)">
 										<div class="icon">
-											<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> <!-- male -->
-											<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> <!-- female -->
+											<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
+											<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
 										</div>
 										<div class="text">
 											<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
-											<span class="tel">tel.</span><span class="tel-data">{{admin.admin_tel}}</span>
-											<span class="id">id.</span><span class="id-data">{{admin.admin_id}}</span>																	
+											<span class="tel">TEL.</span><span class="tel-data">{{admin.admin_tel}}</span>
+											<span class="id">ID.</span><span class="id-data">{{admin.admin_id}}</span>																	
 										</div>
 									</div>
 								</div>
@@ -270,7 +270,7 @@
 									<div class="form-group">
 										<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    <input type="textbox" ng-model="adminId" maxlength="13" class="form-control"ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdmin(1)" ng-disabled="adminIdDisabled">
+								    <input type="textbox" ng-model="adminId" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdmin(1)" ng-disabled="adminIdDisabled">
 										</div>
 									</div>
 									<div class="form-group">
@@ -312,10 +312,11 @@
 									    	<textarea class="form-control" ng-model="adminAddress" rows="3"></textarea>
 										</div>
 									</div>
-									<div class="col-sm-offset-10  col-sm-4 col-md-offset-10">
-										<button type="button" class="btn btn-danger" ng-click="deleteAdmin()" ng-hide="editFlug">ลบ</button>
+
+									<div class="row">
+										<button type="button" class="btn btn-danger col-xs-offset-10 col-xs-2 col-sm-offset-11 col-sm-1 col-md-offset-11 col-md-1" ng-click="deleteAdmin()" ng-hide="editFlug">ลบ</button>
 										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>	
-										<button type="button" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิมผู้ใช้รับบ</button>
+										<button type="button" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิ่ม</button>
 									</div>
 	
 								</div>
