@@ -17,8 +17,8 @@ angular.module('uncleshopApp')
 					$rootScope.pageFlug = true;
 					$rootScope.admin = data;
 				}
-				$rootScope.adminStatus = data.admin_status;
-				localStorageService.add('admin_id',data);
+				$rootScope.admin = data;
+				localStorageService.add('admin',data);
 				$scope.focus('search_focus');
 				$scope.userName = '';
 				$scope.passWord = '';

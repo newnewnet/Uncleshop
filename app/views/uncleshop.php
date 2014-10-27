@@ -132,11 +132,11 @@
 				    		<div class="text">ข้อมูลลูกค้า</div>
 				    	</div>
 
-				    	<div class="box"  data-ng-click="changTab(5); switchMenu()" ng-show="adminStatus==1" data-ng-class="{'customer':tabColor==5}">
-				    		<span class="icon icon4" >
-				    			<img src="img/icon-44.png"/>
+				    	<div class="box"  data-ng-click="changTab(5); switchMenu()" ng-show="admin.admin_status==1" data-ng-class="{'customer':tabColor==5}">
+				    		<span class="icon icon5" >
+				    			<img src="img/icon-user.png"/>
 				    		</span>
-				    		<div class="text">super admin</div>
+				    		<div class="text">ข้อมูลผู้ขาย</div>
 				    	</div>
 				  	</div>
 				</div>

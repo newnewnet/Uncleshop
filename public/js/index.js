@@ -61,19 +61,18 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	$rootScope.pageFlug = false;
 	$rootScope.admin = '';
 	$rootScope.loginText = '';
-	$scope.menu_slide = false;
-	$scope.DataCustomer_slide = false;
-	$scope.currencyVal = 0;
-	$scope.popupLogoutFlug = false;
 	$rootScope.search = {
 		data: ''
 	}
 
-	if(localStorageService.get('admin_id') != null ){
+	$scope.menu_slide = false;
+	$scope.DataCustomer_slide = false;
+	$scope.currencyVal = 0;
+	$scope.popupLogoutFlug = false;
+	
+	if(localStorageService.get('admin') != null ){
 		$rootScope.pageFlug = true;
-		$rootScope.adminStatus = $rootScope.admin.admin_status;
-		$rootScope.admin = localStorageService.get('admin_id');
-		$rootScope.adminStatus = $rootScope.admin.admin_status;
+		$rootScope.admin = localStorageService.get('admin');
 		$scope.focus('search_focus');
 	}
 	else {
