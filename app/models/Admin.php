@@ -30,7 +30,6 @@
 		{	
 			$result = $this->where('admin_user','=',$array['username'])
 											->where('admin_password','=',$array['password'])
-											->select('admin_id','admin_name','admin_status')
 											->first();
 			if($result == '')
 			{
