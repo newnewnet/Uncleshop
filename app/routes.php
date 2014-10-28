@@ -16,7 +16,10 @@ Route::get('/', function()
 	return View::make('uncleshop');
 });
 
-
+Route::post('/send/print_uncleshop', function()
+{
+    return View::make('print_uncleshop');
+});
 
 Route::get('customers','UncleshopApiController@getCustomers');
 Route::get('checkCustomersId','UncleshopApiController@checkCustomersId');
@@ -36,6 +39,8 @@ Route::get('updateAdmin','UncleshopApiController@updateAdmin');
 Route::get('deleteAdmin','UncleshopApiController@deleteAdmin');
 
 Route::post('login','UncleshopApiController@loginAdmin');
+
+
 
 
 
