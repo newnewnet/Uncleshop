@@ -98,7 +98,7 @@
 
 
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
-				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1);getAdmin();default()" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
+				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1);getAdmins();default()" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="title-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
@@ -141,192 +141,187 @@
 				  	</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-12 col-md-9">
-					<div class="box-save-bill" ng-show="tabColor==1">
-						<div class="title">
-							<div class="TEXT-LEFT sub-title-left">
-								ข้อมูลลูกค้า
+				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==1">
+					<div class="title">
+						<div class="TEXT-LEFT sub-title-left">
+							ข้อมูลลูกค้า
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-hide="DataCustomer_toggle">
+							<div class="plus-user CURSOR">
+								<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
+								<img src="img/icon-user.png"/>
 							</div>
-							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-hide="DataCustomer_toggle">
-								<div class="plus-user CURSOR">
-									<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
-									<img src="img/icon-user.png"/>
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-show="DataCustomer_toggle">
+							<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
+						</div>
+					</div>	
+					<div class="box-bill">
+						<div class="form-horizontal">
+							<div class="form-group" ng-hide="DataCustomer_toggle">
+								<!-- <label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label> -->
+							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
+								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
+								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
-							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-show="DataCustomer_toggle">
-								<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
-							</div>
-						</div>	
-						<div class="box-bill">
-							<div class="form-horizontal">
-								<div class="form-group" ng-hide="DataCustomer_toggle">
-									<!-- <label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label> -->
-								    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
-									  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
-									  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
+
+							<div ng-repeat="(key, data) in DataCustomers">
+								<div class="resultUser"style="background-color: white;">
+									<div class="icon">
+										<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> <!-- male -->
+										<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> <!-- female -->
+									</div>
+									<div class="text">
+										<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
+										<span class="tel">TEL.</span><span class="tel-data">{{data.customers_tel}}</span>
+										<span class="id">ID.</span><span class="id-data">{{data.customers_id}}</span>																	
 									</div>
 								</div>
+							</div>
 
-									<div ng-repeat="(key, data) in DataCustomers">
-										<div class="resultUser"style="background-color: white;">
-											<div class="icon">
-												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> <!-- male -->
-												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> <!-- female -->
-											</div>
-											<div class="text">
-												<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
-												<span class="tel">TEL.</span><span class="tel-data">{{data.customers_tel}}</span>
-												<span class="id">ID.</span><span class="id-data">{{data.customers_id}}</span>																	
-											</div>
-										</div>
+							<div ng-show="DataCustomer_toggle">
+								<div class="form-group">
+									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
+								    <div class="col-sm-5 col-md-5">
+								    	<input type="textbox" ng-model="customersId" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersId(customersId)" ng-class="customersError">
 									</div>
-
-								<div ng-show="DataCustomer_toggle">
-									<div class="form-group">
-										<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
-									    <div class="col-sm-5 col-md-5">
-									    	<input type="textbox" ng-model="customersId" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus">
-										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" ng-model="customersName" class="form-control">
 									</div>
-									<div class="form-group">
-										<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="customersName" class="form-control">
-										</div>
-										<label class="col-sm-1 col-md-1 control-label">สกุล</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="customersLastName" class="form-control">
-										</div>
+									<label class="col-sm-1 col-md-1 control-label">สกุล</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" ng-model="customersLastName" class="form-control">
 									</div>
-									<div class="form-group">
-										<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="customersTel" class="form-control" format="number" ng-model="tel">
-										</div>
-										<label class="col-sm-1 col-md-1 control-label">เพศ</label>
-										<div class="col-sm-2 col-md-2">
-											<select class="form-control" ng-model="customersSex">
-									          	<option value="male">ชาย</option>
-									        	<option value="female">หญิง</option>          
-									        </select>
-								        </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10">
 									</div>
-									<div class="form-group">
-										<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
-									    <div class="col-sm-9 col-md-9">
-									    	<textarea class="form-control" ng-model="customersAddress" rows="3"></textarea>
-										</div>
+									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
+									<div class="col-sm-2 col-md-2">
+										<select class="form-control" ng-model="customersSex">
+								          	<option value="male">ชาย</option>
+								        	<option value="female">หญิง</option>          
+								        </select>
+							        </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+								    <div class="col-sm-9 col-md-9">
+								    	<textarea class="form-control" ng-model="customersAddress" rows="3"></textarea>
 									</div>
-									<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
-										<button type="button" class="btn btn-primary button-primary" ng-click="nextBill()">ต่อไป</button>
-									</div>
+								</div>
+								<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
+									<button type="button" class="btn btn-primary button-primary" ng-click="addCustomers()">เพิ่ม</button>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
 
-					<div class="box-amount-bill" ng-show="tabColor==2">
-						<div class="title">ค้นหาบิล</div>	
-						<div class="box-bill"></div>
-					</div>
+				<div class="box-amount-bill" ng-show="tabColor==2">
+					<div class="title">ค้นหาบิล</div>	
+					<div class="box-bill"></div>
+				</div>
 
-					<div class="box-pays-bill" ng-show="tabColor==3">
-						<div class="title">ข้อมูลการจ่ายบิล</div>	
-						<div class="box-bill"></div>
-					</div>
+				<div class="box-pays-bill" ng-show="tabColor==3">
+					<div class="title">ข้อมูลการจ่ายบิล</div>	
+					<div class="box-bill"></div>
+				</div>
 
-					<div class="box-super-admin" ng-show="tabColor==5">
-						<div class="title">
-							<div class="TEXT-LEFT sub-title-left">
-								super admin
+				<div class="box-super-admin col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==5">
+					<div class="title">
+						<div class="TEXT-LEFT sub-title-left">
+							ข้อมูลผู้ขาย
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataAdmin()" ng-hide="adminToggle">
+							<div class="plus-user CURSOR">
+								<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
+								<img src="img/icon-user.png"/>
 							</div>
-							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataAdmin()" ng-hide="adminToggle">
-								<div class="plus-user CURSOR">
-									<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
-									<img src="img/icon-user.png"/>
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataAdmin()" ng-show="adminToggle">
+							<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
+						</div>
+					</div>		
+					<div class="box-bill" >
+						<div class="form-horizontal">
+							<div ng-hide="adminToggle" ng-repeat="admin in admins" class="resultUser" ng-click="editAdmin($index)">
+								<div class="icon">
+									<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
+									<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
+								</div>
+								<div class="text">
+									<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
+									<span class="tel">TEL.</span><span class="tel-data">{{admin.admin_tel}}</span>
+									<span class="id">ID.</span><span class="id-data">{{admin.admin_id}}</span>																	
 								</div>
 							</div>
-							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataAdmin()" ng-show="adminToggle">
-								<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
-							</div>
-						</div>		
-						<div class="box-bill" >
-							<div class="form-horizontal">
-								<div ng-repeat="admin in admins" ng-hide="adminToggle">
-									<div class="resultUser"style="background-color: white;" ng-click="editAdmin($index)">
-										<div class="icon">
-											<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
-											<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
-										</div>
-										<div class="text">
-											<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
-											<span class="tel">TEL.</span><span class="tel-data">{{admin.admin_tel}}</span>
-											<span class="id">ID.</span><span class="id-data">{{admin.admin_id}}</span>																	
-										</div>
-									</div>
-								</div>
-
-								<div ng-show="adminToggle">
-									<div class="form-group">
-										<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
+							<div ng-show="adminToggle">
+								<div class="form-group">
+									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    <input type="textbox" ng-model="adminId" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdmin(1)" ng-disabled="adminIdDisabled">
-										</div>
+									   	<input type="textbox" ng-model="adminId" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdminId()" ng-disabled="adminIdDisabled">
 									</div>
-									<div class="form-group">
-										<label class="col-sm-2 col-md-2 control-label">username</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="adminUser" class="form-control " ng-keyup="checkAdmin(2)" ng-class="adminError[1]">
-										</div>
-										<label class="col-sm-1 col-md-1 control-label">password</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="password" ng-model="adminPassword" class="form-control" ng-class="adminError[2]" ng-keyup="checkAdmin(3)">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="adminName" class="form-control">
-										</div>
-										<label class="col-sm-1 col-md-1 control-label">สกุล</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="adminLastName" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
-									    <div class="col-sm-4 col-md-4">
-									    	<input type="textbox" ng-model="adminTel" class="form-control" format="number" ng-model="tel">
-										</div>
-										<label class="col-sm-1 col-md-1 control-label">เพศ</label>
-										<div class="col-sm-2 col-md-2">
-											<select class="form-control" ng-model="adminSex">
-									          <option value="male">ชาย</option>
-									        	<option value="female">หญิง</option>          
-									        </select>
-								        </div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
-									    <div class="col-sm-9 col-md-9">
-									    	<textarea class="form-control" ng-model="adminAddress" rows="3"></textarea>
-										</div>
-									</div>
+								</div>
 
-									<div class="row">
-										<button type="button" class="btn btn-danger col-xs-offset-10 col-xs-2 col-sm-offset-11 col-sm-1 col-md-offset-11 col-md-1" ng-click="deleteAdmin()" ng-hide="editFlug">ลบ</button>
-										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>	
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">Username</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" ng-model="adminUserName" class="form-control " ng-keyup="checkAdminUserName()" ng-class="adminError[1]">
+									</div>
+									<label class="col-sm-2 col-md-2 control-label">Password</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="password" ng-model="adminPassword" class="form-control" ng-keyup="checkAdminPassword()" ng-class="adminError[2]">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" ng-model="adminName" class="form-control">
+									</div>
+									<label class="col-sm-2 col-md-2 control-label">สกุล</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" ng-model="adminLastName" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="textbox" ng-model="adminTel" class="form-control" numbers-only="numbers-only" ng-model="tel" maxlength="10">
+									</div>
+									<label class="col-sm-2 col-md-2 control-label">เพศ</label>
+									<div class="col-sm-2 col-md-2">
+										<select class="form-control" ng-model="adminSex">
+							   	            <option value="male">ชาย</option>
+								        	<option value="female">หญิง</option>          
+								        </select>
+							        </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+								    <div class="col-sm-10 col-md-10">
+								    	<textarea class="form-control" ng-model="adminAddress" rows="3"></textarea>
+									</div>
+								</div>
+
+								<div class="row"> <!-- col-xs-col-6 col-sm-offset-9 col-sm-col-2 -->
+									<div style="float: right;">
+										<button type="button" class="btn btn-danger " ng-click="deleteAdmin()" ng-hide="editFlug">ลบ</button>
+										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>
 										<button type="button" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิ่ม</button>
 									</div>
-	
-								</div>
+								</div>		
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
-
 		</div>
 	</body>
 </html>
