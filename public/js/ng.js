@@ -10,12 +10,13 @@ angular.module('uncleshopApp')
 
 		switch(number){
 			case 1: 
-				console.log(11111111);
-				$scope.focus('search_focus');
-				console.log($scope.search_focus);
+				$scope.DataCustomer_toggle = false;
+				$scope.focusItem('search_focus');
 				break;
 			case 2:
-				console.log(2222222222);
+				break;
+			case 5:
+				$scope.adminToggle = false;
 				break;
 		}
 
@@ -61,11 +62,11 @@ angular.module('uncleshopApp')
 		$scope.customersDefault();
 		if($scope.DataCustomer_toggle){
 			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
-			$scope.focus('search_focus');
+			$scope.focusItem('search_focus');
 		}
 		else{
 			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
-			$scope.focus('customers_id_focus');
+			$scope.focusItem('customers_id_focus');
 		}
 		$rootScope.DataCustomers = null;
 		$rootScope.search.data = null;
@@ -79,12 +80,47 @@ angular.module('uncleshopApp')
 		$scope.customersTel = '';
 		$scope.customersSex = 'male';
 		$scope.customersAddress = '';
+		$scope.customersError = [];
+		$scope.customerSubmit = true;
 	};
 
 	$scope.addCustomers = function() {
-		console.log('clicked');
-		if($scope.customersId != '' && $scope.customersName != '' && $scope.customersLastName !='')	{
-			console.log('not null');
+		if($scope.customersId != '' && $scope.customersId.length == 13)
+			$scope.customerSubmit = true;
+		else{
+			$scope.customersError[0] = 'input-error';
+			$scope.customerSubmit = false;
+		}
+
+		if($scope.customersName != '')
+			$scope.customerSubmit = true;
+		else{
+			$scope.customersError[1] = 'input-error';
+			$scope.customerSubmit = false;
+		}
+
+		if($scope.customersLastName != '')
+			$scope.customerSubmit = true;
+		else{
+			$scope.customersError[2] = 'input-error';
+			$scope.customerSubmit = false;
+		}
+
+		if($scope.customersTel != '' && $scope.customersId.length == 10)
+			$scope.customerSubmit = true;
+		else{
+			$scope.customersError[3] = 'input-error';
+			$scope.customerSubmit = false;
+		}
+
+		if($scope.customersAddress != '')
+			$scope.customerSubmit = true;
+		else{
+			$scope.customersError[4] = 'input-error';
+			$scope.customerSubmit = false;
+		}
+
+		if($scope.customerSubmit == true)	{
 			data = {
 				'customers_id' : $scope.customersId,
 				'customers_name' :  $scope.customersName,
@@ -110,10 +146,10 @@ angular.module('uncleshopApp')
 				manageCustomers.checkCustomersId(data,function(data, status, headers, config)
 				{
 					if(data == 'customers-same'){
-						$scope.customersError = 'input-error';
+						$scope.customersError[0] = 'input-error';
 					}
 					else 
-						$scope.customersError = '';
+						$scope.customersError[0] = '';
 				});
 			}, 500);
 	};
@@ -141,10 +177,11 @@ angular.module('uncleshopApp')
 		if($scope.adminToggle){
 			$scope.adminToggle = !$scope.adminToggle;
 			$scope.editFlug = false;
+			$scope.focusItem(null);
 		}
 		else{
 			$scope.adminToggle = !$scope.adminToggle;
-			$scope.focus('admin_id_focus');
+			$scope.focusItem('admin_id_focus');
 			$scope.editFlug = true;
 		}
 	};
@@ -160,8 +197,9 @@ angular.module('uncleshopApp')
 	$scope.register = function(value)
 	{
 		$scope.checkAdminPassword();
-		console.log('submiterror : '+$scope.adminSubmitError);
-		if($scope.adminId != '' && $scope.adminUserName != '' && $scope.adminPassword !='' || $scope.adminError[1] == '')
+		if($scope.adminId.length == 13)
+			console.log('13 : '+$scope.adminId.length);
+		if($scope.adminId != '' && $scope.adminId.length == 13 && $scope.adminUserName != '' && $scope.adminPassword !='')
 		{
 			data = {
 				'admin_id' : $scope.adminId,
@@ -203,6 +241,8 @@ angular.module('uncleshopApp')
 				$scope.adminError[1] = 'input-error'; //input adminUserName
 			if($scope.adminPassword == '')
 				$scope.adminError[2] = 'input-error'; //input adminPassword
+			if($scope.adminId.length != 13)
+				$scope.adminError[0] = 'input-error'; //input adminID
 		}
 	};
 
@@ -274,14 +314,14 @@ angular.module('uncleshopApp')
 		$scope.adminAddress =  $scope.admins[index].admin_address;
 	};
 
-	$scope.deleteAdmin = function()
+	$scope.removeAdmin = function()
 	{
 		var data = {
 			'admin_id' : $scope.adminId
 		};
 		manageAdmin.deleteAdmin(data,function(data, status, headers, config)
 		{
-			$scope.getAdmin();
+			$scope.getAdmins();
 			$scope.adminToggle = false;
 		});
 	};

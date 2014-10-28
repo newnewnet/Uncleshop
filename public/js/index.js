@@ -19,13 +19,14 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 		$scope.popupLogoutFlug = false;
 		$rootScope.tabColor=1;
 		localStorageService.add('admin_id',null);
-		$scope.focus('userName_focus');
+		$scope.focusItem('userName_focus');
 	};
 
-	$scope.focus = function(value) {
+	$scope.focusItem = function(value) {
 		$rootScope.userName_focus = false;
 		$rootScope.search_focus = false;
 		$rootScope.customers_id_focus = false;
+		$rootScope.admin_id_focus = false;
 
 		switch(value){
 			case "userName_focus":
@@ -36,6 +37,11 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 				break;
 			case "customers_id_focus":
 				$rootScope.customers_id_focus = true;
+				break;
+			case "admin_id_focus":
+				$rootScope.admin_id_focus = true;
+				break;
+			case null:
 				break;
 		}
 	};
@@ -57,10 +63,10 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	if(localStorageService.get('admin') != null ){
 		$rootScope.pageFlug = true;
 		$rootScope.admin = localStorageService.get('admin');
-		$scope.focus('search_focus');
+		$scope.focusItem('search_focus');
 	}
 	else {
-		$scope.focus('userName_focus');
+		$scope.focusItem('userName_focus');
 	}
 	/*----------------------------------------------------------------*/
 

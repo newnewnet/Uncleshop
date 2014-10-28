@@ -98,7 +98,7 @@
 
 
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
-				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1);getAdmins();default()" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
+				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1);getAdmins();adminDefault();customersDefault();" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="title-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
@@ -184,23 +184,23 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" ng-model="customersId" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersId(customersId)" ng-class="customersError">
+								    	<input type="textbox" ng-model="customersId" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersId(customersId)" ng-class="customersError[0]">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customersName" class="form-control">
+								    	<input type="textbox" ng-model="customersName" class="form-control" ng-class="customersError[1]">
 									</div>
 									<label class="col-sm-1 col-md-1 control-label">สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customersLastName" class="form-control">
+								    	<input type="textbox" ng-model="customersLastName" class="form-control" ng-class="customersError[2]">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10">
+								    	<input type="textbox" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
 									</div>
 									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">
@@ -213,7 +213,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-9 col-md-9">
-								    	<textarea class="form-control" ng-model="customersAddress" rows="3"></textarea>
+								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[4]"></textarea>
 									</div>
 								</div>
 								<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
@@ -224,13 +224,18 @@
 					</div>
 				</div>
 
-				<div class="box-amount-bill" ng-show="tabColor==2">
+				<div class="box-amount-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==2">
 					<div class="title">ค้นหาบิล</div>	
 					<div class="box-bill"></div>
 				</div>
 
-				<div class="box-pays-bill" ng-show="tabColor==3">
+				<div class="box-pays-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
 					<div class="title">ข้อมูลการจ่ายบิล</div>	
+					<div class="box-bill"></div>
+				</div>
+
+				<div class="box-pays-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==4">
+					<div class="title">ข้อมูลลูกค้า</div>	
 					<div class="box-bill"></div>
 				</div>
 
@@ -312,7 +317,7 @@
 
 								<div class="row"> <!-- col-xs-col-6 col-sm-offset-9 col-sm-col-2 -->
 									<div style="float: right;">
-										<button type="button" class="btn btn-danger " ng-click="deleteAdmin()" ng-hide="editFlug">ลบ</button>
+										<button type="button" class="btn btn-danger " ng-click="removeAdmin()" ng-hide="editFlug">ลบ</button>
 										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>
 										<button type="button" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิ่ม</button>
 									</div>
