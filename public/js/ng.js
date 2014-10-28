@@ -8,14 +8,16 @@ angular.module('uncleshopApp')
 		$rootScope.tabColor=number;
 		$rootScope.loginText=text[number];
 
-		// switch(number){
-		// 	case 1: 
-		// 		console.log(11111111);
-		// 		$scope.focus('search_focus');
-		// 		break;
-		// 	case 2:
-		// 		break;
-		// }
+		switch(number){
+			case 1: 
+				console.log(11111111);
+				$scope.focus('search_focus');
+				console.log($scope.search_focus);
+				break;
+			case 2:
+				console.log(2222222222);
+				break;
+		}
 
 	};
 
@@ -71,12 +73,12 @@ angular.module('uncleshopApp')
 
 	$scope.customersDefault = function()
 	{		
-		$scope.customersId = null;
-		$scope.customersName = null;
-		$scope.customersLastName = null;
-		$scope.customersTel = null;
+		$scope.customersId = '';
+		$scope.customersName = '';
+		$scope.customersLastName = '';
+		$scope.customersTel = '';
 		$scope.customersSex = 'male';
-		$scope.customersAddress = null;
+		$scope.customersAddress = '';
 	};
 
 	$scope.addCustomers = function() {
@@ -157,6 +159,8 @@ angular.module('uncleshopApp')
 
 	$scope.register = function(value)
 	{
+		$scope.checkAdminPassword();
+		console.log('submiterror : '+$scope.adminSubmitError);
 		if($scope.adminId != '' && $scope.adminUserName != '' && $scope.adminPassword !='' || $scope.adminError[1] == '')
 		{
 			data = {
@@ -169,8 +173,8 @@ angular.module('uncleshopApp')
 				'admin_tel' : $scope.adminTel,
 				'admin_address' :  $scope.adminAddress
 			};
-
-			if(value == 1 && checkAdminPassword() && $scope.adminSubmitError)
+			
+			if(value == 1 && $scope.adminSubmitError == true)
 			{
 				manageAdmin.saveAdmin(data,function(data, status, headers, config)
 				{
@@ -185,8 +189,8 @@ angular.module('uncleshopApp')
 			{
 				manageAdmin.updateAdmin(data,function(data, status, headers, config)
 				{
-					$scope.getAdmins();
 					$scope.adminToggle = false;
+					$scope.getAdmins();
 				});
 			}
 
@@ -210,7 +214,7 @@ angular.module('uncleshopApp')
 			};
 			manageAdmin.checkAdmin(data,function(data, status, headers, config)
 			{
-				console.log('check');
+				console.log(data);
 				if(data == 'adminId-same'){
 					$scope.adminError[0] = 'input-error';
 					$scope.adminSubmitError = false;
@@ -230,8 +234,6 @@ angular.module('uncleshopApp')
 				'username' : $scope.adminUserName
 			};
 			manageAdmin.checkAdmin(data,function(data, status, headers, config){
-				console.log(data);
-				$scope.adminError[1] = '';
 				if(data == 'userName-same' ){
 					$scope.adminSubmitError = false;
 					$scope.adminError[1] = 'input-error';
@@ -249,13 +251,12 @@ angular.module('uncleshopApp')
 		if($scope.adminPassword != ''){
 			$scope.adminError[2] = '';
 			$scope.adminSubmitError = true;
-			return true;
 		}
 		else{
 			$scope.adminError[2] = 'input-error';
 			$scope.adminSubmitError = false;
-			return false;
 		}
+		console.log('adminPassword');
 	};
 
 	$scope.editAdmin = function(index)
