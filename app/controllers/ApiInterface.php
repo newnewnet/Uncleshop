@@ -2,7 +2,7 @@
 	/* 
 		/saveCustomers : get
 		data = {
-				'customers_id' : $array['customers_id'],
+				'customers_id_card' : $array['customers_id_card'],
 				'customers_name' : $array['customers_name'],
 				'customers_last_name' :$array['customers_last_name'],				
 				'customers_address' : $array['customers_address'],
@@ -12,7 +12,7 @@
 
 		/saveAdmin  : get
 		data = {
-			'admin_id' : $array['admin_id'],
+			'admin_id_card' : $array['admin_id_card'],
 			'admin_name' :  $array['admin_name'],
 			'admin_last_name' : $array['admin_last_name'],
 			'admin_user' :  $array['admin_user'],
@@ -24,7 +24,7 @@
 
 		/checkCustomersId
 		data = {
-			'customers_id' : $scope.id
+			'customers_id_card' : $scope.id_card
 		}
 
 
@@ -33,7 +33,7 @@
 			'username' : $scope.username
 		} or 
 		data = {
-			'admin_id' : $scope.adminId
+			'admin_id_card' : $scope.adminId_card
 		}
 
 
@@ -46,9 +46,17 @@
 
 		/updateAdmin  : get
 		data = {
-			'admin_id' : $scope.admin_id,
-			'admin_password' : ,,
+			admin_id' : $array['admin_id'])
+			'admin_id_card'  :$array['admin_id_card'],
+			'admin_name' :$array['admin_name'],
+			'admin_last_name'  :$array['admin_last_name'],
+			'admin_user'  : $array['admin_user'],
+			'admin_password'  :$array['admin_password'],
+			'admin_sex' : $array['admin_sex'],
+			'admin_tel' : $array['admin_tel'],
+			'admin_address' : $array['admin_address']
 		}
+
 
 
 
@@ -78,6 +86,7 @@
 		/updateCustomers  : get
 		data = {
 					'customers_id' : $array['customers_id'],
+					'customers_id_card' => $array['customers_id_card'],
 					'customers_name' : $array['customers_name'],
 					'customers_last_name' :$array['customers_last_name'],				
 					'customers_address' : $array['customers_address'],

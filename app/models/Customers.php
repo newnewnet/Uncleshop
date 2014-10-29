@@ -12,7 +12,7 @@
 			if($key != '')
 			{
 				$customers  = new Customers;
-				$result = $customers->orWhere('customers_id', 'LIKE', "%".$key."%")
+				$result = $customers->orWhere('customers_id_card', 'LIKE', "%".$key."%")
 								->orWhere('customers_name', 'LIKE', "%".$key."%")
 								->orWhere('customers_last_name', 'LIKE', "%".$key."%")
 								->orWhere('customers_tel', 'LIKE', "%".$key."%")
@@ -27,6 +27,7 @@
 			{
 				$result = $this->where('customers_id','=',$array['customers_id'])
 						->update(array(
+								'customers_id_card' => $array['customers_id_card'],
 								'customers_name' => $array['customers_name'],
 								'customers_last_name' => $array['customers_last_name'],				
 								'customers_address' => $array['customers_address'],
@@ -47,10 +48,10 @@
 		public function insertCustomers($array)
 		{
 
-			if(isset($array['customers_id']))
+			if(isset($array['customers_id_card']))
 			{			
 				$this->insert([
-					'customers_id' => $array['customers_id'],
+					'customers_id_card' => $array['customers_id_card'],
 					'customers_name' => $array['customers_name'],
 					'customers_last_name' => $array['customers_last_name'],		
 					'customers_address' => $array['customers_address'],
@@ -62,7 +63,7 @@
 		public function checkCustomersId($array)
 		{
 			$result = "success";
-			$count = $this->where('customers_id','=',$array['customers_id'])->count();
+			$count = $this->where('customers_id_card','=',$array['customers_id_card'])->count();
 			if($count != 0)
 			{
 				$result = "customers-same";

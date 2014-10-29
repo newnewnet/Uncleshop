@@ -9,13 +9,13 @@
 
 		public function insertAdmin($array)
 		{
-			$count = $this->where('admin_id','=',$array['admin_id'])->count();
+			$count = $this->where('admin_id_card','=',$array['admin_id_card'])->count();
 			if($count != 0)
 			{
 				return "error";
 			}
 			$this->insert([
-					'admin_id' => $array['admin_id'],
+					'admin_id_card' => $array['admin_id_card'],
 					'admin_name' => $array['admin_name'],
 					'admin_last_name' => $array['admin_last_name'],
 					'admin_user' => $array['admin_user'],
@@ -29,8 +29,9 @@
 		public function loginAmin($array)
 		{	
 			$result = $this->where('admin_user','=',$array['username'])
-											->where('admin_password','=',$array['password'])
-											->first();
+							->where('admin_password','=',$array['password'])
+							->first();
+							
 			if($result == '')
 			{
 				$result = null;
@@ -51,9 +52,9 @@
 				}
 
 			}
-			if(isset($array['admin_id']))
+			if(isset($array['admin_id_card']))
 			{	
-				$count = $this->where('admin_id','=',$array['admin_id'])->count();
+				$count = $this->where('admin_id_card','=',$array['admin_id_card'])->count();
 				if($count != 0)
 				{
 					$result = 'adminId-same';
@@ -69,6 +70,7 @@
 			{
 					$result = $this->where('admin_id','=',$array['admin_id'])
 											->update(array(
+												'admin_id_card' => $array['admin_id_card'],
 												'admin_name' => $array['admin_name'],
 												'admin_last_name' => $array['admin_last_name'],
 												'admin_user' => $array['admin_user'],
@@ -84,7 +86,10 @@
 		{
 			if(isset($array['admin_id']))
 			{
-				$result = $this->where('admin_id', '=', $array['admin_id'])->delete();
+				$result = $this->where('admin_id', '=', $array['admin_id'])
+										->update(array(
+												'admin_status' => 2
+										));
 				return $result;
 			}
 		}
