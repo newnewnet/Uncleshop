@@ -29,6 +29,9 @@
 		<script src="js/login.js"></script>
 		<script src="js/ng.js"></script>
 
+		<!-- Sweet Alert -->
+		<script src="lib-sweet-alert/sweet-alert.js"></script>
+		<link rel="stylesheet" href="lib-sweet-alert/sweet-alert.css">
 
 		<!-- Font Awesome -->
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">

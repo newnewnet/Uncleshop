@@ -106,7 +106,7 @@ angular.module('uncleshopApp')
 			$scope.customerSubmit = false;
 		}
 
-		if($scope.customersTel != '' && $scope.customersId.length == 10)
+		if($scope.customersTel != '' && $scope.customersTel.length == 10)
 			$scope.customerSubmit = true;
 		else{
 			$scope.customersError[3] = 'input-error';
@@ -131,7 +131,12 @@ angular.module('uncleshopApp')
 			};
 			manageCustomers.addCustomers(data,function(data, status, headers, config) {
 				if(data != 'error')
-					alert('Success !!');
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "เพิ่มข้อมูลลูกค้าแล้ว",   
+						type: "success",
+						timer: 1500
+					});
 					$scope.customersDefault();
 			});
 		}
@@ -227,6 +232,12 @@ angular.module('uncleshopApp')
 			{
 				manageAdmin.updateAdmin(data,function(data, status, headers, config)
 				{
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "แก้ไขข้อมูลเรียบร้อยแล้ว",   
+						type: "success",
+						timer: 1500
+					});
 					$scope.adminToggle = false;
 					$scope.getAdmins();
 				});
@@ -321,8 +332,26 @@ angular.module('uncleshopApp')
 		};
 		manageAdmin.deleteAdmin(data,function(data, status, headers, config)
 		{
-			$scope.getAdmins();
-			$scope.adminToggle = false;
+			swal({
+				title: "เรียบร้อย !!",   
+				text: "เพิ่มข้อมูลลูกค้าแล้ว",   
+				type: "success",
+				timer: 1500
+			});
+			/*------------*/
+			swal({   
+				title: "Are you sure?",   
+				text: "You will not be able to recover this imaginary file!",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "Yes, delete it!",   
+				closeOnConfirm: false 
+			}, function(){   
+				swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+				$scope.getAdmins();
+				$scope.adminToggle = false;
+			});
 		});
 	};
 	
