@@ -92,16 +92,15 @@
 				<input style="margin-top: 5%; margin-bottom: 5px;" class="form-control" type="text" placeholder="Username" ng-model="userName" focus-me="userName_focus">
 				<input style="margin-bottom: 15px;" class="form-control" type="Password" placeholder="Password" ng-model="passWord" ng-enter="login()">
 				<div class="row-fluid TEXT-CENTER">
-					<button type="button" class="btn btn-success" ng-click="login()">LOGIN</button>
+					<button type="button" class="btn btn-success" style="width: 100px;" ng-click="login()">LOGIN</button>
 				</div>
 				<div class="row-fluid TEXT-CENTER" style="position: relative; bottom: -10px; color: #3498db;">
 					© Champangam Electronic.
 				</div>
 			</div>
 
-
 			<div ng-show="pageFlug" ng-controller="uncleshopController">
-				<div class="col-sm-4 col-md-3 con-tabmenu" ng-init="changTab(1);getAdmins();adminDefault();customersDefault();" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
+				<div class="col-sm-4 col-md-3 con-tabmenu" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="title-menu"><img src="img/icon-title.png"/>
 				    		<span style="line-height: 1em;">เมนูการทำบิล</span>
@@ -187,7 +186,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" ng-model="customersId" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersId(customersId)" ng-class="customersError[0]">
+								    	<input type="textbox" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
 									</div>
 								</div>
 								<div class="form-group">
@@ -274,7 +273,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-									   	<input type="textbox" ng-model="adminId" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdminId()" ng-disabled="adminIdDisabled">
+									   	<input type="textbox" ng-model="adminIdCard" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdminId()" ng-disabled="adminIdDisabled">
 									</div>
 								</div>
 

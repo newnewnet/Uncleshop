@@ -8,18 +8,16 @@ angular.module('uncleshopApp')
 		$rootScope.tabColor=number;
 		$rootScope.loginText=text[number];
 
-		switch(number){
-			case 1: 
-				$scope.DataCustomer_toggle = false;
-				$scope.focusItem('search_focus');
-				break;
-			case 2:
-				break;
-			case 5:
-				$scope.adminToggle = false;
-				break;
+		if(number == 1){
+			$scope.DataCustomer_toggle = false;
+			$scope.focusItem('search_focus');
 		}
-
+		else if(number == 5){
+			$scope.adminToggle = false;
+			$scope.focusItem(null);
+		}
+		else
+			$scope.focusItem(null);
 	};
 
 	/////เวลาส่งทำงี้นะ
@@ -35,22 +33,22 @@ angular.module('uncleshopApp')
 		});
 	};
 
-	$scope.savaBill = function()
-	{
-		var data = {
-			'customers_id' : $scope.customersId,
-			'customers_name' : $scope.customersName,
-			'customers_tel' : $scope.customersLastName,
-			'customers_address' : $scope.customersAddress,
-			'customers_sex' : $scope.customersSex,
-			'customers_tel' :$scope.customersTel									
-		};
+	// $scope.savaBill = function()
+	// {
+	// 	var data = {
+	// 		'customers_id' : $scope.customersId,
+	// 		'customers_name' : $scope.customersName,
+	// 		'customers_tel' : $scope.customersLastName,
+	// 		'customers_address' : $scope.customersAddress,
+	// 		'customers_sex' : $scope.customersSex,
+	// 		'customers_tel' :$scope.customersTel									
+	// 	};
 
-		bill.saveBill(data,function(data, status, headers, config)
-		{
+	// 	bill.saveBill(data,function(data, status, headers, config)
+	// 	{
 
-		});
-	};
+	// 	});
+	// };
 
 	/*----------------------------  bill  ---------------------------------*/
 	$scope.nextBill = function() {
@@ -74,7 +72,7 @@ angular.module('uncleshopApp')
 
 	$scope.customersDefault = function()
 	{		
-		$scope.customersId = '';
+		$scope.customersIdCard = '';
 		$scope.customersName = '';
 		$scope.customersLastName = '';
 		$scope.customersTel = '';
@@ -85,7 +83,7 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.addCustomers = function() {
-		if($scope.customersId != '' && $scope.customersId.length == 13)
+		if($scope.customersIdCard != '' && $scope.customersIdCard.length == 13)
 			$scope.customerSubmit = true;
 		else{
 			$scope.customersError[0] = 'input-error';
@@ -122,7 +120,7 @@ angular.module('uncleshopApp')
 
 		if($scope.customerSubmit == true)	{
 			data = {
-				'customers_id' : $scope.customersId,
+				'customers_id_card' : $scope.customersIdCard,
 				'customers_name' :  $scope.customersName,
 				'customers_last_name' : $scope.customersLastName,
 				'customers_address' :  $scope.customersAddress,
@@ -142,13 +140,13 @@ angular.module('uncleshopApp')
 		}
 	};
 
-	$scope.checkCustomersId = function(value) {
+	$scope.checkCustomersIdCard = function() {
 		setTimeout(function()
 			{
 				var data = {
-					'customers_id' : $scope.customersId
+					'customers_id_card' : $scope.customersIdCard
 				};
-				manageCustomers.checkCustomersId(data,function(data, status, headers, config)
+				manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
 				{
 					if(data == 'customers-same'){
 						$scope.customersError[0] = 'input-error';
@@ -169,7 +167,7 @@ angular.module('uncleshopApp')
 		$scope.adminAddress = '';
 		$scope.adminLastName = '';
 		$scope.userError = '';
-		$scope.adminId = '';
+		$scope.adminIdCard = '';
 		$scope.adminUserName = '';
 		$scope.adminPassword = '';
 		$scope.adminError = [];
@@ -202,20 +200,36 @@ angular.module('uncleshopApp')
 	$scope.register = function(value)
 	{
 		$scope.checkAdminPassword();
-		if($scope.adminId.length == 13)
-			console.log('13 : '+$scope.adminId.length);
-		if($scope.adminId != '' && $scope.adminId.length == 13 && $scope.adminUserName != '' && $scope.adminPassword !='')
+		if($scope.adminIdCard.length == 13)
+			console.log('13 : '+$scope.adminIdCard.length);
+		if($scope.adminIdCard != '' && $scope.adminIdCard.length == 13 && $scope.adminUserName != '' && $scope.adminPassword !='')
 		{
-			data = {
-				'admin_id' : $scope.adminId,
-				'admin_name' :  $scope.adminName,
-				'admin_last_name' : $scope.adminLastName,
-				'admin_user' :  $scope.adminUserName,
-				'admin_password' : $scope.adminPassword,
-				'admin_sex' : $scope.adminSex,
-				'admin_tel' : $scope.adminTel,
-				'admin_address' :  $scope.adminAddress
-			};
+			if(value == 1){
+				data = {
+					'admin_id_card' : $scope.adminIdCard,
+					'admin_name' :  $scope.adminName,
+					'admin_last_name' : $scope.adminLastName,
+					'admin_user' :  $scope.adminUserName,
+					'admin_password' : $scope.adminPassword,
+					'admin_sex' : $scope.adminSex,
+					'admin_tel' : $scope.adminTel,
+					'admin_address' :  $scope.adminAddress
+				};
+			}
+			if(value == 2){
+				data = {
+					'admin_id' : $scope.adminId,
+					'admin_id_card' : $scope.adminIdCard,
+					'admin_name' :  $scope.adminName,
+					'admin_last_name' : $scope.adminLastName,
+					'admin_user' :  $scope.adminUserName,
+					'admin_password' : $scope.adminPassword,
+					'admin_sex' : $scope.adminSex,
+					'admin_tel' : $scope.adminTel,
+					'admin_address' :  $scope.adminAddress
+				};
+			}
+
 			
 			if(value == 1 && $scope.adminSubmitError == true)
 			{
@@ -246,13 +260,13 @@ angular.module('uncleshopApp')
 		}
 		else
 		{
-			if($scope.adminId == '')
+			if($scope.adminIdCard == '')
 				$scope.adminError[0] = 'input-error'; //input adminID
 			if($scope.adminUserName == '')
 				$scope.adminError[1] = 'input-error'; //input adminUserName
 			if($scope.adminPassword == '')
 				$scope.adminError[2] = 'input-error'; //input adminPassword
-			if($scope.adminId.length != 13)
+			if($scope.adminIdCard.length != 13)
 				$scope.adminError[0] = 'input-error'; //input adminID
 		}
 	};
@@ -261,7 +275,7 @@ angular.module('uncleshopApp')
 		setTimeout(function()
 		{
 			var data = {
-				'admin_id': $scope.adminId
+				'admin_id_card': $scope.adminIdCard
 			};
 			manageAdmin.checkAdmin(data,function(data, status, headers, config)
 			{
@@ -316,6 +330,7 @@ angular.module('uncleshopApp')
 		$scope.editFlug = false;
 		$scope.adminIdDisabled = true;
 		$scope.adminId = $scope.admins[index].admin_id;
+		$scope.adminIdCard = $scope.admins[index].admin_id_card;
 		$scope.adminName =  $scope.admins[index].admin_name;
 		$scope.adminLastName =  $scope.admins[index].admin_last_name;
 		$scope.adminUserName =  $scope.admins[index].admin_user;
@@ -330,30 +345,35 @@ angular.module('uncleshopApp')
 		var data = {
 			'admin_id' : $scope.adminId
 		};
-		manageAdmin.deleteAdmin(data,function(data, status, headers, config)
-		{
+		swal({   
+			title: "ต้องการลบ ?",   
+			text: "ข้อมูลสำคัญของผู้ขายจะถูกลบ",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "ใช่, ลบออก !",   
+			closeOnConfirm: false 
+		}, function(){   
 			swal({
 				title: "เรียบร้อย !!",   
-				text: "เพิ่มข้อมูลลูกค้าแล้ว",   
+				text: "ข้อมูลผู้ขายถูกลบแล้ว",   
 				type: "success",
 				timer: 1500
 			});
-			/*------------*/
-			swal({   
-				title: "Are you sure?",   
-				text: "You will not be able to recover this imaginary file!",   
-				type: "warning",   
-				showCancelButton: true,   
-				confirmButtonColor: "#DD6B55",   
-				confirmButtonText: "Yes, delete it!",   
-				closeOnConfirm: false 
-			}, function(){   
-				swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+			manageAdmin.deleteAdmin(data,function(data, status, headers, config)
+			{
 				$scope.getAdmins();
 				$scope.adminToggle = false;
 			});
 		});
 	};
+	/*when init*/
+	// $scope.init = function() {
+	// 	// $scope.changTab(1);
+	// 	// $scope.getAdmins();
+	// 	// $scope.adminDefault();
+	// 	// $scope.customersDefault();
+	// };
 	
 }])
 
@@ -428,7 +448,7 @@ angular.module('uncleshopApp')
 		  .error(function(data, status, headers, config) {
 		  });
 		},
-		checkCustomersId:function(data,callback)
+		checkCustomersIdCard:function(data,callback)
 		{
 			$http({method: 'GET', url: '/checkCustomersId',params:data})
 		  .success(callback)

@@ -17,9 +17,17 @@ angular.module('uncleshopApp')
 					$rootScope.pageFlug = true;
 					$rootScope.admin = data;
 				}
+				else{
+					swal({   
+						title: "ไม่ถูกต้อง !",   
+						text: "ตรวจสอบ Username และ Passwrod อีกครั้ง",   
+						timer: 1500,
+						type: 'error'
+					});
+				}
 				$rootScope.admin = data;
 				localStorageService.add('admin',data);
-				$scope.focus('search_focus');
+				$scope.focusItem('search_focus');
 				$scope.userName = '';
 				$scope.passWord = '';
 			});

@@ -1,15 +1,7 @@
 <?php
 	/* 
-		/saveCustomers : get
-		data = {
-				'customers_id_card' : $array['customers_id_card'],
-				'customers_name' : $array['customers_name'],
-				'customers_last_name' :$array['customers_last_name'],				
-				'customers_address' : $array['customers_address'],
-				'customers_sex' : $array['customers_sex'],
-				'customers_tel' : $array['customers_tel'],
-		}
 
+	-----------------------		Admin	----------------------------------------------
 		/saveAdmin  : get
 		data = {
 			'admin_id_card' : $array['admin_id_card'],
@@ -22,12 +14,6 @@
 			'admin_address' :  $array['admin_address'],
 		}
 
-		/checkCustomersId
-		data = {
-			'customers_id_card' : $scope.id_card
-		}
-
-
 		/checkUser : get
 		data = {
 			'username' : $scope.username
@@ -36,9 +22,6 @@
 			'admin_id_card' : $scope.adminId_card
 		}
 
-
-
-
 		/deleteAdmin   : get
 		data = {
 			'admin_id' : $scope.admin_id
@@ -46,7 +29,7 @@
 
 		/updateAdmin  : get
 		data = {
-			admin_id' : $array['admin_id'])
+			'admin_id' : $array['admin_id'])
 			'admin_id_card'  :$array['admin_id_card'],
 			'admin_name' :$array['admin_name'],
 			'admin_last_name'  :$array['admin_last_name'],
@@ -57,8 +40,7 @@
 			'admin_address' : $array['admin_address']
 		}
 
-
-
+-----------------------		Bill	----------------------------------------------
 
 		/saveBill   : get
 
@@ -82,6 +64,7 @@
 			]}
 		}
 
+-----------------------		Customer	----------------------------------------------
 
 		/updateCustomers  : get
 		data = {
@@ -104,3 +87,17 @@
 			key:สิ่งที่จะค้นหา
 		}	
 		
+		/saveCustomers : get
+		data = {
+				'customers_id_card' : $array['customers_id_card'],
+				'customers_name' : $array['customers_name'],
+				'customers_last_name' :$array['customers_last_name'],				
+				'customers_address' : $array['customers_address'],
+				'customers_sex' : $array['customers_sex'],
+				'customers_tel' : $array['customers_tel'],
+		}
+
+		/checkCustomersId
+		data = {
+			'customers_id_card' : $scope.id_card
+		}
