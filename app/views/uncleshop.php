@@ -83,7 +83,7 @@
 	  </header>
 
 
-		<div class="container" style="margin-bottom: 50px;">
+		<div class="container" style="margin-bottom: 50px;" >
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
 				<div class="row-fluid TEXT-CENTER">
@@ -99,7 +99,7 @@
 				</div>
 			</div>
 
-			<div ng-show="pageFlug" ng-controller="uncleshopController">
+			<div ng-show="pageFlug" ng-controller="uncleshopController" ng-init="init()">
 				<div class="col-sm-4 col-md-3 con-tabmenu" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="title-menu"><img src="img/icon-title.png"/>
@@ -182,7 +182,7 @@
 								</div>
 							</div>
 
-							<div ng-show="DataCustomer_toggle">
+							<div ng-show="DataCustomer_toggle&&state==1">
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
@@ -221,7 +221,36 @@
 								<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
 									<button type="button" class="btn btn-primary button-primary" ng-click="addCustomers()">เพิ่ม</button>
 								</div>
+
 							</div>
+
+							<div ng-show="true">
+								<div class="form-group" ng-repeat="product in productData">
+									<label class="col-sm-2 col-md-2 control-label" >ชื่อสินค้า</label>
+							    <div class="col-sm-3 col-md-3">
+							   	 <input type="textbox" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
+									</div>
+									<label class="col-sm-1 col-md-1 control-label">ราคา</label>
+							    <div class="col-sm-2 col-md-2">
+							    	<input type="textbox" ng-model="product.productPrice " class="form-control" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')">
+									</div>
+									<label class="col-sm-1 col-md-1 control-label">จำนวน</label>
+							    <div class="col-sm-1 col-md-1">
+							    	<input type="textbox" ng-model="product.productAmount" class="form-control"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')">
+									</div>
+
+									<div class=" col-sm-1  col-md-1" style="padding: 5px;" ng-show="$index==countProduct-1">
+										<i class="fa fa-plus-circle" style="font-size: 26px; color: #4cae4c;" ng-click="positiveProduct()"></i>
+									</div>
+									<div class="col-sm-1 col-md-1" style="padding: 5px;" ng-show="$index!=countProduct-1" ng-click="minusProduct($index)">
+										<i class="fa fa-times-circle" style="font-size: 26px;color: #d43f3a;"></i>
+									</div>
+								</div>
+								<div class="col-sm-offset-6 col-sm-2 col-md-offset-5 col-md-2">
+									<button type="button" class="btn btn-primary " style="width: 99px;" ng-click="createBill()">บันทึกสินค้า</button>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>

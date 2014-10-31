@@ -8,63 +8,74 @@
 
 		public function insertBill($array)
 		{
+			$product = new Product;
 		
 			$billCode = $this->randomBill();
 
-			$day = 0;
-			$month = date('m');
-			$year   = date('Y');
+			// $day = 0;
+			// $month = date('m');
+			// $year   = date('Y');
 
-			if($array['bill']->bill_type == 1)
-			{
-				$day = 15*$array['bill']->bill_date_amount;
-				$endDate = time() + ($day *24*60 * 60);
-				$endDate  = date('Y-m-d',$endDate );
-			}
-			else 
-			{
-				for($i=0 ;$i<$array['bill']->bill_date_amount;$i++)
-				{
-						if($month == 12)
-						{
-							$month = 1;
-						}
-						else if($i != 0)
-						{
-							$month+=1;
-						}
+			// if($array['bill']->bill_type == 1)
+			// {
+			// 	$day = 15*$array['bill']->bill_date_amount;
+			// 	$endDate = time() + ($day *24*60 * 60);
+			// 	$endDate  = date('Y-m-d',$endDate );
+			// }
+			// else 
+			// {
+			// 	for($i=0 ;$i<$array['bill']->bill_date_amount;$i++)
+			// 	{
+			// 			if($month == 12)
+			// 			{
+			// 				$month = 1;
+			// 			}
+			// 			else if($i != 0)
+			// 			{
+			// 				$month+=1;
+			// 			}
 			
-						$day+=$this->daysInMonth($month,$year);
-						$expireDate = time() + ($day *24*60 * 60);
-						$year = date('Y',$expireDate);					
-				}
-				$endDate = time() + ($day *24*60 * 60);
-				$endDate  = date('Y-m-d',$endDate );
-			}
+			// 			$day+=$this->daysInMonth($month,$year);
+			// 			$expireDate = time() + ($day *24*60 * 60);
+			// 			$year = date('Y',$expireDate);					
+			// 	}
+			// 	$endDate = time() + ($day *24*60 * 60);
+			// 	$endDate  = date('Y-m-d',$endDate );
+			// }
 
+			// $this->insert([
+			// 		'bill_id' => $billCode ,
+			// 		'bill_start_date' => date('Y-m-d'),
+			// 		'bill_end_date' => $endDate,
+			// 		'bill_total_price' => $array['bill']->bill_total_price,
+			// 		'bill_date_amount' => $array['bill']->bill_date_amount,
+			// 		'bill_status' => 0,
+			// 		'bill_price' => $array['bill']->bill_price,
+			// 		'bill_type' => $array['bill']->bill_type,
+			// 		'bill_price_dow' => $array['bill']->bill_price_dow,
+			// 		'customers_id' => $array['bill']->customers_id,
+			// 		'admin_id' => $array['bill']->admin_id
+			// ]);]
+			$data = json_decode($array['data']);
+	
 			$this->insert([
-					'bill_id' => $billCode ,
-					'bill_start_date' => date('Y-m-d'),
-					'bill_end_date' => $endDate,
-					'bill_total_price' => $array['bill']->bill_total_price,
-					'bill_date_amount' => $array['bill']->bill_date_amount,
-					'bill_status' => 0,
-					'bill_price' => $array['bill']->bill_price,
-					'bill_type' => $array['bill']->bill_type,
-					'bill_price_dow' => $array['bill']->bill_price_dow,
-					'customers_id' => $array['bill']->customers_id,
-					'admin_id' => $array['bill']->admin_id
+					'bill_code' => $billCode ,
+					'bill_create_time' => date('Y-m-d H:i:s'),
+					'customers_id' => $data->customers_id,
+					'admin_id' => $data->admin_id
 			]);
 
-			foreach ( $array['product'] as $product)
+			for($i=0;$i<count($data->product);$i++)
 			{
+
 				$product->insert([
-						'product_name' => $product->product_name,
-						'product_amount' => $product->product_amount,
-						'product_price' => $product->product_price,
-						'bill_id' => $billCode
+						'product_name' => $data->product[$i]->productName,
+						'product_amount' => $data->product[$i]->productAmount,
+						'product_price' => $data->product[$i]->productPrice,
+						'bill_code' => $billCode
 				]);
 			}
+			return $billCode;
 
 
 		}

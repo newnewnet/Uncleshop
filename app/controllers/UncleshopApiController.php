@@ -41,7 +41,7 @@
 		{
 			$array = Input::all();
 			$bill = new Bill;
-			$bill->insertBill($array);
+			return $bill->insertBill($array);
 
 		}
 		public function saveAdmin()

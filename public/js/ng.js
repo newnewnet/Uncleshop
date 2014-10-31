@@ -1,5 +1,5 @@
 angular.module('uncleshopApp')
-.controller('uncleshopController', ['$scope','$rootScope','manageAdmin','manageCustomers', function($scope,$rootScope,manageAdmin,manageCustomers) 
+.controller('uncleshopController', ['$scope','$rootScope','manageAdmin','manageCustomers','bill', function($scope,$rootScope,manageAdmin,manageCustomers,bill) 
 {
 		
 	$scope.changTab = function(number)
@@ -7,8 +7,9 @@ angular.module('uncleshopApp')
 		var text = ['','เพิ่มบิล','ค้นหาบิล','ข้อมูลการจ่ายบิล', 'ข้อมูลลูกค้า', 'ข้อมูลผู้ขาย']
 		$rootScope.tabColor=number;
 		$rootScope.loginText=text[number];
-
+		
 		if(number == 1){
+			$scope.state = 1;
 			$scope.DataCustomer_toggle = false;
 			$scope.focusItem('search_focus');
 		}
@@ -135,6 +136,7 @@ angular.module('uncleshopApp')
 						type: "success",
 						timer: 1500
 					});
+					$scope.state = 2;
 					$scope.customersDefault();
 			});
 		}
@@ -368,35 +370,117 @@ angular.module('uncleshopApp')
 		});
 	};
 	/*when init*/
-	// $scope.init = function() {
-	// 	// $scope.changTab(1);
-	// 	// $scope.getAdmins();
-	// 	// $scope.adminDefault();
-	// 	// $scope.customersDefault();
-	// };
+	$scope.init = function() {
+		$scope.changTab(1);
+		$scope.getAdmins();
+		$scope.adminDefault();
+		$scope.customersDefault();
+		$scope.productDefault();
+		
+	};
+
+	/*----------------------------  prodcut---------------------------------*/
+	$scope.productDefault = function()
+	{
+		$scope.productData = [];
+		$scope.productData[0]={
+			'productName':'',
+			'productPrice':'',
+			'productAmount':''
+		};
+		$scope.countProduct = $scope.productData.length;
+	};
+
+	$scope.positiveProduct = function() {
+		$scope.productData.push({
+			'productName':'',
+			'productPrice':'',
+			'productAmount':'',
+		});
+		$scope.countProduct = $scope.productData.length;
+	};
+	$scope.minusProduct = function(index) {
+		$scope.productData.splice(index,1);
+		$scope.countProduct = $scope.productData.length;
+	};
+ 	$scope.checkProductError = function(index,nameError)
+ 	{
+ 		if(nameError == 'productNameError')
+		{
+			if($scope.productData[index].productNameError != '')
+				$scope.productData[index].productNameError = '';
+		}
+		else if(nameError == 'productPriceError')
+		{
+			if($scope.productData[index].productPriceError != '')
+				$scope.productData[index].productPriceError = '';
+		}
+		else if(nameError == 'productAmountError')
+		{
+			if($scope.productData[index].productAmountError != '')
+				$scope.productData[index].productAmountError = '';
+		}
+ 	}
+	$scope.createBill  = function()
+	{
+		var count = true;
+		angular.forEach($scope.productData, function(products) {
+		
+			if(products.productName == '')
+			{
+				count = false;
+				products.productNameError = 'input-error';
+			}
+			if( products.productPrice == '' )
+			{
+				count = false;
+				products.productPriceError = 'input-error';
+			}
+			if(products.productAmount == '')
+			{
+				count = false;
+				products.productAmountError = 'input-error';
+			}
+
+		});
+		
+		if(count)
+		{
+			var data = {
+				'customers_id' : $scope.customersIdCard,
+				'admin_id': $rootScope.admin.admin_id,
+				'product':$scope.productData,
+			};
+			data = {
+				data:JSON.stringify(data)
+			};
+			bill.createBill(data,function(data, status, headers, config)
+			{
+				$scope.billCode = data;
+			})
+		}
+	};
 	
 }])
-
-// .factory('bill', ['$http', function($http) 
-// {
-// 	return {
-// 		saveBill:function(data,callback)
-// 		{
-// 			$http({method: 'GET', url: '/saveBill',params:data})
-// 			.success(callback)
-// 			.error(function(data, status, headers, config) {
-// 		  });
-// 		},
-// 		getCustomers:function(data,callback)
-// 		{
-// 			$http({method: 'GET', url: '/customers',params:data})
-// 			.success(callback)
-// 			.error(function(data, status, headers, config) {
-// 		  });
-// 		}
-// 	};
-// }])
-
+.factory('bill', ['$http', function($http) 
+{
+	return {
+		createBill:function(data,callback)
+		{
+			$http({method: 'POST', url: '/saveBill',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		},
+		// getCustomers:function(data,callback)
+		// {
+		// 	$http({method: 'GET', url: '/customers',params:data})
+		// 	.success(callback)
+		// 	.error(function(data, status, headers, config) {
+		//   });
+		// }
+	};
+}])
 .factory('manageAdmin', ['$http', function($http) 
 {
 	return {
