@@ -100,7 +100,7 @@
 		}
 		public function getAdminInterest()
 		{
-			$result = $this->where('admin_status','=',1)->select('admin_interest')->first();
-			return  $result->admin_interest;
+			$result = $this->where('admin_status','=',1)->select('admin_interest_week','admin_interest_month')->first();
+			return  $result;
 		}
 	}
