@@ -25,6 +25,8 @@ Route::get('customers','UncleshopApiController@getCustomers');
 Route::get('checkCustomersId','UncleshopApiController@checkCustomersId');
 Route::get('saveCustomers','UncleshopApiController@saveCustomers');
 Route::get('admin','UncleshopApiController@getAdmin');
+Route::get('interest','UncleshopApiController@getAdminInterest');
+
 
 Route::get('updateCustomers','UncleshopApiController@updateCustomers');
 

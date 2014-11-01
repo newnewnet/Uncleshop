@@ -98,4 +98,9 @@
 			$result = $this->where('admin_status','=',0)->get();
 			return  $result;
 		}
+		public function getAdminInterest()
+		{
+			$result = $this->where('admin_status','=',1)->select('admin_interest')->first();
+			return  $result->admin_interest;
+		}
 	}

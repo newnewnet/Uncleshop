@@ -93,4 +93,10 @@
 			$result = $admin->getAdmin();
 			return $result;
 		}
+		public function getAdminInterest()
+		{
+			$admin = new Admin;
+			$result = $admin->getAdminInterest();
+			return $result;
+		}
 	}

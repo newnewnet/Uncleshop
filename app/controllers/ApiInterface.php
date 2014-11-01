@@ -2,6 +2,9 @@
 	/* 
 
 	-----------------------		Admin	----------------------------------------------
+		/interest : get
+
+
 		/saveAdmin  : get
 		data = {
 			'admin_id_card' : $array['admin_id_card'],
