@@ -59,6 +59,7 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
+
 	$scope.calBill = function(value) {
 
 		if(value == 'priceDow')
@@ -96,7 +97,7 @@ angular.module('uncleshopApp')
 					'priceTermOfPayment': $scope.priceWithoutDow / $scope.timeOfPayment //ราคาต่องวด
 				};
 		});
-	};
+	}
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
 	$scope.switchDataCustomer = function(){

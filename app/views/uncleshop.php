@@ -252,12 +252,12 @@
 									<div class="row">
 										<label class="col-sm-2 control-label">เงินดาว</label>
 									    <div class="col-sm-3">
-									    	<input type="text" numbers-only="numbers-only" ng-model="price_dow" class="form-control">
+									    	<input type="text" numbers-only="numbers-only" ng-model="priceDow" class="form-control">
 										</div>
 
 										<label class="col-xs-12 col-sm-1 control-label">เวลา</label>
 									    <div class="col-xs-4 col-sm-2">
-									    	<input type="text" numbers-only="numbers-only" ng-model="time_dow" class="form-control">
+									    	<input type="text" numbers-only="numbers-only" ng-model="timeOfPayment" class="form-control">
 										</div>
 
 										<div class="col-xs-6 col-sm-2">
