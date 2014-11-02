@@ -64,7 +64,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	if(localStorageService.get('admin') != null ){
 		$rootScope.pageFlug = true;
 		$scope.addProduct_Toggle = true;
-		$scope.DataCustomer_toggle = true;
+		$scope.DataCustomer_toggle = false;
 		$rootScope.admin = localStorageService.get('admin');
 		$scope.focusItem('search_focus');
 	}

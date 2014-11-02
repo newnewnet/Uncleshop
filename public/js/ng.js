@@ -97,7 +97,8 @@ angular.module('uncleshopApp')
 					'priceTermOfPayment': $scope.priceWithoutDow / $scope.timeOfPayment //ราคาต่องวด
 				};
 		});
-	}
+	};
+
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
 	$scope.switchDataCustomer = function(){
