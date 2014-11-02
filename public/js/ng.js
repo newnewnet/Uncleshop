@@ -513,19 +513,20 @@ angular.module('uncleshopApp')
 		
 		if(count)
 		{
+			var billType = 0;
+			if($scope.type_dow == 'week')
+			{
+				billType = 1;
+			}
 			var data = {
-				'customer' : {
-					'customers_id' : $scope.customersIdCard	
-				},
-				'bill' : {
-					'bill_total_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
-					'bill_date_amount' : $scope.timeOfPayment., // จำนวนงวด
-					'bill_interestValue' : $scope.billData.interestValue, 
-					'bill_type' : $scope.type_dow, //ชนิการผ่อน
-					'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
-					'customers_id' : $scope.DataCustomersOfBill.customers_id,
-					'admin_id': ,
-				},
+				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
+				'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
+				'bill_interest' : $scope.billData.interestValue, 
+				'bill_type' : billType, //ชนิการผ่อน
+				'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
+				'customers_id_card' : $scope.DataCustomersOfBill.customers_id_card,
+				'admin_id':$rootScope.admin.admin_id ,
+				'customers_id' : $scope.customersIdCard,
 				'product' : $scope.productData
 			};
 			data = {
