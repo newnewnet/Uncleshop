@@ -154,8 +154,17 @@
 								<img src="img/icon-user.png"/>
 							</div>
 						</div>
-						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-show="DataCustomer_toggle">
-							<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
+						<!-- ********************************** -->
+						<div ng-show="DataCustomer_toggle">
+							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-show="DataCustomer_search_toggle">
+								<div class="plus-user CURSOR">
+									<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
+									<img src="img/icon-user.png"/>
+								</div>
+							</div>
+							<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-hide="DataCustomer_search_toggle">
+								<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
+							</div>
 						</div>
 					</div>	
 					<div class="box-bill"> 
@@ -285,30 +294,32 @@
 								        </select>
 							        </div>
 								</div>
-									
-								<div class="row" style="margin-top: 25px; border-top: 1px solid #45B39C;">
-									<div class="row">
-										<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ราคาสินค้า</label>
-										<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct | number:0) + '    บาท'}}</label>
-										<label class="col-xs-offset-1 col-xs-4 col-sm-1 control-label" style="color: #1196d1;">ดอกเบี้ย</label>
-										<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.interestValue < 0 ? 0 : billData.interestValue | number:0) + '    บาท'}}</label>
-									</div>
-									<div class="row">
-										<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #1196d1;">ราคารวม</label>
-										<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct | number:0) + '    บาท'}}</label>
-										<label class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-2 control-label" style="color: #1196d1;">เงินดาวน์</label>
-										<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceDow < 0 ? 0 : billData.priceDow | number:0) + '    บาท'}}</label>
-									</div>
-									<div class="row">
-										<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #1196d1; text-decoration: underline;">ราคาผ่อนส่ง</label>
-										<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceWithoutDow < 0 ? 0 : billData.priceWithoutDow | number:0) + '    บาท'}}</label>
-										<label class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
-										<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน" : "บาท/วิก")}}</label>
-									</div>
-								</div>									
-								<div class="row">
-									<div class="col-xs-2 col-xs-offset-5" style="margin-top: 10px;">
-										<button type="button" class="btn btn-success TEXT-CENTER" style="margin-left:-10px; width: 60px;" ng-click="createBill()">เพิ่มบิล</button>
+								
+								<div class="col-xs-12">
+									<div class="row" style="margin-top: 25px; box-sizing: border-box; border-top: 1px solid #45B39C; padding: 12px 0px 0px 15px;">
+										<div class="row">
+											<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ราคาสินค้า</label>
+											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct | number:0) + '    บาท'}}</label>
+											<label class="col-xs-offset-1 col-xs-4 col-sm-1 control-label" style="color: #1196d1;">ดอกเบี้ย</label>
+											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.interestValue < 0 ? 0 : billData.interestValue | number:0) + '    บาท'}}</label>
+										</div>
+										<div class="row">
+											<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #1196d1;">ราคารวม</label>
+											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct+billData.interestValue | number:0) + '    บาท'}}</label>
+											<label class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-2 control-label" style="color: #1196d1;">เงินดาวน์</label>
+											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceDow < 0 ? 0 : billData.priceDow | number:0) + '    บาท'}}</label>
+										</div>
+										<div class="row">
+											<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #1196d1; text-decoration: underline;">ราคาผ่อนส่ง</label>
+											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceWithoutDow < 0 ? 0 : billData.priceWithoutDow | number:0) + '    บาท'}}</label>
+											<label class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน" : "บาท/วิก")}}</label>
+										</div>								
+										<div class="row">
+											<div class="col-xs-2 col-xs-offset-5" style="margin-top: 10px;">
+												<button type="button" class="btn btn-success TEXT-CENTER" style="margin-left:-10px; width: 60px;" ng-click="createBill()">เพิ่มบิล</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

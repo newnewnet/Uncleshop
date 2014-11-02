@@ -9,8 +9,8 @@ angular.module('uncleshopApp')
 		$rootScope.loginText=text[number];
 		
 		if(number == 1){
-			$scope.state = 1;
 			$scope.addProduct_toggle = true;
+			$scope.DataCustomer_toggle = false;
 			//$scope.focusItem('search_focus');
 		}
 		else if(number == 5){
@@ -179,16 +179,26 @@ angular.module('uncleshopApp')
 				'customers_sex' : $scope.customersSex,
 				'customers_tel' : $scope.customersTel
 			};
+			$scope.DataCustomersOfBill = data;
 			manageCustomers.addCustomers(data,function(data, status, headers, config) {
-				if(data != 'error')
+				if(data != 'error'){
 					swal({
 						title: "เรียบร้อย !!",   
 						text: "เพิ่มข้อมูลลูกค้าแล้ว",   
 						type: "success",
 						timer: 1500
 					});
-					$scope.state = 2;
 					$scope.customersDefault();
+					$scope.addProduct_toggle = true;
+					$scope.DataCustomer_toggle = false;
+				}
+				else
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",   
+						type: "error",
+						timer: 1500
+					});
 			});
 		}
 	};
@@ -504,9 +514,19 @@ angular.module('uncleshopApp')
 		if(count)
 		{
 			var data = {
-				'customers_id' : $scope.customersIdCard,
-				'admin_id': $rootScope.admin.admin_id,
-				'product':$scope.productData,
+				'customer' : {
+					'customers_id' : $scope.customersIdCard	
+				},
+				'bill' : {
+					'bill_total_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
+					'bill_date_amount' : $scope.timeOfPayment., // จำนวนงวด
+					'bill_interestValue' : $scope.billData.interestValue, 
+					'bill_type' : $scope.type_dow, //ชนิการผ่อน
+					'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
+					'customers_id' : $scope.DataCustomersOfBill.customers_id,
+					'admin_id': ,
+				},
+				'product' : $scope.productData
 			};
 			data = {
 				data:JSON.stringify(data)
