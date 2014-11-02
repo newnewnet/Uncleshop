@@ -28,19 +28,20 @@
 			{
 				for($i=0 ;$i<$data->bill_date_amount;$i++)
 				{
-						if($month == 12)
-						{
-							$month = 1;
-						}
-						else if($i != 0)
-						{
-							$month+=1;
-						}
+						// if($month == 12)
+						// {
+						// 	$month = 1;
+						// }
+						// else if($i != 0)
+						// {
+						// 	$month+=1;
+						// }
 			
-						$day+=$this->daysInMonth($month,$year);
-						$expireDate = time() + ($day *24*60 * 60);
-						$year = date('Y',$expireDate);					
+						// $day+=$this->daysInMonth($month,$year);
+						// $expireDate = time() + ($day *24*60 * 60);
+						// $year = date('Y',$expireDate);					
 				}
+				$day = 30 * $data->bill_date_amount;
 				$endDate = time() + ($day *24*60 * 60);
 				$endDate  = date('Y-m-d',$endDate );
 			}
@@ -57,7 +58,7 @@
 					'bill_id' => $billCode ,
 					'bill_start_date' => date('Y-m-d'),
 					'bill_end_date' => $endDate,
-					'bill_total_price' => $data->bill_total_price,
+					'bill_interest' => $data->bill_total_price,
 					'bill_date_amount' => $data->bill_date_amount,
 					'bill_status' => 0,
 					'bill_price' => $data->bill_price,
@@ -87,10 +88,19 @@
 		public function getBill($billCode)
 		{
 			$product = new Product;
+			$customer = new Customers;
+			$admin = new Admin;
+
 			$billData = $this->where('bill_code','=',$billCode)->first();
 			$productData = $product->where('bill_code','=',$billCode)->get();
+			$customerData =  $customer->where('customers_id','=',$billData->customers_id)->first();
+			$adminData = $admin->where('admin_id','=',$billData->admin_id)->frist();
+
+
 			$result['bill'] = $billData;
 			$result['product'] = $productData;
+			$result['customer'] = $customerData;
+			$result['admin'] = $adminData;
 
 			return $result;
 		}
