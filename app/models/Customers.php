@@ -16,7 +16,7 @@
 								->orWhere('customers_name', 'LIKE', "%".$key."%")
 								->orWhere('customers_last_name', 'LIKE', "%".$key."%")
 								->orWhere('customers_tel', 'LIKE', "%".$key."%")
-								->get();
+								->take(10)->get();
 				
 			}
 			return $result;
