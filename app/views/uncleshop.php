@@ -146,7 +146,7 @@
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==1">
 					<div class="title">
 						<div class="TEXT-LEFT sub-title-left">
-							ข้อมูลลูกค้า
+							ข้อมูลสินค้า
 						</div>
 						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-hide="DataCustomer_toggle">
 							<div class="plus-user CURSOR">
@@ -160,8 +160,7 @@
 					</div>	
 					<div class="box-bill">
 						<div class="form-horizontal">
-							<div class="form-group" ng-hide="DataCustomer_toggle">
-								<!-- <label class="col-sm-4 col-md-4 control-label">ค้นหาลูกค้า</label> -->
+							<!-- <div class="form-group" ng-hide="DataCustomer_toggle">						
 							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
 								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
 								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
@@ -171,8 +170,8 @@
 							<div ng-repeat="(key, data) in DataCustomers">
 								<div class="resultUser"style="background-color: white;">
 									<div class="icon">
-										<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> <!-- male -->
-										<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> <!-- female -->
+										<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+										<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
 									</div>
 									<div class="text">
 										<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
@@ -180,29 +179,29 @@
 										<span class="id">ID.</span><span class="id-data">{{data.customers_id}}</span>																	
 									</div>
 								</div>
-							</div>
+							</div> -->
 
-							<div ng-show="DataCustomer_toggle&&state==1">
+							<!-- <div ng-show="DataCustomer_toggle&&state==1">
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="textbox" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
+								    	<input type="text" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customersName" class="form-control" ng-class="customersError[1]">
+								    	<input type="text" ng-model="customersName" class="form-control" ng-class="customersError[1]">
 									</div>
 									<label class="col-sm-1 col-md-1 control-label">สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customersLastName" class="form-control" ng-class="customersError[2]">
+								    	<input type="text" ng-model="customersLastName" class="form-control" ng-class="customersError[2]">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
+								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
 									</div>
 									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">
@@ -221,36 +220,85 @@
 								<div class="col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
 									<button type="button" class="btn btn-primary button-primary" ng-click="addCustomers()">เพิ่ม</button>
 								</div>
+							</div> -->
 
-							</div>
-
-							<div ng-show="true">
+							<div ng-show="addProduct_Toggle">
 								<div class="form-group" ng-repeat="product in productData">
-									<label class="col-sm-2 col-md-2 control-label" >ชื่อสินค้า</label>
-							    <div class="col-sm-3 col-md-3">
-							   	 <input type="textbox" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
-									</div>
-									<label class="col-sm-1 col-md-1 control-label">ราคา</label>
-							    <div class="col-sm-2 col-md-2">
-							    	<input type="textbox" ng-model="product.productPrice " class="form-control" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')">
-									</div>
-									<label class="col-sm-1 col-md-1 control-label">จำนวน</label>
-							    <div class="col-sm-1 col-md-1">
-							    	<input type="textbox" ng-model="product.productAmount" class="form-control"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')">
-									</div>
+									<div class="row">
+										<label class="col-sm-2 col-md-2 control-label" >ชื่อสินค้า</label>
+									    <div class="col-sm-3 col-md-3">
+									   	 	<input type="text" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
+										</div>
 
-									<div class=" col-sm-1  col-md-1" style="padding: 5px;" ng-show="$index==countProduct-1">
-										<i class="fa fa-plus-circle" style="font-size: 26px; color: #4cae4c;" ng-click="positiveProduct()"></i>
-									</div>
-									<div class="col-sm-1 col-md-1" style="padding: 5px;" ng-show="$index!=countProduct-1" ng-click="minusProduct($index)">
-										<i class="fa fa-times-circle" style="font-size: 26px;color: #d43f3a;"></i>
-									</div>
+										<label class="col-sm-1 col-md-1 control-label">ราคา</label>
+									    <div class="col-sm-2 col-md-2">
+									    	<input type="text" ng-model="product.productPrice" class="form-control" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')">
+										</div>
+
+										<label class="col-sm-1 col-md-1 control-label">จำนวน</label>
+									    <div class="col-sm-2">
+									    	<input type="text" ng-model="product.productAmount" class="form-control"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')">
+										</div>
+
+										<div class="col-xs-offset-5 col-xs-2 col-sm-offset-0 col-sm-1 col-md-1 CURSOR" ng-show="$index==countProduct-1">
+											<i class="fa fa-plus-circle" style="font-size: 26px; color: #45B39C; padding:5px;" ng-click="positiveProduct()"></i>
+										</div>
+										<div class="col-xs-offset-5 col-xs-2 col-sm-offset-0 col-sm-1 col-md-1 CURSOR" ng-show="$index!=countProduct-1" ng-click="minusProduct($index)">
+											<i class="fa fa-times-circle" style="font-size: 26px;color: #e05b49; padding:5px;"></i>
+										</div>
+									</div>									
 								</div>
-								<div class="col-sm-offset-6 col-sm-2 col-md-offset-5 col-md-2">
-									<button type="button" class="btn btn-primary " style="width: 99px;" ng-click="createBill()">บันทึกสินค้า</button>
+								<div class="form-group" style="margin-top: 25px; border-top: 1px solid #1196d1; padding-top: 10px;">
+									<div class="row">
+										<label class="col-sm-2 control-label">เงินดาว</label>
+									    <div class="col-sm-3">
+									    	<input type="text" numbers-only="numbers-only" ng-model="price_dow" class="form-control">
+										</div>
+
+										<label class="col-xs-12 col-sm-1 control-label">เวลา</label>
+									    <div class="col-xs-4 col-sm-2">
+									    	<input type="text" numbers-only="numbers-only" ng-model="time_dow" class="form-control">
+										</div>
+
+										<div class="col-xs-6 col-sm-2">
+											<select class="form-control" ng-model="type_dow">
+									          	<option value="month">เดือน</option>
+									        	<option value="week">วิก</option>          
+									        </select>
+								        </div>
+
+								        <div class="col-xs-1 col-sm-offset-1 col-sm-1">
+											<i class="fa fa-calculator CURSOR" style="color: #FBA01E; font-size: 26px; padding: 5px;" ng-click="calBill()"></i>
+										</div>
+									</div>
+									
+									<div class="row" style="margin-top: 25px; border-top: 1px solid #45B39C; padding-top: 10px;">
+										<label class="col-xs-6 col-sm-2 control-label" style="color: #e05b49; text-decoration: underline;">ราคาสินค้า</label>
+										<label class="col-xs-3 col-sm-1 control-label TEXT-RIGHT">3,000</label>
+										<label class="col-xs-6 col-sm-2 control-label" style="">ดอกเบี้ย</label>
+										<label class="col-xs-3 col-sm-1 control-label TEXT-RIGHT">600</label>
+										<label class="col-xs-6 col-sm-2 control-label" style="">ราคารวม</label>
+										<label class="col-xs-3 col-sm-1 control-label TEXT-RIGHT">3,600</label>
+										<label class="col-xs-6 col-sm-2 control-label" style="">เงินดาวน์</label>
+										<label class="col-xs-3 col-sm-1 control-label TEXT-RIGHT">1,000</label>
+										<label class="col-xs-6 col-sm-2 control-label" style="color: #1196d1; text-decoration: underline;">ราคาผ่อนส่ง</label>
+										<label class="col-xs-3 col-sm-1 control-label TEXT-RIGHT">2,600</label>
+									</div>
+									<div class="row">
+										<label class="col-xs-12 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+										<label class="col-sm-1 control-label">80066</label>
+										<label class="col-sm-1 control-label">บาท</label>
+										<label class="col-sm-1 control-label">3</label>
+										<label class="col-sm-1 control-label">เดือน</label>										
+									</div>
+								
+									<div class="row">
+										<div class="col-sm-offset-6 col-sm-2 col-md-offset-5 col-md-2">
+											<button type="button" class="btn btn-primary " style="width: 99px; margin-top: 25px;" ng-click="createBill()">บันทึกสินค้า</button>
+										</div>
+									</div>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -302,14 +350,14 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-									   	<input type="textbox" ng-model="adminIdCard" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdminId()" ng-disabled="adminIdDisabled">
+									   	<input type="text" ng-model="adminIdCard" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdminId()" ng-disabled="adminIdDisabled">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">Username</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="adminUserName" class="form-control " ng-keyup="checkAdminUserName()" ng-class="adminError[1]">
+								    	<input type="text" ng-model="adminUserName" class="form-control " ng-keyup="checkAdminUserName()" ng-class="adminError[1]">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">Password</label>
 								    <div class="col-sm-4 col-md-4">
@@ -319,17 +367,17 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="adminName" class="form-control">
+								    	<input type="text" ng-model="adminName" class="form-control">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="adminLastName" class="form-control">
+								    	<input type="text" ng-model="adminLastName" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="textbox" ng-model="adminTel" class="form-control" numbers-only="numbers-only" ng-model="tel" maxlength="10">
+								    	<input type="text" ng-model="adminTel" class="form-control" numbers-only="numbers-only" ng-model="tel" maxlength="10">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">

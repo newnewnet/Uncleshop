@@ -10,8 +10,8 @@ angular.module('uncleshopApp')
 		
 		if(number == 1){
 			$scope.state = 1;
-			$scope.DataCustomer_toggle = false;
-			$scope.focusItem('search_focus');
+			$scope.addProduct_toggle = true;
+			//$scope.focusItem('search_focus');
 		}
 		else if(number == 5){
 			$scope.adminToggle = false;
@@ -52,23 +52,72 @@ angular.module('uncleshopApp')
 	// };
 
 	/*----------------------------  bill  ---------------------------------*/
-	$scope.nextBill = function() {
+	$scope.addCustomerToBill = function(index) {
+		console.log($scope.DataCustomers[index]);
+		$scope.DataCustomersOfBill = $scope.DataCustomers[index];
+		$scope.DataCustomer_toggle = false;
+		$scope.addProduct_toggle = true;
+	};
 
+	$scope.calBill = function(value) {
+
+		if(value == 'priceDow')
+			$scope.priceDowError = ' ';
+		if(value == 'timeOfPayment')
+			$scope.timeOfPaymentError = ' ';
+
+		var priceOfAllProduct = 0;
+		$scope.billData = [];
+		for(var i = 0; i<$scope.productData.length; i++){
+			priceOfAllProduct +=  $scope.productData[i].productPrice * $scope.productData[i].productAmount;
+		}
+
+		var interest;
+		manageAdmin.getInterestValue(function(data, status, headers, config)
+		{
+			if($scope.type_dow == 'month')
+				interest = data.admin_interest_month;
+			else
+				interest = data.admin_interest_week;
+
+			if($scope.timeOfPayment == null)
+				$scope.timeOfPayment = 0;
+			if($scope.priceDow == null)
+				$scope.priceDow = 0;
+			if($scope.timeOfPayment == null)
+				$scope.timeOfPayment = 1;
+
+				$scope.billData = {
+					'priceOfAllProduct': priceOfAllProduct,//ราคาสินค้าทั้งหมด
+					'interestValue':  interest*$scope.timeOfPayment,//ดอกเบี้ย
+					'priceDow': $scope.priceDow, //เงินดาว
+					'timeOfPayment': $scope.timeOfPayment, //เวลาในการผ่อน
+					'priceWithoutDow': $scope.priceWithoutDow = (priceOfAllProduct+(interest*$scope.timeOfPayment)) - $scope.priceDow,//ราคารวมดอกเบี้ยและหักเงินดาวน์
+					'priceTermOfPayment': $scope.priceWithoutDow / $scope.timeOfPayment //ราคาต่องวด
+				};
+		});
 	};
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
 	$scope.switchDataCustomer = function(){
 		$scope.customersDefault();
-		if($scope.DataCustomer_toggle){
-			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
-			$scope.focusItem('search_focus');
+		$scope.DataCustomer_toggle = true;
+		if($scope.addProduct_toggle){
+			$scope.DataCustomer_search_toggle = true;
 		}
 		else{
-			$scope.DataCustomer_toggle = !$scope.DataCustomer_toggle;
-			$scope.focusItem('customers_id_focus');
+			if($scope.DataCustomer_search_toggle){
+				$scope.DataCustomer_search_toggle = !$scope.DataCustomer_search_toggle;
+				$scope.focusItem('search_focus');
+			}
+			else{
+				$scope.DataCustomer_search_toggle = !$scope.DataCustomer_search_toggle;
+				$scope.focusItem('customers_id_focus');
+			}
 		}
 		$rootScope.DataCustomers = null;
 		$rootScope.search.data = null;
+		$scope.addProduct_toggle = false;
 	};
 
 	$scope.customersDefault = function()
@@ -203,7 +252,6 @@ angular.module('uncleshopApp')
 	{
 		$scope.checkAdminPassword();
 		if($scope.adminIdCard.length == 13)
-			console.log('13 : '+$scope.adminIdCard.length);
 		if($scope.adminIdCard != '' && $scope.adminIdCard.length == 13 && $scope.adminUserName != '' && $scope.adminPassword !='')
 		{
 			if(value == 1){
@@ -281,7 +329,6 @@ angular.module('uncleshopApp')
 			};
 			manageAdmin.checkAdmin(data,function(data, status, headers, config)
 			{
-				console.log(data);
 				if(data == 'adminId-same'){
 					$scope.adminError[0] = 'input-error';
 					$scope.adminSubmitError = false;
@@ -323,7 +370,6 @@ angular.module('uncleshopApp')
 			$scope.adminError[2] = 'input-error';
 			$scope.adminSubmitError = false;
 		}
-		console.log('adminPassword');
 	};
 
 	$scope.editAdmin = function(index)
@@ -375,8 +421,7 @@ angular.module('uncleshopApp')
 		$scope.getAdmins();
 		$scope.adminDefault();
 		$scope.customersDefault();
-		$scope.productDefault();
-		
+		$scope.productDefault();		
 	};
 
 	/*----------------------------  prodcut---------------------------------*/
@@ -420,6 +465,8 @@ angular.module('uncleshopApp')
 			if($scope.productData[index].productAmountError != '')
 				$scope.productData[index].productAmountError = '';
 		}
+
+		$scope.calBill();
  	}
 	$scope.createBill  = function()
 	{
@@ -440,6 +487,14 @@ angular.module('uncleshopApp')
 			{
 				count = false;
 				products.productAmountError = 'input-error';
+			}
+			if($scope.priceDow == null || $scope.priceDow.length == 0){
+				$scope.priceDowError = 'input-error';
+				count = false;
+			}
+			if($scope.timeOfPayment == null || $scope.timeOfPayment.length == 0){
+				$scope.timeOfPaymentError = 'input-error';
+				count = false;
 			}
 
 		});
@@ -484,6 +539,13 @@ angular.module('uncleshopApp')
 .factory('manageAdmin', ['$http', function($http) 
 {
 	return {
+		getInterestValue:function(callback)
+		{
+			$http({method: 'GET', url: '/interest'})
+		  .success(callback)
+		  .error(function(data, status, headers, config) {
+		  });
+		},
 		saveAdmin:function(data,callback)
 		{
 			$http({method: 'GET', url: '/saveAdmin',params:data})
@@ -518,7 +580,7 @@ angular.module('uncleshopApp')
 		  .success(callback)
 		  .error(function(data, status, headers, config) {
 		  });
-		},
+		}
 	};
 }])
 

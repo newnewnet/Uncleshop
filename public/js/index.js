@@ -55,6 +55,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	$rootScope.search = {
 		data: ''
 	}
+	$scope.type_dow = 'month';
 
 	$scope.menu_slide = false;
 	$scope.currencyVal = 0;
@@ -62,6 +63,8 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	
 	if(localStorageService.get('admin') != null ){
 		$rootScope.pageFlug = true;
+		$scope.addProduct_Toggle = true;
+		$scope.DataCustomer_toggle = true;
 		$rootScope.admin = localStorageService.get('admin');
 		$scope.focusItem('search_focus');
 	}
