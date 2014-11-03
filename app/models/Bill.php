@@ -71,7 +71,7 @@
 			$billData = $this->where('bill_code','=',$billCode)->first();
 			$productData = $product->where('bill_code','=',$billCode)->get();
 			$customerData =  $customer->where('customers_id_card','=',$billData->customers_id_card)->first();
-			$adminData = $admin->where('admin_id','=',$billData->admin_id)->first();
+			$adminData = $admin->where('admin_id','=',$billData->admin_id)->select('admin_name','admin_last_name')->first();
 
 			$billData['bill_total_price'] = $billData->bill_price+$billData->bill_interest;
 
