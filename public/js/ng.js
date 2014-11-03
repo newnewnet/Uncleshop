@@ -53,7 +53,6 @@ angular.module('uncleshopApp')
 
 	/*----------------------------  bill  ---------------------------------*/
 	$scope.addCustomerToBill = function(index) {
-		console.log($scope.DataCustomers[index]);
 		$scope.DataCustomersOfBill = $scope.DataCustomers[index];
 		$scope.DataCustomer_toggle = false;
 		$scope.addProduct_toggle = true;
@@ -437,6 +436,11 @@ angular.module('uncleshopApp')
 	};
 
 	/*----------------------------  prodcut---------------------------------*/
+	$scope.setBillDefault = function() {
+		$scope.productDefault();
+		$scope.billData = [];
+		$scope.DataCustomersOfBill = null;
+	}
 	$scope.productDefault = function()
 	{
 		$scope.productData = [];
@@ -534,7 +538,7 @@ angular.module('uncleshopApp')
 			};
 			bill.createBill(data,function(data, status, headers, config)
 			{
-				$scope.billCode = data;
+				console.log(data);
 			})
 		}
 	};

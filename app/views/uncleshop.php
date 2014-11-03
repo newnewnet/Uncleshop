@@ -235,20 +235,20 @@
 						</div>
 						<div class="form-horizontal" ng-show="addProduct_toggle">
 							<div class="row" ng-show="DataCustomersOfBill != null">
-								<label class="col-xs-1 col-sm-2 control-label" style="color: #e05b49;">รหัสบัตร</label>
-								<label class="col-xs-5 col-sm-2 control-label TEXT-CENTER">{{DataCustomersOfBill.customers_id_card}}</label>
-								<label class="col-xs-1 col-sm-2 control-label" style="color: #1196d1;">เบอร์โทร</label>
-								<label class="col-xs-5 col-sm-2 control-label">{{DataCustomersOfBill.customers_tel}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">เลขบัตร</label>
+								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_id_card}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">เบอร์โทร</label>
+								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_tel}}</label>
 							</div>
 							<div class="row" ng-show="DataCustomersOfBill != null">
-								<label class="col-xs-1 col-sm-2 control-label" style="color: #e05b49;">ชื่อ</label>
-								<label class="col-xs-5 col-sm-2 control-label TEXT-CENTER">{{DataCustomersOfBill.customers_name}}</label>
-								<label class="col-xs-1 col-sm-offset-1 col-sm-1 control-label" style="color: #1196d1;">สกุล</label>
-								<label class="col-xs-5 col-sm-2 control-label">{{DataCustomersOfBill.customers_last_name}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ชื่อ</label>
+								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_name}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">สกุล</label>
+								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_last_name}}</label>
 							</div>
 							<div class="row" style="margin-bottom: 25px; border-bottom: 1px solid #1196d1; padding-bottom: 15px;" ng-show="DataCustomersOfBill != null">
-								<label class="col-xs-1 col-sm-2 control-label" style="color: #e05b49;">ที่อยู่</label>
-								<label class="col-xs-11 col-sm-10 control-label" style="text-align: left;">{{DataCustomersOfBill.customers_address}}</label>
+								<label class="col-xs-3 col-sm-2 control-label" style="color: #45B39C;">ที่อยู่</label>
+								<label class="col-xs-9 col-sm-10 control-label" style="text-align: left;">{{DataCustomersOfBill.customers_address}}</label>
 							</div>
 							<div class="form-group" ng-repeat="product in productData">
 								<div class="row">
@@ -298,26 +298,29 @@
 								<div class="col-xs-12">
 									<div class="row" style="margin-top: 25px; box-sizing: border-box; border-top: 1px solid #45B39C; padding: 12px 0px 0px 15px;">
 										<div class="row">
-											<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ราคาสินค้า</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #e05b49;">ราคาสินค้า</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct | number:0) + '    บาท'}}</label>
-											<label class="col-xs-offset-1 col-xs-4 col-sm-1 control-label" style="color: #1196d1;">ดอกเบี้ย</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1;">ดอกเบี้ย</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.interestValue < 0 ? 0 : billData.interestValue | number:0) + '    บาท'}}</label>
 										</div>
 										<div class="row">
-											<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #1196d1;">ราคารวม</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1;">ราคารวม</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct+billData.interestValue | number:0) + '    บาท'}}</label>
-											<label class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-2 control-label" style="color: #1196d1;">เงินดาวน์</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1;">เงินดาวน์</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceDow < 0 ? 0 : billData.priceDow | number:0) + '    บาท'}}</label>
 										</div>
 										<div class="row">
-											<label class="col-xs-offset-1 col-xs-4 col-sm-2 control-label" style="color: #1196d1; text-decoration: underline;">ราคาผ่อนส่ง</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceWithoutDow < 0 ? 0 : billData.priceWithoutDow | number:0) + '    บาท'}}</label>
-											<label class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
 											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน" : "บาท/วิก")}}</label>
 										</div>								
 										<div class="row">
-											<div class="col-xs-2 col-xs-offset-5" style="margin-top: 10px;">
-												<button type="button" class="btn btn-success TEXT-CENTER" style="margin-left:-10px; width: 60px;" ng-click="createBill()">เพิ่มบิล</button>
+											<div class="col-xs-3 col-xs-offset-2" style="margin-top: 10px;">
+												<button type="button" class="btn btn-success TEXT-CENTER" ng-click="createBill()">เพิ่ม</button>
+											</div>
+											<div class="col-xs-3 col-xs-offset-2" style="margin-top: 10px;">
+												<button type="button" class="btn btn-danger TEXT-CENTER" style="margin-left: 10px;" ng-click="setBillDefault()">ล้าง</button>
 											</div>
 										</div>
 									</div>
