@@ -194,7 +194,7 @@ angular.module('uncleshopApp')
 				else
 					swal({
 						title: "ไม่สำเร็จ !!",   
-						text: "กรุณาลองใหม่อีกครั้ง",   
+						text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
 						type: "error",
 						timer: 1500
 					});
@@ -514,7 +514,15 @@ angular.module('uncleshopApp')
 			}
 
 		});
-		
+		if($scope.DataCustomersOfBill == null){
+			count = false;
+			swal({
+				title: "ไม่สำเร็จ !!",   
+				text: "กรุณาเพิ่มข้อมูลลูกค้าก่อน",   
+				type: "error",
+				timer: 3000
+			});
+		}
 		if(count)
 		{
 			var billType = 0;

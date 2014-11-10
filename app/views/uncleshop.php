@@ -315,12 +315,12 @@
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
 											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน" : "บาท/วิก")}}</label>
 										</div>								
-										<div class="row">
-											<div class="col-xs-3 col-xs-offset-2" style="margin-top: 10px;">
+										<div class="row" style="padding-top: 20px;">
+											<div class="col-xs-2 col-xs-offset-3 col-sm-2 col-sm-offset-4">
 												<button type="button" class="btn btn-success TEXT-CENTER" ng-click="createBill()">เพิ่ม</button>
 											</div>
-											<div class="col-xs-3 col-xs-offset-2" style="margin-top: 10px;">
-												<button type="button" class="btn btn-danger TEXT-CENTER" style="margin-left: 10px;" ng-click="setBillDefault()">ล้าง</button>
+											<div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-0">
+												<button type="button" class="btn btn-danger TEXT-CENTER" ng-click="setBillDefault()">ล้าง</button>
 											</div>
 										</div>
 									</div>
