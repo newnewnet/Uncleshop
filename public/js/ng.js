@@ -34,6 +34,16 @@ angular.module('uncleshopApp')
 		});
 	};
 
+	$scope.backToBill = function() {
+		$scope.DataCustomer_toggle = false;
+		$scope.addProduct_toggle = true;
+	};
+
+	$scope.backToAdmin = function() {
+		$scope.adminToggle = false;
+		$scope.getAdmins();
+	};
+
 	// $scope.savaBill = function()
 	// {
 	// 	var data = {
@@ -297,6 +307,12 @@ angular.module('uncleshopApp')
 				manageAdmin.saveAdmin(data,function(data, status, headers, config)
 				{
 					if(data != 'error'){
+						swal({
+							title: "เรียบร้อย !!",   
+							text: "เพิ่มข้อมูลผู้ขายแล้ว",   
+							type: "success",
+							timer: 1500
+						});
 						$scope.getAdmins(); //get all admin after saved new admin
 						$scope.adminToggle = false;
 					}
@@ -307,14 +323,24 @@ angular.module('uncleshopApp')
 			{
 				manageAdmin.updateAdmin(data,function(data, status, headers, config)
 				{
-					swal({
-						title: "เรียบร้อย !!",   
-						text: "แก้ไขข้อมูลเรียบร้อยแล้ว",   
-						type: "success",
-						timer: 1500
-					});
-					$scope.adminToggle = false;
-					$scope.getAdmins();
+					if(data == '1'){ //update success = 1
+						swal({
+							title: "เรียบร้อย !!",   
+							text: "แก้ไขข้อมูลเรียบร้อยแล้ว",   
+							type: "success",
+							timer: 1500
+						});
+						$scope.adminToggle = false;
+						$scope.getAdmins();
+					}
+					else{
+						swal({
+							title: "ไม่สำเร็จ !!",   
+							text: "กรุณาลองใหม่อีกครั้ง",   
+							type: "error",
+							timer: 3000
+						});
+					}
 				});
 			}
 
@@ -413,16 +439,27 @@ angular.module('uncleshopApp')
 			confirmButtonText: "ใช่, ลบออก !",   
 			closeOnConfirm: false 
 		}, function(){   
-			swal({
-				title: "เรียบร้อย !!",   
-				text: "ข้อมูลผู้ขายถูกลบแล้ว",   
-				type: "success",
-				timer: 1500
-			});
 			manageAdmin.deleteAdmin(data,function(data, status, headers, config)
 			{
 				$scope.getAdmins();
 				$scope.adminToggle = false;
+				console.log(data);
+				if(data == '1'){ //delete success = 1
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "ข้อมูลผู้ขายถูกลบแล้ว",   
+						type: "success",
+						timer: 1500
+					});
+				}
+				else{
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",   
+						type: "error",
+						timer: 3000
+					});
+				}
 			});
 		});
 	};
@@ -519,6 +556,14 @@ angular.module('uncleshopApp')
 			swal({
 				title: "ไม่สำเร็จ !!",   
 				text: "กรุณาเพิ่มข้อมูลลูกค้าก่อน",   
+				type: "error",
+				timer: 3000
+			});
+		}
+		if(count == false){
+			swal({
+				title: "ไม่สำเร็จ !!",   
+				text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
 				type: "error",
 				timer: 3000
 			});

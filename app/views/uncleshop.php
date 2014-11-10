@@ -145,7 +145,7 @@
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==1">
 					<div class="title">
-						<div class="TEXT-LEFT sub-title-left">
+						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToBill()">
 							ข้อมูลบิล
 						</div>
 						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataCustomer()" ng-hide="DataCustomer_toggle">
@@ -185,7 +185,7 @@
 									<div class="text">
 										<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
 										<span class="tel">TEL.</span><span class="tel-data">{{data.customers_tel}}</span>
-										<span class="id">ID.</span><span class="id-data">{{data.customers_id}}</span>																	
+										<span class="id">ID.</span><span class="id-data">{{data.customers_id_card}}</span>																	
 									</div>
 								</div>
 							</div>
@@ -320,7 +320,7 @@
 												<button type="button" class="btn btn-success TEXT-CENTER" ng-click="createBill()">เพิ่ม</button>
 											</div>
 											<div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-0">
-												<button type="button" class="btn btn-danger TEXT-CENTER" ng-click="setBillDefault()">ล้าง</button>
+												<button type="button" class="btn btn-danger TEXT-CENTER" ng-click="setBillDefault()">ลบ</button>
 											</div>
 										</div>
 									</div>
@@ -347,7 +347,7 @@
 
 				<div class="box-super-admin col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==5">
 					<div class="title">
-						<div class="TEXT-LEFT sub-title-left">
+						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToAdmin()">
 							ข้อมูลผู้ขาย
 						</div>
 						<div class="TEXT-RIGHT sub-title-right" ng-click="switchDataAdmin()" ng-hide="adminToggle">
