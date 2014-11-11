@@ -1,7 +1,10 @@
 
 <html>
+	<meta charset="utf-8">
+ 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<link href="/css/print_tag.css" rel="stylesheet"/>
+	<title>Uncleshop</title>
 	<body>
 	
 		<div class="frame">
