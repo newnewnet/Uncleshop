@@ -194,10 +194,11 @@
 
 		$(document).ready(function() 
 		{		
+			var billCode = "<?php echo $_POST['billCode'] ?>";
 			$.ajax({
 				type: "GET",
 				url: "/getBill",
-				data:{'bill_code':"B11147085535"}
+				data:{'bill_code':billCode}
 				}).done(function(data) {
 					console.log(data);
 					normal(data);

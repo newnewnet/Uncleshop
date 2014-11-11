@@ -322,6 +322,12 @@
 											<div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-0">
 												<button type="button" class="btn btn-danger TEXT-CENTER" ng-click="setBillDefault()">ลบ</button>
 											</div>
+											<div ng-show="billCode!=null">
+												<form action="/send/print_uncleshop" method="post" target="_blank"  >
+													<input type="hidden" name="billCode"  value="{{billCode}}"> 
+													<buttom type="submit" class="btn btn-danger TEXT-CENTER">xปริ้น</buttom>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>

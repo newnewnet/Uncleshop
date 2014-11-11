@@ -16,7 +16,7 @@ Route::get('/', function()
 	return View::make('uncleshop');
 });
 
-Route::get('/send/print_uncleshop', function()
+Route::post('/send/print_uncleshop', function()
 {
     return View::make('print_uncleshop');
 });

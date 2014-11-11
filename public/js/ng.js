@@ -614,6 +614,10 @@ angular.module('uncleshopApp')
 			bill.createBill(data,function(data, status, headers, config)
 			{
 				console.log(data);
+				if(data != '')
+				{
+					$scope.billCode = data; 
+				}
 			})
 		}
 	};
