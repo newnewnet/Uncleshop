@@ -44,6 +44,13 @@
 			return $bill->insertBill($array);
 
 		}
+		public function getBill()
+		{
+			$billCode = Input::get('bill_code');
+			$bill = new Bill;
+			return $bill->getBill($billCode);
+
+		}
 		public function saveAdmin()
 		{
 			$array = Input::all();

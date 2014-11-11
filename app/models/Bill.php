@@ -57,8 +57,7 @@
 				]);
 			}
 
-			$result = $this->getBill($billCode);
-			return $result;
+			return $billCode;
 
 
 		}
