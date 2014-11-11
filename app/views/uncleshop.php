@@ -117,14 +117,14 @@
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-22.png"/>
 				    		</span>
-				    		<div class="text">ค้นหาบิล</div>
+				    		<div class="text">จ่ายค่างวด</div>
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
 				    		<span class="icon icon3" >
 				    			<img src="img/icon-33.png"/>
 				    		</span>
-				    		<div class="text">การจ่ายบิล</div>
+				    		<div class="text">ประวัติบิล</div>
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(4); switchMenu()" data-ng-class="{'customer':tabColor==4}">
@@ -331,12 +331,37 @@
 				</div>
 
 				<div class="box-amount-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==2">
-					<div class="title">ค้นหาบิล</div>	
-					<div class="box-bill"></div>
+					<div class="title">จ่ายค่างวด</div>	
+					<div class="box-bill">
+						<div class="form-horizontal">
+							<div class="form-group">						
+							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
+								  <input placeholder="ค้นหาบิล" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
+								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
+								</div>
+							</div>
+
+							<!-- <div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)"> -->
+								<div class="resultUserBill"style="background-color: white;">
+									<div class="icon">
+										<img src="img/icon-44.png">
+										<!-- <img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> -->
+									</div>
+									<div class="text">
+										<span class="name">{{'Apisit' + ' ' + 'Somtapthai'}}</span>
+										<span class="tel">TEL.</span><span class="tel-data">{{'0827072959'}}</span>
+										<span class="id">ID.</span><span class="id-data">{{'1249800077746'}}</span>	
+										<span class="id" style="color: #1196d1;">สินค้า.</span><span class="id-data">{{'ตู้เย็น Samsung'}}</span>	
+										<span class="id" style="color: #1196d1;">รหัสบิล.</span><span class="id-data">{{'bi1154824648574'}}</span>																	
+									</div>
+								</div>
+							<!-- </div> -->
+						</div>
+					</div>
 				</div>
 
 				<div class="box-pays-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
-					<div class="title">ข้อมูลการจ่ายบิล</div>	
+					<div class="title">ประวัติบิล</div>	
 					<div class="box-bill"></div>
 				</div>
 

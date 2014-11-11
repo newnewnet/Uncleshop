@@ -189,25 +189,46 @@ angular.module('uncleshopApp')
 				'customers_tel' : $scope.customersTel
 			};
 			$scope.DataCustomersOfBill = data;
-			manageCustomers.addCustomers(data,function(data, status, headers, config) {
-				if(data != 'error'){
-					swal({
-						title: "เรียบร้อย !!",   
-						text: "เพิ่มข้อมูลลูกค้าแล้ว",   
-						type: "success",
-						timer: 1500
-					});
-					$scope.customersDefault();
-					$scope.addProduct_toggle = true;
-					$scope.DataCustomer_toggle = false;
-				}
-				else
-					swal({
-						title: "ไม่สำเร็จ !!",   
-						text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
-						type: "error",
-						timer: 1500
-					});
+			manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
+				{
+					if(data == 'customers-same'){
+						swal({
+							title: "ไม่สำเร็จ !!",   
+							text: "เลขบัตรประชาชนนี้มีอยู่ในระบบแล้ว",   
+							type: "error",
+							timer: 2000
+						});
+					}
+					else{
+						manageCustomers.addCustomers(data,function(data, status, headers, config) {
+							if(data != 'error'){
+								swal({
+									title: "เรียบร้อย !!",   
+									text: "เพิ่มข้อมูลลูกค้าแล้ว",   
+									type: "success",
+									timer: 2000
+								});
+								$scope.customersDefault();
+								$scope.addProduct_toggle = true;
+								$scope.DataCustomer_toggle = false;
+							}
+							else
+								swal({
+									title: "ไม่สำเร็จ !!",   
+									text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
+									type: "error",
+									timer: 2000
+								});
+						});
+					}
+			}, 500);
+		}
+		else{
+			swal({
+				title: "ไม่สำเร็จ !!",   
+				text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
+				type: "error",
+				timer: 2000
 			});
 		}
 	};
@@ -457,7 +478,7 @@ angular.module('uncleshopApp')
 						title: "ไม่สำเร็จ !!",   
 						text: "กรุณาลองใหม่อีกครั้ง",   
 						type: "error",
-						timer: 3000
+						timer: 2000
 					});
 				}
 			});
@@ -465,7 +486,7 @@ angular.module('uncleshopApp')
 	};
 	/*when init*/
 	$scope.init = function() {
-		$scope.changTab(1);
+		$scope.changTab(2);
 		$scope.getAdmins();
 		$scope.adminDefault();
 		$scope.customersDefault();
@@ -550,22 +571,23 @@ angular.module('uncleshopApp')
 				count = false;
 			}
 
+			if(count == false){
+				swal({
+					title: "ไม่สำเร็จ !!",   
+					text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
+					type: "error",
+					timer: 2000
+				});
+			}
+
 		});
-		if($scope.DataCustomersOfBill == null){
+		if($scope.DataCustomersOfBill == null && count != false){
 			count = false;
 			swal({
 				title: "ไม่สำเร็จ !!",   
 				text: "กรุณาเพิ่มข้อมูลลูกค้าก่อน",   
 				type: "error",
-				timer: 3000
-			});
-		}
-		if(count == false){
-			swal({
-				title: "ไม่สำเร็จ !!",   
-				text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
-				type: "error",
-				timer: 3000
+				timer: 2000
 			});
 		}
 		if(count)
