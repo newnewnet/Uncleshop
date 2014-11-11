@@ -1,0 +1,143 @@
+body {
+	width: 900px; 
+	margin: auto; 
+	font-family: tahoma,arial,verdana,sans-serif;
+}
+
+.frame {
+	width: 100%; 
+	padding: 16px 0; 
+	margin: auto; 
+	/*border-bottom: dashed 2px #ccc; */
+}
+.frame .bill-customers {
+	margin: auto;
+	border-radius: 5px;
+	width: 80%;
+	margin-top: 20px;
+	border: 1px solid #333;
+	padding: 10px;
+}
+.frame .bill-customers .text-customers {
+	float: left;
+	width: 50%;
+	
+}
+.frame .bill-title {
+	margin: auto;
+	height: 32px;
+	width: 80%;
+	margin-top: 10px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border: 1px solid #333;
+	padding: 0 10px
+}
+.frame .bill-title .title {
+	float: left;
+	width: 85px;
+	height: 100%;
+	line-height: 29px;
+	text-align: center;
+	border-right: 1px solid #333;
+}
+.frame .bill-product {
+	margin: auto;
+	height: 32px;
+	width: 80%;
+	margin-top: -1px;
+	border: 1px solid #333;
+	padding: 0px 10px
+}
+.frame .bill-product .text {
+	width: 85px;
+	height: 32px;
+	text-align: center;
+	border-right: 1px solid #333;
+	float: left;
+	line-height: 29px
+}
+.frame .bill-product-total {
+	margin: auto;
+	height: 32px;
+	width: 80%;
+	margin-top: -1px;
+	border: 1px solid #333;
+	padding: 0px 10px
+}
+
+.frame .bill-product-total .text {
+	width: 482px;
+	height: 32px;
+	text-align: center;
+	border-right: 1px solid #333;
+	float: left;
+	line-height: 29px;
+
+}
+
+.frame .bill-detail {
+	margin: auto; 
+	border-radius: 5px; 
+	width: 80%;  
+	margin-top: 10px;   
+	padding: 10px;
+}
+
+.frame .bill-detail .left {
+	width: 50%;
+	float: left;
+}
+.frame .bill-detail .left .title {
+	width: 80px;
+	float: left;
+	margin-left: 20px;
+}
+.frame .bill-detail .left .value{
+	margin-left: 94px;
+}
+.frame .bill-detail .left .currency{
+	float: right;
+}
+
+.frame .bill-detail .right {
+
+}
+.frame .bill-detail .right .title {
+ 	width: 86px;
+	float: left;
+	margin-left: 20px;
+}
+.frame .bill-detail .right .value{
+	margin-left: 94px;
+}
+.frame .bill-detail .right .currency{
+	float: right;
+	margin-right: 20px;
+}
+
+.frame .bill-date {
+	margin: auto;
+	width: 80%;
+	margin-top: 12px;
+	border-top: 1px solid #B0B0B0;
+	padding: 13px 10px;
+}
+.frame .bill-admin {
+	width: 80%;
+	margin: auto;
+	width: 80%;
+	text-align: right;
+	margin-top: 12px;
+	border-top: 1px solid #B0B0B0;
+	padding: 13px 10px;
+}
+.frame .bill-code {
+	width: 80%;
+	margin: auto;
+	text-align: left;
+}
+
+
+
+
