@@ -325,7 +325,7 @@
 											<div ng-show="billCode!=null">
 												<form action="/send/print_uncleshop" method="post" target="_blank"  >
 													<input type="hidden" name="billCode"  value="{{billCode}}"> 
-													<buttom type="submit" class="btn btn-danger TEXT-CENTER">xปริ้น</buttom>
+													<input type="submit" class="btn btn-danger TEXT-CENTER" value="ปริ้น">
 												</form>
 											</div>
 										</div>
