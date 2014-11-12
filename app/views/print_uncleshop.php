@@ -67,6 +67,13 @@
 			  <div class="text" style="width:85px; border:none" id="productTotalPrice">
 			  </div>
 			</div>
+			<div class="note">
+				*<span style="text-decoration: underline">หมายเหตุ</span>&nbsp
+				<span>อัตราดอกเบี้ย</span>&nbsp
+				<span id="billInterestToMount"></span>&nbsp
+				<span>บาท/</span><span id="billType1"></span>
+			</div>
+
 			<!-- //////////////////////รายละเอียดบิล //////////////////// -->
 			<div class="bill-detail">
 			  <div>
@@ -102,7 +109,7 @@
 			    <div class="right">
 			      <div  class="title" style="text-decoration: underline">การผ่อนชำระ</div>
 			      <span class="value" id="billInstallmentsPrice"></span>
-			  	  <span class="currency">บาท</span>
+			  	  <span class="currency">บาท/<span id="billType2"></span></span>
 			    </div>
 			  </div>
 			</div>
@@ -169,6 +176,14 @@
 	  	billPayPrice = commaNumber(billPayPrice);
 	  	billInstallmentsPrice = commaNumber(billInstallmentsPrice);
 
+	  	var billType = "เดือน";
+	  	if(bill.bill_type == 1)
+	  	{
+	  		billType = "วิก";
+	  	}
+	  	$('#billInterestToMount').append(bill.bill_interest_to_mount);
+	  	$('#billType1').append(billType);
+	  	$('#billType2').append(billType);
 	  	$('#billCode').append(bill.bill_code);
 	  	$('#billPrice').append(billPrice);
 	  	$('#billInterest').append(billInterest);
@@ -176,6 +191,7 @@
 	  	$('#billPriceDow').append(billPriceDow);
 	  	$('#billPayPrice').append(billPayPrice);
 	  	$('#billInstallmentsPrice').append(billInstallmentsPrice);
+
 
 	  	var divDateBill = "";
 	  	$.each(dateBill, function(i, dateBills) 

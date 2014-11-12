@@ -14,7 +14,6 @@
 				$customers  = new Customers;
 				$result = $customers->orWhere('customers_id_card', 'LIKE', "%".$key."%")
 								->orWhere('customers_name', 'LIKE', "%".$key."%")
-								->orWhere('customers_last_name', 'LIKE', "%".$key."%")
 								->orWhere('customers_tel', 'LIKE', "%".$key."%")
 								->get();
 				
@@ -28,8 +27,7 @@
 				$result = $this->where('customers_id','=',$array['customers_id'])
 						->update(array(
 								'customers_id_card' => $array['customers_id_card'],
-								'customers_name' => $array['customers_name'],
-								'customers_last_name' => $array['customers_last_name'],				
+								'customers_name' => $array['customers_name'],		
 								'customers_address' => $array['customers_address'],
 								'customers_sex' => $array['customers_sex'],
 								'customers_tel' =>$array['customers_tel'],
@@ -52,8 +50,7 @@
 			{			
 				$this->insert([
 					'customers_id_card' => $array['customers_id_card'],
-					'customers_name' => $array['customers_name'],
-					'customers_last_name' => $array['customers_last_name'],		
+					'customers_name' => $array['customers_name'],	
 					'customers_address' => $array['customers_address'],
 					'customers_sex' => $array['customers_sex'],
 					'customers_tel' =>$array['customers_tel']

@@ -138,6 +138,14 @@ body {
 	text-align: left;
 }
 
+.frame .note {
+	margin: auto;
+	width: 80%;
+	margin-top: 12px;
+	border-bottom: 1px solid #B0B0B0;
+	padding: 8px 12px;
+}
+
 
 
 

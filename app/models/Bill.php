@@ -80,30 +80,27 @@
 			$productData = $product->where('bill_code','=',$billCode)->get();
 			$customerData =  $customer->where('customers_id_card','=',$billData->customers_id_card)->first();
 			$adminData = $admin->where('admin_id','=',$billData->admin_id)->select('admin_name','admin_last_name')->first();
-			$dateBill = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status')->get();
+			$billDetailData = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status')->get();
 			$billData['bill_total_price'] = $billData->bill_price+$billData->bill_interest;
 			$billData['bill_installments_price'] = ceil((($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow)/$billData->bill_date_amount);
 			$billData['bill_pay_price'] = (($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow);
-			
-			// $startDate = $billData->bill_start_date;
-			// $day = 30;
+			$billData['bill_interest_to_mount'] = ($billData->bill_interest/$billData->bill_date_amount);
 
-			// if($billData->bill_type == 1)
-			// {
-			// 	$day = 15;
-			// }
-			// for($i=0 ;$i<$billData->bill_date_amount;$i++)
-			// {		
-			// 	$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
-			// 	$startDate = date('Y-m-d',$startDate);	
-			// 	$dateBill[$i] = $startDate;
-			// }
+			$billData->bill_start_date = strtotime($billData->bill_start_date);
+			$billData->bill_start_date = date('d-m-Y',$billData->bill_start_date);
 
+			for($i=0;$i<count($billDetailData);$i++)
+			{
+				$date = strtotime($billDetailData[$i]->bill_detail_date);
+				$date = date('d-m-Y',$date);
+				$billDetailData[$i]->bill_detail_date = $date;
+			}
+				
 			$result['bill'] = $billData;
 			$result['product'] = $productData;
 			$result['customer'] = $customerData;
 			$result['admin'] = $adminData;
-			$result['dateBill'] = $dateBill;
+			$result['dateBill'] = $billDetailData;
 
 			return $result;
 		}
