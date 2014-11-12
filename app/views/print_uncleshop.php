@@ -180,7 +180,7 @@
 	  	var divDateBill = "";
 	  	$.each(dateBill, function(i, dateBills) 
 	  	{
-	  		divDateBill = "<div style='margin-top: 6px'>"+dateBills+"</div>";
+	  		divDateBill = "<div style='margin-top: 6px'>"+dateBills.bill_detail_date+"</div>";
 	  		$('#dateBill').append(divDateBill);
 	  	});
 
@@ -203,7 +203,6 @@
 				url: "/getBill",
 				data:{'bill_code':billCode}
 				}).done(function(data) {
-					console.log(data);
 					normal(data);
 				});
   

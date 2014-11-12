@@ -9,28 +9,25 @@
 		public function insertBill($array)
 		{
 			$product = new Product;
+			$billDeatail = new BillDetail;
 		
 			$billCode = $this->randomBill();
 
 			$data = json_decode($array['data']);
 
+			$startDate = date('Y-m-d');
 			$day = 30;
-			// $month = date('m');
-			// $year   = date('Y');
-
+		
 			if($data->bill_type == 1)
 			{
 				$day = 15;
-				// $day = 15*$data->bill_date_amount;
-				// $endDate = time() + ($day *24*60 * 60);
-				// $endDate  = date('Y-m-d',$endDate );
 			}
 
-			$day = $day * $data->bill_date_amount;
-			$endDate = time() + ($day * 24 * 60 * 60);
+			$day1 = $day * $data->bill_date_amount;
+			$endDate = time() + ($day1 * 24 * 60 * 60);
 			$endDate  = date('Y-m-d',$endDate );
 
-	
+
 			$this->insert([
 					'bill_code' => $billCode ,
 					'bill_start_date' => date('Y-m-d'),
@@ -57,6 +54,17 @@
 				]);
 			}
 
+			for($i=0 ;$i<$data->bill_date_amount;$i++)
+			{		
+				$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
+				$startDate = date('Y-m-d',$startDate);	
+				$billDeatail->insert([
+						'bill_detail_date' => $startDate,
+						'bill_detail_status' => 0,
+						'bill_code' => $billCode
+				]);
+			}
+
 			return $billCode;
 
 
@@ -66,30 +74,30 @@
 			$product = new Product;
 			$customer = new Customers;
 			$admin = new Admin;
+			$billDeatail = new BillDetail;
 
 			$billData = $this->where('bill_code','=',$billCode)->first();
 			$productData = $product->where('bill_code','=',$billCode)->get();
 			$customerData =  $customer->where('customers_id_card','=',$billData->customers_id_card)->first();
 			$adminData = $admin->where('admin_id','=',$billData->admin_id)->select('admin_name','admin_last_name')->first();
-
+			$dateBill = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status')->get();
 			$billData['bill_total_price'] = $billData->bill_price+$billData->bill_interest;
-
 			$billData['bill_installments_price'] = ceil((($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow)/$billData->bill_date_amount);
 			$billData['bill_pay_price'] = (($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow);
 			
-			$starDate = $billData->bill_start_date;
-			$day = 30;
+			// $startDate = $billData->bill_start_date;
+			// $day = 30;
 
-			if($billData->bill_type == 1)
-			{
-				$day = 15;
-			}
-			for($i=0 ;$i<$billData->bill_date_amount;$i++)
-			{		
-				$starDate= strtotime($starDate) + ($day* 24 * 60 * 60);
-				$starDate = date('Y-m-d',$starDate);	
-				$dateBill[$i] = $starDate;
-			}
+			// if($billData->bill_type == 1)
+			// {
+			// 	$day = 15;
+			// }
+			// for($i=0 ;$i<$billData->bill_date_amount;$i++)
+			// {		
+			// 	$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
+			// 	$startDate = date('Y-m-d',$startDate);	
+			// 	$dateBill[$i] = $startDate;
+			// }
 
 			$result['bill'] = $billData;
 			$result['product'] = $productData;
@@ -141,5 +149,40 @@
 			return $billCode;
 
 		}
+
+
+		public function searchBill($key)
+		{
+			$result = '';
+			if($key != '')
+			{
+				$customers =  new Customers;
+				$product = new Product;
+				$result = $customers->join('bill', 'customers.customers_id_card', '=', 'bill.customers_id_card')			
+								->orWhere('customers.customers_id_card', 'LIKE', "%".$key."%")
+								->orWhere('customers.customers_name', 'LIKE', "%".$key."%")
+								->orWhere('customers.customers_last_name', 'LIKE', "%".$key."%")
+								->orWhere('customers.customers_tel', 'LIKE', "%".$key."%")
+								->orWhere('bill.bill_code', 'LIKE', "%".$key."%")
+								->where('bill.bill_status', '=', 0)
+								// ->join('product', 'bill.bill_code', '=', 'product.bill_code')
+								// ->whereRaw('product.product_price = (select max(`product.product_price`) from product)')
+								->select('bill.bill_code','customers.customers_name','customers.customers_last_name','customers.customers_tel','customers.customers_id_card')
+								->get();
+
+				for($i=0;$i<count($result);$i++)
+				{
+					$productData = $product->where('bill_code','=',$result[$i]->bill_code)
+									->orderBy('product_price', 'desc')
+                  ->select('product_name','product_price','product_amount')
+                  ->first();
+          $result[$i]['product'] = $productData;
+
+				}
+
+			}
+			return $result;
+		}
+
 
 	}

@@ -106,4 +106,25 @@
 			$result = $admin->getAdminInterest();
 			return $result;
 		}
+		public function searchBill()
+		{
+			$key = Input::get('key');
+			$bill= new Bill;
+			$result = $bill->searchBill($key);
+			return $result;
+		}
+		public function updateBillDeatail()
+		{
+			$array = Input::all();
+			$billDetail= new BillDetail;
+			$result = $billDetail->updateBillDeatail($array);
+			return $result;
+		}
+		public function cutBillDeatail()
+		{
+			$array = Input::all();
+			$billDetail= new BillDetail;
+			$result = $billDetail->cutBillDeatail($array);
+			return $result;
+		}
 	}

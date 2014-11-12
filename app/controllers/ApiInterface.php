@@ -104,3 +104,37 @@
 		data = {
 			'customers_id_card' : $scope.id_card
 		}
+
+
+		------------------- apo หน้า จ่าย งวด----------------------
+		
+		/bill  :   get 
+		data = {
+			key : ข้อมูลที่จะค้นหา
+		}
+		
+		/getBill  :  get 
+		data = {
+			bill_code :bill_code
+		}
+
+		/updateBillDeatail   :  post 		
+		data = {
+			'bill_detail_id' : $array['bill_detail_id']
+			'bill_detail_price' : $array['bill_detail_price']
+			'admin_id' : $array['admin_id']
+		}
+
+		/cutBillDeatail   : post
+		data = {
+			'bill_detail_id' : $array['bill_detail_id']
+			'bill_detail_price' : $array['bill_detail_price']
+			'admin_id' : $array['admin_id']
+			'bill_interest' : $array['bill_interest']
+			'bill_date_amount' : $array['bill_date_amount']
+			'bill_price' : $array['bill_price']
+			'bill_code' : $array['bill_code']
+		}
+
+
+		
