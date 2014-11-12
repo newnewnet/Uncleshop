@@ -113,18 +113,18 @@
 			$result = $bill->searchBill($key);
 			return $result;
 		}
-		public function updateBillDeatail()
+		public function updateBillDetail()
 		{
 			$array = Input::all();
 			$billDetail= new BillDetail;
-			$result = $billDetail->updateBillDeatail($array);
+			$result = $billDetail->updateBillDetail($array);
 			return $result;
 		}
-		public function cutBillDeatail()
+		public function cutBillDetail()
 		{
 			$array = Input::all();
 			$billDetail= new BillDetail;
-			$result = $billDetail->cutBillDeatail($array);
+			$result = $billDetail->cutBillDetail($array);
 			return $result;
 		}
 	}

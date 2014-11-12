@@ -118,14 +118,14 @@
 			bill_code :bill_code
 		}
 
-		/updateBillDeatail   :  post 		
+		/updateBillDetail   :  post 		
 		data = {
 			'bill_detail_id' : $array['bill_detail_id']
 			'bill_detail_price' : $array['bill_detail_price']
 			'admin_id' : $array['admin_id']
 		}
 
-		/cutBillDeatail   : post
+		/cutBillDetail   : post
 		data = {
 			'bill_detail_id' : $array['bill_detail_id']
 			'bill_detail_price' : $array['bill_detail_price']

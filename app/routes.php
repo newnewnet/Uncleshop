@@ -36,8 +36,8 @@ Route::post('saveBill','UncleshopApiController@saveBill');
 Route::get('getBill','UncleshopApiController@getBill');
 Route::get('bill','UncleshopApiController@searchBill');
 
-Route::post('updateBillDeatail','UncleshopApiController@updateBillDeatail');
-Route::post('cutBillDeatail','UncleshopApiController@cutBillDeatail');
+Route::post('updateBillDetail','UncleshopApiController@updateBillDetail');
+Route::post('cutBillDetail','UncleshopApiController@cutBillDetail');
 
 Route::get('saveAdmin','UncleshopApiController@saveAdmin');
 Route::get('checkUser','UncleshopApiController@checkUser');

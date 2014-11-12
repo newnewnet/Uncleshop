@@ -6,7 +6,7 @@
 		public $timestamps = false;
 		protected $primaryKey = 'bill_detail_id';
 
-		public function updateBillDeatail($array)
+		public function updateBillDetail($array)
 		{
 			if(isset($array))
 			{			
@@ -34,7 +34,7 @@
 				return $result;
 			}
 		}
-		public function cutBillDeatail($array)
+		public function cutBillDetail($array)
 		{
 			if(isset($array))
 			{
