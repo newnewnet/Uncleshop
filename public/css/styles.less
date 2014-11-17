@@ -451,7 +451,7 @@ header {
 		input, button, select, textarea {
 			font-size:20px;
 		}
-		.resultUser {
+		.resultUser .resultUserBill {
 			margin-bottom: 5px;
 			cursor:pointer;
 			background-color: @body-bg;
@@ -510,24 +510,69 @@ header {
 			}
 		}
 		.resultUserBill{
-			.resultUser;
+			margin-bottom: 5px;
+			cursor:pointer;
+			background-color: @body-bg;
 			height: 88px;
-			.icon{
-				img{
-					margin-top: 50%;
+			border: 1px solid #dcdcdc;
+			/*border-left: 1px solid #dcdcdc;*/
+			&:hover, &:focus {	
+				border: 1px solid #f1c40f;
+			}
+
+			&:first-child {
+				-webkit-border-top-left-radius: @border-radius-small;
+				-moz-border-top-left-radius: @border-radius-small;
+				border-top-left-radius: @border-radius-small;
+			}/*
+			&:last-child {
+				border-bottom: 1px solid #dcdcdc;
+			}*/
+			.icon {
+				float: left;
+				width: 44px;
+				height: 100%;
+				img {
 					margin-left: 15%;
+					margin-right: 5%;
+					margin-top: 50%%;
 					width: 85%;
+				}
+			}
+			span {
+				float: left;
+			    padding: 0px 0 0 0px;
+			}
+			.text {			
+				/*widows: 85%;*/
+				float: left;
+				line-height: 13px;
+				margin-left: 13px;
+				padding: 14px 0px 0px 0px;
+				color: #34495e;
+				.name {									
+					margin-right: 8px;
+				}
+				.tel {
+					color: #e67e22;
+				}
+				.tel-data {
+					margin-right: 8px;
+				}
+				.id {
+					color: #16a085;
+				}
+				.id-data {
+					margin-right: 8px;
 				}
 			}
 		}
 	}
 }
 
-
 .box-amount-bill {
 	.box-save-bill;
 }
-
 
 .box-pays-bill{
 	.box-save-bill;
@@ -584,12 +629,12 @@ header {
 	  .wrapper {
 	  	.separate {
 	  	  #logo {
-  		    	.logo {
-  		    		display: inline;
-  		    	}
-  		    	.logo-2 {
-  		    		display: none;
-  		    	}
+  		    .logo {
+  		    	display: inline;
+  		    }
+  		    .logo-2 {
+  		    	display: none;
+  		    }
 		  }
 	  	}
 	  }
@@ -627,7 +672,7 @@ header {
 				}
 			}
 		}
-		.box-bill {
+		.box-bill {			
 			.resultUser {
 				.icon {
 					float: left;
@@ -641,7 +686,7 @@ header {
 					width: 75%;
 					padding: 0px 0px 0px 0px;
 					.name {	
-						width: 100%;			
+						width: 100%;		
 					}
 					.tel {
 						color: #e67e22;
@@ -663,6 +708,82 @@ header {
 			}
 		}
 	}
+
+	.resultUserBill{
+		margin-bottom: 5px;
+		cursor:pointer;
+		background-color: @body-bg;
+		height: 88px;
+		border: 1px solid #dcdcdc;
+		/*border-left: 1px solid #dcdcdc;*/
+		&:hover, &:focus {	
+			border: 1px solid #f1c40f;
+		}
+			&:first-child {
+			-webkit-border-top-left-radius: @border-radius-small;
+			-moz-border-top-left-radius: @border-radius-small;
+			border-top-left-radius: @border-radius-small;
+		}/*
+		&:last-child {
+			border-bottom: 1px solid #dcdcdc;
+		}*/
+		.icon {
+			float: left;
+			width: 44px;
+			height: 100%;
+			img {
+				margin-left: 15%;
+				margin-right: 5%;
+				margin-top: 50%%;
+				width: 85%;
+			}
+		}
+		span {
+			float: left;
+		    padding: 0px;
+		}
+		.text {
+			position: relative;
+			float: left;				
+			margin-left: 5px;
+			color: #34495e;
+			width: 77%;
+			height: 100%;
+			padding: 0px 0px 0px 0px;
+			.name {	
+				width: 100%;		
+			}
+			.tel {
+				color: #e67e22;
+				width: 15%;
+			}
+			.tel-data {
+				width: 80%;
+			}
+			.id {
+				color: #16a085;
+				width: 15%;
+			}
+			.id-data {
+				width: 80%;
+			}
+			.code {
+				color: #1196d1;
+				width: 15%;
+			}
+			.code-data { 
+				width: 80%;
+			}
+			.product {
+				color: #8e44ad;
+				width: 20%;
+			}
+			.product-data {
+				width: 75%;
+			}
+		}
+	}
+
 	.box-super-admin {
 		.box-save-bill;
 	}
@@ -713,6 +834,17 @@ header {
 				padding: 0px 0px 0px 0px;
 			}
 		}
+		.resultUserBill{
+			.resultUser;
+			height: 66px;
+			.icon{
+				img{
+					margin-top: 25%;
+					margin-left: 15%;
+					width: 85%;
+				}
+			}
+		}
 	}
 	.box-super-admin {
 		.box-save-bill;
@@ -756,6 +888,17 @@ header {
 				color: #34495e;
 				width: 75%;
 				padding: 0px 0px 0px 0px;
+			}
+		}
+		.resultUserBill{
+			.resultUser;
+			height: 66px;
+			.icon{
+				img{
+					margin-top: 25%;
+					margin-left: 15%;
+					width: 85%;
+				}
 			}
 		}
 	}

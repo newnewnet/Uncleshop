@@ -108,16 +108,19 @@
 
 		------------------- apo หน้า จ่าย งวด----------------------
 		
+		/** mean searchBill
 		/bill  :   get 
 		data = {
 			key : ข้อมูลที่จะค้นหา
 		}
 		
+		/** mean get all data from Bill
 		/getBill  :  get 
 		data = {
 			bill_code :bill_code
 		}
-
+		
+		/** mean 
 		/updateBillDetail   :  post 		
 		data = {
 			'bill_detail_id' : $array['bill_detail_id']

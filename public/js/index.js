@@ -55,6 +55,9 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format'])
 	$rootScope.search = {
 		data: ''
 	}
+	$rootScope.searchBill = {
+		data: ''
+	}
 	$scope.type_dow = 'month';
 
 	$scope.menu_slide = false;

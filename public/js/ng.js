@@ -1,5 +1,5 @@
 angular.module('uncleshopApp')
-.controller('uncleshopController', ['$scope','$rootScope','manageAdmin','manageCustomers','bill', function($scope,$rootScope,manageAdmin,manageCustomers,bill) 
+.controller('uncleshopController', ['$scope','$rootScope','manageAdmin','manageCustomers','manageBill', function($scope,$rootScope,manageAdmin,manageCustomers,manageBill) 
 {
 		
 	$scope.changTab = function(number)
@@ -12,6 +12,9 @@ angular.module('uncleshopApp')
 			$scope.addProduct_toggle = true;
 			$scope.DataCustomer_toggle = false;
 			//$scope.focusItem('search_focus');
+		}
+		else if(number == 2){
+			$rootScope.searchBill.data = null;
 		}
 		else if(number == 5){
 			$scope.adminToggle = false;
@@ -31,7 +34,7 @@ angular.module('uncleshopApp')
 		manageCustomers.getCustomers(data,function(data, status, headers, config)
 		{
 			$rootScope.DataCustomers = data;
-		});
+		},500);
 	};
 
 	$scope.backToBill = function() {
@@ -44,22 +47,6 @@ angular.module('uncleshopApp')
 		$scope.getAdmins();
 	};
 
-	// $scope.savaBill = function()
-	// {
-	// 	var data = {
-	// 		'customers_id' : $scope.customersId,
-	// 		'customers_name' : $scope.customersName,
-	// 		'customers_tel' : $scope.customersLastName,
-	// 		'customers_address' : $scope.customersAddress,
-	// 		'customers_sex' : $scope.customersSex,
-	// 		'customers_tel' :$scope.customersTel									
-	// 	};
-
-	// 	bill.saveBill(data,function(data, status, headers, config)
-	// 	{
-
-	// 	});
-	// };
 
 	/*----------------------------  bill  ---------------------------------*/
 	$scope.addCustomerToBill = function(index) {
@@ -67,7 +54,6 @@ angular.module('uncleshopApp')
 		$scope.DataCustomer_toggle = false;
 		$scope.addProduct_toggle = true;
 	};
-
 
 	$scope.calBill = function(value) {
 
@@ -107,7 +93,6 @@ angular.module('uncleshopApp')
 				};
 		});
 	};
-
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
 	$scope.switchDataCustomer = function(){
@@ -248,6 +233,19 @@ angular.module('uncleshopApp')
 						$scope.customersError[0] = '';
 				});
 			}, 500);
+	};
+
+	/*---------------------------- Bill-->Customers  ---------------------------------*/
+	$scope.searchBillForPay = function() {
+		var data = {
+			'key': $rootScope.searchBill.data
+		}
+		
+		manageBill.searchBill(data,function(data, status, headers, config)
+		{
+			$rootScope.DataBill = data;
+			console.log($rootScope.DataBill);
+		}, 500);
 	};
 
 	/*----------------------------  super  admin---------------------------------*/
@@ -490,7 +488,7 @@ angular.module('uncleshopApp')
 		$scope.getAdmins();
 		$scope.adminDefault();
 		$scope.customersDefault();
-		$scope.productDefault();		
+		$scope.productDefault();
 	};
 
 	/*----------------------------  prodcut---------------------------------*/
@@ -611,7 +609,7 @@ angular.module('uncleshopApp')
 			data = {
 				data:JSON.stringify(data)
 			};
-			bill.createBill(data,function(data, status, headers, config)
+			manageBill.createBill(data,function(data, status, headers, config)
 			{
 				console.log(data);
 				if(data != '')
@@ -623,7 +621,7 @@ angular.module('uncleshopApp')
 	};
 	
 }])
-.factory('bill', ['$http', function($http) 
+.factory('manageBill', ['$http', function($http) 
 {
 	return {
 		createBill:function(data,callback)
@@ -633,13 +631,34 @@ angular.module('uncleshopApp')
 			.error(function(data, status, headers, config) {
 		  });
 		},
-		// getCustomers:function(data,callback)
-		// {
-		// 	$http({method: 'GET', url: '/customers',params:data})
-		// 	.success(callback)
-		// 	.error(function(data, status, headers, config) {
-		//   });
-		// }
+		searchBill:function(data,callback)
+		{
+			$http({method: 'GET', url: '/bill',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		},
+		getBill:function(data,callback)
+		{
+			$http({method: 'GET', url: '/getBill',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		},
+		updateBillDetail:function(data,callback)
+		{
+			$http({method: 'POST', url: '/updateBillDetail',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		},
+		cutBillDetail:function(data,callback)
+		{
+			$http({method: 'POST', url: '/cutBillDetail',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		}
 	};
 }])
 .factory('manageAdmin', ['$http', function($http) 

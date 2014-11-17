@@ -342,26 +342,27 @@
 						<div class="form-horizontal">
 							<div class="form-group">						
 							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
-								  <input placeholder="ค้นหาบิล" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
-								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
+								  <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-keyup="searchBillForPay()" style="font-size: 20px;">
+								  <span class="input-group-addon CURSOR" ng-click="searchBillForPay()"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
-
-							<!-- <div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)"> -->
-								<div class="resultUserBill"style="background-color: white;">
+							<div ng-repeat="(key, data) in DataBill" ng-click="">
+								<div class="resultUserBill">
 									<div class="icon">
 										<img src="img/icon-44.png">
+										<!-- <img src="img/icon-44.png"> -->
+										<!-- <img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> -->
 										<!-- <img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> -->
 									</div>
 									<div class="text">
-										<span class="name">{{'Apisit' + ' ' + 'Somtapthai'}}</span>
-										<span class="tel">TEL.</span><span class="tel-data">{{'0827072959'}}</span>
-										<span class="id">ID.</span><span class="id-data">{{'1249800077746'}}</span>	
-										<span class="id" style="color: #1196d1;">สินค้า.</span><span class="id-data">{{'ตู้เย็น Samsung'}}</span>	
-										<span class="id" style="color: #1196d1;">รหัสบิล.</span><span class="id-data">{{'bi1154824648574'}}</span>																	
+										<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
+										<span class="tel">TEL.</span><span class="tel-data">{{data.customers_tel}}</span>
+										<span class="id">ID.</span><span class="id-data">{{data.customers_id_card}}</span>	
+										<span class="code" style="color: #1196d1;">BID.</span><span class="id-data">{{data.bill_code}}</span>	
+										<span class="product" style="color: #8e44ad;">สินค้า.</span><span class="product-data">{{data.product.product_name | limitTo:20}}</span>																										
 									</div>
 								</div>
-							<!-- </div> -->
+							</div>
 						</div>
 					</div>
 				</div>
