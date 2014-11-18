@@ -353,10 +353,8 @@
 									<div class="resultUserBill">
 										<div class="wrap">
 											<div class="icon">
-												<img src="img/icon-44.png">
-												<!-- <img src="img/icon-44.png"> -->
-												<!-- <img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> -->
-												<!-- <img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> -->
+												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
 											</div>
 											<div class="text">
 												<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
