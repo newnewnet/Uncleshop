@@ -452,14 +452,14 @@ header {
 			font-size:20px;
 		}
 		.resultUser {
-			margin-bottom: 5px;
+			background-color: white; 
+			width: 80%; 
+			margin-left: 10%;
 			cursor:pointer;
-			background-color: @body-bg;
-			height: 44px;
+			height: 66px;
 			border: 1px solid #dcdcdc;
-			/*border-left: 1px solid #dcdcdc;*/
+			margin-bottom: 3px;
 			&:hover, &:focus {
-				
 				border: 1px solid #f1c40f;
 			}
 
@@ -467,103 +467,158 @@ header {
 				-webkit-border-top-left-radius: @border-radius-small;
 				-moz-border-top-left-radius: @border-radius-small;
 				border-top-left-radius: @border-radius-small;
-			}/*
-			&:last-child {
-				border-bottom: 1px solid #dcdcdc;
-			}*/
-			.icon {
-				float: left;
-				width: 44px;
+			}
+
+			.wrap {
+				margin-left: 15%;
 				height: 100%;
-				img {
-					margin-left: 7.5%;
-					margin-top: 7.5%;
-					width: 85%;
+				width: 80%;
+				.icon {
+					float: left;
+					width: 84px;
+					height: 100%;
+					img {
+						margin-top: 10px;
+						width: 44px;
+					}
 				}
-			}
-			span {
-				float: left;
-			    padding: 0px 0 0 0px;
-			}
-			.text {			
-				/*widows: 85%;*/
-				float: left;
-				line-height: 13px;
-				margin-left: 13px;
-				padding: 14px 0px 0px 0px;
-				color: #34495e;
-				.name {									
-					margin-right: 8px;
-				}
-				.tel {
-					color: #e67e22;
-				}
-				.tel-data {
-					margin-right: 8px;
-				}
-				.id {
-					color: #16a085;
-				}
-				.id-data {
-					margin-right: 8px;
+				.text {
+					position: relative;
+					float: left;
+					height: 100%;
+					width: 80%;
+					color: #34495e;
+
+					.name {			
+						float: left;	
+						width: 100%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+						margin-bottom: 0px;
+					}
+					.tel {
+						float: left;
+						color: #e67e22;
+						width: 10%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.tel-data {
+						float: left;
+						width: 90%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.id {
+						float: left;
+						color: #16a085;
+						width: 10%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.id-data {
+						float: left;
+						width: 90%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
 				}
 			}
 		}
-		.resultUserBill{
-			margin-bottom: 5px;
-			cursor:pointer;
-			background-color: @body-bg;
-			height: 88px;
-			border: 1px solid #dcdcdc;
-			/*border-left: 1px solid #dcdcdc;*/
-			&:hover, &:focus {	
-				border: 1px solid #f1c40f;
-			}
 
-			&:first-child {
-				-webkit-border-top-left-radius: @border-radius-small;
-				-moz-border-top-left-radius: @border-radius-small;
-				border-top-left-radius: @border-radius-small;
-			}/*
-			&:last-child {
-				border-bottom: 1px solid #dcdcdc;
-			}*/
-			.icon {
-				float: left;
-				width: 44px;
-				height: 100%;
-				img {
-					margin-left: 15%;
-					margin-right: 5%;
-					margin-top: 50%%;
-					width: 85%;
+		.resultUserBill {
+			.resultUser;
+			height: 108px;
+			.wrap {
+				.icon {
+					float: left;
+					width: 84px;
+					height: 100%;
+					img {
+						margin-top: 30px;
+						width: 44px;
+					}
 				}
-			}
-			span {
-				float: left;
-			    padding: 0px 0 0 0px;
-			}
-			.text {			
-				/*widows: 85%;*/
-				float: left;
-				line-height: 13px;
-				margin-left: 13px;
-				padding: 14px 0px 0px 0px;
-				color: #34495e;
-				.name {									
-					margin-right: 8px;
-				}
-				.tel {
-					color: #e67e22;
-				}
-				.tel-data {
-					margin-right: 8px;
-				}
-				.id {
-					color: #16a085;
-				}
-				.id-data {
-					margin-right: 8px;
+				.text {
+					position: relative;
+					float: left;
+					height: 100%;
+					width: 80%;
+					color: #34495e;
+
+					.name {			
+						float: left;	
+						width: 100%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+						margin-bottom: 0px;
+					}
+					.tel {
+						float: left;
+						color: #e67e22;
+						width: 10%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.tel-data {
+						float: left;
+						width: 90%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.id {
+						float: left;
+						color: #16a085;
+						width: 10%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.id-data {
+						float: left;
+						width: 90%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.code {
+						float: left;
+						color: #16a085;
+						width: 10%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.code-data {
+						float: left;
+						width: 90%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.product {
+						float: left;
+						color: #16a085;
+						width: 10%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
+					.product-data {
+						float: left;
+						width: 90%;
+						position: relative;
+						height: 20px;
+						line-height: 20px;
+					}
 				}
 			}
 		}
@@ -631,161 +686,91 @@ header {
 	  .wrapper {
 	  	.separate {
 	  	  #logo {
-  		    	.logo {
-  		    		display: inline;
-  		    	}
-  		    	.logo-2 {
-  		    		display: none;
-  		    	}
+  		   	.logo {
+  		   		display: inline;
+  		   	}
+  		   	.logo-2 {
+  		   		display: none;
+  		   	}
 		  }
 	  	}
 	  }
 	}
 
 	.box-save-bill {
-		margin-top: 20px;
-		.title {
-			font: 24px/18px 'thaisans_semibold';
-			color: #555;
-			height: 41px;
-			padding: 12px 0px 3px 15px;
-			margin-bottom: 18px;
-			border-bottom: solid 2px #ddd;
-			box-sizing: border-box;
-
-			.sub-title-left {
-				float: left;
-			}
-
-			.sub-title-right {
-				position: absolute; 
-				right: 30px; 
-				color: #1abc9c;
-			}
-
-			.plus-user {
-				position: relative;
-				margin-top: -30px;
-				width: 35px;
-				height: 35px;
-				img {
-					widows: 100%;
-					height: 100%;
-				}
-			}
-		}
 		.box-bill {
 			.resultUser {
-				.icon {
-					float: left;
-					margin-left: 5%;
-				}
-				.text {
-					position: relative;
-					float: left;				
-					margin-left: 5px;
-					color: #34495e;
-					width: 75%;
-					padding: 0px 0px 0px 0px;
-					.name {	
-						width: 100%;			
+				.wrap {
+					width: 300px;
+					margin-left: 0px;
+					.icon{
+						width: 44px;
+						margin-left: 5%;
 					}
-					.tel {
-						color: #e67e22;
-						width: 10%;
-					}
-					.tel-data {
-						margin-left: 10px; 
-						width: 80%;
-					}
-					.id {
-						color: #16a085;
-						width: 10%;
-					}
-					.id-data {
-						margin-left: 10px; 
-						width: 80%;
+					.text{
+						width: 70%;
+						margin-left: 5px;
+						.tel {
+							width: 15%;
+						}
+						.tel-data {
+							width: 85%;
+						}
+						.id {
+							width: 15%;
+						}
+						.id-data {
+							width: 85%;
+						}
 					}
 				}
 			}
-		}		
-	}
-	.box-bill {
-		.resultUserBill{
-			margin-bottom: 5px;
-			cursor:pointer;
-			background-color: @body-bg;
-			height: 88px;
-			border: 1px solid #dcdcdc;
-			/*border-left: 1px solid #dcdcdc;*/
-			&:hover, &:focus {	
-				border: 1px solid #f1c40f;
-			}
-				&:first-child {
-				-webkit-border-top-left-radius: @border-radius-small;
-				-moz-border-top-left-radius: @border-radius-small;
-				border-top-left-radius: @border-radius-small;
-			}/*
-			&:last-child {
-				border-bottom: 1px solid #dcdcdc;
-			}*/
-			.icon {
-				float: left;
-				width: 44px;
-				height: 100%;
-				img {
-					margin-left: 15%;
-					margin-right: 5%;
-					margin-top: 50%%;
-					width: 85%;
-				}
-			}
-			span {
-				float: left;
-			    padding: 0px;
-			}
-			.text {
-				position: relative;
-				float: left;				
-				margin-left: 5px;
-				color: #34495e;
-				width: 77%;
-				height: 100%;
-				padding: 0px 0px 0px 0px;
-				.name {	
-					width: 100%;		
-				}
-				.tel {
-					color: #e67e22;
-					width: 15%;
-				}
-				.tel-data {
-					width: 80%;
-				}
-				.id {
-					color: #16a085;
-					width: 15%;
-				}
-				.id-data {
-					width: 80%;
-				}
-				.code {
-					color: #1196d1;
-					width: 15%;
-				}
-				.code-data { 
-					width: 80%;
-				}
-				.product {
-					color: #8e44ad;
-					width: 20%;
-				}
-				.product-data {
-					width: 75%;
+			.resultUserBill{
+				.resultUser;
+				.wrap {
+					width: 300px;
+					margin-left: 0px;
+					.icon{
+						width: 44px;
+						margin-left: 5%;
+					}
+					.text{
+						width: 70%;
+						margin-left: 5px;
+						.tel {
+							width: 15%;
+						}
+						.tel-data {
+							width: 85%;
+						}
+						.id {
+							width: 15%;
+						}
+						.id-data {
+							width: 85%;
+						}
+						.code {
+							color: #1196d1;
+							width: 10%;
+						}
+						.code-data { 
+							width: 80%;
+							margin-left: 10px; 
+						}
+						.product {
+							color: #8e44ad;
+							width: 10%;
+						}
+						.product-data {
+							width: 75%;
+							margin-left: 20px; 
+						}
+					}
 				}
 			}
 		}
 	}
+
 	.box-super-admin {
 		.box-save-bill;
 	}
@@ -821,33 +806,21 @@ header {
 	  }
 	}
 
-	.box-bill {
-		.resultUser {
-			.icon {
-				float: left;
-				margin-left: 5%
+	.box-save-bill {
+		.box-bill {
+			.resultUser {
+				.wrap {
+					width: 100%;
+				}
 			}
-			.text {
-				position: relative;
-				float: left;				
-				margin-left: 5px;
-				color: #34495e;
-				width: 75%;
-				padding: 0px 0px 0px 0px;
-			}
-		}
-		.resultUserBill{
-			.resultUser;
-			height: 66px;
-			.icon{
-				img{
-					margin-top: 25%;
-					margin-left: 15%;
-					width: 85%;
+			.resultUserBill {
+				.wrap {
+					width: 100%;
 				}
 			}
 		}
 	}
+
 	.box-super-admin {
 		.box-save-bill;
 	}
@@ -875,34 +848,6 @@ header {
 		  }
 	  	}
 	  }
-	}
-
-	.box-bill {
-		.resultUser {
-			.icon {
-				float: left;
-				margin-left: 5%
-			}
-			.text {
-				position: relative;
-				float: left;				
-				margin-left: 5px;
-				color: #34495e;
-				width: 75%;
-				padding: 0px 0px 0px 0px;
-			}
-		}
-		.resultUserBill{
-			.resultUser;
-			height: 66px;
-			.icon{
-				img{
-					margin-top: 25%;
-					margin-left: 15%;
-					width: 85%;
-				}
-			}
-		}
 	}
 
 	.box-super-admin {

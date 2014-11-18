@@ -177,15 +177,17 @@
 							</div>
 
 							<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
-								<div class="resultUser"style="background-color: white;">
-									<div class="icon">
-										<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
-										<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
-									</div>
-									<div class="text">
-										<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
-										<span class="tel">TEL.</span><span class="tel-data">{{data.customers_tel}}</span>
-										<span class="id">ID.</span><span class="id-data">{{data.customers_id_card}}</span>																	
+								<div class="resultUser">
+									<div class="wrap">
+										<div class="icon">
+											<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+											<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+										</div>
+										<div class="text">
+											<div class="name">{{data.customers_name + ' ' + data.customers_last_name}}</div>
+											<div class="tel">TEL.</div><div class="tel-data">{{data.customers_tel}}</div>
+											<div class="id">ID.</div><div class="id-data">{{data.customers_id_card}}</div>																	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -336,7 +338,7 @@
 					</div>
 				</div>
 
-				<div class="box-amount-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==2">
+				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==2">
 					<div class="title">จ่ายค่างวด</div>	
 					<div class="box-bill">
 						<div class="form-horizontal">
@@ -348,18 +350,20 @@
 							</div>
 							<div ng-repeat="(key, data) in DataBill" ng-click="">
 								<div class="resultUserBill">
-									<div class="icon">
-										<img src="img/icon-44.png">
-										<!-- <img src="img/icon-44.png"> -->
-										<!-- <img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> -->
-										<!-- <img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> -->
-									</div>
-									<div class="text">
-										<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
-										<span class="tel">TEL.</span><span class="tel-data">{{data.customers_tel}}</span>
-										<span class="id">ID.</span><span class="id-data">{{data.customers_id_card}}</span>	
-										<span class="code" style="color: #1196d1;">BID.</span><span class="id-data">{{data.bill_code}}</span>	
-										<span class="product" style="color: #8e44ad;">สินค้า.</span><span class="product-data">{{data.product.product_name | limitTo:20}}</span>																										
+									<div class="wrap">
+										<div class="icon">
+											<img src="img/icon-44.png">
+											<!-- <img src="img/icon-44.png"> -->
+											<!-- <img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> -->
+											<!-- <img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> -->
+										</div>
+										<div class="text">
+											<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
+											<span class="tel">TEL:</span><span class="tel-data">{{data.customers_tel}}</span>
+											<span class="id">ID:</span><span class="id-data">{{data.customers_id_card}}</span>	
+											<span class="code" style="color: #1196d1;">BILL:</span><span class="code-data">{{data.bill_code}}</span>	
+											<span class="product" style="color: #8e44ad;">สินค้า:</span><span class="product-data">{{data.product.product_name | limitTo:20}}</span>																										
+										</div>
 									</div>
 								</div>
 							</div>
@@ -394,15 +398,19 @@
 					</div>		
 					<div class="box-bill" >
 						<div class="form-horizontal">
-							<div ng-hide="adminToggle" ng-repeat="admin in admins" class="resultUser" ng-click="editAdmin($index)">
-								<div class="icon">
-									<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
-									<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
-								</div>
-								<div class="text">
-									<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
-									<span class="tel">TEL.</span><span class="tel-data">{{admin.admin_tel}}</span>
-									<span class="id">ID.</span><span class="id-data">{{admin.admin_id}}</span>																	
+							<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
+								<div class="resultUser">
+									<div class="wrap">
+										<div class="icon">
+											<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
+											<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
+										</div>
+										<div class="text">
+											<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
+											<span class="tel">TEL.</span><span class="tel-data">{{admin.admin_tel}}</span>
+											<span class="id">ID.</span><span class="id-data">{{admin.admin_id}}</span>																	
+										</div>
+									</div>
 								</div>
 							</div>
 							<div ng-show="adminToggle">
