@@ -176,22 +176,23 @@
 								</div>
 							</div>
 
-							<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
-								<div class="resultUser">
-									<div class="wrap">
-										<div class="icon">
-											<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
-											<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
-										</div>
-										<div class="text">
-											<div class="name">{{data.customers_name + ' ' + data.customers_last_name}}</div>
-											<div class="tel">TEL.</div><div class="tel-data">{{data.customers_tel}}</div>
-											<div class="id">ID.</div><div class="id-data">{{data.customers_id_card}}</div>																	
+							<div class="conResult">
+								<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
+									<div class="resultUser">
+										<div class="wrap">
+											<div class="icon">
+												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+											</div>
+											<div class="text">
+												<div class="name">{{data.customers_name + ' ' + data.customers_last_name}}</div>
+												<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
+												<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-
 							<div ng-hide="DataCustomer_search_toggle">
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
@@ -200,21 +201,25 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
+									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
 								    <div class="col-sm-4 col-md-4">
 								    	<input type="text" ng-model="customersName" class="form-control" ng-class="customersError[1]">
 									</div>
-									<label class="col-sm-1 col-md-1 control-label">สกุล</label>
-								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="customersLastName" class="form-control" ng-class="customersError[2]">
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
 								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
 									</div>
-									<label class="col-sm-1 col-md-1 control-label">เพศ</label>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+								    <div class="col-sm-10 col-md-10">
+								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[4]"></textarea>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">
 										<select class="form-control" ng-model="customersSex">
 								          	<option value="male">ชาย</option>
@@ -222,12 +227,7 @@
 								        </select>
 							        </div>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
-								    <div class="col-sm-9 col-md-9">
-								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[4]"></textarea>
-									</div>
-								</div>
+
 								<div class="row">
 									<div class="col-xs-2 col-xs-offset-5 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
 										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers()">เพิ่ม</button>
@@ -348,21 +348,23 @@
 								  <span class="input-group-addon CURSOR" ng-click="searchBillForPay()"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
-							<div ng-repeat="(key, data) in DataBill" ng-click="">
-								<div class="resultUserBill">
-									<div class="wrap">
-										<div class="icon">
-											<img src="img/icon-44.png">
-											<!-- <img src="img/icon-44.png"> -->
-											<!-- <img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> -->
-											<!-- <img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> -->
-										</div>
-										<div class="text">
-											<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
-											<span class="tel">TEL:</span><span class="tel-data">{{data.customers_tel}}</span>
-											<span class="id">ID:</span><span class="id-data">{{data.customers_id_card}}</span>	
-											<span class="code" style="color: #1196d1;">BILL:</span><span class="code-data">{{data.bill_code}}</span>	
-											<span class="product" style="color: #8e44ad;">สินค้า:</span><span class="product-data">{{data.product.product_name | limitTo:20}}</span>																										
+							<div  class="conResult">
+								<div ng-repeat="(key, data) in DataBill" ng-click="">
+									<div class="resultUserBill">
+										<div class="wrap">
+											<div class="icon">
+												<img src="img/icon-44.png">
+												<!-- <img src="img/icon-44.png"> -->
+												<!-- <img src="img/icon-44.png" ng-show="data.customers_sex == 'male'"> -->
+												<!-- <img src="img/icon-user.png" ng-show="data.customers_sex == 'female'"> -->
+											</div>
+											<div class="text">
+												<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
+												<span class="tel">เบอร์โทร</span><span class="tel-data">{{data.customers_tel}}</span>
+												<span class="tel" style="color: #45B39C;">รหัสบัตร</span><span class="tel-data">{{data.customers_id_card}}</span>	
+												<span class="tel" style="color: #1196d1;">รหัสบิล</span><span class="tel-data">{{data.bill_code}}</span>	
+												<span class="tel" style="color: #8e44ad;">สินค้า:</span><span class="tel-data">{{data.product.product_name | limitTo:20}}</span>																										
+											</div>
 										</div>
 									</div>
 								</div>
@@ -371,17 +373,17 @@
 					</div>
 				</div>
 
-				<div class="box-pays-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
+				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
 					<div class="title">ประวัติบิล</div>	
 					<div class="box-bill"></div>
 				</div>
 
-				<div class="box-pays-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==4">
+				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==4">
 					<div class="title">ข้อมูลลูกค้า</div>	
 					<div class="box-bill"></div>
 				</div>
 
-				<div class="box-super-admin col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==5">
+				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==5">
 					<div class="title">
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToAdmin()">
 							ข้อมูลผู้ขาย
@@ -398,17 +400,19 @@
 					</div>		
 					<div class="box-bill" >
 						<div class="form-horizontal">
-							<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
-								<div class="resultUser">
-									<div class="wrap">
-										<div class="icon">
-											<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
-											<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
-										</div>
-										<div class="text">
-											<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
-											<span class="tel">TEL.</span><span class="tel-data">{{admin.admin_tel}}</span>
-											<span class="id">ID.</span><span class="id-data">{{admin.admin_id}}</span>																	
+							<div  class="conResult">
+								<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
+									<div class="resultUser">
+										<div class="wrap">
+											<div class="icon">
+												<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
+												<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
+											</div>
+											<div class="text">
+												<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
+												<span class="tel" style="color: #45B39C;">เบอร์โทร</span><span class="tel-data">{{admin.admin_tel}}</span>
+												<span class="tel">รหัสบัตร</span><span class="tel-data">{{admin.admin_id}}</span>																	
+											</div>
 										</div>
 									</div>
 								</div>
@@ -432,20 +436,22 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-md-2 control-label">ชื่อ</label>
+									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
 								    <div class="col-sm-4 col-md-4">
 								    	<input type="text" ng-model="adminName" class="form-control">
 									</div>
-									<label class="col-sm-2 col-md-2 control-label">สกุล</label>
-								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="adminLastName" class="form-control">
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
 								    	<input type="text" ng-model="adminTel" class="form-control" numbers-only="numbers-only" ng-model="tel" maxlength="10">
 									</div>
+								</div>								
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+								    <div class="col-sm-10 col-md-10">
+								    	<textarea class="form-control" ng-model="adminAddress" rows="3"></textarea>
+									</div>
+								</div>
+								<div class="form-group">									
 									<label class="col-sm-2 col-md-2 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">
 										<select class="form-control" ng-model="adminSex">
@@ -454,18 +460,12 @@
 								        </select>
 							        </div>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
-								    <div class="col-sm-10 col-md-10">
-								    	<textarea class="form-control" ng-model="adminAddress" rows="3"></textarea>
-									</div>
-								</div>
 
 								<div class="row"> <!-- col-xs-col-6 col-sm-offset-9 col-sm-col-2 -->
-									<div style="float: right;">
+									<div class="col-xs-4 col-xs-offset-4 col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
 										<button type="button" class="btn btn-danger " ng-click="removeAdmin()" ng-hide="editFlug">ลบ</button>
 										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>
-										<button type="button" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิ่ม</button>
+										<button type="button" style="margin-left: 53px;" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิ่ม</button>
 									</div>
 								</div>		
 							</div>

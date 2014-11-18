@@ -447,177 +447,137 @@ header {
 		height: auto;
 		font-family: 'thaisans_semibold';
 		font-size:20px;
-
 		input, button, select, textarea {
 			font-size:20px;
 		}
-		.resultUser {
-			background-color: white; 
-			width: 80%; 
-			margin-left: 10%;
-			cursor:pointer;
-			height: 66px;
-			border: 1px solid #dcdcdc;
-			margin-bottom: 3px;
-			&:hover, &:focus {
-				border: 1px solid #f1c40f;
-			}
-
-			&:first-child {
-				-webkit-border-top-left-radius: @border-radius-small;
-				-moz-border-top-left-radius: @border-radius-small;
-				border-top-left-radius: @border-radius-small;
-			}
-
-			.wrap {
-				margin-left: 15%;
-				height: 100%;
-				width: 80%;
-				.icon {
-					float: left;
-					width: 84px;
-					height: 100%;
-					img {
-						margin-top: 10px;
-						width: 44px;
-					}
+		
+		.conResult {
+			margin-left: 13%;
+			.resultUser {
+				float: left;
+				background-color: white; 
+				width: 296px;
+				cursor:pointer;
+				border: 1px solid #dcdcdc;
+				margin-bottom: 3px;
+				height: 66px;
+				&:hover, &:focus {
+					border: 1px solid #f1c40f;
 				}
-				.text {
-					position: relative;
-					float: left;
-					height: 100%;
-					width: 80%;
-					color: #34495e;
 
-					.name {			
-						float: left;	
-						width: 100%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-						margin-bottom: 0px;
-					}
-					.tel {
+				&:first-child {
+					-webkit-border-top-left-radius: @border-radius-small;
+					-moz-border-top-left-radius: @border-radius-small;
+					border-top-left-radius: @border-radius-small;
+				}
+				.wrap {
+					.icon {
 						float: left;
-						color: #e67e22;
-						width: 10%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
+						width: 44px;
+						height: 100%;
+						margin-left: 7.5px;
+						margin-right: 7.5px;
+						img {
+							margin-top: 12px;
+							width: 44px;
+						}
 					}
-					.tel-data {
-						float: left;
-						width: 90%;
+					.text {
 						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.id {
 						float: left;
-						color: #16a085;
-						width: 10%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.id-data {
-						float: left;
-						width: 90%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
+						height: 100%;
+						width: 210px;
+						color: #34495e;
+
+						.name {			
+							float: left;	
+							width: 100%;
+							position: relative;
+							height: 20px;
+							line-height: 20px;
+							margin-bottom: 0px;
+						}
+						.tel {
+							float: left;
+							color: #e67e22;
+							width: 65px;
+							position: relative;
+							height: 20px;
+							line-height: 20px;
+						}
+						.tel-data {
+							float: left;
+							width: 145px;
+							position: relative;
+							height: 20px;
+							line-height: 20px;
+						}
 					}
 				}
 			}
 		}
 
-		.resultUserBill {
-			.resultUser;
-			height: 108px;
-			.wrap {
-				.icon {
-					float: left;
-					width: 84px;
-					height: 100%;
-					img {
-						margin-top: 30px;
-						width: 44px;
-					}
+		.conResult {
+			margin-left: 13%;
+			.resultUserBill {
+				float: left;
+				background-color: white; 
+				width: 296px;
+				cursor:pointer;
+				border: 1px solid #dcdcdc;
+				margin-bottom: 3px;
+				&:hover, &:focus {
+					border: 1px solid #f1c40f;
 				}
-				.text {
-					position: relative;
-					float: left;
-					height: 100%;
-					width: 80%;
-					color: #34495e;
 
-					.name {			
-						float: left;	
-						width: 100%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-						margin-bottom: 0px;
-					}
-					.tel {
+				&:first-child {
+					-webkit-border-top-left-radius: @border-radius-small;
+					-moz-border-top-left-radius: @border-radius-small;
+					border-top-left-radius: @border-radius-small;
+				}
+				height: 108px;
+				.wrap {
+					.icon {
 						float: left;
-						color: #e67e22;
-						width: 10%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
+						width: 44px;
+						height: 100%;
+						margin-left: 15px;
+						margin-right: 15px;
+						img {
+							margin-top: 30px;
+							width: 44px;
+						}
 					}
-					.tel-data {
-						float: left;
-						width: 90%;
+					.text {
 						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.id {
 						float: left;
-						color: #16a085;
-						width: 10%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.id-data {
-						float: left;
-						width: 90%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.code {
-						float: left;
-						color: #16a085;
-						width: 10%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.code-data {
-						float: left;
-						width: 90%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.product {
-						float: left;
-						color: #16a085;
-						width: 10%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
-					}
-					.product-data {
-						float: left;
-						width: 90%;
-						position: relative;
-						height: 20px;
-						line-height: 20px;
+						height: 100%;
+						width: 210px;
+						color: #34495e;
+
+						.name {			
+							float: left;	
+							width: 100%;
+							position: relative;
+							height: 20px;
+							line-height: 20px;
+							margin-bottom: 0px;
+						}
+						.tel {
+							float: left;
+							color: #e67e22;
+							width: 65px;
+							position: relative;
+							height: 20px;
+							line-height: 20px;
+						}
+						.tel-data {
+							float: left;
+							width: 145px;
+							position: relative;
+							height: 20px;
+							line-height: 20px;
+						}
 					}
 				}
 			}
@@ -649,7 +609,24 @@ header {
 /* Extra Small devices (phones, less than 768px) */
 @screen-xs-max: 767px;
 @media (max-width: @screen-xs-max) {
+	@media (min-width: 568px) and (max-width: 600px) {
+		.box-save-bill {
+			.box-bill {
+				.conResult {
+					margin-left: 22%;
+				}
+			}
+		}
+	}
 
+	.box-save-bill {
+		.box-bill {
+			.conResult {
+				margin-left: -15px;
+			}
+		}
+	}
+	
 	header { 
 	  .wrapper {
 	  	.separate {
@@ -699,75 +676,7 @@ header {
 
 	.box-save-bill {
 		.box-bill {
-			.resultUser {
-				.wrap {
-					width: 300px;
-					margin-left: 0px;
-					.icon{
-						width: 44px;
-						margin-left: 5%;
-					}
-					.text{
-						width: 70%;
-						margin-left: 5px;
-						.tel {
-							width: 15%;
-						}
-						.tel-data {
-							width: 85%;
-						}
-						.id {
-							width: 15%;
-						}
-						.id-data {
-							width: 85%;
-						}
-					}
-				}
-			}
-			.resultUserBill{
-				.resultUser;
-				.wrap {
-					width: 300px;
-					margin-left: 0px;
-					.icon{
-						width: 44px;
-						margin-left: 5%;
-					}
-					.text{
-						width: 70%;
-						margin-left: 5px;
-						.tel {
-							width: 15%;
-						}
-						.tel-data {
-							width: 85%;
-						}
-						.id {
-							width: 15%;
-						}
-						.id-data {
-							width: 85%;
-						}
-						.code {
-							color: #1196d1;
-							width: 10%;
-						}
-						.code-data { 
-							width: 80%;
-							margin-left: 10px; 
-						}
-						.product {
-							color: #8e44ad;
-							width: 10%;
-						}
-						.product-data {
-							width: 75%;
-							margin-left: 20px; 
-						}
-					}
-				}
-			}
+			margin-left: 0px;
 		}
 	}
 
@@ -808,15 +717,8 @@ header {
 
 	.box-save-bill {
 		.box-bill {
-			.resultUser {
-				.wrap {
-					width: 100%;
-				}
-			}
-			.resultUserBill {
-				.wrap {
-					width: 100%;
-				}
+			.conResult {
+				margin-left: 5%;
 			}
 		}
 	}
@@ -850,6 +752,14 @@ header {
 	  }
 	}
 
+	.box-save-bill {
+		.box-bill {
+			.conResult {
+				margin-left: 5%;
+			}
+		}
+	}
+
 	.box-super-admin {
 		.box-save-bill;
 	}
@@ -876,5 +786,13 @@ header {
 		  }
 	  	}
 	  }
+	}
+
+	.box-save-bill {
+		.box-bill {
+			.conResult {
+				margin-left: 13%;
+			}
+		}
 	}
 }

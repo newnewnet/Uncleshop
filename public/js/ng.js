@@ -11,6 +11,7 @@ angular.module('uncleshopApp')
 		if(number == 1){
 			$scope.addProduct_toggle = true;
 			$scope.DataCustomer_toggle = false;
+			$scope.menu_slide = false;
 			//$scope.focusItem('search_focus');
 		}
 		else if(number == 2){
