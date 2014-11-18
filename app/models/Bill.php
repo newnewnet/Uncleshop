@@ -161,7 +161,7 @@
 								->orWhere('customers.customers_tel', 'LIKE', "%".$key."%")
 								->orWhere('bill.bill_code', 'LIKE', "%".$key."%")
 								->where('bill.bill_status', '=', 0)
-								->select('bill.bill_code','customers.customers_name','customers.customers_tel','customers.customers_id_card')
+								->select('bill.bill_code','customers.customers_name','customers.customers_tel','customers.customers_id_card','customers.customers_sex')
 								->get();
 
 				for($i=0;$i<count($result);$i++)
