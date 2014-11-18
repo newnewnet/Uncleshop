@@ -158,7 +158,7 @@
 				$result = $customers->join('bill', 'customers.customers_id_card', '=', 'bill.customers_id_card')			
 								->orWhere('customers.customers_id_card', 'LIKE', "%".$key."%")
 								->orWhere('customers.customers_name', 'LIKE', "%".$key."%")
-								->orWhere('customers.customers_last_name', 'LIKE', "%".$key."%")
+								// ->orWhere('customers.customers_last_name', 'LIKE', "%".$key."%")
 								->orWhere('customers.customers_tel', 'LIKE', "%".$key."%")
 								->orWhere('bill.bill_code', 'LIKE', "%".$key."%")
 								->where('bill.bill_status', '=', 0)
