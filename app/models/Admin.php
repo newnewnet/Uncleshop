@@ -17,7 +17,7 @@
 			$this->insert([
 					'admin_id_card' => $array['admin_id_card'],
 					'admin_name' => $array['admin_name'],
-					'admin_last_name' => $array['admin_last_name'],
+					// 'admin_last_name' => $array['admin_last_name'],
 					'admin_user' => $array['admin_user'],
 					'admin_password' =>$array['admin_password'],
 					'admin_sex' =>$array['admin_sex'],
@@ -72,7 +72,7 @@
 											->update(array(
 												'admin_id_card' => $array['admin_id_card'],
 												'admin_name' => $array['admin_name'],
-												'admin_last_name' => $array['admin_last_name'],
+												// 'admin_last_name' => $array['admin_last_name'],
 												'admin_user' => $array['admin_user'],
 												'admin_password' =>$array['admin_password'],
 												'admin_sex' =>$array['admin_sex'],
