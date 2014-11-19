@@ -341,15 +341,15 @@
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==2">
 					<div class="title">จ่ายค่างวด</div>	
 					<div class="box-bill">
-						<div class="form-horizontal">
+						<div class="form-horizontal" ng-show="findPayBill_toggle">
 							<div class="form-group">						
 							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
 								  <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-keyup="searchBillForPay()" style="font-size: 20px;">
 								  <span class="input-group-addon CURSOR" ng-click="searchBillForPay()"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
-							<div  class="conResult">
-								<div ng-repeat="(key, data) in DataBill" ng-click="">
+							<div class="conResult">
+								<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
 									<div class="resultUserBill">
 										<div class="wrap">
 											<div class="icon">
@@ -367,6 +367,10 @@
 									</div>
 								</div>
 							</div>
+						</div>
+
+						<div class="form-horizontal" ng-hide="findPayBill_toggle">
+							Pay Bill
 						</div>
 					</div>
 				</div>

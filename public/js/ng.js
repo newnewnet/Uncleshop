@@ -16,6 +16,7 @@ angular.module('uncleshopApp')
 		}
 		else if(number == 2){
 			$rootScope.searchBill.data = null;
+			$scope.findPayBill_toggle = true;
 		}
 		else if(number == 5){
 			$scope.adminToggle = false;
@@ -54,6 +55,16 @@ angular.module('uncleshopApp')
 		$scope.DataCustomersOfBill = $scope.DataCustomers[index];
 		$scope.DataCustomer_toggle = false;
 		$scope.addProduct_toggle = true;
+	};
+
+	$scope.payBill = function(index) {
+		var data = {
+			'bill_code': $scope.DataBill[index].bill_code
+		};
+		manageBill.getBill(data,function(data, status, headers, config){
+			console.log(data);
+		});
+		$scope.findPayBill_toggle = false;
 	};
 
 	$scope.calBill = function(value) {
@@ -221,19 +232,19 @@ angular.module('uncleshopApp')
 
 	$scope.checkCustomersIdCard = function() {
 		setTimeout(function()
+		{
+			var data = {
+				'customers_id_card' : $scope.customersIdCard
+			};
+			manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
 			{
-				var data = {
-					'customers_id_card' : $scope.customersIdCard
-				};
-				manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
-				{
-					if(data == 'customers-same'){
-						$scope.customersError[0] = 'input-error';
-					}
-					else 
-						$scope.customersError[0] = '';
-				});
-			}, 500);
+				if(data == 'customers-same'){
+					$scope.customersError[0] = 'input-error';
+				}
+				else 
+					$scope.customersError[0] = '';
+			});
+		}, 500);
 	};
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
@@ -363,7 +374,6 @@ angular.module('uncleshopApp')
 					}
 				});
 			}
-
 		}
 		else
 		{
