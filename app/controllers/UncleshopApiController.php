@@ -109,8 +109,9 @@
 		public function searchBill()
 		{
 			$key = Input::get('key');
+			$status = Input::get('status');
 			$bill= new Bill;
-			$result = $bill->searchBill($key);
+			$result = $bill->searchBill($key,$status);
 			return $result;
 		}
 		public function updateBillDetail()

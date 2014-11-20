@@ -148,33 +148,91 @@
 		}
 
 
-		public function searchBill($key)
+		public function searchBill($key,$status)
 		{
 			$result = '';
+
 			if($key != '')
 			{
 				$customers =  new Customers;
 				$product = new Product;
-				$result = $customers->join('bill', 'customers.customers_id_card', '=', 'bill.customers_id_card')			
-								->orWhere('customers.customers_id_card', 'LIKE', "%".$key."%")
-								->orWhere('customers.customers_name', 'LIKE', "%".$key."%")
-								->orWhere('customers.customers_tel', 'LIKE', "%".$key."%")
-								->orWhere('bill.bill_code', 'LIKE', "%".$key."%")
-								->where('bill.bill_status', '=', 0)
-								->select('bill.bill_code','customers.customers_name','customers.customers_tel','customers.customers_id_card','customers.customers_sex')
-								->get();
-
-				for($i=0;$i<count($result);$i++)
+				
+				if($status == 0)
 				{
-					$productData = $product->where('bill_code','=',$result[$i]->bill_code)
-									->orderBy('product_price', 'desc')
-                  ->select('product_name','product_price','product_amount')
-                  ->first();
-          $result[$i]['product'] = $productData;
+					$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id_card=customers.customers_id_card WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
+					$index = 0;
+					$data = array();
+					for($i=0;$i<count($result);$i++)
+					{
+						if($result[$i]->bill_status == 1)
+						{
+							$data[$index] = $result[$i];
+							$index++;
+						}
 
+					}
+					if($data != "[]")
+					{
+						for($i=0;$i<count($data);$i++)
+						{
+							$productData = $product->where('bill_code','=',$data[$i]->bill_code)
+											->orderBy('product_price', 'desc')
+		                  ->select('product_name','product_price','product_amount')
+		                  ->first();
+
+	          	$data[$i]->product = $productData;
+
+						}
+					}
+					$result = $data;
 				}
+				else if ($status == 1) 
+				{
+					$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id_card=customers.customers_id_card WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
 
+					$index = 0;
+					$data = array();
+					for($i=0;$i<count($result);$i++)
+					{
+						if($result[$i]->bill_status == 0)
+						{
+							$data[$index] = $result[$i];
+							$index++;
+						}
+
+					}
+					if($data != "[]")
+					{
+						for($i=0;$i<count($data);$i++)
+						{
+							$productData = $product->where('bill_code','=',$data[$i]->bill_code)
+											->orderBy('product_price', 'desc')
+		                  ->select('product_name','product_price','product_amount')
+		                  ->first();
+
+	          	$data[$i]->product = $productData;
+
+						}
+					}
+					$result = $data;
+				}
+				else if ($status == 2) 
+				{
+					$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id_card=customers.customers_id_card WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
+
+					for($i=0;$i<count($result);$i++)
+					{
+						$productData = $product->where('bill_code','=',$result[$i]->bill_code)
+										->orderBy('product_price', 'desc')
+	                  ->select('product_name','product_price','product_amount')
+	                  ->first();
+
+	          $result[$i]->product = $productData;
+
+					}
+				}
 			}
+
 			return $result;
 		}
 
