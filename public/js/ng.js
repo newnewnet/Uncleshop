@@ -250,7 +250,8 @@ angular.module('uncleshopApp')
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
 	$scope.searchBillForPay = function() {
 		var data = {
-			'key': $rootScope.searchBill.data
+			'key': $rootScope.searchBill.data,
+			'status': 2
 		}
 		
 		manageBill.searchBill(data,function(data, status, headers, config)
