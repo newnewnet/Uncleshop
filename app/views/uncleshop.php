@@ -243,10 +243,8 @@
 								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_tel}}</label>
 							</div>
 							<div class="row" ng-show="DataCustomersOfBill != null">
-								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ชื่อ</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ชื่อ - สกุล</label>
 								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_name}}</label>
-								<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">สกุล</label>
-								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_last_name}}</label>
 							</div>
 							<div class="row" style="margin-bottom: 25px; border-bottom: 1px solid #1196d1; padding-bottom: 15px;" ng-show="DataCustomersOfBill != null">
 								<label class="col-xs-3 col-sm-2 control-label" style="color: #45B39C;">ที่อยู่</label>
@@ -376,7 +374,7 @@
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
-					<div class="title">ประวัติบิล</div>	
+					<div class="title">ประวัติบจ่ายค่างวด</div>	
 					<div class="box-bill"></div>
 				</div>
 
