@@ -134,7 +134,7 @@
 			var admin = data.admin;
 
 			////////////customers//////////////
-			var divCustomerName = "<label>ชือ-นามสกุล : </label><span >"+customers.customers_name+"</span>&nbsp;<span>"+customers.customers_last_name+"</span>";
+			var divCustomerName = "<label>ชือ-นามสกุล : </label><span >"+customers.customers_name+"</span>";
 	    $('#customerName').append(divCustomerName);
 	    $('#customerIdCard').append(customers.customers_id_card);
 	    $('#customerTel').append(customers.customers_tel);
