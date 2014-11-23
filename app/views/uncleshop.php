@@ -110,7 +110,7 @@
 				    		<span class="icon icon1" >
 				    			<img src="img/icon-11.png"/>
 				    		</span>
-				    		<div class="text">เพิ่มบิล</div>
+				    		<div class="text">บิล</div>
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill':tabColor==2}">
@@ -185,7 +185,7 @@
 												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
 											</div>
 											<div class="text">
-												<div class="name">{{data.customers_name + ' ' + data.customers_last_name}}</div>
+												<div class="name">{{data.customers_name}}</div>
 												<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
 												<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
 											</div>
@@ -236,20 +236,19 @@
 							</div>
 						</div>
 						<div class="form-horizontal" ng-show="addProduct_toggle">
-							<div class="row" ng-show="DataCustomersOfBill != null">
-								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">เลขบัตร</label>
-								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_id_card}}</label>
+							<div class="row" ng-show="DataCustomersOfBill != null" style="margin-bottom: 25px; background-color: white; border-radius: 3px; border-width: 1px; border-color: #1196d1; border-style: solid;">
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">เลขบัตร</label>
+								<label class="col-xs-8 col-sm-10 control-label" style="text-align: left;">{{DataCustomersOfBill.customers_id_card}}</label>
+
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #45B39C;">ชื่อ - สกุล</label>
+								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataCustomersOfBill.customers_name}}</label>								
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">เบอร์โทร</label>
-								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_tel}}</label>
-							</div>
-							<div class="row" ng-show="DataCustomersOfBill != null">
-								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ชื่อ - สกุล</label>
-								<label class="col-xs-5 col-sm-3 control-label TEXT-LEFT">{{DataCustomersOfBill.customers_name}}</label>
-							</div>
-							<div class="row" style="margin-bottom: 25px; border-bottom: 1px solid #1196d1; padding-bottom: 15px;" ng-show="DataCustomersOfBill != null">
-								<label class="col-xs-3 col-sm-2 control-label" style="color: #45B39C;">ที่อยู่</label>
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{DataCustomersOfBill.customers_tel}}</label>
+
+								<label class="col-xs-3 col-sm-2 control-label" style="color: #8e44ad;">ที่อยู่</label>
 								<label class="col-xs-9 col-sm-10 control-label" style="text-align: left;">{{DataCustomersOfBill.customers_address}}</label>
 							</div>
+
 							<div class="form-group" ng-repeat="product in productData">
 								<div class="row">
 									<label class="col-sm-2 col-md-2 control-label" >ชื่อสินค้า</label>
@@ -277,7 +276,7 @@
 							</div>
 							<div class="form-group" style="margin-top: 25px; padding-top: 10px;">
 								<div class="row">
-									<label class="col-sm-2 control-label">เงินดาว</label>
+									<label class="col-sm-2 control-label">เงินดาวน์</label>
 								    <div class="col-sm-3">
 								    	<input type="text" numbers-only="numbers-only" ng-model="priceDow" class="form-control TEXT-RIGHT" ng-keyup="calBill('priceDow')" ng-class="priceDowError">
 									</div>
@@ -300,17 +299,17 @@
 										<div class="row">
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #e05b49;">ราคาสินค้า</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct | number:0) + '    บาท'}}</label>
-											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1;">ดอกเบี้ย</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #e67e22;">ดอกเบี้ย</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.interestValue < 0 ? 0 : billData.interestValue | number:0) + '    บาท'}}</label>
 										</div>
 										<div class="row">
-											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1;">ราคารวม</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C;">ราคารวม</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceOfAllProduct < 0 ? 0 : billData.priceOfAllProduct+billData.interestValue | number:0) + '    บาท'}}</label>
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1;">เงินดาวน์</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceDow < 0 ? 0 : billData.priceDow | number:0) + '    บาท'}}</label>
 										</div>
 										<div class="row">
-											<label class="col-xs-5 col-sm-2 control-label" style="color: #1196d1; text-decoration: underline;">ราคาผ่อนส่ง</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceWithoutDow < 0 ? 0 : billData.priceWithoutDow | number:0) + '    บาท'}}</label>
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
 											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน" : "บาท/วิก")}}</label>
@@ -320,7 +319,7 @@
 												<button type="button" class="btn btn-success TEXT-CENTER" ng-click="createBill()">เพิ่ม</button>
 											</div>
 											<div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-0">
-												<button type="button" class="btn btn-danger TEXT-CENTER" ng-click="setBillDefault()">ลบ</button>
+												<button type="button" class="btn btn-warning TEXT-CENTER" ng-click="setBillDefault()">ล้าง</button>
 											</div>
 											<div ng-show="billCode!=null">
 												<form action="/send/print_uncleshop" method="post" target="_blank"  >
@@ -355,7 +354,7 @@
 												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
 											</div>
 											<div class="text">
-												<span class="name">{{data.customers_name + ' ' + data.customers_last_name}}</span>
+												<span class="name">{{data.customers_name}}</span>
 												<span class="tel">เบอร์โทร</span><span class="tel-data">{{data.customers_tel}}</span>
 												<span class="tel" style="color: #45B39C;">รหัสบัตร</span><span class="tel-data">{{data.customers_id_card}}</span>	
 												<span class="tel" style="color: #1196d1;">รหัสบิล</span><span class="tel-data">{{data.bill_code}}</span>	
@@ -367,8 +366,156 @@
 							</div>
 						</div>
 
-						<div class="form-horizontal" ng-hide="findPayBill_toggle">
-							Pay Bill
+						<div class="form-horizontal" ng-hide="findPayBill_toggle" ng-init="customersDes_toggle = false">
+							<div class="row" ng-hide="customersDes_toggle" style="background-color: white; border-radius: 3px; border-width: 1px; border-style: dashed; border-color: #e67e22;" ng-click="customersDes_toggle = true">
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
+								<label class="col-xs-8 col-sm-10 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
+
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
+								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">ลูกค้า</label>
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{DataPayBill.customer.customers_name}}</label>								
+							</div>
+								
+							<div class="row" ng-show="customersDes_toggle" ng-click="customersDes_toggle = false" style="background-color: white; border-radius: 3px; border-width: 2px; border-color: #e67e22; border-style: solid;">
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
+								<label class="col-xs-8 col-sm-10 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
+
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
+								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">เลขบัตร</label>
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{DataPayBill.customer.customers_id_card}}</label>
+
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #45B39C;">ชื่อ - สกุล</label>
+								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.customer.customers_name}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">เบอร์โทร</label>
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{DataPayBill.customer.customers_tel}}</label>
+
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #8e44ad;">ที่อยู่</label>
+								<label class="col-xs-8 col-sm-10 control-label" style="text-align: left;">{{DataPayBill.customer.customers_address}}</label>
+							</div>
+
+							<div class="col-xs-12" ng-init="productDes_toggle = false" ng-hide="productDes_toggle" ng-click="productDes_toggle = true">
+								<div class="form-group" style="margin-bottom: 0px;">
+									<div class="row" style="background-color: white; padding: 0px 0px 0px 15px; box-sizing: border-box; border: 1px dashed #45B39C; margin-top: 5px;">
+										<div class="row">
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #45B39C;">สินค้า</label>
+											<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.product.length + '    รายการ'}}</label>
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">ราคารวม</label>
+											<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{(DataPayBill.bill.bill_total_price-DataPayBill.bill.bill_interest)|number:0}} {{'    บาท'}}</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12" ng-show="productDes_toggle" ng-click="productDes_toggle = false">
+								<div class="form-group" style="margin-bottom: 0px;" ng-repeat="(key,product) in DataPayBill.product">
+									<div class="row" style="background-color: white; padding: 0px 0px 0px 15px; box-sizing: border-box; border: 2px solid #45B39C; margin-top: 5px;">
+										<div class="row">
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">สินค้า</label>
+											<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{product.product_name}}</label>
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #45B39C;">จำนวน</label>
+											<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{product.product_amount}}</label>
+										</div>
+										<div class="row">
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">ราคา</label>
+											<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{product.product_price|number:0}} {{'    บาท'}}</label>
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #8e44ad;">ราคารวม</label>
+											<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{(product.product_price * product.product_amount)|number:0}} {{'    บาท'}}</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12" ng-init="priceDes_toggle = false" ng-hide="priceDes_toggle" ng-click="priceDes_toggle = true">
+								<div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">								
+									<div class="row" style="padding: 0px 0px 0px 15px; background-color: white; border-radius: 3px; border-width: 1px; border-style: dashed; border-color: #1196d1; margin-bottom: 0px;">
+										<div class="row">
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
+											<label class="col-xs-7 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: left;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน" : "บาท/วิก")}}</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12" ng-show="priceDes_toggle" ng-click="priceDes_toggle = false">
+								<div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">								
+									<div class="row" style="padding: 0px 15px 0px 15px; background-color: white; border-radius: 3px; border-width: 2px; border-style: solid; border-color: #1196d1;">
+										<div class="row">
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ราคาสินค้า</label>
+											<label class="col-xs-8 col-sm-3 control-label" style="text-align: right;">{{DataPayBill.bill.bill_price|number:0}} {{'    บาท'}}</label>
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">ดอกเบี้ย</label>
+											<label class="col-xs-8 col-sm-5 control-label" style="text-align: right;">{{DataPayBill.bill.bill_interest|number:0}} {{'    บาท'}}</label>
+										</div>
+										<div class="row">
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #45B39C;">ราคารวม</label>
+											<label class="col-xs-8 col-sm-3 control-label" style="text-align: right;">{{DataPayBill.bill.bill_total_price|number:0}} {{'    บาท'}}</label>
+											<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">เงินดาวน์</label>
+											<label class="col-xs-8 col-sm-5 control-label" style="text-align: right;">{{DataPayBill.bill.bill_price_dow|number:0}} {{'    บาท'}}</label>
+										</div>
+										<div class="row">
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
+											<label class="col-xs-7 col-sm-3 control-label" style="text-align: right;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: right;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน" : "บาท/วิก")}}</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							
+							<div class="col-xs-12" ng-click="priceDes_toggle = false">
+								<div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">								
+									<div class="row check-pay">
+
+										<div style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 6px; float:left; height: 44px; background-color: #34495e; width: 190px;">
+												งวดวันที่ 10 มิถุนายน 2557
+											</div>
+											<div style="color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px;  padding-top: 6px; float:left; height: 44px; background-color: #1abc9c; width: 60px;">
+												จ่ายแล้ว
+											</div>
+										</div>
+
+										<div style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 6px; float:left; height: 44px; background-color: #34495e; width: 190px;">
+												งวดวันที่ 10 พฤศจิกายน 2557
+											</div>
+											<div style="color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px;  padding-top: 6px; float:left; height: 44px; background-color: #e74c3c; width: 60px;">
+												รอจ่าย
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						<!-- 	<div class="col-xs-12" style="background-color: blue;">
+								<div class="form-group">		
+									<div style="background-color: red; width: 290px; height: 44px;">
+										<div tyle="float:left; width: 228px; height: 42px;">
+											<span style="font-size: 20px;margin-top: 12px; margin-left: 5px;">{{'งวดประจำวันที่ 10 สิงหาคม 2557'}}</span>											
+										</div>
+
+										<div style="float:left; width: 60px; background-color: white; height: 42px; margin: 0px;">
+											<span style="font-size: 20px; margin-top: 12px; margin-left: 5px;">{{'จ่ายแล้ว'}}</span>
+										</div>
+									</div>
+								</div>		
+							</div> -->
+
+							<!-- <div ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; width: 290px; height: 44px; background-color: blue;">
+									<div tyle="float:left; width: 228px; height: 42px;">
+										<span style="font-size: 20px;margin-top: 12px; margin-left: 5px;">{{'งวดประจำวันที่ 10 สิงหาคม 2557'}}</span>											
+									</div>
+
+									<div style="float:left; width: 60px; background-color: white; height: 42px; margin: 0px;">
+										<span style="font-size: 20px; margin-top: 12px; margin-left: 5px;">{{'จ่ายแล้ว'}}</span>
+									</div>
+								</div>		 -->
+
 						</div>
 					</div>
 				</div>

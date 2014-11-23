@@ -1,6 +1,8 @@
 angular.module('uncleshopApp')
 .controller('uncleshopController', ['$scope','$rootScope','manageAdmin','manageCustomers','manageBill', function($scope,$rootScope,manageAdmin,manageCustomers,manageBill) 
 {
+
+	$scope.month = ['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','คุลาคม','พฤศจิกายน','ธันวาคม'];
 		
 	$scope.changTab = function(number)
 	{
@@ -11,7 +13,6 @@ angular.module('uncleshopApp')
 		if(number == 1){
 			$scope.addProduct_toggle = true;
 			$scope.DataCustomer_toggle = false;
-			$scope.menu_slide = false;
 			//$scope.focusItem('search_focus');
 		}
 		else if(number == 2){
@@ -63,6 +64,7 @@ angular.module('uncleshopApp')
 		};
 		manageBill.getBill(data,function(data, status, headers, config){
 			console.log(data);
+			$scope.DataPayBill = data;			
 		});
 		$scope.findPayBill_toggle = false;
 	};
@@ -508,6 +510,7 @@ angular.module('uncleshopApp')
 		$scope.productDefault();
 		$scope.billData = [];
 		$scope.DataCustomersOfBill = null;
+		$scope.priceDow = null;
 	}
 	$scope.productDefault = function()
 	{
