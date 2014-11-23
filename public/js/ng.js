@@ -134,7 +134,6 @@ angular.module('uncleshopApp')
 	{		
 		$scope.customersIdCard = '';
 		$scope.customersName = '';
-		$scope.customersLastName = '';
 		$scope.customersTel = '';
 		$scope.customersSex = 'male';
 		$scope.customersAddress = '';
@@ -157,13 +156,6 @@ angular.module('uncleshopApp')
 			$scope.customerSubmit = false;
 		}
 
-		if($scope.customersLastName != '')
-			$scope.customerSubmit = true;
-		else{
-			$scope.customersError[2] = 'input-error';
-			$scope.customerSubmit = false;
-		}
-
 		if($scope.customersTel != '' && $scope.customersTel.length == 10)
 			$scope.customerSubmit = true;
 		else{
@@ -182,7 +174,6 @@ angular.module('uncleshopApp')
 			data = {
 				'customers_id_card' : $scope.customersIdCard,
 				'customers_name' :  $scope.customersName,
-				'customers_last_name' : $scope.customersLastName,
 				'customers_address' :  $scope.customersAddress,
 				'customers_sex' : $scope.customersSex,
 				'customers_tel' : $scope.customersTel
@@ -266,12 +257,10 @@ angular.module('uncleshopApp')
 	/*----------------------------  super  admin---------------------------------*/
 	$scope.adminDefault = function()
 	{
-		$scope.adminLastName = '';
 		$scope.adminSex = 'male';
 		$scope.adminTel = '';
 		$scope.adminName = '';
 		$scope.adminAddress = '';
-		$scope.adminLastName = '';
 		$scope.userError = '';
 		$scope.adminIdCard = '';
 		$scope.adminUserName = '';
@@ -313,7 +302,6 @@ angular.module('uncleshopApp')
 				data = {
 					'admin_id_card' : $scope.adminIdCard,
 					'admin_name' :  $scope.adminName,
-					'admin_last_name' : $scope.adminLastName,
 					'admin_user' :  $scope.adminUserName,
 					'admin_password' : $scope.adminPassword,
 					'admin_sex' : $scope.adminSex,
@@ -326,7 +314,6 @@ angular.module('uncleshopApp')
 					'admin_id' : $scope.adminId,
 					'admin_id_card' : $scope.adminIdCard,
 					'admin_name' :  $scope.adminName,
-					'admin_last_name' : $scope.adminLastName,
 					'admin_user' :  $scope.adminUserName,
 					'admin_password' : $scope.adminPassword,
 					'admin_sex' : $scope.adminSex,
@@ -450,7 +437,6 @@ angular.module('uncleshopApp')
 		$scope.adminId = $scope.admins[index].admin_id;
 		$scope.adminIdCard = $scope.admins[index].admin_id_card;
 		$scope.adminName =  $scope.admins[index].admin_name;
-		$scope.adminLastName =  $scope.admins[index].admin_last_name;
 		$scope.adminUserName =  $scope.admins[index].admin_user;
 		$scope.adminPassword =  $scope.admins[index].admin_password;
 		$scope.adminSex = $scope.admins[index].admin_sex;
