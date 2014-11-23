@@ -179,6 +179,7 @@ angular.module('uncleshopApp')
 				'customers_tel' : $scope.customersTel
 			};
 			$scope.DataCustomersOfBill = data;
+			
 			manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
 				{
 					if(data == 'customers-same'){
@@ -190,7 +191,7 @@ angular.module('uncleshopApp')
 						});
 					}
 					else{
-						manageCustomers.addCustomers(data,function(data, status, headers, config) {
+						manageCustomers.addCustomers($scope.DataCustomersOfBill,function(data, status, headers, config) {
 							if(data != 'error'){
 								swal({
 									title: "เรียบร้อย !!",   
@@ -294,8 +295,9 @@ angular.module('uncleshopApp')
 
 	$scope.register = function(value)
 	{
+		// console.log("11111");
 		$scope.checkAdminPassword();
-		if($scope.adminIdCard.length == 13)
+		// if($scope.adminIdCard.length == 13)
 		if($scope.adminIdCard != '' && $scope.adminIdCard.length == 13 && $scope.adminUserName != '' && $scope.adminPassword !='')
 		{
 			if(value == 1){
@@ -715,7 +717,7 @@ angular.module('uncleshopApp')
 	return {
 		addCustomers:function(data,callback)
 		{
-			$http({method: 'GET', url: '/saveCustomers',params:data})
+			$http({method: 'POST', url: '/saveCustomers',params:data})
 		  .success(callback)
 		  .error(function(data, status, headers, config) {
 		  });
