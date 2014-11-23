@@ -164,10 +164,9 @@
 			{
 				$customers =  new Customers;
 				$product = new Product;
-				
+				$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id=customers.customers_id WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
 				if($status == 0)
 				{
-					$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id_card=customers.customers_id_card WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
 					$index = 0;
 					$data = array();
 					for($i=0;$i<count($result);$i++)
@@ -196,7 +195,6 @@
 				}
 				else if ($status == 1) 
 				{
-					$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id_card=customers.customers_id_card WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
 
 					$index = 0;
 					$data = array();
@@ -226,7 +224,6 @@
 				}
 				else if ($status == 2) 
 				{
-					$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id_card=customers.customers_id_card WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
 
 					for($i=0;$i<count($result);$i++)
 					{
