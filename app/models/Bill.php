@@ -10,6 +10,7 @@
 		{
 			$product = new Product;
 			$billDeatail = new BillDetail;
+			$customers = new Customers;
 		
 			$billCode = $this->randomBill();
 
@@ -27,6 +28,8 @@
 			$endDate = time() + ($day1 * 24 * 60 * 60);
 			$endDate  = date('Y-m-d',$endDate );
 
+			$customersId = $customers->where('customers_id_card','=',$data->customers_id_card)
+									->select('customers_id')->first();
 
 			$this->insert([
 					'bill_code' => $billCode ,
@@ -38,7 +41,7 @@
 					'bill_price' => $data->bill_price,
 					'bill_type' => $data->bill_type,
 					'bill_price_dow' => $data->bill_price_dow,
-					'customers_id_card' => $data->customers_id_card,
+					'customers_id' => $customersId->customers_id,
 					'bill_create_time' => date('Y-m-d H:i:s'),
 					'admin_id' => $data->admin_id
 			]);
@@ -78,9 +81,9 @@
 
 			$billData = $this->where('bill_code','=',$billCode)->first();
 			$productData = $product->where('bill_code','=',$billCode)->get();
-			$customerData =  $customer->where('customers_id_card','=',$billData->customers_id_card)->first();
+			$customerData =  $customer->where('customers_id','=',$billData->customers_id)->first();
 			$adminData = $admin->where('admin_id','=',$billData->admin_id)->select('admin_name')->first();
-			$billDetailData = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status')->get();
+			$billDetailData = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status','admin_id')->get();
 			$billData['bill_total_price'] = $billData->bill_price+$billData->bill_interest;
 			$billData['bill_installments_price'] = ceil((($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow)/$billData->bill_date_amount);
 			$billData['bill_pay_price'] = (($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow);
@@ -91,10 +94,15 @@
 
 			for($i=0;$i<count($billDetailData);$i++)
 			{
+				if($billDetailData[$i]->admin_id != null)
+				{
+					$billDetailData[$i]->admin_name = $admin->where('admin_id','=',$billDetailData[$i]->admin_id)->select('admin_name')->first();
+				}
 				$date = strtotime($billDetailData[$i]->bill_detail_date);
 				$date = date('d-m-Y',$date);
 				$billDetailData[$i]->bill_detail_date = $date;
 			}
+
 				
 			$result['bill'] = $billData;
 			$result['product'] = $productData;
