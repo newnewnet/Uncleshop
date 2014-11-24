@@ -92,6 +92,17 @@
 			$billData->bill_start_date = strtotime($billData->bill_start_date);
 			$billData->bill_start_date = date('d-m-Y',$billData->bill_start_date);
 
+			// for($i=0;$i<count($billDetailData);$i++)
+			// {
+			// 	if($billDetailData[$i]->admin_id != null)
+			// 	{
+			// 		$billDetailData[$i]->admin_name = $admin->where('admin_id','=',$billDetailData[$i]->admin_id)->select('admin_name')->first();
+			// 	}
+			// 	$date = strtotime($billDetailData[$i]->bill_detail_date);
+			// 	$date = date('d-m-Y',$date);
+			// 	$billDetailData[$i]->bill_detail_date = $date;
+			// }
+			$monthFull = ['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
 			for($i=0;$i<count($billDetailData);$i++)
 			{
 				if($billDetailData[$i]->admin_id != null)
@@ -99,8 +110,10 @@
 					$billDetailData[$i]->admin_name = $admin->where('admin_id','=',$billDetailData[$i]->admin_id)->select('admin_name')->first();
 				}
 				$date = strtotime($billDetailData[$i]->bill_detail_date);
-				$date = date('d-m-Y',$date);
-				$billDetailData[$i]->bill_detail_date = $date;
+				$day = date('d',$date);
+				$month = (int)date('m',$date);
+				$year = date('Y',$date);
+				$billDetailData[$i]->bill_detail_date = $day.' '.$monthFull[$month].' '.$year;
 			}
 
 				

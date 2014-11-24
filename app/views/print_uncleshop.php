@@ -114,7 +114,7 @@
 			  </div>
 			</div>
 			<div class="bill-date">
-				<div style="text-decoration: underline">วันที่ต้องมาจ่าย</div>
+				<div style="text-decoration: underline">วันที่ต้องชำระเงิน</div>
 				<div id="dateBill"></div>
 			</div>
 			<div class="bill-admin">
@@ -200,7 +200,7 @@
 	  		$('#dateBill').append(divDateBill);
 	  	});
 
-	  	$('#adminName').append(admin.admin_name+" "+admin.admin_last_name);
+	  	$('#adminName').append(admin.admin_name);
 
 
 
