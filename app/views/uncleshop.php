@@ -467,55 +467,24 @@
 
 							
 							<div class="col-xs-12" ng-click="priceDes_toggle = false">
-								<div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">								
-									<div class="row check-pay">
+								<!-- <div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">		 -->						
+									<!-- <div class="row check-pay"> -->
 
-										<div ng-click="payTermOfBill()" ng-class="{disabled: data.bill_detail_status == 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
-											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 190px;">
-												งวดวันที่ {{data.bill_detail_date}}
+										<div ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
+										    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
+										    	<i ng-show="data.bill_detail_status == 1" class="fa fa-check-square-o" style="color: #1abc9c; font-size: 20px;"></i>
+										    	<i ng-hide="data.bill_detail_status == 1" class="fa fa-square-o" style="color: #1abc9c; font-size: 20px;"></i>
+										    </div>
+										    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
 											</div>
-											<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px;  padding-top: 3px; float:left; height: 44px; width: 60px;">
-												{{((data.bill_detail_status == "1") ? "จ่ายแล้ว" : (data.bill_detail_status == "99" ? "จ่าย" : "รอจ่าย"))}}
-											</button>		<!-- data.bill_detail_status == 0: 'disabled', data.bill_detail_status == 1: 'btnTrue'  -->
+											<button ng-click="payTermOfBill($index)" ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+												{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
+											</button>							
 										</div>
 
-										<!-- <div style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
-											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 6px; float:left; height: 44px; background-color: #3e5d77; width: 190px;">
-												งวดวันที่ 10 มิถุนายน 2557
-											</div>
-											<div style="color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px;  padding-top: 6px; float:left; height: 44px; background-color: #1abc9c; width: 60px;">
-												จ่ายแล้ว
-											</div>
-										</div> -->									
-
-									</div>
-								</div>
-							</div>
-
-						<!-- 	<div class="col-xs-12" style="background-color: blue;">
-								<div class="form-group">		
-									<div style="background-color: red; width: 290px; height: 44px;">
-										<div tyle="float:left; width: 228px; height: 42px;">
-											<span style="font-size: 20px;margin-top: 12px; margin-left: 5px;">{{'งวดประจำวันที่ 10 สิงหาคม 2557'}}</span>											
-										</div>
-
-										<div style="float:left; width: 60px; background-color: white; height: 42px; margin: 0px;">
-											<span style="font-size: 20px; margin-top: 12px; margin-left: 5px;">{{'จ่ายแล้ว'}}</span>
-										</div>
-									</div>
-								</div>		
-							</div> -->
-
-							<!-- <div ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; width: 290px; height: 44px; background-color: blue;">
-									<div tyle="float:left; width: 228px; height: 42px;">
-										<span style="font-size: 20px;margin-top: 12px; margin-left: 5px;">{{'งวดประจำวันที่ 10 สิงหาคม 2557'}}</span>											
-									</div>
-
-									<div style="float:left; width: 60px; background-color: white; height: 42px; margin: 0px;">
-										<span style="font-size: 20px; margin-top: 12px; margin-left: 5px;">{{'จ่ายแล้ว'}}</span>
-									</div>
-								</div>		 -->
-
+								<!-- </div> -->
+							<!-- </div> -->
 						</div>
 					</div>
 				</div>
@@ -609,7 +578,7 @@
 								</div>
 
 								<div class="row"> <!-- col-xs-col-6 col-sm-offset-9 col-sm-col-2 -->
-									<div class="col-xs-4 col-xs-offset-4 col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
+									<div class="col-xs-6 col-xs-offset-3 col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
 										<button type="button" class="btn btn-danger " ng-click="removeAdmin()" ng-hide="editFlug">ลบ</button>
 										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>
 										<button type="button" style="margin-left: 53px;" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิ่ม</button>

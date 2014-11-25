@@ -16,6 +16,7 @@ angular.module('uncleshopApp')
 				{
 					$rootScope.pageFlug = true;
 					$rootScope.admin = data;
+					console.log($rootScope.admin);
 				}
 				else{
 					swal({   
