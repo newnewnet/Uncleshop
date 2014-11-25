@@ -75,7 +75,7 @@
 			    </div>
 			  </div>
 			  <div class="user" ng-show="pageFlug">
-			  	<span>{{admin.admin_name}}</span>
+			  	<span>{{admin.admin_name | limitTo: 8}}</span>
 			  	<i class="fa fa-cog icon" ng-click="popupLogout()"></i>
 			  	<div class="logout" ng-show="popupLogoutFlug" ng-click="logout()" >Logout</div>
 			  </div>
@@ -470,23 +470,23 @@
 								<div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">								
 									<div class="row check-pay">
 
-										<div style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
-											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 6px; float:left; height: 44px; background-color: #34495e; width: 190px;">
+										<div ng-click="payTermOfBill()" ng-class="{disabled: data.bill_detail_status == 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 190px;">
+												งวดวันที่ {{data.bill_detail_date}}
+											</div>
+											<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px;  padding-top: 3px; float:left; height: 44px; width: 60px;">
+												{{((data.bill_detail_status == "1") ? "จ่ายแล้ว" : (data.bill_detail_status == "99" ? "จ่าย" : "รอจ่าย"))}}
+											</button>		<!-- data.bill_detail_status == 0: 'disabled', data.bill_detail_status == 1: 'btnTrue'  -->
+										</div>
+
+										<!-- <div style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 6px; float:left; height: 44px; background-color: #3e5d77; width: 190px;">
 												งวดวันที่ 10 มิถุนายน 2557
 											</div>
 											<div style="color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px;  padding-top: 6px; float:left; height: 44px; background-color: #1abc9c; width: 60px;">
 												จ่ายแล้ว
 											</div>
-										</div>
-
-										<div style="float: left; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
-											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 6px; float:left; height: 44px; background-color: #34495e; width: 190px;">
-												งวดวันที่ 10 พฤศจิกายน 2557
-											</div>
-											<div style="color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px;  padding-top: 6px; float:left; height: 44px; background-color: #e74c3c; width: 60px;">
-												รอจ่าย
-											</div>
-										</div>
+										</div> -->									
 
 									</div>
 								</div>
@@ -558,7 +558,7 @@
 											<div class="text">
 												<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
 												<span class="tel" style="color: #45B39C;">เบอร์โทร</span><span class="tel-data">{{admin.admin_tel}}</span>
-												<span class="tel">รหัสบัตร</span><span class="tel-data">{{admin.admin_id}}</span>																	
+												<span class="tel">รหัสบัตร</span><span class="tel-data">{{admin.admin_id_card}}</span>																	
 											</div>
 										</div>
 									</div>
