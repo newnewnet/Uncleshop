@@ -63,6 +63,47 @@
 
 			}
 		}
+		public function timeLineBill($date)
+		{
+			$result = '';
+			if($date == '')
+			{
+		 		$result = $this ->join('admin', 'bill_detail.admin_id', '=', 'admin.admin_id')
+		 						->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
+		 						->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
+		 						->where('bill_detail_status','=',1)->orderBy('bill_detail_date','DESC')
+		 						->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name')
+		 						->take(20)
+		 						->get();
+		 	}
+		 	else
+		 	{
+		 		$result = $this ->join('admin', 'bill_detail.admin_id', '=', 'admin.admin_id')
+								->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
+								->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
+								->where('bill_detail_date','=',$date)->where('bill_detail_status','=',1)
+								->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name')
+		 						->take(20)
+		 						->get();
+		 	
+		 	}
+
+		 	if($result != '[]')
+		 	{
+			 	$monthFull = ['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+				for($i=0;$i<count($result);$i++)
+				{
+					$date = strtotime($result[$i]->bill_detail_date);
+					$day = date('d',$date);
+					$month = (int)date('m',$date);
+					$year = date('Y',$date);
+					$result[$i]->bill_detail_date = $day.' '.$monthFull[$month].' '.$year;
+				}
+			}
+
+		 	return  $result;
+		}
+
 
 
 	}

@@ -27,7 +27,6 @@ Route::post('saveCustomers','UncleshopApiController@saveCustomers');
 Route::get('admin','UncleshopApiController@getAdmin');
 Route::get('interest','UncleshopApiController@getAdminInterest');
 
-
 Route::get('updateCustomers','UncleshopApiController@updateCustomers');
 
 Route::get('deleteCustomers','UncleshopApiController@deleteCustomers');
@@ -35,6 +34,7 @@ Route::get('deleteCustomers','UncleshopApiController@deleteCustomers');
 Route::post('saveBill','UncleshopApiController@saveBill');
 Route::get('getBill','UncleshopApiController@getBill');
 Route::get('bill','UncleshopApiController@searchBill');
+Route::get('timeLineBill','UncleshopApiController@timeLineBill');
 
 Route::post('updateBillDetail','UncleshopApiController@updateBillDetail');
 Route::post('cutBillDetail','UncleshopApiController@cutBillDetail');

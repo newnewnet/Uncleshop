@@ -114,6 +114,14 @@
 			$result = $bill->searchBill($key,$status);
 			return $result;
 		}
+		public function timeLineBill()
+		{
+			$date = '';
+			$date = Input::get('date');
+			$billDetail= new BillDetail;
+			$result = $billDetail->timeLineBill($date);
+			return $result;
+		}
 		public function updateBillDetail()
 		{
 			$array = Input::all();
