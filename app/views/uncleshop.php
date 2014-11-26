@@ -496,7 +496,8 @@
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==4">
 					<div class="title">ข้อมูลลูกค้า</div>	
-					<div class="box-bill"></div>
+					<div class="box-bill">
+					</div>
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==5">
@@ -516,7 +517,7 @@
 					</div>		
 					<div class="box-bill" >
 						<div class="form-horizontal">
-							<div  class="conResult" style="background-color: red;">
+							<div  class="conResult">
 								<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
 									<div class="resultUser">
 										<div class="wrap">
@@ -588,6 +589,7 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</body>

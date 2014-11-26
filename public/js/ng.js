@@ -8,6 +8,7 @@ angular.module('uncleshopApp')
 	{
 		var text = ['','เพิ่มบิล','ค้นหาบิล','ข้อมูลการจ่ายบิล', 'ข้อมูลลูกค้า', 'ข้อมูลผู้ขาย']
 		$rootScope.tabColor=number;
+		console.log($rootScope.tabColor);
 		$rootScope.loginText=text[number];
 		
 		if(number == 1){
