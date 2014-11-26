@@ -516,7 +516,7 @@
 					</div>		
 					<div class="box-bill" >
 						<div class="form-horizontal">
-							<div  class="conResult">
+							<div  class="conResult" style="background-color: red;">
 								<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
 									<div class="resultUser">
 										<div class="wrap">

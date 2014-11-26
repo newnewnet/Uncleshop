@@ -22,7 +22,7 @@ angular.module('uncleshopApp')
 		else if(number == 5){
 			$scope.getAdmins();
 			$scope.adminToggle = false;
-			$scope.focusItem(null);
+			//$scope.focusItem(null);
 		}
 		else
 			$scope.focusItem(null);
@@ -60,15 +60,15 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.payTermOfBill = function(index) {	
-		console.log($rootScope.admin.admin_id);
-		// var data = {
-		// 	'bill_detail_id': $scope.DataPayBill.dateBill[index].bill_detail_id,
-		// 	'bill_detail_price': $scope.DataPayBill.dateBill[index].bill_detail_id,
-		// 	'admin_id': $rootScope.admin.admin_id
-		// };	
-		// manageBill.updateBillDetail(data,function(data, status, headers, config){			
-		// 	console.log(data);
-		// });
+		// console.log($rootScope.admin.admin_id);
+		var data = {
+			'bill_detail_id': $scope.DataPayBill.dateBill[index].bill_detail_id,
+			'bill_detail_price': $scope.DataPayBill.dateBill[index].bill_detail_id,
+			'admin_id': $rootScope.admin.admin_id
+		};	
+		manageBill.updateBillDetail(data,function(data, status, headers, config){			
+			console.log(data);
+		},500);
 	};
 
 	$scope.payBill = function(index) {
@@ -84,7 +84,7 @@ angular.module('uncleshopApp')
 				console.log('yes');
 			}
 			else {
-				for(var i=0; i<$scope.DataPayBill.dateBill.length; i++){
+				for(var i=0; i<$scope.DataPayBill.dateBill.length-1; i++){ // -1 or don't
 					if($scope.DataPayBill.dateBill[i].bill_detail_status == 1 && $scope.DataPayBill.dateBill[i+1].bill_detail_status != 1){
 						$scope.DataPayBill.dateBill[i+1].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
 					}				
@@ -92,7 +92,7 @@ angular.module('uncleshopApp')
 			}
 						
 			console.log($scope.DataPayBill);
-		});
+		},500);
 		$scope.findPayBill_toggle = false;
 	};
 
@@ -132,7 +132,7 @@ angular.module('uncleshopApp')
 					'priceWithoutDow': $scope.priceWithoutDow = (priceOfAllProduct+(interest*$scope.timeOfPayment)) - $scope.priceDow,//ราคารวมดอกเบี้ยและหักเงินดาวน์
 					'priceTermOfPayment': $scope.priceWithoutDow / $scope.timeOfPayment //ราคาต่องวด
 				};
-		});
+		},500);
 	};
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
@@ -317,8 +317,9 @@ angular.module('uncleshopApp')
 		manageAdmin.getAdmin(function(data, status, headers, config)
 		{
 			$scope.admins = data;
+			console.log($scope.adminToggle);
 			console.log(data);
-		});
+		},500);
 	};
 
 	$scope.register = function(value)
@@ -367,7 +368,7 @@ angular.module('uncleshopApp')
 						$scope.getAdmins(); //get all admin after saved new admin
 						$scope.adminToggle = false;
 					}
-				});
+				},500);
 			}
 
 			else if(value == 2)
@@ -392,7 +393,7 @@ angular.module('uncleshopApp')
 							timer: 3000
 						});
 					}
-				});
+				},500);
 			}
 		}
 		else
@@ -515,7 +516,7 @@ angular.module('uncleshopApp')
 	/*when init*/
 	$scope.init = function() {
 		$scope.changTab(2);
-		$scope.getAdmins();
+		//$scope.getAdmins();
 		$scope.adminDefault();
 		$scope.customersDefault();
 		$scope.productDefault();
