@@ -482,9 +482,7 @@
 												{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
 											</button>							
 										</div>
-
-								<!-- </div> -->
-							<!-- </div> -->
+							</div>
 						</div>
 					</div>
 				</div>
