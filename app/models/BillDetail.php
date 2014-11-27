@@ -55,8 +55,8 @@
 								->update(array(
 											'bill_status' => 2,
 											'bill_interest' => $array['bill_interest'],
-											'bill_date_amount' => $array['bill_date_amount'],
-											'bill_price' => $array['bill_price']
+											'bill_date_amount' => $array['bill_date_amount']
+											// 'bill_price' => $array['bill_price']
 								));
 
 				return $result;
