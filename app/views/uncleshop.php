@@ -110,14 +110,14 @@
 				    		<span class="icon icon1" >
 				    			<img src="img/icon-11.png"/>
 				    		</span>
-				    		<div class="text">บิล</div>
+				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill':tabColor==2}">
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-22.png"/>
 				    		</span>
-				    		<div class="text">จ่ายค่างวด</div>
+				    		<div class="text">ต้นหาบิล</div>
 				    	</div>
 
 				    	<div class="box"  data-ng-click="changTab(3); switchMenu()" data-ng-class="{'pays-who':tabColor==3}">
@@ -336,13 +336,31 @@
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==2">
-					<div class="title">จ่ายค่างวด</div>	
+					<div class="title CURSOR" ng-click="backToPayBill()">
+						ชำระเงิน
+					</div>	
 					<div class="box-bill">
 						<div class="form-horizontal" ng-show="findPayBill_toggle">
 							<div class="form-group">						
-							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
-								  <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-keyup="searchBillForPay()" style="font-size: 20px;">
-								  <span class="input-group-addon CURSOR" ng-click="searchBillForPay()"><i class="fa fa-search" style="color: #3498db"></i></span>
+							  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6 input-group">
+								  <!-- <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-keyup="searchBillForPay()" style="font-size: 20px;">
+								  <span class="input-group-addon CURSOR" ng-click="searchBillForPay()"><i class="fa fa-search" style="color: #3498db"></i></span> -->
+								  <div class="input-group">
+							      <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-init="optionSearchPayBill = 0" ng-keyup="searchBillForPay()" style="font-size: 20px;">
+							      <div class="input-group-btn">
+							        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 34px; padding-top: 4px;">
+								        <!-- ค้างชำระ -->
+								        <i class="fa fa-search" style="color: #3498db;"></i>
+								        <i class="fa fa-caret-down" style="font-size: 15px;"></i>
+								      </button>
+							        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px;">
+							          <li ng-click="optionSearchPayBill = 0; searchBillForPay();"><a href="#">ค้นหา <j style="text-decoration: underline;">ค้างชำระ</j></a></li>
+							          <li ng-click="optionSearchPayBill = 1; searchBillForPay();"><a href="#">ค้นหา <j style="text-decoration: underline;">ชำระแล้ว</j></a></li>
+							          <li ng-click="optionSearchPayBill = 2; searchBillForPay();"><a href="#">ค้นหา <j style="text-decoration: underline;">ทั้งหมด</j></a></li>
+							        </ul>
+							      </div><!-- /btn-group -->
+							    </div><!-- /input-group -->
+
 								</div>
 							</div>
 							<div class="conResult">
@@ -369,7 +387,9 @@
 						<div class="form-horizontal" ng-hide="findPayBill_toggle" ng-init="customersDes_toggle = false">
 							<div class="row" ng-hide="customersDes_toggle" style="background-color: white; border-radius: 3px; border-width: 1px; border-style: dashed; border-color: #e67e22;" ng-click="customersDes_toggle = true">
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
-								<label class="col-xs-8 col-sm-10 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
+								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">สถานะ</label>
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
 
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
@@ -379,7 +399,9 @@
 								
 							<div class="row" ng-show="customersDes_toggle" ng-click="customersDes_toggle = false" style="background-color: white; border-radius: 3px; border-width: 2px; border-color: #e67e22; border-style: solid;">
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
-								<label class="col-xs-8 col-sm-10 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
+								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
+								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">สถานะ</label>
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
 
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
@@ -466,29 +488,39 @@
 							</div>
 
 							
-							<div class="col-xs-12" ng-click="priceDes_toggle = false">
+							<div class="col-xs-12">
 								<!-- <div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">		 -->						
 									<!-- <div class="row check-pay"> -->
 
-										<div ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+										<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
 											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
 										    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
-										    	<i ng-show="data.bill_detail_status == 1" class="fa fa-check-square-o" style="color: #1abc9c; font-size: 20px;"></i>
-										    	<i ng-hide="data.bill_detail_status == 1" class="fa fa-square-o" style="color: #1abc9c; font-size: 20px;"></i>
+										    	<!-- <i ng-show="data.bill_detail_status == 1" class="fa fa-check-square-o" style="color: #1abc9c; font-size: 20px;"></i> -->
+										    	<i ng-show="data.bill_detail_status == 1" class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
+										    	<i ng-hide="data.bill_detail_status == 1" class="fa fa-clock-o" style="color: #1abc9c; font-size: 20px;"></i>
+										    	<!-- <i ng-hide="data.bill_detail_status == 1" class="fa fa-square-o" style="color: #1abc9c; font-size: 20px;"></i> -->
 										    </div>
 										    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
 											</div>
-											<button ng-click="payTermOfBill($index)" ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+											<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
 												{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
 											</button>							
 										</div>
+
+										<!-- <div ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 10px; margin-right: 5px;"> -->
+											<!-- width: 70px; -->
+											<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -68.5px; background-color: #d9534f; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; font-size: 20px;">
+												ชำระเงินที่เหลือทั้งหมด
+											</button>							
+										<!-- </div> -->
+
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
-					<div class="title">ประวัติบจ่ายค่างวด</div>	
+					<div class="title">ประวัติบชำระเงิน</div>	
 					<div class="box-bill"></div>
 				</div>
 

@@ -8,7 +8,6 @@ angular.module('uncleshopApp')
 	{
 		var text = ['','เพิ่มบิล','ค้นหาบิล','ข้อมูลการจ่ายบิล', 'ข้อมูลลูกค้า', 'ข้อมูลผู้ขาย']
 		$rootScope.tabColor=number;
-		console.log($rootScope.tabColor);
 		$rootScope.loginText=text[number];
 		
 		if(number == 1){
@@ -19,6 +18,7 @@ angular.module('uncleshopApp')
 		else if(number == 2){
 			$rootScope.searchBill.data = null;
 			$scope.findPayBill_toggle = true;
+			$scope.optionSearchPayBill = 0;
 		}
 		else if(number == 5){
 			$scope.getAdmins();
@@ -47,6 +47,13 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
+	$scope.backToPayBill = function() {
+		$scope.findPayBill_toggle = true;
+		$rootScope.DataBill = null;
+		$scope.searchBill.data = null;
+		$scope.optionSearchPayBill = 0;
+	};
+
 	$scope.backToAdmin = function() {
 		$scope.adminToggle = false;
 		$scope.getAdmins();
@@ -60,16 +67,73 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
+	// $scope.cutBill = function() {
+	// 	// manageBill.updateBillDetail(data,function(data, status, headers, config){
+	// 		var detail_index = null;
+	// 		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
+	// 			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
+	// 				detail_index = i;
+	// 			}
+	// 		}
+
+
+	// 			console.log('bill_detail_id' + $scope.DataPayBill.dateBill[detail_index].bill_detail_id);
+	// 			console.log('bill_detail_price' + $scope.DataPayBill.bill.bill_installments_price);
+	// 			console.log('admin_id' + $rootScope.admin.admin_id);
+	// 			console.log('bill_interest' +  ($scope.DataPayBill.bill.bill_interest/$scope.DataPayBill.bill.bill_date_amount));
+	// 			console.log('bill_date_amount' + 
+	// 			console.log('bill_price' + 
+	// 			console.log('bill_code' + $scope.DataPayBill.bill.bill_code);
+
+	// 		// var data = {
+	// 		// 	'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
+	// 		// 	'bill_detail_price' : 
+	// 		// 	'admin_id' : 
+	// 		// 	'bill_interest' : 
+	// 		// 	'bill_date_amount' : 
+	// 		// 	'bill_price' : 
+	// 		// 	'bill_code' : 
+	// 		// };
+	// 	// },500);
+	// };
+
 	$scope.payTermOfBill = function(index) {	
-		// console.log($rootScope.admin.admin_id);
-		var data = {
-			'bill_detail_id': $scope.DataPayBill.dateBill[index].bill_detail_id,
-			'bill_detail_price': $scope.DataPayBill.dateBill[index].bill_detail_id,
-			'admin_id': $rootScope.admin.admin_id
-		};	
-		manageBill.updateBillDetail(data,function(data, status, headers, config){			
-			console.log(data);
-		},500);
+		if($scope.DataPayBill.dateBill[index].bill_detail_status == 99){
+			swal({   
+				title: "ชำระเงิน ?",   
+				text: "คุณต้องการชำระเงินประจำวันที่ " + $scope.DataPayBill.dateBill[index].bill_detail_date + " เป็นจำนวนเงิน " + $scope.DataPayBill.bill.bill_installments_price + " บาท ใช่หรือไม่",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#2980B9",   
+				confirmButtonText: "ใช่, ชำระเงินเดี๋ยวนี้ !",   
+				cancelButtonText: "ยกเลิก",
+				closeOnConfirm: false 
+			}, function(){
+				var data = {
+					'bill_detail_id': $scope.DataPayBill.dateBill[index].bill_detail_id,
+					'bill_detail_price': $scope.DataPayBill.bill.bill_installments_price,
+					'admin_id': $rootScope.admin.admin_id
+				};	
+				manageBill.updateBillDetail(data,function(data, status, headers, config){			
+					if(data == 1){
+						swal({
+							title: "เรียบร้อย !!",   
+							text: "ชำระเงินเรียบร้อยแล้ว",   
+							type: "success",
+							timer: 2000
+						});
+						$scope.payBillWithBillCode($scope.DataPayBill.bill.bill_code);
+					}					
+				},500);
+			});
+		}
+		else if($scope.DataPayBill.dateBill[index].bill_detail_status == 1){
+			console.log('clicked');
+			swal({
+				title: "คุณ " + $scope.DataPayBill.dateBill[index].admin_name.admin_name + " เป็นผู้รับการชำระเงิน",   
+				text: "ประจำวันที่ " + $scope.DataPayBill.dateBill[index].bill_detail_date,   
+			});
+		}		
 	};
 
 	$scope.payBill = function(index) {
@@ -79,22 +143,64 @@ angular.module('uncleshopApp')
 		manageBill.getBill(data,function(data, status, headers, config){			
 			console.log(data);
 			$scope.DataPayBill = data;
+			var length = $scope.DataPayBill.dateBill.length;
 
+			if($scope.DataPayBill.dateBill[0].bill_detail_status == 0){
+				$scope.DataPayBill.dateBill[0].bill_detail_status = 99;
+			}
+			else {
+				for(var i=0; i<length-1; i++){ // -1 or don't
+					if($scope.DataPayBill.dateBill[i].bill_detail_status == 1 && $scope.DataPayBill.dateBill[i+1].bill_detail_status != 1){
+						$scope.DataPayBill.dateBill[i+1].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
+					}				
+
+				}
+			}				
+
+			if($scope.DataPayBill.dateBill[length-1].bill_detail_status == 99 || $scope.DataPayBill.dateBill[length-1].bill_detail_status == 1){
+				$scope.cutBill_toggle = false;
+				console.log('status = '+$scope.DataPayBill.dateBill[length-1].bill_detail_status);
+				console.log('yes');
+			}
+			else
+				$scope.cutBill_toggle = true;
+
+			console.log($scope.DataPayBill);
+		},500);
+		$scope.findPayBill_toggle = false;
+	};
+
+	$scope.payBillWithBillCode = function(billCode) {
+		var data = {
+			'bill_code': billCode
+		};
+		manageBill.getBill(data,function(data, status, headers, config){			
+			$scope.DataPayBill = data;
+			var length = $scope.DataPayBill.dateBill.length;
 			if($scope.DataPayBill.dateBill[0].bill_detail_status == 0){
 				$scope.DataPayBill.dateBill[0].bill_detail_status = 99;
 				console.log('yes');
 			}
 			else {
-				for(var i=0; i<$scope.DataPayBill.dateBill.length-1; i++){ // -1 or don't
+				for(var i=0; i<length-1; i++){ // -1 or don't
 					if($scope.DataPayBill.dateBill[i].bill_detail_status == 1 && $scope.DataPayBill.dateBill[i+1].bill_detail_status != 1){
 						$scope.DataPayBill.dateBill[i+1].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
 					}				
 				}
+			}					
+
+			if($scope.DataPayBill.dateBill[length-1].bill_detail_status == 99 || $scope.DataPayBill.dateBill[length-1].bill_detail_status == 1){
+				$scope.cutBill_toggle = false;
+				console.log('status = '+$scope.DataPayBill.dateBill[length-1].bill_detail_status);
+				console.log('yes');
 			}
-						
+			else
+				$scope.cutBill_toggle = true;
+			
+			$scope.findPayBill_toggle = false;	
+
 			console.log($scope.DataPayBill);
 		},500);
-		$scope.findPayBill_toggle = false;
 	};
 
 	$scope.calBill = function(value) {
@@ -225,7 +331,7 @@ angular.module('uncleshopApp')
 									title: "เรียบร้อย !!",   
 									text: "เพิ่มข้อมูลลูกค้าแล้ว",   
 									type: "success",
-									timer: 2000
+									timer: 1500
 								});
 								$scope.customersDefault();
 								$scope.addProduct_toggle = true;
@@ -273,13 +379,16 @@ angular.module('uncleshopApp')
 	$scope.searchBillForPay = function() {
 		var data = {
 			'key': $rootScope.searchBill.data,
-			'status': 2
+			'status': $scope.optionSearchPayBill
 		}
+		// console.log();
 		
 		manageBill.searchBill(data,function(data, status, headers, config)
 		{
+			// console.log(data);
+			// console.log('option' + $scope.optionSearchPayBill);
 			$rootScope.DataBill = data;
-			console.log($rootScope.DataBill);
+			// console.log($rootScope.DataBill);
 		}, 500);
 	};
 
@@ -353,7 +462,6 @@ angular.module('uncleshopApp')
 					'admin_address' :  $scope.adminAddress
 				};
 			}
-
 			
 			if(value == 1 && $scope.adminSubmitError == true)
 			{
@@ -391,7 +499,7 @@ angular.module('uncleshopApp')
 							title: "ไม่สำเร็จ !!",   
 							text: "กรุณาลองใหม่อีกครั้ง",   
 							type: "error",
-							timer: 3000
+							timer: 2000
 						});
 					}
 				},500);
@@ -487,7 +595,8 @@ angular.module('uncleshopApp')
 			type: "warning",   
 			showCancelButton: true,   
 			confirmButtonColor: "#DD6B55",   
-			confirmButtonText: "ใช่, ลบออก !",   
+			confirmButtonText: "ใช่, ลบออก !",
+			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){   
 			manageAdmin.deleteAdmin(data,function(data, status, headers, config)
