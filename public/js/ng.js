@@ -67,35 +67,39 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
-	// $scope.cutBill = function() {
-	// 	// manageBill.updateBillDetail(data,function(data, status, headers, config){
-	// 		var detail_index = null;
-	// 		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
-	// 			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
-	// 				detail_index = i;
-	// 			}
-	// 		}
+	$scope.cutBill = function() {
+		var detail_index = null;
+		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
+			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
+				detail_index = i;
+			}
+		}
 
+		var detail_price = $scope.DataPayBill.bill.bill_installments_price*($scope.DataPayBill.bill.bill_date_amount-detail_index);
+		detail_price = detail_price - ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1)));
 
-	// 			console.log('bill_detail_id' + $scope.DataPayBill.dateBill[detail_index].bill_detail_id);
-	// 			console.log('bill_detail_price' + $scope.DataPayBill.bill.bill_installments_price);
-	// 			console.log('admin_id' + $rootScope.admin.admin_id);
-	// 			console.log('bill_interest' +  ($scope.DataPayBill.bill.bill_interest/$scope.DataPayBill.bill.bill_date_amount));
-	// 			console.log('bill_date_amount' + 
-	// 			console.log('bill_price' + 
-	// 			console.log('bill_code' + $scope.DataPayBill.bill.bill_code);
+		var data = {
+			'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
+			'bill_detail_price' : detail_price,
+			'admin_id' : $rootScope.admin.admin_id,
+			'bill_interest' : ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1))),
+			'bill_date_amount' : parseInt(detail_index+1),
+			'bill_code' : $scope.DataPayBill.bill.bill_code
+		};
 
-	// 		// var data = {
-	// 		// 	'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
-	// 		// 	'bill_detail_price' : 
-	// 		// 	'admin_id' : 
-	// 		// 	'bill_interest' : 
-	// 		// 	'bill_date_amount' : 
-	// 		// 	'bill_price' : 
-	// 		// 	'bill_code' : 
-	// 		// };
-	// 	// },500);
-	// };
+		manageBill.updateBillDetail(data,function(data, status, headers, config){
+			if(data == 1){
+				alert('cutbill สำเร็จ');
+			}
+			// console.log('bill_detail_id ' + $scope.DataPayBill.dateBill[detail_index].bill_detail_id);
+			// console.log('bill_detail_price ' + detail_price);
+			// console.log('admin_id ' + $rootScope.admin.admin_id);
+			// console.log('bill_interest ' +  ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1))));
+			// console.log('bill_date_amount ' + parseInt(detail_index+1));
+			// console.log('bill_code ' + $scope.DataPayBill.bill.bill_code);
+
+		},500);
+	}
 
 	$scope.payTermOfBill = function(index) {	
 		if($scope.DataPayBill.dateBill[index].bill_detail_status == 99){
@@ -140,7 +144,8 @@ angular.module('uncleshopApp')
 		var data = {
 			'bill_code': $scope.DataBill[index].bill_code
 		};
-		manageBill.getBill(data,function(data, status, headers, config){			
+		manageBill.getBill(data,function(data, status, headers, config){		
+			console.log('before edit');	
 			console.log(data);
 			$scope.DataPayBill = data;
 			var length = $scope.DataPayBill.dateBill.length;
@@ -761,8 +766,9 @@ angular.module('uncleshopApp')
 			})
 		}
 	};
-	
+
 }])
+
 .factory('manageBill', ['$http', function($http) 
 {
 	return {
