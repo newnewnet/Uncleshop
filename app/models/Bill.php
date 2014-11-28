@@ -208,12 +208,11 @@
 				}
 				else if ($status == 1) 
 				{
-
 					$index = 0;
 					$data = array();
 					for($i=0;$i<count($result);$i++)
 					{
-						if($result[$i]->bill_status == 1)
+						if($result[$i]->bill_status > 0 )
 						{
 							$data[$index] = $result[$i];
 							$index++;
