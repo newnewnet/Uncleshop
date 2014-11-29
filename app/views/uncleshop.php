@@ -311,7 +311,7 @@
 										<div class="row">
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceWithoutDow < 0 ? 0 : billData.priceWithoutDow | number:0) + '    บาท'}}</label>
-											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
 											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน" : "บาท/วิก")}}</label>
 										</div>								
 										<div class="row" style="padding-top: 20px;">
@@ -354,9 +354,9 @@
 								        <i class="fa fa-caret-down" style="font-size: 15px;"></i>
 								      </button>
 							        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px;">
-							          <li ng-click="optionSearchPayBill = 0; searchBillForPay();"><a href="#">ค้นหา <j style="text-decoration: underline;">ค้างชำระ</j></a></li>
-							          <li ng-click="optionSearchPayBill = 1; searchBillForPay();"><a href="#">ค้นหา <j style="text-decoration: underline;">ชำระแล้ว</j></a></li>
-							          <li ng-click="optionSearchPayBill = 2; searchBillForPay();"><a href="#">ค้นหา <j style="text-decoration: underline;">ทั้งหมด</j></a></li>
+							          <li ng-click="optionSearchPayBill = 0; searchBillForPay();"><a>ค้นหา <j style="text-decoration: underline;">ค้างชำระ</j></a></li>
+							          <li ng-click="optionSearchPayBill = 1; searchBillForPay();"><a>ค้นหา <j style="text-decoration: underline;">ชำระแล้ว</j></a></li>
+							          <li ng-click="optionSearchPayBill = 2; searchBillForPay();"><a>ค้นหา <j style="text-decoration: underline;">ทั้งหมด</j></a></li>
 							        </ul>
 							      </div><!-- /btn-group -->
 							    </div><!-- /input-group -->
@@ -455,7 +455,7 @@
 										<div class="row">
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-7 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
-											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
 											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: left;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน" : "บาท/วิก")}}</label>
 										</div>
 									</div>
@@ -480,7 +480,7 @@
 										<div class="row">
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-7 col-sm-3 control-label" style="text-align: right;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
-											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">การผ่อนชำระ</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
 											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: right;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน" : "บาท/วิก")}}</label>
 										</div>
 									</div>
@@ -488,33 +488,43 @@
 							</div>
 
 							
-							<div class="col-xs-12">
-								<!-- <div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">		 -->						
-									<!-- <div class="row check-pay"> -->
-
-										<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
-											<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
-										    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
-										    	<!-- <i ng-show="data.bill_detail_status == 1" class="fa fa-check-square-o" style="color: #1abc9c; font-size: 20px;"></i> -->
-										    	<i ng-show="data.bill_detail_status == 1" class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
-										    	<i ng-hide="data.bill_detail_status == 1" class="fa fa-clock-o" style="color: #1abc9c; font-size: 20px;"></i>
-										    	<!-- <i ng-hide="data.bill_detail_status == 1" class="fa fa-square-o" style="color: #1abc9c; font-size: 20px;"></i> -->
-										    </div>
-										    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
-											</div>
-											<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
-												{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
-											</button>							
-										</div>
-
-										<!-- <div ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 10px; margin-right: 5px;"> -->
-											<!-- width: 70px; -->
-											<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -68.5px; background-color: #d9534f; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; font-size: 20px;">
-												ชำระเงินที่เหลือทั้งหมด
-											</button>							
-										<!-- </div> -->
-
+							<div class="col-xs-12" ng-show="DataPayBill.bill.bill_status == 0">
+								<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+									<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
+								    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
+								    	<i ng-show="data.bill_detail_status == 1" class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
+								    	<i ng-hide="data.bill_detail_status == 1" class="fa fa-clock-o" style="color: #1abc9c; font-size: 20px;"></i>
+								    </div>
+								    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
+									</div>
+									<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+										{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
+									</button>							
+								</div>
+								<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -68.5px; background-color: #d9534f; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; font-size: 20px;">
+									ชำระเงินที่เหลือทั้งหมด
+								</button>							
 							</div>
+
+							<div class="col-xs-12" ng-hide="DataPayBill.bill.bill_status == 0">
+								<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.admin_id == null, allow: data.admin_id != null}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+									<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
+								    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
+								    	<i class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
+								    </div>
+								    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
+									</div>
+									<!-- {{data.admin_id == null ? "null" : "nonull"}} -->
+									<button ng-hide="data.admin_id == null" ng-class="{'btn4':data.bill_detail_status == 2, 'btn1':data.bill_detail_status == 1}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+										{{data.bill_detail_status == "1" ? "ชำระแล้ว" : "ตัดบิลแล้ว"}}
+									</button>	
+									<button ng-show="data.admin_id == null" ng-class="{'btn2':data.admin_id == null, 'btn1':data.admin_id != null}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+										ตัดบิลแล้ว
+										<!-- {{data.bill_detail_status == "1" ? "ชำระแล้ว" : "ตัดบิล"}} -->
+									</button>							
+								</div>						
+							</div>
+
 						</div>
 					</div>
 				</div>
