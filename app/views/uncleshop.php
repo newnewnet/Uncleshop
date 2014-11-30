@@ -193,6 +193,7 @@
 									</div>
 								</div>
 							</div>
+
 							<div ng-hide="DataCustomer_search_toggle">
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
@@ -336,8 +337,10 @@
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==2">
-					<div class="title CURSOR" ng-click="backToPayBill()">
-						ชำระเงิน
+					<div class="title">
+						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToPayBill()">
+							ชำระเงิน
+						</div>
 					</div>	
 					<div class="box-bill">
 						<div class="form-horizontal" ng-show="findPayBill_toggle">
@@ -489,7 +492,7 @@
 
 							
 							<div class="col-xs-12" ng-show="DataPayBill.bill.bill_status == 0">
-								<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+								<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -130px; width: 260px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
 									<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
 								    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
 								    	<i ng-show="data.bill_detail_status == 1" class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
@@ -497,17 +500,17 @@
 								    </div>
 								    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
 									</div>
-									<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+									<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
 										{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
 									</button>							
+									<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -68.5px; background-color: #d9534f; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
+										ชำระเงินที่เหลือทั้งหมด
+									</button>							
 								</div>
-								<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -68.5px; background-color: #d9534f; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; font-size: 20px;">
-									ชำระเงินที่เหลือทั้งหมด
-								</button>							
 							</div>
 
 							<div class="col-xs-12" ng-hide="DataPayBill.bill.bill_status == 0">
-								<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.admin_id == null, allow: data.admin_id != null}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -125px; width: 250px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
+								<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.admin_id == null, allow: data.admin_id != null}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -130px; width: 260px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
 									<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
 								    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
 								    	<i class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
@@ -515,10 +518,10 @@
 								    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
 									</div>
 									<!-- {{data.admin_id == null ? "null" : "nonull"}} -->
-									<button ng-hide="data.admin_id == null" ng-class="{'btn4':data.bill_detail_status == 2, 'btn1':data.bill_detail_status == 1}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+									<button ng-hide="data.admin_id == null" ng-class="{'btn4':data.bill_detail_status == 2, 'btn1':data.bill_detail_status == 1}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
 										{{data.bill_detail_status == "1" ? "ชำระแล้ว" : "ตัดบิลแล้ว"}}
 									</button>	
-									<button ng-show="data.admin_id == null" ng-class="{'btn2':data.admin_id == null, 'btn1':data.admin_id != null}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 70px; font-size: 20px;">
+									<button ng-show="data.admin_id == null" ng-class="{'btn2':data.admin_id == null, 'btn1':data.admin_id != null}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
 										ตัดบิลแล้ว
 										<!-- {{data.bill_detail_status == "1" ? "ชำระแล้ว" : "ตัดบิล"}} -->
 									</button>							
@@ -534,11 +537,89 @@
 					<div class="box-bill"></div>
 				</div>
 
+
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==4">
-					<div class="title">ข้อมูลลูกค้า</div>	
+					<div class="title">
+						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToEditCustomer()">
+							ข้อมูลลูกค้า
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-click="backToEditCustomer()" ng-show="Edit_Customer_toggle">
+							<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
+						</div>
+					</div>	
+
 					<div class="box-bill">
+						<div class="form-horizontal">
+							<div class="form-group" ng-hide="Edit_Customer_toggle">						
+							  <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
+								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" style="font-size: 20px;">
+								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
+								</div>
+							</div>
+
+							<div class="conResult" ng-hide="Edit_Customer_toggle">
+								<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">
+									<div class="resultUser">
+										<div class="wrap">
+											<div class="icon">
+												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+											</div>
+											<div class="text">
+												<div class="name">{{data.customers_name}}</div>
+												<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
+												<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div ng-show="Edit_Customer_toggle">
+								<div class="form-group">
+									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
+								    <div class="col-sm-5 col-md-5">
+								    	<input type="text" ng-model="EditCustomersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="text" ng-model="EditCustomersName" class="form-control" ng-class="customersError[1]">
+									</div>
+									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="text" ng-model="EditCustomersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
+									</div>
+								</div>
+									
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+								    <div class="col-sm-10 col-md-10">
+								    	<textarea class="form-control" ng-model="EditCustomersAddress" rows="3"  ng-class="customersError[4]"></textarea>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">เพศ</label>
+									<div class="col-sm-2 col-md-2">
+										<select class="form-control" ng-model="EditCustomersSex">
+								      <option value="male">ชาย</option>
+								      <option value="female">หญิง</option>          
+								    </select>
+							    </div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-6 col-xs-offset-3 col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
+										<button type="button" class="btn btn-danger " ng-click="removeCustomer(EditCustomersId)" ng-hide="editFlug">ลบ</button>
+										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
+				</div><!--  Tab 4  -->
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==5">
 					<div class="title">

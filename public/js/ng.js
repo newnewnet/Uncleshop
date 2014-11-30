@@ -20,6 +20,11 @@ angular.module('uncleshopApp')
 			$scope.findPayBill_toggle = true;
 			$scope.optionSearchPayBill = 0;
 		}
+		else if(number == 4){
+			// $scope.getAdmins();
+			// $scope.adminToggle = false;
+			//$scope.focusItem(null);
+		}
 		else if(number == 5){
 			$scope.getAdmins();
 			$scope.adminToggle = false;
@@ -30,7 +35,7 @@ angular.module('uncleshopApp')
 	};
 
 	/////เวลาส่งทำงี้นะ
-
+/*----------------------------  Customer  ---------------------------------*/
 	$scope.seachCustomers = function ()
 	{
 		var data = {
@@ -40,6 +45,60 @@ angular.module('uncleshopApp')
 		{
 			$rootScope.DataCustomers = data;
 		},500);
+	};
+
+	$scope.backToEditCustomer = function () {
+		$rootScope.DataCustomers = null;
+		$scope.Edit_Customer_toggle = false;
+		$scope.search.data = null;
+	};
+
+	$scope.editCustomer = function (index){
+		$scope.Edit_Customer_toggle = true;
+		$scope.EditCustomersId = $rootScope.DataCustomers[index].customers_id;
+		$scope.EditCustomersIdCard = $rootScope.DataCustomers[index].customers_id_card;
+		$scope.EditCustomersName = $rootScope.DataCustomers[index].customers_name;
+		$scope.EditCustomersTel = $rootScope.DataCustomers[index].customers_tel;
+		$scope.EditCustomersAddress = $rootScope.DataCustomers[index].customers_address;
+		$scope.EditCustomersSex = $rootScope.DataCustomers[index].customers_sex;
+	};
+
+	$scope.updateCustomer = function (){
+		$scope.Edit_Customer_toggle = true;
+		$scope.EditCustomersId = $rootScope.DataCustomers[index].customers_id;
+		$scope.EditCustomersIdCard = $rootScope.DataCustomers[index].customers_id_card;
+		$scope.EditCustomersName = $rootScope.DataCustomers[index].customers_name;
+		$scope.EditCustomersTel = $rootScope.DataCustomers[index].customers_tel;
+		$scope.EditCustomersAddress = $rootScope.DataCustomers[index].customers_address;
+		$scope.EditCustomersSex = $rootScope.DataCustomers[index].customers_sex;
+	};
+
+	$scope.removeCustomer = function(CustomerId) {
+		swal({   
+			title: "ลบข้อมูลลูกค้า ?",   
+			text: "คุณต้องการลบข้อมูลลูกค้าใช่หรือไม่",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "ใช่, ลบออก !",   
+			cancelButtonText: "ยกเลิก",
+			closeOnConfirm: false 
+		}, function(){
+			var data = {
+				'customers_id': CustomerId
+			};
+			manageCustomers.deleteCustomers(data,function(data, status, headers, config)
+			{
+				if(data == 1){
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "ลบข้อมูลลูกค้าเรียบร้อยแล้ว",   
+						type: "success",
+						timer: 2000
+					});
+				}
+			},500);
+		});
 	};
 
 	$scope.backToBill = function() {
@@ -647,7 +706,7 @@ angular.module('uncleshopApp')
 	};
 	/*when init*/
 	$scope.init = function() {
-		$scope.changTab(2);
+		$scope.changTab(4);
 		//$scope.getAdmins();
 		$scope.adminDefault();
 		$scope.customersDefault();
