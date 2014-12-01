@@ -11,14 +11,14 @@ angular.module('uncleshopApp')
 		$rootScope.loginText=text[number];
 		
 		if(number == 1){
-			$scope.addProduct_toggle = true;
-			$scope.DataCustomer_toggle = false;
+			$scope.backToBill();
 			//$scope.focusItem('search_focus');
 		}
 		else if(number == 2){
-			$rootScope.searchBill.data = null;
-			$scope.findPayBill_toggle = true;
-			$scope.optionSearchPayBill = 0;
+			// $rootScope.searchBill.data = null;
+			// $scope.findPayBill_toggle = true;
+			// $scope.optionSearchPayBill = 0;
+			$scope.backToPayBill();
 		}
 		else if(number == 4){
 			$scope.backToEditCustomer();
@@ -182,6 +182,8 @@ angular.module('uncleshopApp')
 	$scope.backToBill = function() {
 		$scope.DataCustomer_toggle = false;
 		$scope.addProduct_toggle = true;
+		$scope.billCode = null;
+		$scope.setBillDefault();
 	};
 
 	$scope.backToPayBill = function() {
@@ -189,6 +191,9 @@ angular.module('uncleshopApp')
 		$rootScope.DataBill = null;
 		$scope.searchBill.data = null;
 		$scope.optionSearchPayBill = 0;
+		$scope.customersDes_toggle = false;
+		$scope.productDes_toggle = false;
+		$scope.priceDes_toggle = false;
 	};
 
 	$scope.backToAdmin = function() {
@@ -205,58 +210,55 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.cutBill = function() {
-		if($scope.DataPayBill.dateBill[index].bill_detail_status == 99){
-			swal({   
-				title: "ชำระเงิน ?",   
-				text: "คุณต้องการชำระเงินประจำวันที่ " + $scope.DataPayBill.dateBill[index].bill_detail_date + " เป็นจำนวนเงิน " + $scope.DataPayBill.bill.bill_installments_price + " บาท ใช่หรือไม่",   
-				type: "warning",   
-				showCancelButton: true,   
-				confirmButtonColor: "#2980B9",   
-				confirmButtonText: "ใช่, ชำระเงินเดี๋ยวนี้ !",   
-				cancelButtonText: "ยกเลิก",
-				closeOnConfirm: false 
-			}, function(){
-				var detail_index = null;
-				for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
-					if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
-						detail_index = i;
-					}
-				}
-
-				var detail_price = $scope.DataPayBill.bill.bill_installments_price*($scope.DataPayBill.bill.bill_date_amount-detail_index);
-				detail_price = detail_price - ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1)));
-
-				var data = {
-					'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
-					'bill_detail_price' : detail_price,
-					'admin_id' : $rootScope.admin.admin_id,
-					'bill_interest' : ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1))),
-					'bill_date_amount' : parseInt(detail_index+1),
-					'bill_code' : $scope.DataPayBill.bill.bill_code
-				};
-
-				manageBill.cutBillDetail(data,function(data, status, headers, config){
-					if(data == 1){
-						swal({
-							title: "เรียบร้อย !!",   
-							text: "ชำระเงินเรียบร้อยแล้ว",   
-							type: "success",
-							timer: 1500
-						});
-						$scope.payBillWithBillCode($scope.DataPayBill.bill.bill_code);
-					}
-					else{
-						swal({
-							title: "ไม่สำเร็จ !!",   
-							text: "กรุณาลองใหม่อีกครั้ง",   
-							type: "error",
-							timer: 2000
-						});
-					}
-
-				},500);
-			});
+		var detail_index = null;
+		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
+			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
+				detail_index = i;
+			}
 		}
+
+		var detail_price = $scope.DataPayBill.bill.bill_installments_price*($scope.DataPayBill.bill.bill_date_amount-detail_index);
+		detail_price = detail_price - ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1)));
+
+		var data = {
+			'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
+			'bill_detail_price' : detail_price,
+			'admin_id' : $rootScope.admin.admin_id,
+			'bill_interest' : ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1))),
+			'bill_date_amount' : parseInt(detail_index+1),
+			'bill_code' : $scope.DataPayBill.bill.bill_code
+		};
+		console.log(data);
+		swal({   
+			title: "ชำระเงินที่เหลือทั้งหมด(ตัดบิล) ?",   
+			text: "คุณต้องการชำระเงินประจำวันที่ " + $scope.DataPayBill.dateBill[detail_index].bill_detail_date + " เป็นจำนวนเงิน " + data.bill_detail_price + " บาท (ตัดบิล) ใช่หรือไม่",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#2980B9",   
+			confirmButtonText: "ใช่, ชำระเงินเดี๋ยวนี้ !",   
+			cancelButtonText: "ยกเลิก",
+			closeOnConfirm: false 
+		}, function(){
+			manageBill.cutBillDetail(data,function(data, status, headers, config){
+				if(data == 1){
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "ชำระเงินเรียบร้อยแล้ว",   
+						type: "success",
+						timer: 1500
+					});
+					$scope.payBillWithBillCode($scope.DataPayBill.bill.bill_code);
+				}
+				else{
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",   
+						type: "error",
+						timer: 2000
+					});
+				}
+			},500);
+		});
 	}
 
 	$scope.payTermOfBill = function(index) {	
@@ -311,10 +313,9 @@ angular.module('uncleshopApp')
 		var data = {
 			'bill_code': $scope.DataBill[index].bill_code
 		};
+		$scope.billCode = $scope.DataBill[index].bill_code;
 		manageBill.getBill(data,function(data, status, headers, config){		
-			console.log('before edit');	
-			console.log(data);
-			$scope.DataPayBill = data;
+			$scope.DataPayBill = data;			 
 			if($scope.DataPayBill.bill.bill_status == 0){
 				var length = $scope.DataPayBill.dateBill.length;
 
@@ -564,6 +565,7 @@ angular.module('uncleshopApp')
 			// console.log(data);
 			// console.log('option' + $scope.optionSearchPayBill);
 			$rootScope.DataBill = data;
+			console.log(data);
 			// console.log($rootScope.DataBill);
 		}, 500);
 	};
@@ -938,10 +940,15 @@ angular.module('uncleshopApp')
 			};
 			manageBill.createBill(data,function(data, status, headers, config)
 			{
-				console.log(data);
 				if(data != '')
-				{
-					$scope.billCode = data; 
+				{	
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "เพิ่มบิลเรียบร้อยแล้ว",   
+						type: "success",
+						timer: 1500
+					});
+					$scope.billCode = data;
 				}
 			})
 		}
