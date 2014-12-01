@@ -223,10 +223,10 @@
 									<label class="col-sm-2 col-md-2 control-label">เพศ</label>
 									<div class="col-sm-2 col-md-2">
 										<select class="form-control" ng-model="customersSex">
-								          	<option value="male">ชาย</option>
-								        	<option value="female">หญิง</option>          
-								        </select>
-							        </div>
+								     	<option value="male">ชาย</option>
+								    	<option value="female">หญิง</option>          
+								    </select>
+							    </div>
 								</div>
 
 								<div class="row">
@@ -234,6 +234,7 @@
 										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers()">เพิ่ม</button>
 									</div>
 								</div>
+
 							</div>
 						</div>
 						<div class="form-horizontal" ng-show="addProduct_toggle">
@@ -543,21 +544,27 @@
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToEditCustomer()">
 							ข้อมูลลูกค้า
 						</div>
-						<div class="TEXT-RIGHT sub-title-right" ng-click="backToEditCustomer()" ng-show="Edit_Customer_toggle">
+						<div class="TEXT-RIGHT sub-title-right" ng-show="Search_Customer_toggle" ng-click="Add_Customer_toggle = true; Search_Customer_toggle = false; Edit_Customer_toggle = false;">
+							<div class="plus-user CURSOR">
+								<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
+								<img src="img/icon-user.png"/>
+							</div>
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-hide="Search_Customer_toggle" ng-click="backToEditCustomer()">
 							<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
 						</div>
 					</div>	
 
 					<div class="box-bill">
 						<div class="form-horizontal">
-							<div class="form-group" ng-hide="Edit_Customer_toggle">						
+							<div class="form-group" ng-show="Search_Customer_toggle">						
 							  <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
 								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" style="font-size: 20px;">
 								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
 
-							<div class="conResult" ng-hide="Edit_Customer_toggle">
+							<div class="conResult" ng-show="Search_Customer_toggle">
 								<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">
 									<div class="resultUser">
 										<div class="wrap">
@@ -575,28 +582,72 @@
 								</div>
 							</div>
 
-							<div ng-show="Edit_Customer_toggle">
+							<!-- add customer -->
+							<div ng-show="Add_Customer_toggle">
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="text" ng-model="EditCustomersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
+								    	<input type="text" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="EditCustomersName" class="form-control" ng-class="customersError[1]">
+								    	<input type="text" ng-model="customersName" class="form-control" ng-class="customersError[1]">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="EditCustomersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
+								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
+								    <div class="col-sm-10 col-md-10">
+								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[4]"></textarea>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">เพศ</label>
+									<div class="col-sm-2 col-md-2">
+										<select class="form-control" ng-model="customersSex">
+								     	<option value="male">ชาย</option>
+								    	<option value="female">หญิง</option>          
+								    </select>
+							    </div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-2 col-xs-offset-5 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
+										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers()">เพิ่ม</button>
+									</div>
+								</div>
+							</div>
+
+							<!-- edit customer -->
+							<div ng-show="Edit_Customer_toggle">
+								<div class="form-group">
+									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
+								    <div class="col-sm-5 col-md-5">
+								    	<input type="text" ng-model="EditCustomersIdCard" maxlength="13" class="form-control" ng-disabled="true" numbers-only="numbers-only" focus-me="customers_id_focus">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="text" ng-keyup="keyCheckCustomer()" ng-class="EditCustomerError[0]" ng-model="EditCustomersName" class="form-control">
+									</div>
+									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
+								    <div class="col-sm-4 col-md-4">
+								    	<input type="text" ng-keyup="keyCheckCustomer()" ng-class="EditCustomerError[1]" ng-model="EditCustomersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10">
 									</div>
 								</div>
 									
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-10 col-md-10">
-								    	<textarea class="form-control" ng-model="EditCustomersAddress" rows="3"  ng-class="customersError[4]"></textarea>
+								    	<textarea class="form-control" ng-keyup="keyCheckCustomer()" ng-class="EditCustomerError[2]" ng-model="EditCustomersAddress" rows="3"></textarea>
 									</div>
 								</div>
 
@@ -613,10 +664,11 @@
 								<div class="row">
 									<div class="col-xs-6 col-xs-offset-3 col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
 										<button type="button" class="btn btn-danger " ng-click="removeCustomer(EditCustomersId)" ng-hide="editFlug">ลบ</button>
-										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>
+										<button type="button" class="btn btn-success" ng-click="updateCustomer()" ng-hide="editFlug">แก้ไข</button>
 									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div><!--  Tab 4  -->

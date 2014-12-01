@@ -21,6 +21,7 @@ angular.module('uncleshopApp')
 			$scope.optionSearchPayBill = 0;
 		}
 		else if(number == 4){
+			$scope.backToEditCustomer();
 			// $scope.getAdmins();
 			// $scope.adminToggle = false;
 			//$scope.focusItem(null);
@@ -49,12 +50,19 @@ angular.module('uncleshopApp')
 
 	$scope.backToEditCustomer = function () {
 		$rootScope.DataCustomers = null;
+		$scope.Search_Customer_toggle = true;
 		$scope.Edit_Customer_toggle = false;
+		$scope.Add_Customer_toggle = false;
+		$scope.customersDefault();
 		$scope.search.data = null;
 	};
 
 	$scope.editCustomer = function (index){
 		$scope.Edit_Customer_toggle = true;
+		$scope.Search_Customer_toggle = false;
+		$scope.Add_Customer_toggle = false;
+		$scope.EditCustomerError = ['1','1','1'];
+
 		$scope.EditCustomersId = $rootScope.DataCustomers[index].customers_id;
 		$scope.EditCustomersIdCard = $rootScope.DataCustomers[index].customers_id_card;
 		$scope.EditCustomersName = $rootScope.DataCustomers[index].customers_name;
@@ -63,14 +71,76 @@ angular.module('uncleshopApp')
 		$scope.EditCustomersSex = $rootScope.DataCustomers[index].customers_sex;
 	};
 
+	$scope.keyCheckCustomer = function (){
+		if($scope.EditCustomersName == ''){
+			$scope.EditCustomerError[0] = 'input-error';
+		}
+		else{
+			$scope.EditCustomerError[0] = '1';
+		}
+
+		if($scope.EditCustomersTel.length != 10){
+			$scope.EditCustomerError[1] = 'input-error';
+		}
+		else{
+			$scope.EditCustomerError[1] = '1';
+		}
+
+		if($scope.EditCustomersAddress == ''){
+			$scope.EditCustomerError[2] = 'input-error';
+		}
+		else{
+			$scope.EditCustomerError[2] = '1';
+		}
+	};
+
 	$scope.updateCustomer = function (){
-		$scope.Edit_Customer_toggle = true;
-		$scope.EditCustomersId = $rootScope.DataCustomers[index].customers_id;
-		$scope.EditCustomersIdCard = $rootScope.DataCustomers[index].customers_id_card;
-		$scope.EditCustomersName = $rootScope.DataCustomers[index].customers_name;
-		$scope.EditCustomersTel = $rootScope.DataCustomers[index].customers_tel;
-		$scope.EditCustomersAddress = $rootScope.DataCustomers[index].customers_address;
-		$scope.EditCustomersSex = $rootScope.DataCustomers[index].customers_sex;
+		var text = '';
+		if($scope.EditCustomerError[0].length > 1)
+			text += ' ชื่อลูกค้า ';
+		if($scope.EditCustomerError[1].length > 1)
+			text += ' เบอร์โทรศัพท์ ';
+		if($scope.EditCustomerError[2].length > 1)
+			text += ' ที่อยู่ ';
+
+		if(text.length > 0){
+			swal({
+				title: "ไม่สำเร็จ !!",   
+				text: "กรุณาตรวจสอบ" + text + 'อีกครั้ง',   
+				type: "error",
+				timer: 2000
+			});
+		}
+
+		else if(text.length == 0){
+			var data = {
+				'customers_id': $scope.EditCustomersId,
+				'customers_id_card': $scope.EditCustomersIdCard,
+				'customers_name': $scope.EditCustomersName,
+				'customers_address': $scope.EditCustomersAddress,
+				'customers_sex': $scope.EditCustomersSex,
+				'customers_tel': $scope.EditCustomersTel
+			};
+
+			manageCustomers.updateCustomers(data,function(data, status, headers, config){
+				if(data == 1){
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "แก้ไขข้อมูลเรียบร้อยแล้ว",   
+						type: "success",
+						timer: 1500
+					});
+				}
+				else{
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",  
+						type: "error",
+						timer: 2000
+					});
+				}
+			});
+		}
 	};
 
 	$scope.removeCustomer = function(CustomerId) {
@@ -94,6 +164,14 @@ angular.module('uncleshopApp')
 						title: "เรียบร้อย !!",   
 						text: "ลบข้อมูลลูกค้าเรียบร้อยแล้ว",   
 						type: "success",
+						timer: 1500
+					});
+				}
+				else{
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",   
+						type: "error",
 						timer: 2000
 					});
 				}
@@ -163,10 +241,19 @@ angular.module('uncleshopApp')
 							title: "เรียบร้อย !!",   
 							text: "ชำระเงินเรียบร้อยแล้ว",   
 							type: "success",
-							timer: 2000
+							timer: 1500
 						});
 						$scope.payBillWithBillCode($scope.DataPayBill.bill.bill_code);
 					}
+					else{
+						swal({
+							title: "ไม่สำเร็จ !!",   
+							text: "กรุณาลองใหม่อีกครั้ง",   
+							type: "error",
+							timer: 2000
+						});
+					}
+
 				},500);
 			});
 		}
@@ -195,9 +282,17 @@ angular.module('uncleshopApp')
 							title: "เรียบร้อย !!",   
 							text: "ชำระเงินเรียบร้อยแล้ว",   
 							type: "success",
-							timer: 2000
+							timer: 1500
 						});
 						$scope.payBillWithBillCode($scope.DataPayBill.bill.bill_code);
+					}
+					else{
+						swal({
+							title: "ไม่สำเร็จ !!",   
+							text: "กรุณาลองใหม่อีกครั้ง",   
+							type: "error",
+							timer: 2000
+						});
 					}					
 				},500);
 			});
@@ -558,6 +653,14 @@ angular.module('uncleshopApp')
 						$scope.getAdmins(); //get all admin after saved new admin
 						$scope.adminToggle = false;
 					}
+					else{
+						swal({
+							title: "ไม่สำเร็จ !!",   
+							text: "กรุณาลองใหม่อีกครั้ง",   
+							type: "error",
+							timer: 2000
+						});
+					}
 				},500);
 			}
 
@@ -711,6 +814,7 @@ angular.module('uncleshopApp')
 		$scope.adminDefault();
 		$scope.customersDefault();
 		$scope.productDefault();
+		$scope.EditCustomerError = ['1','1','1'];
 	};
 
 	/*----------------------------  prodcut---------------------------------*/
