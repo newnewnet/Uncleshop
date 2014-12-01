@@ -194,9 +194,19 @@
 
 
 	  	var divDateBill = "";
+	  	var strBillDetail = "";
 	  	$.each(dateBill, function(i, dateBills) 
 	  	{
-	  		divDateBill = "<div style='margin-top: 6px'>"+dateBills.bill_detail_date+"</div>";
+	  		if(dateBills.bill_detail_status == 0 )
+	  		{
+	  			strBillDetail = "ยังไม่ชำละเงิน";
+	  		}
+	  		else
+	  		{	
+	  			strBillDetail = "ชำระเงินแล้ว";
+	  		}
+
+	  		divDateBill = "<div style='margin-top: 6px;'>"+dateBills.bill_detail_date+" : "+strBillDetail+"</div>";
 	  		$('#dateBill').append(divDateBill);
 	  	});
 
