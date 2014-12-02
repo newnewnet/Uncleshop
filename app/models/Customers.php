@@ -9,12 +9,10 @@
 		public function getCustomers($param,$key)
 		{
 			$result = '';
-			if($key != '')
-			{
-				$result = $this->orWhere('customers_id_card', 'LIKE', "%".$key."%")
-								->orWhere('customers_name', 'LIKE', "%".$key."%")
-								->orWhere('customers_tel', 'LIKE', "%".$key."%");
-			}
+			$result = $this->orWhere('customers_id_card', 'LIKE', "%".$key."%")
+							->orWhere('customers_name', 'LIKE', "%".$key."%")
+							->orWhere('customers_tel', 'LIKE', "%".$key."%");
+
 
 			$perPage = $param['perpage'];
 			$skip = ($param['page'] - 1) * $perPage;
