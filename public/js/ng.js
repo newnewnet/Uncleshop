@@ -35,21 +35,48 @@ angular.module('uncleshopApp')
 			$scope.focusItem(null);
 	};
 
+$scope.al = function(){
+	alert('scroll');
+}
+
 	/////เวลาส่งทำงี้นะ
 /*----------------------------  Customer  ---------------------------------*/
-	$scope.seachCustomers = function ()
+	$scope.seachCustomers = function (type)
 	{
-		var data = {
-			'key':$rootScope.search.data
+		if(type == 1){
+			$scope.page = 1;
+			var data = {
+				'key':$rootScope.search.data,
+				'perpage': 6,
+				'page': $scope.page
+			}
+			manageCustomers.getCustomers(data,function(data, status, headers, config)
+			{
+				$rootScope.DataCustomers = data.data;	
+				console.log($rootScope.DataCustomers);			
+			},500);
 		}
-		manageCustomers.getCustomers(data,function(data, status, headers, config)
-		{
-			$rootScope.DataCustomers = data;
-		},500);
+
+		else{
+			console.log('$scope.page : ');
+			console.log($scope.page++);
+			// var data = {
+			// 	'key':$rootScope.search.data,
+			// 	'perpage': 2,
+			// 	'page': $scope.page
+			// }
+			// manageCustomers.getCustomers(data,function(data, status, headers, config)
+			// {
+			// 	for(var i=0; i<data.data.length; i++){
+			// 		$rootScope.DataCustomers.push(data.data[i]);
+			// 	}
+			// 	console.log($rootScope.DataCustomers);
+			// },500);
+		}		
 	};
 
 	$scope.backToEditCustomer = function () {
-		$rootScope.DataCustomers = null;
+		$rootScope.DataCustomers = [];
 		$scope.Search_Customer_toggle = true;
 		$scope.Edit_Customer_toggle = false;
 		$scope.Add_Customer_toggle = false;
@@ -436,7 +463,7 @@ angular.module('uncleshopApp')
 				$scope.focusItem('customers_id_focus');
 			}
 		}
-		$rootScope.DataCustomers = null;
+		$rootScope.DataCustomers = [];
 		$rootScope.search.data = null;
 		$scope.addProduct_toggle = false;
 	};

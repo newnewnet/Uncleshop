@@ -480,6 +480,8 @@ header {
 		height: auto;
 		font-family: 'thaisans_semibold';
 		font-size:20px;
+		height: 100%;
+
 		input, button, select, textarea {
 			font-size:20px;
 		}
@@ -488,66 +490,75 @@ header {
 			margin-left: 8%;
 		}
 
-		.conResult {
-			margin-left: 13%;
-			.resultUser {
-				float: left;
-				background-color: white; 
-				width: 296px;
-				cursor:pointer;
-				border: 1px solid #dcdcdc;
-				margin-bottom: 3px;
-				height: 66px;
-				&:hover, &:focus {
-					border: 1px solid #f1c40f;
-				}
+		.wrapConResult {
+			overflow: auto;
+			width: 110%; 
+			margin-left: -5%;
+			height: 180px; 
+			/*background-color: red;*/
 
-				&:first-child {
-					-webkit-border-top-left-radius: @border-radius-small;
-					-moz-border-top-left-radius: @border-radius-small;
-					border-top-left-radius: @border-radius-small;
-				}
-				.wrap {
-					.icon {
-						float: left;
-						width: 44px;
-						height: 100%;
-						margin-left: 7.5px;
-						margin-right: 7.5px;
-						img {
-							margin-top: 12px;
-							width: 44px;
-						}
+			.conResult {
+				/*margin-left: 8%;*/
+				.resultUser {
+					float: left;
+					background-color: white; 
+					width: 296px;
+					margin-left: 20px;
+					cursor:pointer;
+					border: 1px solid #dcdcdc;
+					margin-bottom: 3px;
+					height: 66px;
+					&:hover, &:focus {
+						border: 1px solid #f1c40f;
 					}
-					.text {
-						position: relative;
-						float: left;
-						height: 100%;
-						width: 210px;
-						color: #34495e;
 
-						.name {			
-							float: left;	
-							width: 100%;
-							position: relative;
-							height: 20px;
-							line-height: 20px;
-							margin-bottom: 0px;
-						}
-						.tel {
+					&:first-child {
+						-webkit-border-top-left-radius: @border-radius-small;
+						-moz-border-top-left-radius: @border-radius-small;
+						border-top-left-radius: @border-radius-small;
+					}
+					.wrap {
+						.icon {
 							float: left;
-							color: #e67e22;
-							width: 65px;
-							position: relative;
-							height: 20px;
-							line-height: 20px;
+							width: 44px;
+							height: 100%;
+							margin-left: 7.5px;
+							margin-right: 7.5px;
+							img {
+								margin-top: 12px;
+								width: 44px;
+							}
 						}
-						.tel-data {
-							float: left;
-							width: 145px;
+						.text {
 							position: relative;
-							height: 20px;
-							line-height: 20px;
+							float: left;
+							height: 100%;
+							width: 210px;
+							color: #34495e;
+
+							.name {			
+								float: left;	
+								width: 100%;
+								position: relative;
+								height: 20px;
+								line-height: 20px;
+								margin-bottom: 0px;
+							}
+							.tel {
+								float: left;
+								color: #e67e22;
+								width: 65px;
+								position: relative;
+								height: 20px;
+								line-height: 20px;
+							}
+							.tel-data {
+								float: left;
+								width: 145px;
+								position: relative;
+								height: 20px;
+								line-height: 20px;
+							}
 						}
 					}
 				}
@@ -649,7 +660,8 @@ header {
 /* Extra Small devices (phones, less than 768px) */
 @screen-xs-max: 767px;
 @media (max-width: @screen-xs-max) {
-	@media (min-width: 568px) and (max-width: 600px) {
+	/*568px*/
+	@media (min-width: 568px) and (max-width: 636px) {
 		.box-save-bill {
 			.box-bill {
 				.conResult {

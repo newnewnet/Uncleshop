@@ -83,7 +83,7 @@
 	  </header>
 
 
-		<div class="container" style="margin-bottom: 50px;" >
+		<div class="container" style="margin-bottom: 50px;">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
 				<div class="row-fluid TEXT-CENTER">
@@ -559,11 +559,11 @@
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
-					<div class="title">ประวัติบชำระเงิน</div>	
+					<div class="title">ประวัติบชำระเงิน</div>
 					<div class="box-bill"></div>
 				</div>
 
-				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==4">
+				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" when-scrolled="al()" ng-show="tabColor==4">
 					<div class="title">
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToEditCustomer()">
 							ข้อมูลลูกค้า
@@ -583,23 +583,25 @@
 						<div class="form-horizontal">
 							<div class="form-group" ng-show="Search_Customer_toggle">						
 							  <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
-								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" style="font-size: 20px;">
-								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
+								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers(1)" style="font-size: 20px;">
+								  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
 
-							<div class="conResult" ng-show="Search_Customer_toggle">
-								<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">
-									<div class="resultUser">
-										<div class="wrap">
-											<div class="icon">
-												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
-												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
-											</div>
-											<div class="text">
-												<div class="name">{{data.customers_name}}</div>
-												<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
-												<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+							<div class="wrapConResult" style="background-color: red;" ng-show="Search_Customer_toggle">
+								<div class="conResult" ng-show="Search_Customer_toggle">
+									<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">
+										<div class="resultUser">
+											<div class="wrap">
+												<div class="icon">
+													<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+													<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+												</div>
+												<div class="text">
+													<div class="name">{{data.customers_name}}</div>
+													<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
+													<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+												</div>
 											</div>
 										</div>
 									</div>
