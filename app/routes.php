@@ -28,16 +28,18 @@ Route::get('admin','UncleshopApiController@getAdmin');
 Route::get('interest','UncleshopApiController@getAdminInterest');
 
 Route::get('updateCustomers','UncleshopApiController@updateCustomers');
-
 Route::get('deleteCustomers','UncleshopApiController@deleteCustomers');
 
 Route::post('saveBill','UncleshopApiController@saveBill');
 Route::get('getBill','UncleshopApiController@getBill');
 Route::get('bill','UncleshopApiController@searchBill');
 Route::get('timeLineBill','UncleshopApiController@timeLineBill');
-
+////จ่ายค่างวดปกติ///
 Route::post('updateBillDetail','UncleshopApiController@updateBillDetail');
+////มาจ่ายงวดก่อนกำหนด///
 Route::post('cutBillDetail','UncleshopApiController@cutBillDetail');
+////จ่ายดอกเบี้ยเพราะไม่มีเงินจ่ายค่างวดและเพิ่มวันที่ผ่อนไปอีก///
+Route::post('payOnlyInterest','UncleshopApiController@payOnlyInterest');
 
 Route::get('saveAdmin','UncleshopApiController@saveAdmin');
 Route::get('checkUser','UncleshopApiController@checkUser');

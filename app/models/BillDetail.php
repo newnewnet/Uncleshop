@@ -18,12 +18,17 @@
 							));
 
 
-
 				$billDetailData =  $this->where('bill_detail_id','=',$array['bill_detail_id'])->first();
+
+				DB::table('bill')->where('bill_code','=',$billDetailData->bill_code)
+												->update(array(
+																'bill_total' => $array['bill_total'],
+															));
 
 				$count = DB::table('bill')->where('bill_code','=',$billDetailData->bill_code)
 										->where('bill_end_date','=',$billDetailData->bill_detail_date)
 										->count();
+
 				if($count > 0)
 				{
 					DB::table('bill')->where('bill_code','=',$billDetailData->bill_code)
@@ -43,7 +48,9 @@
 								'bill_detail_status' => 2,
 								'bill_detail_price' => $array['bill_detail_price'],
 								'admin_id' => $array['admin_id'],
-							));			
+							));
+
+
 
 				$billDetailData =  $this->where('bill_code','=',$array['bill_code'])
 										->where('bill_detail_status','=',0)
@@ -55,7 +62,8 @@
 								->update(array(
 											'bill_status' => 2,
 											'bill_interest' => $array['bill_interest'],
-											'bill_date_amount' => $array['bill_date_amount']
+											'bill_date_amount' => $array['bill_date_amount'],
+											'bill_total' => $array['bill_total']
 											// 'bill_price' => $array['bill_price']
 								));
 
@@ -103,6 +111,47 @@
 
 		 	return  $result;
 		}
+		public function payOnlyInterest($array)
+		{
+			if(!empty($array))
+			{
+				$bill = new Bill;
+				$this->where('bill_detail_id','=',$array['bill_detail_id'])
+							->update(array(
+								'bill_detail_status' => 3,
+								'bill_detail_price' => $array['bill_detail_price'],
+								'admin_id' => $array['admin_id'],
+							));
+
+
+				$dataBill = $bill->where('bill_code','=',$array['bill_code'])->select('bill_end_date','bill_type','bill_pay_only_lnterest_amoint')->first();
+
+				$day = 30;
+				if($dataBill->bill_type == 1)
+				{
+					$day = 15;
+				}
+				$date = strtotime($dataBill->bill_end_date) + ($day * 24 * 60 * 60);
+				$date = date('Y-m-d',$date);	
+
+				$result = $bill->where('bill_code','=',$array['bill_code'])
+							->update(array(
+								'bill_end_date' => $date,
+								'bill_pay_only_lnterest_amoint' => ++$dataBill->bill_pay_only_lnterest_amoint,
+								'bill_total' => $array['bill_total']
+							));
+
+				$this->insert([
+						'bill_detail_date' => $date,
+						'bill_detail_status' => 0,
+						'bill_code' => $array['bill_code']
+				]);
+				return $result;
+
+			}
+			
+		}
+
 
 
 

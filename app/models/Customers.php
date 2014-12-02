@@ -6,19 +6,26 @@
 		public $timestamps = false;
 		protected $primaryKey = 'customers_id';
 
-		public function getCustomers($key)
+		public function getCustomers($param,$key)
 		{
 			$result = '';
 			if($key != '')
 			{
-				$customers  = new Customers;
-				$result = $customers->orWhere('customers_id_card', 'LIKE', "%".$key."%")
+				$result = $this->orWhere('customers_id_card', 'LIKE', "%".$key."%")
 								->orWhere('customers_name', 'LIKE', "%".$key."%")
-								->orWhere('customers_tel', 'LIKE', "%".$key."%")
-								->get();
-				
+								->orWhere('customers_tel', 'LIKE', "%".$key."%");
 			}
-			return $result;
+
+			$perPage = $param['perpage'];
+			$skip = ($param['page'] - 1) * $perPage;
+			$page = ceil($result->count() / $perPage);
+			$result = $result->skip($skip)->take($perPage)->get();
+
+			return [
+				'page' => $page,
+				'data' => $result
+			];
+					
 		}
 		public function updateCustomers($array)
 		{

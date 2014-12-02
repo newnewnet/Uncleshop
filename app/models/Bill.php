@@ -43,6 +43,7 @@
 					'bill_price_dow' => $data->bill_price_dow,
 					'customers_id' => $customersId->customers_id,
 					'bill_create_time' => date('Y-m-d H:i:s'),
+					'bill_total' => $data->bill_price_dow,
 					'admin_id' => $data->admin_id
 			]);
 
@@ -84,36 +85,24 @@
 			$customerData =  $customer->where('customers_id','=',$billData->customers_id)->first();
 			$adminData = $admin->where('admin_id','=',$billData->admin_id)->select('admin_name')->first();
 			$billDetailData = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status','admin_id')->get();
-			$billData['bill_total_price'] = $billData->bill_price+$billData->bill_interest;
-			$billData['bill_installments_price'] = ceil((($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow)/$billData->bill_date_amount);
-			$billData['bill_pay_price'] = (($billData->bill_price+$billData->bill_interest)-$billData->bill_price_dow);
-			$billData['bill_interest_to_mount'] = ($billData->bill_interest/$billData->bill_date_amount);
+			$billData['bill_total_price'] = $billData->bill_price+($billData->bill_interest*$billData->bill_date_amount);
+			$billData['bill_installments_price'] = ceil((($billData->bill_price+($billData->bill_interest*$billData->bill_date_amount))-$billData->bill_price_dow)/$billData->bill_date_amount);
+			$billData['bill_pay_price'] = (($billData->bill_price+($billData->bill_interest*$billData->bill_date_amount))-$billData->bill_price_dow);
+			$billData['bill_interest_to_mount'] = (($billData->bill_interest*$billData->bill_date_amount)/$billData->bill_date_amount);
 
 			$billData->bill_start_date = strtotime($billData->bill_start_date);
 			$billData->bill_start_date = date('d-m-Y',$billData->bill_start_date);
 
-			// for($i=0;$i<count($billDetailData);$i++)
-			// {
-			// 	if($billDetailData[$i]->admin_id != null)
-			// 	{
-			// 		$billDetailData[$i]->admin_name = $admin->where('admin_id','=',$billDetailData[$i]->admin_id)->select('admin_name')->first();
-			// 	}
-			// 	$date = strtotime($billDetailData[$i]->bill_detail_date);
-			// 	$date = date('d-m-Y',$date);
-			// 	$billDetailData[$i]->bill_detail_date = $date;
-			// }
-			$monthFull = ['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+			$billData->bill_start_date = $this->dateToFormatThai($billData->bill_start_date);
+			
 			for($i=0;$i<count($billDetailData);$i++)
 			{
 				if($billDetailData[$i]->admin_id != null)
 				{
 					$billDetailData[$i]->admin_name = $admin->where('admin_id','=',$billDetailData[$i]->admin_id)->select('admin_name')->first();
 				}
-				$date = strtotime($billDetailData[$i]->bill_detail_date);
-				$day = date('d',$date);
-				$month = (int)date('m',$date);
-				$year = date('Y',$date);
-				$billDetailData[$i]->bill_detail_date = $day.' '.$monthFull[$month].' '.$year;
+			
+				$billDetailData[$i]->bill_detail_date = $this->dateToFormatThai($billDetailData[$i]->bill_detail_date);
 			}
 
 				
@@ -128,6 +117,15 @@
 		private function daysInMonth($month, $year)
 		{
 			return $month == 2 ? ($year % 4 ? 28 : ($year % 100 ? 29 : ($year % 400 ? 28 : 29))) : (($month - 1) % 7 % 2 ? 30 : 31);
+		}
+		private function dateToFormatThai($date)
+		{
+				$monthFull = ['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+				$date = strtotime($date);
+				$day = date('d',$date);
+				$month = (int)date('m',$date);
+				$year = date('Y',$date);
+				return $day.' '.$monthFull[$month].' '.$year;
 		}
 		private function randomBill()
 		{
@@ -169,7 +167,7 @@
 		}
 
 
-		public function searchBill($key,$status)
+		public function searchBill($param,$key,$status)
 		{
 			$result = '';
 
@@ -177,7 +175,19 @@
 			{
 				$customers =  new Customers;
 				$product = new Product;
-				$result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id=customers.customers_id WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
+				$result = $this->join('customers', 'customers.customers_id', '=', 'bill.customers_id')			
+ 								->orWhere('customers.customers_id_card', 'LIKE', "%".$key."%")
+ 								->orWhere('customers.customers_name', 'LIKE', "%".$key."%")							
+ 								->orWhere('customers.customers_tel', 'LIKE', "%".$key."%")
+ 								->orWhere('bill.bill_code', 'LIKE', "%".$key."%")
+ 								->select('bill.bill_status','bill.bill_code','customers.customers_name','customers.customers_tel','customers.customers_id_card','customers.customers_sex');
+				// $result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id=customers.customers_id WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
+				$perPage = $param['perpage'];
+				$skip = ($param['page'] - 1) * $perPage;
+				$page = ceil($result->count() / $perPage);
+
+				$result = $result->skip($skip)->take($perPage)->get();
+
 				if($status == 0)
 				{
 					$index = 0;
@@ -190,19 +200,6 @@
 							$index++;
 						}
 
-					}
-					if($data != "[]")
-					{
-						for($i=0;$i<count($data);$i++)
-						{
-							$productData = $product->where('bill_code','=',$data[$i]->bill_code)
-											->orderBy('product_price', 'desc')
-		                  ->select('product_name','product_price','product_amount')
-		                  ->first();
-
-	          	$data[$i]->product = $productData;
-
-						}
 					}
 					$result = $data;
 				}
@@ -219,24 +216,12 @@
 						}
 
 					}
-					if($data != "[]")
-					{
-						for($i=0;$i<count($data);$i++)
-						{
-							$productData = $product->where('bill_code','=',$data[$i]->bill_code)
-											->orderBy('product_price', 'desc')
-		                  ->select('product_name','product_price','product_amount')
-		                  ->first();
-
-	          	$data[$i]->product = $productData;
-
-						}
-					}
+					
 					$result = $data;
 				}
-				else if ($status == 2) 
-				{
 
+				if($result != "[]")
+				{
 					for($i=0;$i<count($result);$i++)
 					{
 						$productData = $product->where('bill_code','=',$result[$i]->bill_code)
@@ -244,14 +229,17 @@
 	                  ->select('product_name','product_price','product_amount')
 	                  ->first();
 
-	          $result[$i]->product = $productData;
+          	$result[$i]->product = $productData;
 
 					}
 				}
+
+				return [
+					'page' => $page,
+					'data' => $result
+				];
+
 			}
-
-			return $result;
 		}
-
 
 	}

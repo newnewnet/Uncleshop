@@ -6,7 +6,8 @@
 		{	
 			$customers = new Customers;
 			$key = Input::get('key');
-			$result = $customers->getCustomers($key);
+			$param = $this->validateParamBill(Input::all());
+			$result = $customers->getCustomers($param,$key);
 			return $result;
 		}
 		public function saveCustomers()
@@ -110,9 +111,24 @@
 		{
 			$key = Input::get('key');
 			$status = Input::get('status');
+			$param = $this->validateParamBill(Input::all());
 			$bill= new Bill;
-			$result = $bill->searchBill($key,$status);
+			$result = $bill->searchBill($param,$key,$status);
 			return $result;
+		}
+		private function validateParamBill($param)
+		{
+			if(empty($param['page']))
+			{
+				$param['page'] = 1;
+			}
+
+			if(empty($param['perpage']))
+			{
+				$param['perpage'] = 10;
+			}
+
+			return $param;
 		}
 		public function timeLineBill()
 		{
@@ -134,6 +150,13 @@
 			$array = Input::all();
 			$billDetail= new BillDetail;
 			$result = $billDetail->cutBillDetail($array);
+			return $result;
+		}
+		public function payOnlyInterest()
+		{
+			$array = Input::all();
+			$billDetail= new BillDetail;
+			$result = $billDetail->payOnlyInterest($array);
 			return $result;
 		}
 	}

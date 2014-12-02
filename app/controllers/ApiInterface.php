@@ -87,7 +87,9 @@
 
 		/customers  : get
 		data = {
-			key:สิ่งที่จะค้นหา
+			key:สิ่งที่จะค้นหา,
+			perpage:จำนวนข้อมูลแต่ละหน้า,
+			page:หน้าที่เท่าไร
 		}	
 		
 		/saveCustomers : get
@@ -111,7 +113,9 @@
 		/** mean searchBill
 		/bill  :   get 
 		data = {
-			key : ข้อมูลที่จะค้นหา
+			key:สิ่งที่จะค้นหา,
+			perpage:จำนวนข้อมูลแต่ละหน้า,
+			page:หน้าที่เท่าไร
 		}
 		
 		/** mean get all data from Bill
@@ -126,6 +130,7 @@
 			'bill_detail_id' : $array['bill_detail_id']
 			'bill_detail_price' : $array['bill_detail_price']
 			'admin_id' : $array['admin_id']
+			'bill_total' => $array['bill_total']
 		}
 
 		/cutBillDetail   : post
@@ -137,6 +142,17 @@
 			'bill_date_amount' : $array['bill_date_amount']
 			'bill_price' : $array['bill_price']
 			'bill_code' : $array['bill_code']
+			'bill_total' => $array['bill_total']
+		}
+
+
+		/payOnlyInterest : post
+		data = {
+			'bill_detail_id' : $array['bill_detail_id']
+			'bill_detail_price' : $array['bill_detail_price']
+			'admin_id' : $array['admin_id']
+			'bill_code' : $array['bill_code']
+			'bill_total' => $array['bill_total']
 		}
 
 		/timeLineBill
