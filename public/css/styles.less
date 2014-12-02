@@ -22,6 +22,7 @@ html, body {
 	margin: 0;
 	padding: 0;
 	background-color: @color-bg;
+	height: 100%;
 	/*background: url('img/bg.jpg');*/
 }
 .btn1 {
@@ -445,7 +446,9 @@ header {
 	} /*end box*/
 }
 .box-save-bill {
+	position: relative;
 	margin-top: 20px;
+	height: 100%;
 	.title {
 		font: 24px/18px 'thaisans_semibold';
 		color: #555;
@@ -494,8 +497,8 @@ header {
 			overflow: auto;
 			width: 110%; 
 			margin-left: -5%;
-			height: 180px; 
-			/*background-color: red;*/
+			height: 90%; 
+			position: relative;
 
 			.conResult {
 				/*margin-left: 8%;*/
@@ -506,6 +509,7 @@ header {
 					margin-left: 20px;
 					cursor:pointer;
 					border: 1px solid #dcdcdc;
+					border-radius: 3px;
 					margin-bottom: 3px;
 					height: 66px;
 					&:hover, &:focus {
@@ -573,6 +577,7 @@ header {
 				width: 296px;
 				height: auto;
 				cursor:pointer;
+				border-radius: 3px;
 				border: 1px solid #dcdcdc;
 				margin-bottom: 3px;
 				&:hover, &:focus {
@@ -664,8 +669,10 @@ header {
 	@media (min-width: 568px) and (max-width: 636px) {
 		.box-save-bill {
 			.box-bill {
-				.conResult {
-					margin-left: 22%;
+				.wrapConResult {
+					.conResult {
+						margin-left: 22%;
+					}
 				}
 			}
 		}
@@ -676,8 +683,10 @@ header {
 			.check-pay {
 				margin-left: 0px;
 			}
-			.conResult {
-				margin-left: -15px;
+			.wrapConResult {
+				.conResult {
+					margin-left: -15px;
+				}
 			}
 		}
 	}

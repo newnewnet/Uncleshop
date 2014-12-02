@@ -47,31 +47,39 @@ $scope.al = function(){
 			$scope.page = 1;
 			var data = {
 				'key':$rootScope.search.data,
-				'perpage': 6,
+				'perpage': 15,
 				'page': $scope.page
 			}
+			// console.log('search.data');
+			// console.log($rootScope.search.data);
 			manageCustomers.getCustomers(data,function(data, status, headers, config)
 			{
 				$rootScope.DataCustomers = data.data;	
-				console.log($rootScope.DataCustomers);			
+				console.log(data);			
 			},500);
 		}
 
 		else{
-			console.log('$scope.page : ');
-			console.log($scope.page++);
-			// var data = {
-			// 	'key':$rootScope.search.data,
-			// 	'perpage': 2,
-			// 	'page': $scope.page
-			// }
-			// manageCustomers.getCustomers(data,function(data, status, headers, config)
-			// {
-			// 	for(var i=0; i<data.data.length; i++){
-			// 		$rootScope.DataCustomers.push(data.data[i]);
-			// 	}
-			// 	console.log($rootScope.DataCustomers);
-			// },500);
+			// console.log('$scope.page : ');
+			// console.log($scope.page++);
+			var data = {
+				'key':$rootScope.search.data,
+				'perpage': 15,
+				'page': ++$scope.page
+			}
+			// console.log('scope.page : '+$scope.page);
+			manageCustomers.getCustomers(data,function(data, status, headers, config)
+			{
+				// console.log('data.data.page : '+data.page);
+
+				if($scope.page <= data.page){
+					console.log('<= is true');
+					for(var i=0; i<data.data.length; i++){
+						$rootScope.DataCustomers.push(data.data[i]);
+					}
+					console.log($rootScope.DataCustomers);
+				}
+			},500);
 		}		
 	};
 

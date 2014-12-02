@@ -54,7 +54,7 @@
 		<!--script src="less.js"></script-->
 	</head>
 
-	<body ng-controller="indexController">
+	<body ng-controller="indexController" style="height: 100%;">
 		<div class="blur-container" ng-show="menu_slide" ng-click="switchMenu()">
 		</div>
 		<header ng-show="pageFlug">
@@ -83,7 +83,7 @@
 	  </header>
 
 
-		<div class="container" style="margin-bottom: 50px;">
+		<div class="container" style="margin-bottom: 50px; height: 80%;">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
 				<div class="row-fluid TEXT-CENTER">
@@ -99,7 +99,7 @@
 				</div>
 			</div>
 
-			<div ng-show="pageFlug" ng-controller="uncleshopController" ng-init="init()">
+			<div ng-show="pageFlug"style="height: 100%;" ng-controller="uncleshopController" ng-init="init()">
 				<div class="col-sm-4 col-md-3 con-tabmenu" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
 				    	<div class="title-menu"><img src="img/icon-title.png"/>
@@ -563,7 +563,7 @@
 					<div class="box-bill"></div>
 				</div>
 
-				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" when-scrolled="al()" ng-show="tabColor==4">
+				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9"style="height: 100%;" ng-show="tabColor==4">
 					<div class="title">
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToEditCustomer()">
 							ข้อมูลลูกค้า
@@ -579,8 +579,8 @@
 						</div>
 					</div>	
 
-					<div class="box-bill">
-						<div class="form-horizontal">
+					<div class="box-bill"style="height: 100%;">
+						<div class="form-horizontal" style="height: 100%;">
 							<div class="form-group" ng-show="Search_Customer_toggle">						
 							  <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
 								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers(1)" style="font-size: 20px;">
@@ -588,7 +588,7 @@
 								</div>
 							</div>
 
-							<div class="wrapConResult" style="background-color: red;" ng-show="Search_Customer_toggle">
+							<div class="wrapConResult" ng-show="Search_Customer_toggle" when-scrolled="seachCustomers(2)">
 								<div class="conResult" ng-show="Search_Customer_toggle">
 									<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">
 										<div class="resultUser">
