@@ -173,69 +173,72 @@
 
 			$customers =  new Customers;
 			$product = new Product;
-			$result = $this->join('customers', 'customers.customers_id', '=', 'bill.customers_id')			
-								->orWhere('customers.customers_id_card', 'LIKE', "%".$key."%")
-								->orWhere('customers.customers_name', 'LIKE', "%".$key."%")							
-								->orWhere('customers.customers_tel', 'LIKE', "%".$key."%")
-								->orWhere('bill.bill_code', 'LIKE', "%".$key."%")
-								->select('bill.bill_status','bill.bill_code','customers.customers_name','customers.customers_tel','customers.customers_id_card','customers.customers_sex');
-			// $result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id=customers.customers_id WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
-			$perPage = $param['perpage'];
-			$skip = ($param['page'] - 1) * $perPage;
-			$page = ceil($result->count() / $perPage);
-
-			$result = $result->skip($skip)->take($perPage)->get();
-
-			if($status == 0)
+			if(!empty($key))
 			{
-				$index = 0;
-				$data = array();
-				for($i=0;$i<count($result);$i++)
+				$result = $this->join('customers', 'customers.customers_id', '=', 'bill.customers_id')			
+									->orWhere('customers.customers_id_card', 'LIKE', "%".$key."%")
+									->orWhere('customers.customers_name', 'LIKE', "%".$key."%")							
+									->orWhere('customers.customers_tel', 'LIKE', "%".$key."%")
+									->orWhere('bill.bill_code', 'LIKE', "%".$key."%")
+									->select('bill.bill_status','bill.bill_code','customers.customers_name','customers.customers_tel','customers.customers_id_card','customers.customers_sex');
+				// $result =  DB::select(DB::raw("select bill_status,bill.bill_code,customers.customers_name,customers.customers_tel,customers.customers_id_card,customers.customers_sex FROM bill INNER JOIN customers ON bill.customers_id=customers.customers_id WHERE customers.customers_id_card  LIKE '%".$key."%'  or  customers.customers_name  LIKE '%".$key."%'  or  customers.customers_tel  LIKE '%".$key."% ' or  bill.bill_code  LIKE  '%".$key."%'"));
+				$perPage = $param['perpage'];
+				$skip = ($param['page'] - 1) * $perPage;
+				$page = ceil($result->count() / $perPage);
+
+				$result = $result->skip($skip)->take($perPage)->get();
+
+				if($status == 0)
 				{
-					if($result[$i]->bill_status == 0)
+					$index = 0;
+					$data = array();
+					for($i=0;$i<count($result);$i++)
 					{
-						$data[$index] = $result[$i];
-						$index++;
-					}
+						if($result[$i]->bill_status == 0)
+						{
+							$data[$index] = $result[$i];
+							$index++;
+						}
 
+					}
+					$result = $data;
 				}
-				$result = $data;
-			}
-			else if ($status == 1) 
-			{
-				$index = 0;
-				$data = array();
-				for($i=0;$i<count($result);$i++)
+				else if ($status == 1) 
 				{
-					if($result[$i]->bill_status > 0 )
+					$index = 0;
+					$data = array();
+					for($i=0;$i<count($result);$i++)
 					{
-						$data[$index] = $result[$i];
-						$index++;
+						if($result[$i]->bill_status > 0 )
+						{
+							$data[$index] = $result[$i];
+							$index++;
+						}
+
 					}
-
+					
+					$result = $data;
 				}
-				
-				$result = $data;
-			}
 
-			if($result != "[]")
-			{
-				for($i=0;$i<count($result);$i++)
+				if($result != "[]")
 				{
-					$productData = $product->where('bill_code','=',$result[$i]->bill_code)
-									->orderBy('product_price', 'desc')
-                  ->select('product_name','product_price','product_amount')
-                  ->first();
+					for($i=0;$i<count($result);$i++)
+					{
+						$productData = $product->where('bill_code','=',$result[$i]->bill_code)
+										->orderBy('product_price', 'desc')
+	                  ->select('product_name','product_price','product_amount')
+	                  ->first();
 
-        	$result[$i]->product = $productData;
+	        	$result[$i]->product = $productData;
 
+					}
 				}
-			}
 
-			return [
-				'page' => $page,
-				'data' => $result
-			];
+				return [
+					'page' => $page,
+					'data' => $result
+				];
+			}
 
 			
 		}

@@ -9,21 +9,22 @@
 		public function getCustomers($param,$key)
 		{
 			$result = '';
-			$result = $this->orWhere('customers_id_card', 'LIKE', "%".$key."%")
-							->orWhere('customers_name', 'LIKE', "%".$key."%")
-							->orWhere('customers_tel', 'LIKE', "%".$key."%");
+			if(!empty($key))
+			{
+				$result = $this->orWhere('customers_id_card', 'LIKE', "%".$key."%")
+								->orWhere('customers_name', 'LIKE', "%".$key."%")
+								->orWhere('customers_tel', 'LIKE', "%".$key."%");
+				$perPage = $param['perpage'];
+				$skip = ($param['page'] - 1) * $perPage;
+				$page = ceil($result->count() / $perPage);
+				$result = $result->skip($skip)->take($perPage)->get();
 
-
-			$perPage = $param['perpage'];
-			$skip = ($param['page'] - 1) * $perPage;
-			$page = ceil($result->count() / $perPage);
-			$result = $result->skip($skip)->take($perPage)->get();
-
-			return [
-				'page' => $page,
-				'data' => $result
-			];
-					
+				return [
+					'page' => $page,
+					'data' => $result
+				];
+			}
+			
 		}
 		public function updateCustomers($array)
 		{
