@@ -381,7 +381,7 @@
 								</div>
 							</div>
 							<div class="conResult">
-								<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
+								<div ng-repeat="(key, data) in DataBill.data" ng-click="payBill($index)">
 									<div class="resultUserBill">
 										<div class="wrap">
 											<div class="icon">
@@ -559,7 +559,7 @@
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
-					<div class="title">ประวัติบชำระเงิน</div>
+					<div class="title">ประวัติชำระเงิน</div>
 					<div class="box-bill"></div>
 				</div>
 
@@ -588,8 +588,8 @@
 								</div>
 							</div>
 
-							<div class="wrapConResult" ng-show="Search_Customer_toggle" when-scrolled="seachCustomers(2)">
-								<div class="conResult" ng-show="Search_Customer_toggle">
+							<div class="wrapConResult" ng-show="Search_Customer_toggle" when-scrolled="seachCustomers(2)"><!-- seachCustomers(2) -->
+								<div class="conResult" ng-show="Search_Customer_toggle"> 
 									<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">
 										<div class="resultUser">
 											<div class="wrap">

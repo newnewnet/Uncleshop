@@ -47,7 +47,7 @@ $scope.al = function(){
 			$scope.page = 1;
 			var data = {
 				'key':$rootScope.search.data,
-				'perpage': 15,
+				'perpage': 18,
 				'page': $scope.page
 			}
 			// console.log('search.data');
@@ -60,8 +60,7 @@ $scope.al = function(){
 		}
 
 		else{
-			// console.log('$scope.page : ');
-			// console.log($scope.page++);
+			alert('scroll');
 			var data = {
 				'key':$rootScope.search.data,
 				'perpage': 15,
@@ -345,10 +344,12 @@ $scope.al = function(){
 	};
 
 	$scope.payBill = function(index) {
+		console.log(index);
+		console.log($rootScope.DataBill.data[index].bill_code);
 		var data = {
-			'bill_code': $scope.DataBill[index].bill_code
+			'bill_code': $rootScope.DataBill.data[index].bill_code
 		};
-		$scope.billCode = $scope.DataBill[index].bill_code;
+		//$scope.billCode = $scope.DataBill[index].bill_code;
 		manageBill.getBill(data,function(data, status, headers, config){		
 			$scope.DataPayBill = data;			 
 			if($scope.DataPayBill.bill.bill_status == 0){
@@ -600,8 +601,8 @@ $scope.al = function(){
 			// console.log(data);
 			// console.log('option' + $scope.optionSearchPayBill);
 			$rootScope.DataBill = data;
-			console.log(data);
-			// console.log($rootScope.DataBill);
+			// console.log(data);
+			console.log($rootScope.DataBill);
 		}, 500);
 	};
 
