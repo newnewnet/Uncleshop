@@ -20,9 +20,13 @@
 
 				$billDetailData =  $this->where('bill_detail_id','=',$array['bill_detail_id'])->first();
 
+				$billData =  DB::table('bill')->where('bill_code','=',$billDetailData->bill_code)->select('bill_total')->first();
+
+				$billData->bill_total+=$array['bill_detail_price'];
+
 				DB::table('bill')->where('bill_code','=',$billDetailData->bill_code)
 												->update(array(
-																'bill_total' => $array['bill_total'],
+																'bill_total' => $billData->bill_total,
 															));
 
 				$count = DB::table('bill')->where('bill_code','=',$billDetailData->bill_code)
@@ -50,6 +54,9 @@
 								'admin_id' => $array['admin_id'],
 							));
 
+				$billData =  DB::table('bill')->where('bill_code','=',$array['bill_code'])->select('bill_total')->first();
+
+				$billData->bill_total+=$array['bill_detail_price'];
 
 
 				$billDetailData =  $this->where('bill_code','=',$array['bill_code'])
@@ -63,7 +70,7 @@
 											'bill_status' => 2,
 											'bill_interest' => $array['bill_interest'],
 											'bill_date_amount' => $array['bill_date_amount'],
-											'bill_total' => $array['bill_total']
+											'bill_total' => $billData->bill_total
 											// 'bill_price' => $array['bill_price']
 								));
 
@@ -123,6 +130,9 @@
 								'admin_id' => $array['admin_id'],
 							));
 
+				$billData =  DB::table('bill')->where('bill_code','=',$array['bill_code'])->select('bill_total')->first();
+
+				$billData->bill_total+=$array['bill_detail_price'];
 
 				$dataBill = $bill->where('bill_code','=',$array['bill_code'])->select('bill_end_date','bill_type','bill_pay_only_lnterest_amoint')->first();
 
@@ -138,7 +148,7 @@
 							->update(array(
 								'bill_end_date' => $date,
 								'bill_pay_only_lnterest_amoint' => ++$dataBill->bill_pay_only_lnterest_amoint,
-								'bill_total' => $array['bill_total']
+								'bill_total' => $billData->bill_total
 							));
 
 				$this->insert([
