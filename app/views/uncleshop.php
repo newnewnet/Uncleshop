@@ -99,6 +99,10 @@
 				</div>
 			</div>
 
+			<!-- <div style="z-index: 1000; position: absolute; width: 50px; height: 50px; background-red:red;">
+				Loading
+			</div> -->
+
 			<div ng-show="pageFlug"style="height: 100%;" ng-controller="uncleshopController" ng-init="init()">
 				<div class="col-sm-4 col-md-3 con-tabmenu" data-ng-class="{'con-tabmenu-slide':menu_slide==true}">
 				    <div class="tabmenu">
@@ -167,27 +171,29 @@
 							</div>
 						</div>
 					</div>	
-					<div class="box-bill"> 
-						<div class="form-horizontal" ng-show="DataCustomer_toggle">
+					<div class="box-bill" style="height: 100%;"> 
+						<div class="form-horizontal" style="height: 100%;" ng-show="DataCustomer_toggle">
 							<div class="form-group" ng-show="DataCustomer_search_toggle">						
 							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
-								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers()" focus-me="search_focus" style="font-size: 20px;">
-								  <span class="input-group-addon CURSOR" ng-click="seachCustomers()"><i class="fa fa-search" style="color: #3498db"></i></span>
+								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers(1)" focus-me="search_focus" style="font-size: 20px;">
+								  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
 
-							<div class="conResult">
-								<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
-									<div class="resultUser">
-										<div class="wrap">
-											<div class="icon">
-												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
-												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
-											</div>
-											<div class="text">
-												<div class="name">{{data.customers_name}}</div>
-												<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
-												<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+							<div class="wrapConResult" when-scrolled="seachCustomers(2)">
+								<div class="conResult">
+									<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
+										<div class="resultUser">
+											<div class="wrap">
+												<div class="icon">
+													<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+													<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+												</div>
+												<div class="text">
+													<div class="name">{{data.customers_name}}</div>
+													<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
+													<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+												</div>
 											</div>
 										</div>
 									</div>
@@ -716,18 +722,20 @@
 					</div>		
 					<div class="box-bill" >
 						<div class="form-horizontal">
-							<div  class="conResult">
-								<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
-									<div class="resultUser">
-										<div class="wrap">
-											<div class="icon">
-												<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
-												<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
-											</div>
-											<div class="text">
-												<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
-												<span class="tel" style="color: #45B39C;">เบอร์โทร</span><span class="tel-data">{{admin.admin_tel}}</span>
-												<span class="tel">รหัสบัตร</span><span class="tel-data">{{admin.admin_id_card}}</span>																	
+							<div class="wrapConResult">
+								<div  class="conResult">
+									<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
+										<div class="resultUser">
+											<div class="wrap">
+												<div class="icon">
+													<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
+													<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->
+												</div>
+												<div class="text">
+													<span class="name">{{admin.admin_name + ' ' + admin.admin_last_name}}</span>
+													<span class="tel" style="color: #45B39C;">เบอร์โทร</span><span class="tel-data">{{admin.admin_tel}}</span>
+													<span class="tel">รหัสบัตร</span><span class="tel-data">{{admin.admin_id_card}}</span>																	
+												</div>
 											</div>
 										</div>
 									</div>

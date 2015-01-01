@@ -35,10 +35,6 @@ angular.module('uncleshopApp')
 			$scope.focusItem(null);
 	};
 
-$scope.al = function(){
-	alert('scroll');
-}
-
 	/////เวลาส่งทำงี้นะ
 /*----------------------------  Customer  ---------------------------------*/
 	$scope.seachCustomers = function (type)
@@ -47,7 +43,7 @@ $scope.al = function(){
 			$scope.page = 1;
 			var data = {
 				'key':$rootScope.search.data,
-				'perpage': 18,
+				'perpage': 25,
 				'page': $scope.page
 			}
 			// console.log('search.data');
@@ -60,7 +56,6 @@ $scope.al = function(){
 		}
 
 		else{
-			alert('scroll');
 			var data = {
 				'key':$rootScope.search.data,
 				'perpage': 15,
