@@ -70,7 +70,7 @@ angular.module('directive.format',[])
         var raw = elm[0];
         
         elm.bind('scroll', function() {
-            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+            if (raw.scrollTop + raw.offsetHeight >= (raw.scrollHeight-(raw.scrollHeight*0.2))) {
                 scope.$apply(attr.whenScrolled);
             }
         });

@@ -199,7 +199,7 @@
 	  	{
 	  		if(dateBills.bill_detail_status == 0 )
 	  		{
-	  			strBillDetail = "ยังไม่ชำละเงิน";
+	  			strBillDetail = "ยังไม่ชำระเงิน";
 	  		}
 	  		else
 	  		{	

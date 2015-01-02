@@ -58,7 +58,7 @@ angular.module('uncleshopApp')
 		else{
 			var data = {
 				'key':$rootScope.search.data,
-				'perpage': 15,
+				'perpage': 25,
 				'page': ++$scope.page
 			}
 			// console.log('scope.page : '+$scope.page);
@@ -238,7 +238,7 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
-	$scope.cutBill = function() {
+	$scope.cutBill = function() { //ตัดบิล
 		var detail_index = null;
 		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
 			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
@@ -417,6 +417,8 @@ angular.module('uncleshopApp')
 			$scope.priceDowError = ' ';
 		if(value == 'timeOfPayment')
 			$scope.timeOfPaymentError = ' ';
+		if(value == 'interest')
+			$scope.interestError = ' ';
 
 		var priceOfAllProduct = 0;
 		$scope.billData = [];
@@ -424,30 +426,32 @@ angular.module('uncleshopApp')
 			priceOfAllProduct +=  $scope.productData[i].productPrice * $scope.productData[i].productAmount;
 		}
 
-		var interest;
-		manageAdmin.getInterestValue(function(data, status, headers, config)
-		{
-			if($scope.type_dow == 'month')
-				interest = data.admin_interest_month;
-			else
-				interest = data.admin_interest_week;
+		// var interest;
+		// manageAdmin.getInterestValue(function(data, status, headers, config)
+		// {
+			// if($scope.type_dow == 'month')
+			// 	interest = data.admin_interest_month;
+			// else
+			// 	interest = data.admin_interest_week;
 
-			if($scope.timeOfPayment == null)
-				$scope.timeOfPayment = 0;
+			// if($scope.timeOfPayment == null)
+			// 	$scope.timeOfPayment = 0;
 			if($scope.priceDow == null)
 				$scope.priceDow = 0;
 			if($scope.timeOfPayment == null)
 				$scope.timeOfPayment = 1;
+			if($scope.interest == null)
+				$scope.interest = 0;
 
 				$scope.billData = {
 					'priceOfAllProduct': priceOfAllProduct,//ราคาสินค้าทั้งหมด
-					'interestValue':  interest*$scope.timeOfPayment,//ดอกเบี้ย
+					'interestValue':  $scope.interest*$scope.timeOfPayment,//ดอกเบี้ย
 					'priceDow': $scope.priceDow, //เงินดาว
 					'timeOfPayment': $scope.timeOfPayment, //เวลาในการผ่อน
-					'priceWithoutDow': $scope.priceWithoutDow = (priceOfAllProduct+(interest*$scope.timeOfPayment)) - $scope.priceDow,//ราคารวมดอกเบี้ยและหักเงินดาวน์
+					'priceWithoutDow': $scope.priceWithoutDow = (priceOfAllProduct+($scope.interest*$scope.timeOfPayment)) - $scope.priceDow,//ราคารวมดอกเบี้ยและหักเงินดาวน์
 					'priceTermOfPayment': $scope.priceWithoutDow / $scope.timeOfPayment //ราคาต่องวด
 				};
-		},500);
+		// },500);
 	};
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
@@ -584,21 +588,39 @@ angular.module('uncleshopApp')
 	};
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
-	$scope.searchBillForPay = function() {
-		var data = {
-			'key': $rootScope.searchBill.data,
-			'status': $scope.optionSearchPayBill
+	$scope.searchBillForPay = function(value) {
+		console.log('value : '+value);
+		if(value == 1){
+			$scope.pageSearchBillForpay = 1;
+			var data = {
+				'key': $rootScope.searchBill.data,
+				'status': $scope.optionSearchPayBill,
+				'perpage': 25,
+				'page': $scope.pageSearchBillForpay
+			}
+			manageBill.searchBill(data,function(data, status, headers, config)
+			{
+				$rootScope.DataBill = data.data;
+			}, 500);
 		}
-		// console.log();
-		console.log('status: ' + $scope.optionSearchPayBill);
-		manageBill.searchBill(data,function(data, status, headers, config)
-		{
-			// console.log(data);
-			// console.log('option' + $scope.optionSearchPayBill);
-			$rootScope.DataBill = data;
-			// console.log(data);
-			console.log($rootScope.DataBill);
-		}, 500);
+
+		else {
+			var data = {
+				'key': $rootScope.searchBill.data,
+				'status': $scope.optionSearchPayBill,
+				'perpage': 25,
+				'page': ++$scope.pageSearchBillForpay
+			}
+			manageBill.searchBill(data,function(data, status, headers, config)
+			{
+				if($scope.pageSearchBillForpay <= data.page){
+					for(var i=0; i<data.data.length; i++){
+						$rootScope.DataBill.push(data.data[i]);
+					}
+					// console.log(data);
+				}
+			}, 500);
+		}		
 	};
 
 	/*----------------------------  super  admin---------------------------------*/
@@ -847,7 +869,11 @@ angular.module('uncleshopApp')
 		$scope.adminDefault();
 		$scope.customersDefault();
 		$scope.productDefault();
-		$scope.EditCustomerError = ['1','1','1'];
+		$scope.EditCustomerError = ['1','1','1'];		
+	};
+
+	$scope.al = function() {
+		alert('scrolled');
 	};
 
 	/*----------------------------  prodcut---------------------------------*/
@@ -856,6 +882,8 @@ angular.module('uncleshopApp')
 		$scope.billData = [];
 		$scope.DataCustomersOfBill = null;
 		$scope.priceDow = null;
+		$scope.interest = null;
+		$scope.timeOfPayment = null;
 	}
 	$scope.productDefault = function()
 	{
@@ -928,6 +956,10 @@ angular.module('uncleshopApp')
 				$scope.timeOfPaymentError = 'input-error';
 				count = false;
 			}
+			if($scope.interest == null || $scope.interest.length == 0){
+				$scope.interestError = 'input-error';
+				count = false;
+			}
 
 			if(count == false){
 				swal({
@@ -959,7 +991,7 @@ angular.module('uncleshopApp')
 				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
 				'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
 				// 'bill_interest' : $scope.billData.interestValue, 
-				'bill_interest' : 400,
+				'bill_interest' : $scope.interest,
 				'bill_type' : billType, //ชนิการผ่อน
 				'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
 				'customers_id_card' : $scope.DataCustomersOfBill.customers_id_card,

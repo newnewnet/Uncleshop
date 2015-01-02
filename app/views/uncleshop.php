@@ -138,7 +138,7 @@
 				    		<div class="text">ข้อมูลลูกค้า</div>
 				    	</div>
 
-				    	<div class="box"  data-ng-click="changTab(5); switchMenu()" ng-show="admin.admin_status==1" data-ng-class="{'admin':tabColor==5}">
+				    	<div class="box"  data-ng-click="changTab(5);" ng-show="admin.admin_status==1" data-ng-class="{'admin':tabColor==5}">
 				    		<span class="icon icon5" >
 				    			<img src="img/icon-user.png"/>
 				    		</span>
@@ -173,26 +173,28 @@
 					</div>	
 					<div class="box-bill" style="height: 100%;"> 
 						<div class="form-horizontal" style="height: 100%;" ng-show="DataCustomer_toggle">
-							<div class="form-group" ng-show="DataCustomer_search_toggle">						
-							    <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
-								  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers(1)" focus-me="search_focus" style="font-size: 20px;">
-								  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
+							<div ng-show="DataCustomer_search_toggle" style="height: 100%;">
+								<div class="form-group">						
+								  <div class="col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 input-group">
+									  <input placeholder="ค้นหาลูกค้า" type="text" ng-model="search.data" class="form-control" ng-keyup="seachCustomers(1)" focus-me="search_focus" style="font-size: 20px;">
+									  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
+									</div>
 								</div>
-							</div>
 
-							<div class="wrapConResult" when-scrolled="seachCustomers(2)">
-								<div class="conResult">
-									<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
-										<div class="resultUser">
-											<div class="wrap">
-												<div class="icon">
-													<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
-													<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
-												</div>
-												<div class="text">
-													<div class="name">{{data.customers_name}}</div>
-													<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
-													<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+								<div class="wrapConResult" when-scrolled="seachCustomers(2)">
+									<div class="conResult">
+										<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
+											<div class="resultUser">
+												<div class="wrap">
+													<div class="icon">
+														<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+														<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+													</div>
+													<div class="text">
+														<div class="name">{{data.customers_name}}</div>
+														<div class="tel">เบอร์โทร</div><div class="tel-data">{{data.customers_tel}}</div>
+														<div class="tel" style="color: #45B39C;">รหัสบัตร</div><div class="tel-data">{{data.customers_id_card}}</div>																	
+													</div>
 												</div>
 											</div>
 										</div>
@@ -243,6 +245,7 @@
 
 							</div>
 						</div>
+
 						<div class="form-horizontal" ng-show="addProduct_toggle">
 							<div class="row" ng-show="DataCustomersOfBill != null" style="margin-bottom: 25px; background-color: white; border-radius: 3px; border-width: 1px; border-color: #1196d1; border-style: solid;">
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">เลขบัตร</label>
@@ -259,18 +262,18 @@
 
 							<div class="form-group" ng-repeat="product in productData">
 								<div class="row">
-									<label class="col-sm-2 col-md-2 control-label" >ชื่อสินค้า</label>
-								    <div class="col-sm-3 col-md-3">
-								   	 	<input type="text" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
+									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">ชื่อสินค้า</label>
+								  <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
+								   	<input type="text" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
 									</div>
 
-									<label class="col-sm-1 col-md-1 control-label">ราคา</label>
-								    <div class="col-sm-2 col-md-2">
+									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ราคา</label>
+								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
 								    	<input type="text" ng-model="product.productPrice" class="form-control TEXT-RIGHT" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')">
 									</div>
 
-									<label class="col-sm-1 col-md-1 control-label" ng-init="product.productAmount = 1">จำนวน</label>
-								    <div class="col-sm-2">
+									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">จำนวน</label>
+								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
 								    	<input type="text" ng-model="product.productAmount" class="form-control TEXT-RIGHT"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')">
 									</div>
 
@@ -284,22 +287,29 @@
 							</div>
 							<div class="form-group" style="margin-top: 25px; padding-top: 10px;">
 								<div class="row">
-									<label class="col-sm-2 control-label">เงินดาวน์</label>
-								    <div class="col-sm-3">
+									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">เงินดาวน์</label>
+								    <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
 								    	<input type="text" numbers-only="numbers-only" ng-model="priceDow" class="form-control TEXT-RIGHT" ng-keyup="calBill('priceDow')" ng-class="priceDowError">
-									</div>
+										</div>
 
-									<label class="col-xs-12 col-sm-1 control-label" ng-init="timeOfPayment = 1">เวลา</label>
-								    <div class="col-xs-6 col-sm-2">
-								    	<input type="text" numbers-only="numbers-only" ng-model="timeOfPayment" class="form-control TEXT-CENTER" ng-keyup="calBill('timeOfPayment')" ng-class="timeOfPaymentError">
-									</div>
+									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ดอกเบี้ย</label>
+								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
+								    	<input type="text" numbers-only="numbers-only" ng-model="interest" class="form-control TEXT-RIGHT" ng-keyup="calBill('interest')" ng-class="interestError">
+										</div>																	
+								</div>
 
-									<div class="col-xs-6 col-sm-2">
+								<div class="row">
+									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">เวลา</label>
+								    <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
+								    	<input type="text" numbers-only="numbers-only" ng-model="timeOfPayment" class="form-control TEXT-RIGHT" ng-keyup="calBill('timeOfPayment')" ng-class="timeOfPaymentError">
+										</div>	
+									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ชนิด</label>
+									<div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
 										<select class="form-control" ng-model="type_dow" ng-click="calBill()">
-								          	<option value="month">เดือน</option>
-								        	<option value="week">วิก</option>          
-								        </select>
-							        </div>
+								     	<option value="month">เดือน</option>
+								     	<option value="week">วิก</option>          
+								    </select>
+							    </div>
 								</div>
 								
 								<div class="col-xs-12">
@@ -363,13 +373,13 @@
 						</div>
 					</div>	
 					<div class="box-bill">
-						<div class="form-horizontal" ng-show="findPayBill_toggle">
+						<div class="form-horizontal" style="height: 100%;" ng-show="findPayBill_toggle">
 							<div class="form-group">						
 							  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6 input-group">
 								  <!-- <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-keyup="searchBillForPay()" style="font-size: 20px;">
 								  <span class="input-group-addon CURSOR" ng-click="searchBillForPay()"><i class="fa fa-search" style="color: #3498db"></i></span> -->
 								  <div class="input-group">
-							      <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-init="optionSearchPayBill = 0" ng-keyup="searchBillForPay()" style="font-size: 20px;">
+							      <input placeholder="ค้นหาบิล" type="text" ng-model="searchBill.data" class="form-control" ng-init="optionSearchPayBill = 0" ng-keyup="searchBillForPay(1)" style="font-size: 20px;">
 							      <div class="input-group-btn">
 							        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 34px; padding-top: 4px;">
 								        <!-- ค้างชำระ -->
@@ -377,35 +387,37 @@
 								        <i class="fa fa-caret-down" style="font-size: 15px;"></i>
 								      </button>
 							        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px;">
-							          <li ng-click="optionSearchPayBill = 0; searchBillForPay();"><a>ค้นหา <j style="text-decoration: underline;">ค้างชำระ</j></a></li>
-							          <li ng-click="optionSearchPayBill = 1; searchBillForPay();"><a>ค้นหา <j style="text-decoration: underline;">ชำระแล้ว</j></a></li>
-							          <li ng-click="optionSearchPayBill = 2; searchBillForPay();"><a>ค้นหา <j style="text-decoration: underline;">ทั้งหมด</j></a></li>
+							          <li ng-click="optionSearchPayBill = 0; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ค้างชำระ</j></a></li>
+							          <li ng-click="optionSearchPayBill = 1; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ชำระแล้ว</j></a></li>
+							          <li ng-click="optionSearchPayBill = 2; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ทั้งหมด</j></a></li>
 							        </ul>
 							      </div><!-- /btn-group -->
 							    </div><!-- /input-group -->
 
 								</div>
 							</div>
-							<div class="conResult">
-								<div ng-repeat="(key, data) in DataBill.data" ng-click="payBill($index)">
-									<div class="resultUserBill">
-										<div class="wrap">
-											<div class="icon">
-												<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
-												<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
-											</div>
-											<div class="text">
-												<span class="name">{{data.customers_name}}</span>
-												<span class="tel">เบอร์โทร</span><span class="tel-data">{{data.customers_tel}}</span>
-												<span class="tel" style="color: #45B39C;">รหัสบัตร</span><span class="tel-data">{{data.customers_id_card}}</span>	
-												<span class="tel" style="color: #1196d1;">รหัสบิล</span><span class="tel-data">{{data.bill_code}}</span>	
-												<span class="tel" style="color: #8e44ad;">สินค้า</span><span class="tel-data">{{data.product.product_name | limitTo:20}}</span>																										
-												<span class="tel" style="color: #6e2d89;">สถานะบิล</span>
-												<span class="tel-data">{{(data.bill_status==0) ? 'ค้างชำระ' : 'ชำระแล้ว'}} 
-													<i ng-show="data.bill_status != 0" class="fa fa-check" style="color: #1abc9c;"></i> 
-													<i ng-hide="data.bill_status != 0" class="fa fa-times" style="color: #e05b49;"></i> 
-												</span>
-												
+							<div class="wrapConResult" when-scrolled="searchBillForPay(2);">  <!-- style="background-color: red; height: 10%; overflow: auto; width: 110%; position: relative" -->
+								<div class="conResult">
+									<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
+										<div class="resultUserBill">
+											<div class="wrap">
+												<div class="icon">
+													<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+													<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+												</div>
+												<div class="text">
+													<span class="name">{{data.customers_name}}</span>
+													<span class="tel">เบอร์โทร</span><span class="tel-data">{{data.customers_tel}}</span>
+													<span class="tel" style="color: #45B39C;">รหัสบัตร</span><span class="tel-data">{{data.customers_id_card}}</span>	
+													<span class="tel" style="color: #1196d1;">รหัสบิล</span><span class="tel-data">{{data.bill_code}}</span>	
+													<span class="tel" style="color: #8e44ad;">สินค้า</span><span class="tel-data">{{data.product.product_name | limitTo:20}}</span>																										
+													<span class="tel" style="color: #6e2d89;">สถานะบิล</span>
+													<span class="tel-data">{{(data.bill_status==0) ? 'ค้างชำระ' : 'ชำระแล้ว'}} 
+														<i ng-show="data.bill_status != 0" class="fa fa-check" style="color: #1abc9c;"></i> 
+														<i ng-hide="data.bill_status != 0" class="fa fa-times" style="color: #e05b49;"></i> 
+													</span>
+													
+												</div>
 											</div>
 										</div>
 									</div>
