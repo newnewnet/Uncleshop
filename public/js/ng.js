@@ -958,7 +958,8 @@ angular.module('uncleshopApp')
 			var data = {
 				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
 				'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
-				'bill_interest' : $scope.billData.interestValue, 
+				// 'bill_interest' : $scope.billData.interestValue, 
+				'bill_interest' : 400,
 				'bill_type' : billType, //ชนิการผ่อน
 				'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
 				'customers_id_card' : $scope.DataCustomersOfBill.customers_id_card,
