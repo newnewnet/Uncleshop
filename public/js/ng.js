@@ -39,6 +39,8 @@ angular.module('uncleshopApp')
 /*----------------------------  Customer  ---------------------------------*/
 	$scope.seachCustomers = function (type)
 	{
+		$rootScope.DataCustomers = '';
+		$scope.loadingCustomers = true;
 		if(type == 1){
 			$scope.page = 1;
 			var data = {
@@ -51,7 +53,7 @@ angular.module('uncleshopApp')
 			manageCustomers.getCustomers(data,function(data, status, headers, config)
 			{
 				$rootScope.DataCustomers = data.data;	
-				console.log(data);			
+				$scope.loadingCustomers = false;		
 			},500);
 		}
 
@@ -71,6 +73,7 @@ angular.module('uncleshopApp')
 					for(var i=0; i<data.data.length; i++){
 						$rootScope.DataCustomers.push(data.data[i]);
 					}
+					$scope.loadingCustomers = false;	
 					console.log($rootScope.DataCustomers);
 				}
 			},500);
@@ -589,7 +592,8 @@ angular.module('uncleshopApp')
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
 	$scope.searchBillForPay = function(value) {
-		console.log('value : '+value);
+		$rootScope.DataBill = '';
+		$scope.loadingBill = true;
 		if(value == 1){
 			$scope.pageSearchBillForpay = 1;
 			var data = {
@@ -601,6 +605,7 @@ angular.module('uncleshopApp')
 			manageBill.searchBill(data,function(data, status, headers, config)
 			{
 				$rootScope.DataBill = data.data;
+				$scope.loadingBill = false;
 			}, 500);
 		}
 
@@ -619,6 +624,7 @@ angular.module('uncleshopApp')
 					}
 					// console.log(data);
 				}
+				$scope.loadingBill = false;
 			}, 500);
 		}		
 	};

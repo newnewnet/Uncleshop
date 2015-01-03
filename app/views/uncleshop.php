@@ -98,7 +98,7 @@
 					© Champangam Electronic.
 				</div>
 			</div>
-
+			<div style="width: 100%;height: 50px;text-align: center; margin-top: 20px;" ng-show="loadingLogin"><img src="img/hourglass.gif" style="width:45px"/></div>
 			<!-- <div style="z-index: 1000; position: absolute; width: 50px; height: 50px; background-red:red;">
 				Loading
 			</div> -->
@@ -180,7 +180,7 @@
 									  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
 									</div>
 								</div>
-
+								<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
 								<div class="wrapConResult" when-scrolled="seachCustomers(2)">
 									<div class="conResult">
 										<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
@@ -396,6 +396,7 @@
 
 								</div>
 							</div>
+							<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingBill"><img src="img/hourglass.gif" style="width:45px"/></div>
 							<div class="wrapConResult" when-scrolled="searchBillForPay(2);">  <!-- style="background-color: red; height: 10%; overflow: auto; width: 110%; position: relative" -->
 								<div class="conResult">
 									<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
@@ -605,7 +606,7 @@
 								  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
-
+							<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
 							<div class="wrapConResult" ng-show="Search_Customer_toggle" when-scrolled="seachCustomers(2)"><!-- seachCustomers(2) -->
 								<div class="conResult" ng-show="Search_Customer_toggle"> 
 									<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">

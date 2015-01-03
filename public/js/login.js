@@ -4,6 +4,7 @@ angular.module('uncleshopApp')
 
 	$scope.login = function()
 	{
+		$rootScope.loadingLogin = true;
 		if($scope.userName != '' && $scope.passWord != '')
 		{
 			var data = {
@@ -12,11 +13,11 @@ angular.module('uncleshopApp')
 			}
 			login.loginAdmin(data,function(data, status, headers, config)
 			{
+				$rootScope.loadingLogin = false;
 				if(data != '')
 				{
 					$rootScope.pageFlug = true;
 					$rootScope.admin = data;
-					console.log($rootScope.admin);
 				}
 				else{
 					swal({   
