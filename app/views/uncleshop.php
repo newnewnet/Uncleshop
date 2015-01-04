@@ -181,6 +181,7 @@
 									</div>
 								</div>
 								<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
+								<div style="width: 100%;height: 50px;text-align: center;" ng-show="noResultCustomers"><img src="img/nodata.png" style="width:50px"/></div>
 								<div class="wrapConResult" when-scrolled="seachCustomers(2)">
 									<div class="conResult">
 										<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
@@ -397,6 +398,7 @@
 								</div>
 							</div>
 							<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingBill"><img src="img/hourglass.gif" style="width:45px"/></div>
+							<div style="width: 100%;height: 50px;text-align: center;" ng-show="noResultBill"><img src="img/nodata.png" style="width:50px"/></div>
 							<div class="wrapConResult" when-scrolled="searchBillForPay(2);">  <!-- style="background-color: red; height: 10%; overflow: auto; width: 110%; position: relative" -->
 								<div class="conResult">
 									<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
@@ -549,9 +551,16 @@
 										{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
 									</button>																						
 								</div>
-								<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -110px; background-color: #d9534f; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 220px; font-size: 20px;">
-									ชำระเงินที่เหลือทั้งหมด(ตัดบิล)
-								</button>	
+								<div class="row">
+									<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -110px; margin-bottom: 5px; background-color: #FFA530; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 220px; font-size: 20px;">
+										ชำระเงินเฉพาะ<i style="text-decoration: underline;">ดอกเบี้ย</i>เท่านั้น
+									</button>	
+								</div>
+								<div class="row">
+									<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -110px; margin-bottom: 5px; background-color: #d9534f; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 220px; font-size: 20px;">
+										ชำระเงินที่เหลือทั้งหมด<i style="text-decoration: underline;">(ตัดบิล)</i>
+									</button>	
+								</div>
 							</div>
 
 							<div class="col-xs-12" ng-hide="DataPayBill.bill.bill_status == 0">
@@ -607,6 +616,7 @@
 								</div>
 							</div>
 							<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
+							<div style="width: 100%;height: 50px;text-align: center;" ng-show="noResultCustomers"><img src="img/nodata.png" style="width:50px"/></div>
 							<div class="wrapConResult" ng-show="Search_Customer_toggle" when-scrolled="seachCustomers(2)"><!-- seachCustomers(2) -->
 								<div class="conResult" ng-show="Search_Customer_toggle"> 
 									<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">

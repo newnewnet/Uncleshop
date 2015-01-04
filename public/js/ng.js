@@ -9,7 +9,10 @@ angular.module('uncleshopApp')
 		var text = ['','เพิ่มบิล','ค้นหาบิล','ข้อมูลการจ่ายบิล', 'ข้อมูลลูกค้า', 'ข้อมูลผู้ขาย']
 		$rootScope.tabColor=number;
 		$rootScope.loginText=text[number];
-		
+		$scope.noResultCustomers = false;
+		$scope.noResultBill = false;
+		$scope.loadingCustomers = false;
+
 		if(number == 1){
 			$scope.backToBill();
 			//$scope.focusItem('search_focus');
@@ -41,6 +44,7 @@ angular.module('uncleshopApp')
 	{
 		$rootScope.DataCustomers = '';
 		$scope.loadingCustomers = true;
+		$scope.noResultCustomers = false;
 		if(type == 1){
 			$scope.page = 1;
 			var data = {
@@ -52,8 +56,13 @@ angular.module('uncleshopApp')
 			// console.log($rootScope.search.data);
 			manageCustomers.getCustomers(data,function(data, status, headers, config)
 			{
-				$rootScope.DataCustomers = data.data;	
-				$scope.loadingCustomers = false;		
+				if(data.data.length == 0){
+					$scope.noResultCustomers = true;
+				}
+				
+				$scope.loadingCustomers = false;
+				$rootScope.DataCustomers = data.data;
+					
 			},500);
 		}
 
@@ -342,10 +351,8 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.payBill = function(index) {
-		console.log(index);
-		console.log($rootScope.DataBill.data[index].bill_code);
 		var data = {
-			'bill_code': $rootScope.DataBill.data[index].bill_code
+			'bill_code': $rootScope.DataBill[index].bill_code
 		};
 		//$scope.billCode = $scope.DataBill[index].bill_code;
 		manageBill.getBill(data,function(data, status, headers, config){		
@@ -594,6 +601,8 @@ angular.module('uncleshopApp')
 	$scope.searchBillForPay = function(value) {
 		$rootScope.DataBill = '';
 		$scope.loadingBill = true;
+		$scope.noResultBill = false;
+
 		if(value == 1){
 			$scope.pageSearchBillForpay = 1;
 			var data = {
@@ -604,6 +613,10 @@ angular.module('uncleshopApp')
 			}
 			manageBill.searchBill(data,function(data, status, headers, config)
 			{
+				if(data.data.length == 0){
+					$scope.noResultBill = true;
+				}
+
 				$rootScope.DataBill = data.data;
 				$scope.loadingBill = false;
 			}, 500);
@@ -1060,6 +1073,13 @@ angular.module('uncleshopApp')
 		cutBillDetail:function(data,callback)
 		{
 			$http({method: 'POST', url: '/cutBillDetail',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		},
+		payOnlyInterest:function(data,callback)
+		{
+			$http({method: 'POST', url: '/payOnlyInterest',params:data})
 			.success(callback)
 			.error(function(data, status, headers, config) {
 		  });
