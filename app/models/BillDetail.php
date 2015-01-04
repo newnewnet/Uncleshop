@@ -134,7 +134,7 @@
 
 				$billData->bill_total+=$array['bill_detail_price'];
 
-				$dataBill = $bill->where('bill_code','=',$array['bill_code'])->select('bill_end_date','bill_type','bill_pay_only_lnterest_amoint')->first();
+				$dataBill = $bill->where('bill_code','=',$array['bill_code'])->select('bill_end_date','bill_type','bill_pay_only_lnterest_amount')->first();
 
 				$day = 30;
 				if($dataBill->bill_type == 1)
@@ -147,7 +147,7 @@
 				$result = $bill->where('bill_code','=',$array['bill_code'])
 							->update(array(
 								'bill_end_date' => $date,
-								'bill_pay_only_lnterest_amoint' => ++$dataBill->bill_pay_only_lnterest_amoint,
+								'bill_pay_only_lnterest_amount' => ++$dataBill->bill_pay_only_lnterest_amoint,
 								'bill_total' => $billData->bill_total
 							));
 
