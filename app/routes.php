@@ -33,6 +33,7 @@ Route::get('deleteCustomers','UncleshopApiController@deleteCustomers');
 Route::post('saveBill','UncleshopApiController@saveBill');
 Route::get('getBill','UncleshopApiController@getBill');
 Route::get('bill','UncleshopApiController@searchBill');
+Route::get('deleteBill','UncleshopApiController@deleteBill');
 Route::get('timeLineBill','UncleshopApiController@timeLineBill');
 ////จ่ายค่างวดปกติ///
 Route::post('updateBillDetail','UncleshopApiController@updateBillDetail');

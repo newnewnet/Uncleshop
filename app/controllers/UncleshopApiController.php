@@ -159,4 +159,10 @@
 			$result = $billDetail->payOnlyInterest($array);
 			return $result;
 		}
+		public function deleteBill()
+		{
+			$billCode = Input::get('bill_code');
+			$bill = new Bill;
+			return $bill->deleteBill($billCode);
+		}
 	}

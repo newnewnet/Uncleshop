@@ -242,5 +242,14 @@
 
 			
 		}
+		public function deleteBill($billCode)
+		{
+			$result = $this->where('bill_code', '=', $billCode)->delete();
+			
+			DB::table('bill_detail')->where('bill_code', '=', $billCode)->delete();
+			DB::table('product')->where('bill_code', '=', $billCode)->delete();
+			
+			return $result;
+		}
 
 	}

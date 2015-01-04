@@ -67,6 +67,13 @@
 			]}
 		}
 
+
+
+		/deleteBill    :  get
+		data = {
+			bill_code : B65464897654
+		}
+
 -----------------------		Customer	----------------------------------------------
 
 		/updateCustomers  : get
