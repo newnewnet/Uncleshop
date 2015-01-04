@@ -250,6 +250,55 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
+	$scope.onlyInterest = function() { // จ่ายเฉพาะดอกเบี้ย
+		console.log('onlyInterest');
+		console.log($scope.DataPayBill);
+		var detail_index = null;
+		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
+			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
+				detail_index = i;
+			}
+		}
+		var data = {
+			'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
+			'bill_detail_price' : $scope.DataPayBill.bill.bill_interest_to_mount,
+			'admin_id' : $rootScope.admin.admin_id,
+			'bill_code' : $scope.DataPayBill.bill.bill_code
+		};
+
+		swal({   
+			title: "ชำระเงินเฉพาะดอกเบี้ย ?",   
+			text: "คุณต้องการชำระเงินดอกเบี้ยประจำวันที่ " + $scope.DataPayBill.dateBill[detail_index].bill_detail_date + " เป็นจำนวนเงิน " + data.bill_detail_price + " บาท ใช่หรือไม่",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#2980B9",   
+			confirmButtonText: "ใช่, ชำระเงินเดี๋ยวนี้ !",   
+			cancelButtonText: "ยกเลิก",
+			closeOnConfirm: false 
+		}, function(){
+			manageBill.payOnlyInterest(data,function(data, status, headers, config){
+				console.log(data);
+				if(data == 1){
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "ชำระเงินเฉพาะดอกเบี้ยเรียบร้อยแล้ว",   
+						type: "success",
+						timer: 1500
+					});
+					$scope.payBillWithBillCode($scope.DataPayBill.bill.bill_code);
+				}
+				else{
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",   
+						type: "error",
+						timer: 2000
+					});
+				}
+			},500);
+		});
+	}
+
 	$scope.cutBill = function() { //ตัดบิล
 		var detail_index = null;
 		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){

@@ -331,7 +331,7 @@
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceWithoutDow < 0 ? 0 : billData.priceWithoutDow | number:0) + '    บาท'}}</label>
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
-											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน" : "บาท/วิก")}}</label>
+											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน ("+billData.timeOfPayment+")เดือน" : "บาท/วิก ("+billData.timeOfPayment+")วิก")}}</label>
 										</div>								
 										<div class="row" style="padding-top: 20px;">
 											<div ng-hide="billCode!=null" class="col-xs-2 col-xs-offset-3 col-sm-2 col-sm-offset-4">
@@ -506,7 +506,7 @@
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-7 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
-											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: left;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน" : "บาท/วิก")}}</label>
+											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: left;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน ("+DataPayBill.bill.bill_date_amount+")เดือน" : "บาท/วิก ("+DataPayBill.bill.bill_date_amount+")วิก")}}</label>
 										</div>
 									</div>
 								</div>
@@ -531,7 +531,7 @@
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-7 col-sm-3 control-label" style="text-align: right;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
-											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: right;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน" : "บาท/วิก")}}</label>
+											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: right;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน ("+DataPayBill.bill.bill_date_amount+")เดือน" : "บาท/วิก ("+DataPayBill.bill.bill_date_amount+")วิก")}}</label>
 										</div>
 									</div>
 								</div>
@@ -552,7 +552,7 @@
 									</button>																						
 								</div>
 								<div class="row">
-									<button ng-click="cutBill()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -110px; margin-bottom: 5px; background-color: #FFA530; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 220px; font-size: 20px;">
+									<button ng-click="onlyInterest()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -110px; margin-bottom: 5px; background-color: #FFA530; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 220px; font-size: 20px;">
 										ชำระเงินเฉพาะ<i style="text-decoration: underline;">ดอกเบี้ย</i>เท่านั้น
 									</button>	
 								</div>
