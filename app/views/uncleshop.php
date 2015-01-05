@@ -373,6 +373,9 @@
 								</form>
 							</div>
 						</div>
+						<div class="sub-title-right2 CURSOR" ng-click="removeBill(billCode)" ng-hide="findPayBill_toggle">
+							<i class="fa fa-trash" style="color: #e05b49;"> </i>
+						</div>
 					</div>	
 					<div class="box-bill">
 						<div class="form-horizontal" style="height: 100%;" ng-show="findPayBill_toggle">

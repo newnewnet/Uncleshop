@@ -252,6 +252,43 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
+	$scope.removeBill = function(index) {		
+		var data = {
+			'bill_code' : index
+		};
+
+		swal({   
+			title: "ลบข้อมูลทั้งหมดของบิลนี้ ?",   
+			text: "ลบข้อมูลบิลของคุณ " + $scope.DataPayBill.customer.customers_name + " ใช่หรือไม่ ?",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#2980B9",   
+			confirmButtonText: "ใช่, ลบเดี๋ยวนี้ !",   
+			cancelButtonText: "ยกเลิก",
+			closeOnConfirm: false 
+		}, function(){
+			manageBill.deleteBill(data,function(data, status, headers, config){
+				if(data == 1){
+					swal({
+						title: "เรียบร้อย !!",   
+						text: "ลบข้อมูลบิลเรียบร้อยแล้ว",   
+						type: "success",
+						timer: 1500
+					});
+					$scope.backToPayBill();					
+				}
+				else{
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",   
+						type: "error",
+						timer: 2000
+					});
+				}
+			},500);
+		});
+	};
+
 	$scope.onlyInterest = function() { // จ่ายเฉพาะดอกเบี้ย
 		console.log('onlyInterest');
 		console.log($scope.DataPayBill);
@@ -423,6 +460,7 @@ angular.module('uncleshopApp')
 		var data = {
 			'bill_code': $rootScope.DataBill[index].bill_code
 		};
+		$scope.billCode = $rootScope.DataBill[index].bill_code;
 		//$scope.billCode = $scope.DataBill[index].bill_code;
 		manageBill.getBill(data,function(data, status, headers, config){		
 			console.log('payBill');
@@ -1132,6 +1170,13 @@ angular.module('uncleshopApp')
 		getBill:function(data,callback)
 		{
 			$http({method: 'GET', url: '/getBill',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		},
+		deleteBill:function(data,callback)
+		{
+			$http({method: 'GET', url: '/deleteBill',params:data})
 			.success(callback)
 			.error(function(data, status, headers, config) {
 		  });
