@@ -180,8 +180,7 @@
 									  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
 									</div>
 								</div>
-								<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
-								<div style="width: 100%;height: 50px;text-align: center;" ng-show="noResultCustomers"><img src="img/nodata.png" style="width:50px"/></div>
+								
 								<div class="wrapConResult" when-scrolled="seachCustomers(2)">
 									<div class="conResult">
 										<div ng-repeat="(key, data) in DataCustomers" ng-click="addCustomerToBill($index)">
@@ -200,6 +199,8 @@
 											</div>
 										</div>
 									</div>
+									<div style="float:left;position: relative; width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
+									<div style="float:left;position: relative; width: 100%;height: 50px;text-align: center;" ng-show="noResultCustomers"><img src="img/nodata.png" style="width:50px"/></div>
 								</div>
 							</div>
 
@@ -364,7 +365,7 @@
 						</div>
 						<div class="TEXT-RIGHT sub-title-right CURSOR">
 							<div ng-hide="findPayBill_toggle">
-								<form action="/send/print_uncleshop" method="post" target="_blank"  >
+								<form action="/send/print_uncleshop" method="post" target="_blanFk"  >
 									<input type="hidden" name="billCode" value="{{billCode}}"> 
 									<button type="submit" value="ปริ้น" style="border: 0px; background-color: #EEEEEE;">
 										<i class="fa fa-print" style="color: #555;"> </i>
@@ -397,8 +398,7 @@
 
 								</div>
 							</div>
-							<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingBill"><img src="img/hourglass.gif" style="width:45px"/></div>
-							<div style="width: 100%;height: 50px;text-align: center;" ng-show="noResultBill"><img src="img/nodata.png" style="width:50px"/></div>
+							
 							<div class="wrapConResult" when-scrolled="searchBillForPay(2);">  <!-- style="background-color: red; height: 10%; overflow: auto; width: 110%; position: relative" -->
 								<div class="conResult">
 									<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
@@ -425,6 +425,8 @@
 										</div>
 									</div>
 								</div>
+								<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="loadingBill"><img src="img/hourglass.gif" style="width:45px"/></div>
+								<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="noResultBill"><img src="img/nodata.png" style="width:50px"/></div>
 							</div>
 						</div>
 
@@ -542,13 +544,13 @@
 								<div ng-click="payTermOfBill($index)" ng-class="{disabled: data.bill_detail_status == 0, allow: data.bill_detail_status != 0}" ng-repeat="(key, data) in DataPayBill.dateBill" style="position: relative; left: 50%; margin-left: -130px; width: 260px; height: 44px; margin-bottom: 5px; margin-right: 5px;">
 									<div style="color: #efefef; border-top-left-radius: 3px; border-bottom-left-radius: 3px; padding-left: 5px; padding-top: 8px; float:left; height: 44px; background-color: #34495e; width: 180px;">
 								    <div style="margin-top: 3px; float: left; margin-right: 8px; margin-left: 5px;">
-								    	<i ng-show="data.bill_detail_status == 1" class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
-								    	<i ng-hide="data.bill_detail_status == 1" class="fa fa-clock-o" style="color: #1abc9c; font-size: 20px;"></i>
+								    	<i ng-show="data.bill_detail_status == 1 || data.bill_detail_status == 3" class="fa fa-check" style="color: #1abc9c; font-size: 20px;"></i>
+								    	<i ng-hide="data.bill_detail_status == 1 || data.bill_detail_status == 3" class="fa fa-clock-o" style="color: #1abc9c; font-size: 20px;"></i>
 								    </div>
 								    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
 									</div>
-									<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
-										{{((data.bill_detail_status == "1") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
+									<button ng-class="{'btn1':data.bill_detail_status == 1, 'btn5':data.bill_detail_status == 3, 'btn2':data.bill_detail_status == 0, 'btn3':data.bill_detail_status == 99}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
+										{{((data.bill_detail_status == "1" || data.bill_detail_status == "3") ? "ชำระแล้ว" : (data.bill_detail_status == "99" ? "ชำระเงิน" : "รอ"))}}
 									</button>																						
 								</div>
 								<div class="row">
@@ -572,12 +574,11 @@
 								    <div style="color: #1abc9c; font-size: 20px;">{{data.bill_detail_date}}</div>
 									</div>
 									<!-- {{data.admin_id == null ? "null" : "nonull"}} -->
-									<button ng-hide="data.admin_id == null" ng-class="{'btn4':data.bill_detail_status == 2, 'btn1':data.bill_detail_status == 1}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
-										{{data.bill_detail_status == "1" ? "ชำระแล้ว" : "ตัดบิลแล้ว"}}
+									<button ng-hide="data.admin_id == null" ng-class="{'btn5':data.bill_detail_status == 3, 'btn4':data.bill_detail_status == 2, 'btn1':data.bill_detail_status == 1}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
+										{{data.bill_detail_status == "1" || data.bill_detail_status == "3" ? "ชำระแล้ว" : "ตัดบิลแล้ว"}}
 									</button>	
 									<button ng-show="data.admin_id == null" ng-class="{'btn2':data.admin_id == null, 'btn1':data.admin_id != null}" style="border: 0; color: #efefef; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 80px; font-size: 20px;">
 										ตัดบิลแล้ว
-										<!-- {{data.bill_detail_status == "1" ? "ชำระแล้ว" : "ตัดบิล"}} -->
 									</button>							
 								</div>						
 							</div>
@@ -615,8 +616,10 @@
 								  <span class="input-group-addon CURSOR" ng-click="seachCustomers(1)"><i class="fa fa-search" style="color: #3498db"></i></span>
 								</div>
 							</div>
-							<div style="width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
-							<div style="width: 100%;height: 50px;text-align: center;" ng-show="noResultCustomers"><img src="img/nodata.png" style="width:50px"/></div>
+
+							<!-- <div style="position: relative; width: 100%; height: 100%; left: 50%; top: 50%; margin-left: -22.5px; margin-top: -22.5px;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
+							<div style="position: relative; width: 100%; height: 100%; left: 50%; top: 50%; margin-left: -25px; margin-top: -25px;" ng-show="noResultCustomers"><img src="img/nodata.png" style="width:50px"/></div> -->
+							
 							<div class="wrapConResult" ng-show="Search_Customer_toggle" when-scrolled="seachCustomers(2)"><!-- seachCustomers(2) -->
 								<div class="conResult" ng-show="Search_Customer_toggle"> 
 									<div ng-repeat="(key, data) in DataCustomers" ng-click="editCustomer($index)">
@@ -635,6 +638,8 @@
 										</div>
 									</div>
 								</div>
+								<div style="float:left;position: relative; width: 100%;height: 50px;text-align: center;" ng-show="loadingCustomers"><img src="img/hourglass.gif" style="width:45px"/></div>
+								<div style="float:left;position: relative; width: 100%;height: 50px;text-align: center;" ng-show="noResultCustomers"><img src="img/nodata.png" style="width:50px"/></div>
 							</div>
 
 							<!-- add customer -->

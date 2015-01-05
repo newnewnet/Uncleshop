@@ -42,7 +42,6 @@ angular.module('uncleshopApp')
 /*----------------------------  Customer  ---------------------------------*/
 	$scope.seachCustomers = function (type)
 	{
-		$rootScope.DataCustomers = '';
 		$scope.loadingCustomers = true;
 		$scope.noResultCustomers = false;
 		if(type == 1){
@@ -56,41 +55,44 @@ angular.module('uncleshopApp')
 			// console.log($rootScope.search.data);
 			manageCustomers.getCustomers(data,function(data, status, headers, config)
 			{
+				// console.log('page');
+				// console.log(data.page);
+				// console.log(data);
 				if(data.data.length == 0){
 					$scope.noResultCustomers = true;
 				}
 				
 				$scope.loadingCustomers = false;
-				$rootScope.DataCustomers = data.data;
+				$scope.DataCustomers = data.data;
 					
 			},500);
 		}
 
 		else{
+			// console.log($scope.page);
 			var data = {
 				'key':$rootScope.search.data,
 				'perpage': 25,
 				'page': ++$scope.page
 			}
+			// console.log(data);
 			// console.log('scope.page : '+$scope.page);
 			manageCustomers.getCustomers(data,function(data, status, headers, config)
-			{
-				// console.log('data.data.page : '+data.page);
-
+			{			
+				// console.log(data);
 				if($scope.page <= data.page){
 					console.log('<= is true');
 					for(var i=0; i<data.data.length; i++){
-						$rootScope.DataCustomers.push(data.data[i]);
-					}
-					$scope.loadingCustomers = false;	
-					console.log($rootScope.DataCustomers);
+						$scope.DataCustomers.push(data.data[i]);
+					}					
 				}
+				$scope.loadingCustomers = false;
 			},500);
 		}		
 	};
 
 	$scope.backToEditCustomer = function () {
-		$rootScope.DataCustomers = [];
+		$scope.DataCustomers = [];
 		$scope.Search_Customer_toggle = true;
 		$scope.Edit_Customer_toggle = false;
 		$scope.Add_Customer_toggle = false;
@@ -104,12 +106,12 @@ angular.module('uncleshopApp')
 		$scope.Add_Customer_toggle = false;
 		$scope.EditCustomerError = ['1','1','1'];
 
-		$scope.EditCustomersId = $rootScope.DataCustomers[index].customers_id;
-		$scope.EditCustomersIdCard = $rootScope.DataCustomers[index].customers_id_card;
-		$scope.EditCustomersName = $rootScope.DataCustomers[index].customers_name;
-		$scope.EditCustomersTel = $rootScope.DataCustomers[index].customers_tel;
-		$scope.EditCustomersAddress = $rootScope.DataCustomers[index].customers_address;
-		$scope.EditCustomersSex = $rootScope.DataCustomers[index].customers_sex;
+		$scope.EditCustomersId = $scope.DataCustomers[index].customers_id;
+		$scope.EditCustomersIdCard = $scope.DataCustomers[index].customers_id_card;
+		$scope.EditCustomersName = $scope.DataCustomers[index].customers_name;
+		$scope.EditCustomersTel = $scope.DataCustomers[index].customers_tel;
+		$scope.EditCustomersAddress = $scope.DataCustomers[index].customers_address;
+		$scope.EditCustomersSex = $scope.DataCustomers[index].customers_sex;
 	};
 
 	$scope.keyCheckCustomer = function (){
@@ -255,7 +257,7 @@ angular.module('uncleshopApp')
 		console.log($scope.DataPayBill);
 		var detail_index = null;
 		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
-			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
+			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99 || $scope.DataPayBill.dateBill[i].bill_detail_status == 3){
 				detail_index = i;
 			}
 		}
@@ -300,21 +302,31 @@ angular.module('uncleshopApp')
 	}
 
 	$scope.cutBill = function() { //ตัดบิล
-		var detail_index = null;
+		var detail_index = 0;
+		var detail_term = 0;
 		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
 			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99){
 				detail_index = i;
 			}
+			if($scope.DataPayBill.dateBill[i].bill_detail_status == 0){
+				detail_term++;
+			}
 		}
+		detail_term++;
 
-		var detail_price = $scope.DataPayBill.bill.bill_installments_price*($scope.DataPayBill.bill.bill_date_amount-detail_index);
-		detail_price = detail_price - ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1)));
+		console.log('detail_term: '+detail_term);
+		console.log('detail_price: '+detail_price);
+		console.log('detail_index: '+detail_index);
+		console.log('bill_installments_price: '+$scope.DataPayBill.bill.bill_installments_price);
+		var detail_price = $scope.DataPayBill.bill.bill_installments_price*detail_term;
+		detail_price = detail_price - ($scope.DataPayBill.bill.bill_interest * (detail_term-1));
 
 		var data = {
 			'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
 			'bill_detail_price' : detail_price,
 			'admin_id' : $rootScope.admin.admin_id,
-			'bill_interest' : ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1))),
+			// 'bill_interest' : ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1))),
+			'bill_interest' : $scope.DataPayBill.bill.bill_interest,
 			'bill_date_amount' : parseInt(detail_index+1),
 			'bill_code' : $scope.DataPayBill.bill.bill_code
 		};
@@ -389,10 +401,18 @@ angular.module('uncleshopApp')
 				},500);
 			});
 		}
-		else if($scope.DataPayBill.dateBill[index].bill_detail_status == 1 || $scope.DataPayBill.dateBill[index].bill_detail_status == 2){
+		else if($scope.DataPayBill.dateBill[index].bill_detail_status != 0 || $scope.DataPayBill.dateBill[index].bill_detail_status != 99){
 			if($scope.DataPayBill.dateBill[index].admin_id != null){
+				var type = '';
+				if($scope.DataPayBill.dateBill[index].bill_detail_status == 1)
+					type = ' (แบบปกติ)';
+				else if($scope.DataPayBill.dateBill[index].bill_detail_status == 3)
+					type = ' (แบบเฉพาะดอกเบี้ย)';
+				else if($scope.DataPayBill.dateBill[index].bill_detail_status == 2)
+					type = ' (แบบตัดบิล)';
+
 				swal({
-					title: "คุณ " + $scope.DataPayBill.dateBill[index].admin_name.admin_name + " เป็นผู้รับการชำระเงิน",   
+					title: "คุณ " + $scope.DataPayBill.dateBill[index].admin_name.admin_name + " เป็นผู้รับการชำระเงิน"+type,   
 					text: "ประจำวันที่ " + $scope.DataPayBill.dateBill[index].bill_detail_date,   
 				});
 			}
@@ -405,7 +425,9 @@ angular.module('uncleshopApp')
 		};
 		//$scope.billCode = $scope.DataBill[index].bill_code;
 		manageBill.getBill(data,function(data, status, headers, config){		
-			$scope.DataPayBill = data;			 
+			console.log('payBill');
+			console.log(data);
+			$scope.DataPayBill = data;						 
 			if($scope.DataPayBill.bill.bill_status == 0){
 				var length = $scope.DataPayBill.dateBill.length;
 
@@ -414,14 +436,15 @@ angular.module('uncleshopApp')
 				}
 				else {
 					for(var i=0; i<length-1; i++){ // -1 or don't
-						if($scope.DataPayBill.dateBill[i].bill_detail_status == 1 && $scope.DataPayBill.dateBill[i+1].bill_detail_status != 1){
-							$scope.DataPayBill.dateBill[i+1].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
+						if($scope.DataPayBill.dateBill[i].bill_detail_status == 0){
+							$scope.DataPayBill.dateBill[i].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
+							i = length;
 						}				
 
 					}
 				}				
 
-				if($scope.DataPayBill.dateBill[length-1].bill_detail_status == 99 || $scope.DataPayBill.dateBill[length-1].bill_detail_status == 1){
+				if($scope.DataPayBill.dateBill[length-1].bill_detail_status != 0){
 					$scope.cutBill_toggle = false;
 					console.log('status = '+$scope.DataPayBill.dateBill[length-1].bill_detail_status);
 					console.log('yes');
@@ -443,19 +466,21 @@ angular.module('uncleshopApp')
 			$scope.DataPayBill = data;
 			if($scope.DataPayBill.bill.bill_status == 0){
 				var length = $scope.DataPayBill.dateBill.length;
+
 				if($scope.DataPayBill.dateBill[0].bill_detail_status == 0){
 					$scope.DataPayBill.dateBill[0].bill_detail_status = 99;
-					console.log('yes');
 				}
 				else {
 					for(var i=0; i<length-1; i++){ // -1 or don't
-						if($scope.DataPayBill.dateBill[i].bill_detail_status == 1 && $scope.DataPayBill.dateBill[i+1].bill_detail_status != 1){
-							$scope.DataPayBill.dateBill[i+1].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
+						if($scope.DataPayBill.dateBill[i].bill_detail_status == 0){
+							$scope.DataPayBill.dateBill[i].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
+							i = length;
 						}				
-					}
-				}					
 
-				if($scope.DataPayBill.dateBill[length-1].bill_detail_status == 99 || $scope.DataPayBill.dateBill[length-1].bill_detail_status == 1){
+					}
+				}				
+
+				if($scope.DataPayBill.dateBill[length-1].bill_detail_status != 0){
 					$scope.cutBill_toggle = false;
 					console.log('status = '+$scope.DataPayBill.dateBill[length-1].bill_detail_status);
 					console.log('yes');
@@ -530,7 +555,7 @@ angular.module('uncleshopApp')
 				$scope.focusItem('customers_id_focus');
 			}
 		}
-		$rootScope.DataCustomers = [];
+		$scope.DataCustomers = [];
 		$rootScope.search.data = null;
 		$scope.addProduct_toggle = false;
 	};
@@ -648,7 +673,6 @@ angular.module('uncleshopApp')
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
 	$scope.searchBillForPay = function(value) {
-		$rootScope.DataBill = '';
 		$scope.loadingBill = true;
 		$scope.noResultBill = false;
 
