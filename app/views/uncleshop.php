@@ -28,10 +28,12 @@
 		<script src="js/constant/angular-local-storage.js"></script>
 		<script src="js/login.js"></script>
 		<script src="js/ng.js"></script>
+		<!-- <script src="js/bootstrap-datepicker.js"></script> -->
 
 		<!-- Sweet Alert -->
 		<script src="lib-sweet-alert/sweet-alert.js"></script>
 		<link rel="stylesheet" href="lib-sweet-alert/sweet-alert.css">
+		<!-- <link rel="stylesheet" href="css/datepicker.css"> -->
 
 		<!-- Font Awesome -->
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +140,7 @@
 				    		<div class="text">ข้อมูลลูกค้า</div>
 				    	</div>
 
-				    	<div class="box"  data-ng-click="changTab(5);" ng-show="admin.admin_status==1" data-ng-class="{'admin':tabColor==5}">
+				    	<div class="box"  data-ng-click="changTab(5); switchMenu()" ng-show="admin.admin_status==1" data-ng-class="{'admin':tabColor==5}">
 				    		<span class="icon icon5" >
 				    			<img src="img/icon-user.png"/>
 				    		</span>
@@ -591,8 +593,38 @@
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
-					<div class="title">ประวัติชำระเงิน</div>
-					<div class="box-bill"></div>
+					<div class="title">
+						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="">
+							ประวัติชำระเงิน
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-show="Search_Customer_toggle" ng-click="Add_Customer_toggle = true; Search_Customer_toggle = false; Edit_Customer_toggle = false;">
+							<div class="plus-user CURSOR">
+								<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
+								<img src="img/icon-user.png"/>
+							</div>
+						</div>
+						<div class="TEXT-RIGHT sub-title-right" ng-hide="Search_Customer_toggle" ng-click="backToEditCustomer()">
+							<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
+						</div>
+					</div>
+
+					<div class="box-bill"style="height: 100%;">
+						<div class="row">
+			        <div class="col-md-6">
+			            <p class="input-group">
+			              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-6">
+			            <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
+			        </div>
+			    </div>
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9"style="height: 100%;" ng-show="tabColor==4">
