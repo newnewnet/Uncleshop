@@ -63,6 +63,17 @@ return array(
 			'prefix'    => '',
 		),
 
+		// 'mysql' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'cpnstore_uncleshop',
+		// 	'username'  => 'cpnstore_base',
+		// 	'password'  => '4VeRte0lv',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
+
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
