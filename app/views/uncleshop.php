@@ -17,6 +17,8 @@
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="js/bootstrap.min.js"></script>
 
+	    <script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+
 	    <!-- Google Font -->
 	    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 	    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
@@ -597,6 +599,7 @@
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="">
 							ประวัติชำระเงิน
 						</div>
+
 						<div class="TEXT-RIGHT sub-title-right" ng-show="Search_Customer_toggle" ng-click="Add_Customer_toggle = true; Search_Customer_toggle = false; Edit_Customer_toggle = false;">
 							<div class="plus-user CURSOR">
 								<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
@@ -608,7 +611,7 @@
 						</div>
 					</div>
 
-					<div class="box-bill"style="height: 100%;">
+					
 						<div class="row">
 			        <div class="col-md-6">
 			            <p class="input-group">
@@ -619,7 +622,7 @@
 			            </p>
 			        </div>
 			      </div>
-			    </div>
+			   
 			    <div class="row">
 			        <div class="col-md-6">
 			            <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
