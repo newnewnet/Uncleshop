@@ -252,4 +252,76 @@
 			return $result;
 		}
 
+		// public function insertBill()
+		// {
+		// 	$product = new Product;
+		// 	$billDeatail = new BillDetail;
+		// 	$customers = new Customers;
+
+		// 	for($i= 0 ; $i<10000;$i++)
+		// 	{
+		// 		$bill_date_amount = 2;
+		// 		$bill_type = 0;
+
+		// 		$billCode = $this->randomBill();
+
+		// 		// $data = json_decode($array['data']);
+
+		// 		$startDate = date('Y-m-d');
+		// 		$day = 30;
+			
+		// 		if($bill_type == 1)
+		// 		{
+		// 			$day = 15;
+		// 		}
+
+		// 		$day1 = $day * $bill_date_amount;
+		// 		$endDate = time() + ($day1 * 24 * 60 * 60);
+		// 		$endDate  = date('Y-m-d',$endDate );
+
+		// 		$customersId = $customers->where('customers_id_card','=',25)
+		// 								->select('customers_id')->first();
+
+		// 		$this->insert([
+		// 				'bill_code' => $billCode ,
+		// 				'bill_start_date' => date('Y-m-d'),
+		// 				'bill_end_date' => $endDate,
+		// 				'bill_interest' => 200,
+		// 				'bill_date_amount' => $bill_date_amount,
+		// 				'bill_status' => 0,
+		// 				'bill_price' => 35000,
+		// 				'bill_type' => $bill_type,
+		// 				'bill_price_dow' => 5000,
+		// 				'customers_id' => 25,
+		// 				'bill_create_time' => date('Y-m-d H:i:s'),
+		// 				'bill_total' => 5000,
+		// 				'admin_id' => 1
+		// 		]);
+
+		// 		for($i=0;$i<2;$i++)
+		// 		{
+
+		// 			$product->insert([
+		// 					'product_name' => "TV",
+		// 					'product_amount' => 1,
+		// 					'product_price' => 15000,
+		// 					'bill_code' => $billCode
+		// 			]);
+		// 		}
+
+		// 		for($i=0 ;$i<$bill_date_amount;$i++)
+		// 		{		
+		// 			$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
+		// 			$startDate = date('Y-m-d',$startDate);	
+		// 			$billDeatail->insert([
+		// 					'bill_detail_date' => $startDate,
+		// 					'bill_detail_status' => 0,
+		// 					'bill_code' => $billCode
+		// 			]);
+		// 		}
+		// 	}
+
+		// 	// return $billCode;
+		// }
+
 	}
