@@ -14,6 +14,7 @@
 						->update(array(
 								'bill_detail_status' => 1,
 								'bill_detail_price' => $array['bill_detail_price'],
+								'bill_detail_time' => date("H:i:s"),
 								'admin_id' => $array['admin_id'],
 							));
 
@@ -51,6 +52,7 @@
 						->update(array(
 								'bill_detail_status' => 2,
 								'bill_detail_price' => $array['bill_detail_price'],
+								'bill_detail_time' => date("H:i:s"),
 								'admin_id' => $array['admin_id'],
 							));
 
@@ -86,8 +88,8 @@
 		 		$result = $this ->join('admin', 'bill_detail.admin_id', '=', 'admin.admin_id')
 		 						->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
 		 						->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
-		 						->where('bill_detail_status','=',1)->orderBy('bill_detail_date','DESC')
-		 						->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name');
+		 						->where('bill_detail_status','>',0)->orderBy('bill_detail_date','DESC')
+		 						->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name','bill_detail_time');
 
 
 		 	}
@@ -96,8 +98,8 @@
 		 		$result = $this ->join('admin', 'bill_detail.admin_id', '=', 'admin.admin_id')
 								->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
 								->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
-								->where('bill_detail_date','=',$date)->where('bill_detail_status','=',1)
-								->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name');
+								->where('bill_detail_date','=',$date)->where('bill_detail_status','>',0)
+								->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name','bill_detail_time');
 		 						// ->take(20)
 		 						// ->get();
 		 	
@@ -121,7 +123,10 @@
 				}
 			}
 
-		 	return  $result;
+		 	return [
+					'page' => $page,
+					'data' => $result
+				];
 		}
 		public function payOnlyInterest($array)
 		{
@@ -132,6 +137,7 @@
 							->update(array(
 								'bill_detail_status' => 3,
 								'bill_detail_price' => $array['bill_detail_price'],
+								'bill_detail_time' => date("H:i:s"),
 								'admin_id' => $array['admin_id'],
 							));
 
