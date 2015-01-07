@@ -78,7 +78,7 @@
 
 			}
 		}
-		public function timeLineBill($date)
+		public function timeLineBill($date,$param)
 		{
 			$result = '';
 			if($date == '')
@@ -87,9 +87,9 @@
 		 						->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
 		 						->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
 		 						->where('bill_detail_status','=',1)->orderBy('bill_detail_date','DESC')
-		 						->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name')
-		 						->take(20)
-		 						->get();
+		 						->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name');
+
+
 		 	}
 		 	else
 		 	{
@@ -97,11 +97,16 @@
 								->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
 								->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
 								->where('bill_detail_date','=',$date)->where('bill_detail_status','=',1)
-								->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name')
-		 						->take(20)
-		 						->get();
+								->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name');
+		 						// ->take(20)
+		 						// ->get();
 		 	
 		 	}
+
+		 	$perPage = $param['perpage'];
+			$skip = ($param['page'] - 1) * $perPage;
+			$page = ceil($result->count() / $perPage);
+			$result = $result->skip($skip)->take($perPage)->get();
 
 		 	if($result != '[]')
 		 	{

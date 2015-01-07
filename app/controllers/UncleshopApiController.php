@@ -134,8 +134,9 @@
 		{
 			$date = '';
 			$date = Input::get('date');
+			$param = $this->validateParamBill(Input::all());
 			$billDetail= new BillDetail;
-			$result = $billDetail->timeLineBill($date);
+			$result = $billDetail->timeLineBill($date,$param);
 			return $result;
 		}
 		public function updateBillDetail()
