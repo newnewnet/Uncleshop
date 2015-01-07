@@ -55,14 +55,12 @@ angular.module('uncleshopApp')
 			$scope.backToBill();
 			//$scope.focusItem('search_focus');
 		}
-		else if(number == 2){
-			// $rootScope.searchBill.data = null;
-			// $scope.findPayBill_toggle = true;
-			// $scope.optionSearchPayBill = 0;
+		else if(number == 2){			
 			$scope.backToPayBill();
 		}
 		else if(number == 3){
-			
+			$scope.dt = new Date();
+			$scope.historyBill(1);
 		}
 		else if(number == 4){
 			$scope.backToEditCustomer();
@@ -286,26 +284,72 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
-	$scope.historyBill = function() {
-		var data = {
-			data : $scope.dt,
-			perpage: 1,
-			page: 1
-		};
-		manageBill.timeLineBill(data,function(data, status, headers, config){
-			console.log(data);
-			$scope.timeline = data;
-		});		
-		var d = new Date("2011-04-20 09:30:51.01");
-			h = (d.getHours()<10?'0':'') + d.getHours(),
-     		m = (d.getMinutes()<10?'0':'') + d.getMinutes();
-     	var data = {
-     		day: d.getDate(),
-     		hours: h,
-     		minute: m	
-     	};
-     		console.log(d);
-			console.log(data);
+	$scope.historyBill = function(value) {
+		$scope.loadingBill = true;
+		$scope.noResultBill = false;
+
+		if(value == 1){
+			var y = $scope.dt.getFullYear();
+			var m = $scope.dt.getMonth();
+				m += 1;
+			var d = $scope.dt.getDate();
+			if(m <= 9)
+				m = '0'+m;
+			if(d <= 9)
+				d = '0'+d;
+
+			$scope.histPage = 1;
+
+			var data = {
+				data: y + '-' + m + '-' + d,
+				// data: '2015-01-07',
+				perpage: 10,
+				page: $scope.histPage
+			};
+			console.log('yep');
+			console.log(data.data);
+			manageBill.timeLineBill(data,function(data, status, headers, config){
+				if(data == '' || data.page == 0){
+					$scope.noResultBill = true;
+					$scope.timeline = [];
+				}
+
+				$scope.loadingBill = false;
+				console.log(data);
+				$scope.timeline = data;
+				console.log('history value 1');
+			},500);
+		}	
+
+		else {
+			var y = $scope.dt.getFullYear();
+			var m = $scope.dt.getMonth();
+				m += 1;
+			var d = $scope.dt.getDate();
+			if(m <= 9)
+				m = '0'+m;
+			if(d <= 9)
+				d = '0'+d;
+
+			var data = {
+				data: y + '-' + m + '-' + d,
+				// data: '2015-01-07',
+				perpage: 10,
+				page: ++$scope.histPage
+			};
+			console.log('yep');
+			console.log(data.data);
+			manageBill.timeLineBill(data,function(data, status, headers, config){
+				if($scope.histPage <= data.page){
+					for(var i=0; i<data.data.length; i++){
+						$scope.timeline.data.push(data.data[i]);
+					}
+				}
+				$scope.loadingBill = false;
+				console.log('history value 2');
+				
+			},500);
+		}	
 	};
 
 	$scope.removeBill = function(index) {		
@@ -506,11 +550,17 @@ angular.module('uncleshopApp')
 		}		
 	};
 
-	$scope.payBill = function(index) {
+	$scope.switchToPayBillTab = function(value) {
+		$scope.changTab(2);
+		$scope.backToPayBill();
+		$scope.payBill(value);
+	};
+
+	$scope.payBill = function(value) {
 		var data = {
-			'bill_code': $rootScope.DataBill[index].bill_code
+			'bill_code': value
 		};
-		$scope.billCode = $rootScope.DataBill[index].bill_code;
+		$scope.billCode = value;
 		manageBill.getBill(data,function(data, status, headers, config){
 			$scope.DataPayBill = data;		
 			console.log(data);				 
