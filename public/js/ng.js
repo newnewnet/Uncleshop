@@ -289,13 +289,23 @@ angular.module('uncleshopApp')
 	$scope.historyBill = function() {
 		var data = {
 			data : $scope.dt,
-			perpage: 3,
+			perpage: 1,
 			page: 1
 		};
 		manageBill.timeLineBill(data,function(data, status, headers, config){
 			console.log(data);
 			$scope.timeline = data;
 		});		
+		var d = new Date("2011-04-20 09:30:51.01");
+			h = (d.getHours()<10?'0':'') + d.getHours(),
+     		m = (d.getMinutes()<10?'0':'') + d.getMinutes();
+     	var data = {
+     		day: d.getDate(),
+     		hours: h,
+     		minute: m	
+     	};
+     		console.log(d);
+			console.log(data);
 	};
 
 	$scope.removeBill = function(index) {		

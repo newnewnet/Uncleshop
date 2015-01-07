@@ -611,38 +611,16 @@
 					      </p>
 					  </div>
 					</div>
-
-					{{timeline}}
-
-					<!-- <div class="wrapConResult" when-scrolled="searchBillForPay(2);">
+					{{ddd}}
+					<div class="wrapConResult" when-scrolled="searchBillForPay(2);">
 						<div class="conResult">
-							<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
-								<div class="resultUserBill">
-									<div class="wrap">
-										<div class="icon">
-											<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
-											<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
-										</div>
-										<div class="text">
-											<span class="name">{{data.customers_name}}</span>
-											<span class="tel">เบอร์โทร</span><span class="tel-data">{{data.customers_tel}}</span>
-											<span class="tel" style="color: #45B39C;">รหัสบัตร</span><span class="tel-data">{{data.customers_id_card}}</span>	
-											<span class="tel" style="color: #1196d1;">รหัสบิล</span><span class="tel-data">{{data.bill_code}}</span>	
-											<span class="tel" style="color: #8e44ad;">สินค้า</span><span class="tel-data">{{data.product.product_name | limitTo:20}}</span>																										
-											<span class="tel" style="color: #6e2d89;">สถานะบิล</span>
-											<span class="tel-data">{{(data.bill_status==0) ? 'ค้างชำระ' : 'ชำระแล้ว'}} 
-												<i ng-show="data.bill_status != 0" class="fa fa-check" style="color: #1abc9c;"></i> 
-												<i ng-hide="data.bill_status != 0" class="fa fa-times" style="color: #e05b49;"></i> 
-											</span>
-												
-										</div>
-									</div>
-								</div>
+							<div ng-repeat="(key, data) in timeline" ng-click="">
+								คุณ {{data.admin_name}} รับชำระเงินจาก คุณ {{data.customers_name}} ประจำวันที่ {{data.bill_detail_date}}
 							</div>
 						</div>
 						<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="loadingBill"><img src="img/hourglass.gif" style="width:45px"/></div>
 						<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="noResultBill"><img src="img/nodata.png" style="width:50px"/></div>
-					</div> -->
+					</div>
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9"style="height: 100%;" ng-show="tabColor==4">
