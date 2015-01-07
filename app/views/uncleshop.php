@@ -596,37 +596,53 @@
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9" ng-show="tabColor==3">
 					<div class="title">
-						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="">
+						<div class="TEXT-LEFT sub-title-left">
 							ประวัติชำระเงิน
-						</div>
-
-						<div class="TEXT-RIGHT sub-title-right" ng-show="Search_Customer_toggle" ng-click="Add_Customer_toggle = true; Search_Customer_toggle = false; Edit_Customer_toggle = false;">
-							<div class="plus-user CURSOR">
-								<i class="fa fa-plus-circle CURSOR" style="font-size: 18px"></i>
-								<img src="img/icon-user.png"/>
-							</div>
-						</div>
-						<div class="TEXT-RIGHT sub-title-right" ng-hide="Search_Customer_toggle" ng-click="backToEditCustomer()">
-							<i class="fa fa-search CURSOR" style="margin-top: -10px; color: #3498db"></i>
 						</div>
 					</div>
 
 					<div class="row">
-					  <div class="col-md-6">
-					      <p class="input-group">
-					        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+					  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6">
+					      <p class="input-group">  <!-- close-on-date-selection="al()" -->
+					        <input type="text" class="form-control" maxlength="10" ng-focus="historyBill()" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
 					        <span class="input-group-btn">
 					          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 					        </span>
 					      </p>
 					  </div>
 					</div>
-			   
-			    <div class="row">
-			        <div class="col-md-6">
-			            <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
-			        </div>
-			    </div>
+
+					{{timeline}}
+
+					<!-- <div class="wrapConResult" when-scrolled="searchBillForPay(2);">
+						<div class="conResult">
+							<div ng-repeat="(key, data) in DataBill" ng-click="payBill($index)">
+								<div class="resultUserBill">
+									<div class="wrap">
+										<div class="icon">
+											<img src="img/icon-44.png" ng-show="data.customers_sex == 'male'">
+											<img src="img/icon-user.png" ng-show="data.customers_sex == 'female'">
+										</div>
+										<div class="text">
+											<span class="name">{{data.customers_name}}</span>
+											<span class="tel">เบอร์โทร</span><span class="tel-data">{{data.customers_tel}}</span>
+											<span class="tel" style="color: #45B39C;">รหัสบัตร</span><span class="tel-data">{{data.customers_id_card}}</span>	
+											<span class="tel" style="color: #1196d1;">รหัสบิล</span><span class="tel-data">{{data.bill_code}}</span>	
+											<span class="tel" style="color: #8e44ad;">สินค้า</span><span class="tel-data">{{data.product.product_name | limitTo:20}}</span>																										
+											<span class="tel" style="color: #6e2d89;">สถานะบิล</span>
+											<span class="tel-data">{{(data.bill_status==0) ? 'ค้างชำระ' : 'ชำระแล้ว'}} 
+												<i ng-show="data.bill_status != 0" class="fa fa-check" style="color: #1abc9c;"></i> 
+												<i ng-hide="data.bill_status != 0" class="fa fa-times" style="color: #e05b49;"></i> 
+											</span>
+												
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="loadingBill"><img src="img/hourglass.gif" style="width:45px"/></div>
+						<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="noResultBill"><img src="img/nodata.png" style="width:50px"/></div>
+					</div> -->
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9"style="height: 100%;" ng-show="tabColor==4">
