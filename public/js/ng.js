@@ -288,7 +288,9 @@ angular.module('uncleshopApp')
 
 	$scope.historyBill = function() {
 		var data = {
-			data : $scope.dt
+			data : $scope.dt,
+			perpage: 3,
+			page: 1
 		};
 		manageBill.timeLineBill(data,function(data, status, headers, config){
 			console.log(data);
