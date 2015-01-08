@@ -134,9 +134,10 @@
 		{
 			$date = '';
 			$date = Input::get('date');
+			$column = Input::get('column');
 			$param = $this->validateParamBill(Input::all());
 			$billDetail= new BillDetail;
-			$result = $billDetail->timeLineBill($date,$param);
+			$result = $billDetail->timeLineBill($date,$param,$column);
 			return $result;
 		}
 		public function updateBillDetail()

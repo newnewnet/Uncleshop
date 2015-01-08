@@ -168,7 +168,8 @@
 		data = {
 			date : '2014-12-24',
 			perpage:จำนวนข้อมูลแต่ละหน้า,
-			page:หน้าที่เท่าไร
+			page:หน้าที่เท่าไร,
+			column : bill_detail_pay_date หรือ bill_detail_date
 
 		}
 		แบบนี้นะ
