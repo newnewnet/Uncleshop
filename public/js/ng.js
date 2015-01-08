@@ -60,6 +60,7 @@ angular.module('uncleshopApp')
 		}
 		else if(number == 3){
 			$scope.dt = new Date();
+			$scope.optionSearchHistory = 'bill_detail_pay_date';
 			$scope.historyBill(1);
 		}
 		else if(number == 4){
@@ -285,10 +286,12 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.historyBill = function(value) { // วันนี้ลูกค้าคนใดต้องมาจ่ายบ้าง ?
+		console.log('dt'+$scope.dt);
+
 		$scope.loadingBill = true;
 		$scope.noResultBill = false;
 
-		if(value == 1){
+		if(value == 1 && $scope.dt != undefined){
 			var y = $scope.dt.getFullYear();
 			var m = $scope.dt.getMonth();
 				m += 1;
@@ -304,8 +307,10 @@ angular.module('uncleshopApp')
 				date: y + '-' + m + '-' + d,
 				// data: '2015-01-07',
 				perpage: 10,
-				page: $scope.histPage
+				page: $scope.histPage,
+				column: $scope.optionSearchHistory
 			};
+			console.log($scope.optionSearchHistory);
 			console.log('yep');
 			console.log(data.date);
 			manageBill.timeLineBill(data,function(data, status, headers, config){
@@ -321,7 +326,7 @@ angular.module('uncleshopApp')
 			},500);
 		}	
 
-		else {
+		else if(value == 2){
 			var y = $scope.dt.getFullYear();
 			var m = $scope.dt.getMonth();
 				m += 1;
@@ -335,7 +340,8 @@ angular.module('uncleshopApp')
 				data: y + '-' + m + '-' + d,
 				// data: '2015-01-07',
 				perpage: 10,
-				page: ++$scope.histPage
+				page: ++$scope.histPage,
+				column: $scope.optionSearchHistory
 			};
 			manageBill.timeLineBill(data,function(data, status, headers, config){
 				if($scope.histPage <= data.page){

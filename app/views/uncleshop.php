@@ -409,7 +409,6 @@
 							<div class="wrapConResult" when-scrolled="searchBillForPay(2);">  <!-- style="background-color: red; height: 10%; overflow: auto; width: 110%; position: relative" -->
 								<div class="conResult">
 									<div ng-repeat="(key, data) in DataBill" ng-click="payBill(data.bill_code)">
-									{{data}}
 										<div class="resultUserBill">
 											<div class="wrap">
 												<div class="icon">
@@ -604,17 +603,28 @@
 
 					<div class="row">
 					  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6">
-					      <p class="input-group">  <!-- close-on-date-selection="al()" -->
-					        <input type="text" ng-enter="historyBill(1)" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+					      <div class="input-group" style="margin-bottom: 15px;">  <!-- close-on-date-selection="al()" -->
+					        <input type="text" ng-enter="historyBill(1)" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
 					        <span class="input-group-btn">
 					          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 					        </span>
-					      </p>
+					        <span class="input-group-btn">
+							    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 34px; padding-top: 4px;">
+							    <!-- ค้างชำระ -->
+								    <i class="fa fa-search" style="color: #3498db;"></i>
+							    	<i class="fa fa-caret-down" style="font-size: 15px;"></i>
+							    </button>
+							    <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px; font-family: 'thaisans_semibold';">
+							    	<li ng-click="optionSearchHistory = 'bill_detail_pay_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ชำระแล้ว</j></a></li>
+							        <li ng-click="optionSearchHistory = 'bill_detail_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ครบรอบชำระ</j></a></li>
+							    </ul>
+							</span>
+					      </div>
 					  </div>
 					</div>
 
 					<div class="box-bill" style="height: 100%;">
-						<div class="form-horizontal" style="height: 100%;">
+						<div ng-show="optionSearchHistory == 'bill_detail_pay_date'" class="form-horizontal" style="height: 100%;">
 							<div class="wrapConResult" when-scrolled="historyBill(2)">
 								<div class="conResult">
 									<div ng-repeat="(key, data) in timeline.data" class="CURSOR" ng-click="switchToPayBillTab(data.bill_code)">
@@ -622,10 +632,44 @@
 											<div style="width: 100%; font-size: 36px; float-left;">												
 												<i class="fa fa-clock-o" style="color: #8bd9e8;"></i>{{' '}}<d style="color: #75d97e;">{{data.bill_detail_time|limitTo:5}}</d>
 											</div>
+											<!-- <div style="width: 50%; font-size: 24px; float-left;">												
+												<d style="color: #75d97e;">{{data.bill_detail_pay_date  | date:'yyyy-MM-dd'}}</d>
+											</div> -->
 											<div style="width: 100%; color: #1d9191; float-left; margin-top: -12px;">												
+												รหัสบิล<d style="color: #24b79a ">{{'   '+data.bill_code}}</d>
+											</div>
+											<div style="width: 100%; color: #1d9191; float-left; margin-top: -8px;">												
 												ผู้รับเงิน<d style="color: #24b79a ">{{'   '+data.admin_name}}</d>
 											</div>
-											<div style="width: 100%; color: #1d9191; float-left; margin-top: -5px;">												
+											<div style="width: 100%; color: #1d9191; float-left; margin-top: -8px;">												
+												ผู้ชำระเงิน<d style="color: #24b79a ">{{'   '+data.customers_name}}</d>
+											</div>																						 
+										</div>
+									</div>
+								</div>
+								<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="loadingBill"><img src="img/hourglass.gif" style="width:45px"/></div>
+								<div style="float: left; width: 100%;height: 50px;text-align: center;" ng-show="noResultBill"><img src="img/nodata.png" style="width:50px"/></div>
+							</div>
+						</div>
+
+						<div ng-hide="optionSearchHistory == 'bill_detail_pay_date'" class="form-horizontal" style="height: 100%;">
+							<div class="wrapConResult" when-scrolled="historyBill(2)">
+								<div class="conResult">
+									<div ng-repeat="(key, data) in timeline.data" class="CURSOR" ng-click="switchToPayBillTab(data.bill_code)">
+										<div class="timeLine">
+											<div style="width: 100%; font-size: 36px; float-left;">												
+												<i class="fa fa-clock-o" style="color: #f29d9d;"></i>{{' '}}<d style="color: #75d97e;">รอชำระเงิน</d>
+											</div>
+											<!-- <div style="width: 50%; font-size: 24px; float-left;">												
+												<d style="color: #75d97e;">{{data.bill_detail_pay_date  | date:'yyyy-MM-dd'}}</d>
+											</div> -->
+											<div style="width: 100%; color: #1d9191; float-left; margin-top: -12px;">												
+												รหัสบิล<d style="color: #24b79a ">{{'   '+data.bill_code}}</d>
+											</div>
+											<div style="width: 100%; color: #1d9191; float-left; margin-top: -8px;">												
+												ผู้รับเงิน<d style="color: #24b79a ">{{'   '+data.admin_name}}</d>
+											</div>
+											<div style="width: 100%; color: #1d9191; float-left; margin-top: -8px;">												
 												ผู้ชำระเงิน<d style="color: #24b79a ">{{'   '+data.customers_name}}</d>
 											</div>																						 
 										</div>
@@ -636,7 +680,6 @@
 							</div>
 						</div>
 					</div>	
-
 				</div>
 
 				<div class="box-save-bill col-xs-12 col-sm-12 col-md-9"style="height: 100%;" ng-show="tabColor==4">
