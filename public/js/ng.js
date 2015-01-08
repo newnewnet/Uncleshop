@@ -284,7 +284,7 @@ angular.module('uncleshopApp')
 		$scope.addProduct_toggle = true;
 	};
 
-	$scope.historyBill = function(value) {
+	$scope.historyBill = function(value) { // วันนี้ลูกค้าคนใดต้องมาจ่ายบ้าง ?
 		$scope.loadingBill = true;
 		$scope.noResultBill = false;
 
@@ -307,7 +307,7 @@ angular.module('uncleshopApp')
 				page: $scope.histPage
 			};
 			console.log('yep');
-			console.log(data.data);
+			console.log(data.date);
 			manageBill.timeLineBill(data,function(data, status, headers, config){
 				if(data == '' || data.page == 0){
 					$scope.noResultBill = true;
@@ -337,8 +337,6 @@ angular.module('uncleshopApp')
 				perpage: 10,
 				page: ++$scope.histPage
 			};
-			console.log('yep');
-			console.log(data.data);
 			manageBill.timeLineBill(data,function(data, status, headers, config){
 				if($scope.histPage <= data.page){
 					for(var i=0; i<data.data.length; i++){
