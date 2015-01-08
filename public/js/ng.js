@@ -306,7 +306,7 @@ angular.module('uncleshopApp')
 			var data = {
 				date: y + '-' + m + '-' + d,
 				// data: '2015-01-07',
-				perpage: 10,
+				perpage: 25,
 				page: $scope.histPage,
 				column: $scope.optionSearchHistory
 			};
@@ -339,7 +339,7 @@ angular.module('uncleshopApp')
 			var data = {
 				data: y + '-' + m + '-' + d,
 				// data: '2015-01-07',
-				perpage: 10,
+				perpage: 25,
 				page: ++$scope.histPage,
 				column: $scope.optionSearchHistory
 			};

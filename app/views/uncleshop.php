@@ -658,19 +658,16 @@
 									<div ng-repeat="(key, data) in timeline.data" class="CURSOR" ng-click="switchToPayBillTab(data.bill_code)">
 										<div class="timeLine">
 											<div style="width: 100%; font-size: 36px; float-left;">												
-												<i class="fa fa-clock-o" style="color: #f29d9d;"></i>{{' '}}<d style="color: #75d97e;">รอชำระเงิน</d>
+												<i class="fa fa-clock-o" style="color: #f29d9d;"></i>{{' '}}<d style="color: #f46e98;">รอชำระเงิน</d>
 											</div>
 											<!-- <div style="width: 50%; font-size: 24px; float-left;">												
 												<d style="color: #75d97e;">{{data.bill_detail_pay_date  | date:'yyyy-MM-dd'}}</d>
 											</div> -->
-											<div style="width: 100%; color: #1d9191; float-left; margin-top: -12px;">												
-												รหัสบิล<d style="color: #24b79a ">{{'   '+data.bill_code}}</d>
+											<div style="width: 100%; color: #ce0202; float-left; margin-top: -12px;">												
+												รหัสบิล<d style="color: #f45d5d ">{{'   '+data.bill_code}}</d>
 											</div>
-											<div style="width: 100%; color: #1d9191; float-left; margin-top: -8px;">												
-												ผู้รับเงิน<d style="color: #24b79a ">{{'   '+data.admin_name}}</d>
-											</div>
-											<div style="width: 100%; color: #1d9191; float-left; margin-top: -8px;">												
-												ผู้ชำระเงิน<d style="color: #24b79a ">{{'   '+data.customers_name}}</d>
+											<div style="width: 100%; color: #ce0202; float-left; margin-top: -8px;">												
+												ผู้ชำระเงิน<d style="color: #f45d5d ">{{'   '+data.customers_name}}</d>
 											</div>																						 
 										</div>
 									</div>
