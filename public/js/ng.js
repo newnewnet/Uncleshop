@@ -301,7 +301,7 @@ angular.module('uncleshopApp')
 			$scope.histPage = 1;
 
 			var data = {
-				data: y + '-' + m + '-' + d,
+				date: y + '-' + m + '-' + d,
 				// data: '2015-01-07',
 				perpage: 10,
 				page: $scope.histPage
