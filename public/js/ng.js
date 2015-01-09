@@ -53,18 +53,22 @@ angular.module('uncleshopApp')
 
 		if(number == 1){
 			$scope.backToBill();
+			$scope.tabColor = 1;
 			//$scope.focusItem('search_focus');
 		}
 		else if(number == 2){			
 			$scope.backToPayBill();
+			$scope.tabColor = 2;
 		}
 		else if(number == 3){
 			$scope.dt = new Date();
 			$scope.optionSearchHistory = 'bill_detail_pay_date';
 			$scope.historyBill(1);
+			$scope.tabColor = 3;
 		}
 		else if(number == 4){
 			$scope.backToEditCustomer();
+			$scope.tabColor = 4;
 			// $scope.getAdmins();
 			// $scope.adminToggle = false;
 			//$scope.focusItem(null);
@@ -72,6 +76,7 @@ angular.module('uncleshopApp')
 		else if(number == 5){
 			$scope.getAdmins();
 			$scope.adminToggle = false;
+			$scope.tabColor = 5;
 			//$scope.focusItem(null);
 		}
 		else
@@ -262,6 +267,18 @@ angular.module('uncleshopApp')
 		$scope.setBillDefault();
 	};
 
+	$scope.backToEditBill = function() {
+		$scope.editBill($scope.billCode); 
+		$scope.edited=false; 
+		$scope.tabColor=2.1;
+		$scope.DataCustomer_toggle = false;
+		$scope.addProduct_toggle = true;
+
+		$scope.priceDowError = '';
+		$scope.interestError = '';
+		$scope.timeOfPaymentError = '';
+	};
+
 	$scope.backToPayBill = function() {
 		$scope.findPayBill_toggle = true;
 		$rootScope.DataBill = null;
@@ -269,7 +286,7 @@ angular.module('uncleshopApp')
 		$scope.optionSearchPayBill = 0;
 		$scope.customersDes_toggle = false;
 		$scope.productDes_toggle = false;
-		$scope.priceDes_toggle = false;
+		$scope.priceDes_toggle = false;		
 	};
 
 	$scope.backToAdmin = function() {
@@ -281,6 +298,8 @@ angular.module('uncleshopApp')
 	/*----------------------------  bill  ---------------------------------*/
 	$scope.addCustomerToBill = function(index) {
 		$scope.DataCustomersOfBill = $scope.DataCustomers[index];
+		$scope.dataEditBill = [];
+		$scope.dataEditBill.customer = $scope.DataCustomers[index];
 		$scope.DataCustomer_toggle = false;
 		$scope.addProduct_toggle = true;
 	};
@@ -640,20 +659,12 @@ angular.module('uncleshopApp')
 
 		var priceOfAllProduct = 0;
 		$scope.billData = [];
+
 		for(var i = 0; i<$scope.productData.length; i++){
-			priceOfAllProduct +=  $scope.productData[i].productPrice * $scope.productData[i].productAmount;
+			priceOfAllProduct +=  $scope.productData[i].product_price * $scope.productData[i].product_amount;
+			console.log(priceOfAllProduct);
 		}
-
-		// var interest;
-		// manageAdmin.getInterestValue(function(data, status, headers, config)
-		// {
-			// if($scope.type_dow == 'month')
-			// 	interest = data.admin_interest_month;
-			// else
-			// 	interest = data.admin_interest_week;
-
-			// if($scope.timeOfPayment == null)
-			// 	$scope.timeOfPayment = 0;
+		
 			if($scope.priceDow == null)
 				$scope.priceDow = 0;
 			if($scope.timeOfPayment == null)
@@ -669,7 +680,118 @@ angular.module('uncleshopApp')
 					'priceWithoutDow': $scope.priceWithoutDow = (priceOfAllProduct+($scope.interest*$scope.timeOfPayment)) - $scope.priceDow,//ราคารวมดอกเบี้ยและหักเงินดาวน์
 					'priceTermOfPayment': $scope.priceWithoutDow / $scope.timeOfPayment //ราคาต่องวด
 				};
-		// },500);
+
+	};
+
+	$scope.editBill = function(billCode) {
+		var data = {
+			'bill_code': billCode
+		};
+		manageBill.getBill(data,function(data, status, headers, config){
+			$scope.dataEditBill = data;
+			$scope.productData = [];
+			// $scope.DataCustomersOfBill = data.customer; //customers
+			for(var i=0; i<data.product.length; i++){ //product
+				$scope.productData.push(data.product[i]);
+			}
+			for(var i=0; i<$scope.productData.length; i++){ //product2
+				$scope.productData[i].product_price = parseInt($scope.productData[i].product_price);
+			}
+			console.log($scope.productData);
+
+			$scope.dataEditBill.bill.bill_price_dow = parseInt($scope.dataEditBill.bill.bill_price_dow);
+			$scope.dataEditBill.bill.bill_interest = parseInt($scope.dataEditBill.bill.bill_interest);
+			
+			$scope.priceDow = data.bill.bill_price_dow;
+			$scope.interest = data.bill.bill_interest;
+			$scope.timeOfPayment = data.bill.bill_date_amount;
+			$scope.type_dow = data.bill.bill_type;
+			$scope.calBill();
+		},500);
+	};
+
+	$scope.editBillFinish = function(billCode) {
+		var count = true;
+		angular.forEach($scope.productData, function(products) {
+			if(products.product_name == '')
+			{
+				count = false;
+				products.productNameError = 'input-error';
+			}
+			if( products.product_price == '' )
+			{
+				count = false;
+				products.productPriceError = 'input-error';
+			}
+			if(products.product_amount == '')
+			{
+				count = false;
+				products.productAmountError = 'input-error';
+			}
+			if($scope.priceDow == null || $scope.priceDow.length == 0){
+				$scope.priceDowError = 'input-error';
+				count = false;
+			}
+			if($scope.timeOfPayment == null || $scope.timeOfPayment.length == 0){
+				$scope.timeOfPaymentError = 'input-error';
+				count = false;
+			}
+			if($scope.interest == null || $scope.interest.length == 0){
+				$scope.interestError = 'input-error';
+				count = false;
+			}
+			if(count == false){
+				swal({
+					title: "ไม่สำเร็จ !!",   
+					text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",   
+					type: "error",
+					timer: 2000
+				});
+			}
+
+		});
+		
+		if($scope.dataEditBill == null && count != false){
+			count = false;
+			swal({
+				title: "ไม่สำเร็จ !!",   
+				text: "กรุณาเพิ่มข้อมูลลูกค้าก่อน",   
+				type: "error",
+				timer: 2000
+			});
+		}
+
+		if(count != false){
+			var products = [];
+			for(var i=0; i<$scope.productData.length; i++){
+				products.push({
+					product_name: $scope.productData[i].product_name, 
+					product_price: $scope.productData[i].product_price, 
+					product_amount: $scope.productData[i].product_amount
+				});
+			}
+			var product = [];
+			for(var i=0; i<products.length; i++){
+				product.push(products[i]);
+			}
+			console.log(product);
+			var data = {
+				'bill_code': billCode,
+				'bill_start_date': $scope.dataEditBill.bill.bill_start_date,
+				'bill_total_price' : $scope.dataEditBill.bill.bill_total_price,
+				'bill_date_amount' : $scope.dataEditBill.bill.bill_date_amount,
+				'bill_price': $scope.dataEditBill.bill.bill_price,
+				'bill_type': $scope.dataEditBill.bill.bill_type,
+				'bill_price_dow' : $scope.dataEditBill.bill.bill_price_dow,
+				'customers_id' : $scope.dataEditBill.customer.customers_id,
+				'admin_id': $rootScope.admin.admin_id,
+				'product': product
+			};		
+
+			manageBill.updateBill(data,function(data, status, headers, config){
+				console.log(data);
+			},500);
+		}		
 	};
 
 	/*---------------------------- Bill-->Customers  ---------------------------------*/
@@ -1102,23 +1224,28 @@ angular.module('uncleshopApp')
 		$scope.priceDow = null;
 		$scope.interest = null;
 		$scope.timeOfPayment = null;
+		$scope.dataEditBill = null;
+
+		$scope.priceDowError = '';
+		$scope.interestError = '';
+		$scope.timeOfPaymentError = '';
 	}
 	$scope.productDefault = function()
 	{
 		$scope.productData = [];
 		$scope.productData[0]={
-			'productName':'',
-			'productPrice':'',
-			'productAmount':''
+			'product_name':'',
+			'product_price':'',
+			'product_amount':''
 		};
 		$scope.countProduct = $scope.productData.length;
 	};
 
 	$scope.positiveProduct = function() {
 		$scope.productData.push({
-			'productName':'',
-			'productPrice':'',
-			'productAmount':'',
+			'product_name':'',
+			'product_price':'',
+			'product_amount':'',
 		});
 		$scope.countProduct = $scope.productData.length;
 	};
@@ -1146,22 +1273,23 @@ angular.module('uncleshopApp')
 
 		$scope.calBill();
  	}
+
 	$scope.createBill  = function()
 	{
 		var count = true;
 		angular.forEach($scope.productData, function(products) {
 		
-			if(products.productName == '')
+			if(products.product_name == '')
 			{
 				count = false;
 				products.productNameError = 'input-error';
 			}
-			if( products.productPrice == '' )
+			if( products.product_price == '' )
 			{
 				count = false;
 				products.productPriceError = 'input-error';
 			}
-			if(products.productAmount == '')
+			if(products.product_amount == '')
 			{
 				count = false;
 				products.productAmountError = 'input-error';
@@ -1272,6 +1400,13 @@ angular.module('uncleshopApp')
 		updateBillDetail:function(data,callback)
 		{
 			$http({method: 'POST', url: '/updateBillDetail',params:data})
+			.success(callback)
+			.error(function(data, status, headers, config) {
+		  });
+		},
+		updateBill:function(data,callback)
+		{
+			$http({method: 'POST', url: '/updateBill',params:data})
 			.success(callback)
 			.error(function(data, status, headers, config) {
 		  });
