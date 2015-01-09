@@ -1086,7 +1086,7 @@ angular.module('uncleshopApp')
 
 	/*when init*/
 	$scope.init = function() {
-		$scope.changTab(3);
+		$scope.changTab(2);
 		$scope.today();
 		$scope.adminDefault();
 		$scope.customersDefault();

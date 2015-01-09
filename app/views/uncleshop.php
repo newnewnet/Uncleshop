@@ -367,8 +367,8 @@
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToPayBill()">
 							ชำระเงิน
 						</div>
-						<div class="sub-title-right CURSOR" ng-click="removeBill(billCode)" style="right: 90px;" ng-show="findPayBill_toggle == false">
-							
+						<div class="sub-title-right CURSOR" ng-click="EditBill(billCode)" style="right: 105px;" ng-show="findPayBill_toggle == false">
+							<i class="fa fa-wrench"></i>
 						</div>
 						<div class="TEXT-RIGHT sub-title-right CURSOR">
 							<div ng-hide="findPayBill_toggle">
