@@ -66,6 +66,27 @@
 		}
 
 
+		/updateBill   : post
+
+		data = {
+			'bill_code' ข้อมุล:,
+			'bill_start_date' ข้อมุล,
+			'bill_total_price' : $array['bill_total_price'],
+			'bill_date_amount' :  $array['bill_date_amount'],
+			'bill_price' => : ['bill_price'],
+			'bill_type' => : ['bill_type'],
+			'bill_price_dow' :  $array['bill_price_dow'],
+			'customers_id' : $array['customers_id'],
+			'admin_id': $array['admin_id'],
+			product : {[
+					'product_name' : $product->product_name,
+					'product_amount' : $product->product_amount,
+					'product_price': $product->product_price,
+				]}
+			},
+			
+		}
+
 
 		/deleteBill    :  get
 		data = {

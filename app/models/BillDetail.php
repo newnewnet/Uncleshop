@@ -86,9 +86,11 @@
 		{
 			$result = '';
 			$oparater = '>';
+			$adminFlug = 'bill_detail.admin_id';
 			if($column == 'bill_detail_date')
 			{
 				$oparater = '=';
+				$adminFlug = 'bill.admin_id';
 			}
 
 			if($date == '')
@@ -103,9 +105,9 @@
 		 	}
 		 	else
 		 	{
-		 		$result = $this ->join('admin', 'bill_detail.admin_id', '=', 'admin.admin_id')
-								->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
+		 		$result = $this ->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
 								->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
+								->join('admin', $adminFlug, '=', 'admin.admin_id')
 								->where($column,'=',$date)->where('bill_detail_status',$oparater,0)
 								->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name','bill_detail_time','bill_detail_pay_date');
 		 	

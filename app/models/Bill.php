@@ -283,7 +283,6 @@
 					'bill_end_date' => $endDate,
 					'bill_interest' => $data->bill_interest,
 					'bill_date_amount' => $data->bill_date_amount,
-					'bill_status' => 0,
 					'bill_price' => $data->bill_price,
 					'bill_type' => $data->bill_type,
 					'bill_price_dow' => $data->bill_price_dow,
