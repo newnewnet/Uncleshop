@@ -367,6 +367,9 @@
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToPayBill()">
 							ชำระเงิน
 						</div>
+						<div class="sub-title-right CURSOR" ng-click="removeBill(billCode)" style="right: 90px;" ng-show="findPayBill_toggle == false">
+							
+						</div>
 						<div class="TEXT-RIGHT sub-title-right CURSOR">
 							<div ng-hide="findPayBill_toggle">
 								<form action="/send/print_uncleshop" method="post" target="_blanFk"  >
