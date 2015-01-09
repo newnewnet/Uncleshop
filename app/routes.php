@@ -32,6 +32,7 @@ Route::get('deleteCustomers','UncleshopApiController@deleteCustomers');
 
 Route::post('saveBill','UncleshopApiController@saveBill');
 Route::get('getBill','UncleshopApiController@getBill');
+Route::post('updateBill','UncleshopApiController@updateBill');
 Route::get('bill','UncleshopApiController@searchBill');
 Route::get('deleteBill','UncleshopApiController@deleteBill');
 Route::get('timeLineBill','UncleshopApiController@timeLineBill');

@@ -52,6 +52,13 @@
 			return $bill->getBill($billCode);
 
 		}
+		public function updateBill()
+		{
+			$array = Input::all();
+			$bill = new Bill;
+			return $bill->insertBill($array);
+
+		}
 		public function saveAdmin()
 		{
 			$array = Input::all();

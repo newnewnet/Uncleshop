@@ -251,6 +251,71 @@
 			
 			return $result;
 		}
+		public function updateBill($array)
+		{
+			$product = new Product;
+			$billDeatail = new BillDetail;
+			$customers = new Customers;
+			
+			$data = json_decode($array['data']);
+
+			DB::table('bill_detail')->where('bill_code', '=', $data->bill_code)->delete();
+			DB::table('product')->where('bill_code', '=', $data->bill_code)->delete();
+
+			$startDate = $data->bill_start_date;
+			$day = 30;
+		
+			if($data->bill_type == 1)
+			{
+				$day = 15;
+			}
+
+			$day1 = $day * $data->bill_date_amount;
+			$endDate = time() + ($day1 * 24 * 60 * 60);
+			$endDate  = date('Y-m-d',$endDate );
+
+			$customersId = $customers->where('customers_id_card','=',$data->customers_id_card)
+									->select('customers_id')->first();
+
+			$this->where('bill_code','=',$data->bill_code)
+						->update(array(
+					'bill_start_date' => $data->bill_start_date,
+					'bill_end_date' => $endDate,
+					'bill_interest' => $data->bill_interest,
+					'bill_date_amount' => $data->bill_date_amount,
+					'bill_status' => 0,
+					'bill_price' => $data->bill_price,
+					'bill_type' => $data->bill_type,
+					'bill_price_dow' => $data->bill_price_dow,
+					'customers_id' => $customersId->customers_id,
+					'bill_total' => $data->bill_price_dow,
+					'admin_id' => $data->admin_id
+				));
+
+			for($i=0;$i<count($data->product);$i++)
+			{
+
+				$product->insert([
+						'product_name' => $data->product[$i]->productName,
+						'product_amount' => $data->product[$i]->productAmount,
+						'product_price' => $data->product[$i]->productPrice,
+						'bill_code' => $data->bill_code
+				]);
+			}
+
+			for($i=0 ;$i<$data->bill_date_amount;$i++)
+			{		
+				$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
+				$startDate = date('Y-m-d',$startDate);	
+				$billDeatail->insert([
+						'bill_detail_date' => $startDate,
+						'bill_detail_status' => 0,
+						'bill_code' => $data->bill_code
+				]);
+			}
+
+			return $billCode;
+		}
 
 		// public function insertBill()
 		// {

@@ -85,6 +85,12 @@
 		public function timeLineBill($date,$param,$column)
 		{
 			$result = '';
+			$oparater = '>';
+			if($column == 'bill_detail_date')
+			{
+				$oparater = '=';
+			}
+
 			if($date == '')
 			{
 		 		$result = $this ->join('admin', 'bill_detail.admin_id', '=', 'admin.admin_id')
@@ -100,10 +106,8 @@
 		 		$result = $this ->join('admin', 'bill_detail.admin_id', '=', 'admin.admin_id')
 								->join('bill', 'bill_detail.bill_code', '=', 'bill.bill_code')
 								->join('customers', 'bill.customers_id', '=', 'customers.customers_id')
-								->where($column,'=',$date)->where('bill_detail_status','>',0)
+								->where($column,'=',$date)->where('bill_detail_status',$oparater,0)
 								->select('admin.admin_id','admin.admin_name','bill_detail.bill_detail_date','bill_detail.bill_detail_id','bill_detail.bill_code','bill_detail.bill_detail_status','customers.customers_name','bill_detail_time','bill_detail_pay_date');
-		 						// ->take(20)
-		 						// ->get();
 		 	
 		 	}
 
