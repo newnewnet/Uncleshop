@@ -253,26 +253,21 @@
 		}
 		public function updateBill($array)
 		{
+			
 			$product = new Product;
 			$billDeatail = new BillDetail;
 			$customers = new Customers;
-
-
 			
 			$data = json_decode($array['data']);
 			$billData = $this->where('bill_code', '=', $data->bill_code)->select('bill_start_date','bill_pay_only_lnterest_amount')->first();
-
 			$billDatailStatus = DB::table('bill_detail')
 									->where('bill_code', '=', $data->bill_code)
 									->where('bill_detail_status', '>', 0)
 									->select('bill_detail_status','bill_detail_price')
 									->get();
-
 			$countbillDatailStatus = count($billDatailStatus);
-
 			DB::table('bill_detail')->where('bill_code', '=', $data->bill_code)->delete();
 			DB::table('product')->where('bill_code', '=', $data->bill_code)->delete();
-
 			$startDate = $billData->bill_start_date;
 			$day = 30;
 		
@@ -280,13 +275,9 @@
 			{
 				$day = 15;
 			}
-
 			$day1 = $day * ($data->bill_date_amount+$billData->bill_pay_only_lnterest_amount);
 			$endDate = strtotime($startDate) + ($day1 * 24 * 60 * 60);
 			$endDate  = date('Y-m-d',$endDate );
-
-			
-
 			$result = $this->where('bill_code','=',$data->bill_code)
 						->update(array(
 					'bill_start_date' => $billData->bill_start_date,
@@ -300,10 +291,8 @@
 					'bill_total' => $data->bill_price_dow,
 					'admin_id' => $data->admin_id
 				));
-
 			for($i=0;$i<count($data->product);$i++)
 			{
-
 				$product->insert([
 						'product_name' => $data->product[$i]->productName,
 						'product_amount' => $data->product[$i]->productAmount,
@@ -311,12 +300,10 @@
 						'bill_code' => $data->bill_code
 				]);
 			}
-
 			for($i=0 ;$i<($data->bill_date_amount+$billData->bill_pay_only_lnterest_amount);$i++)
 			{
 				$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
 				$startDate = date('Y-m-d',$startDate);	
-
 				if($countbillDatailStatus > 0 )
 				{
 					$billDeatail->insert([
@@ -335,10 +322,8 @@
 							'bill_code' => $data->bill_code
 						]);
 				}
-
 				
 			}
-
 			return $result;
 
 		}

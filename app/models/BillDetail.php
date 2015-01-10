@@ -167,7 +167,7 @@
 				$result = $bill->where('bill_code','=',$array['bill_code'])
 							->update(array(
 								'bill_end_date' => $date,
-								'bill_pay_only_lnterest_amount' => ++$dataBill->bill_pay_only_lnterest_amoint,
+								'bill_pay_only_lnterest_amount' => ++$dataBill->bill_pay_only_lnterest_amount,
 								'bill_total' => $billData->bill_total
 							));
 
