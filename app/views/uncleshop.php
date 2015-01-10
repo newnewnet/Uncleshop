@@ -367,9 +367,9 @@
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToPayBill()">
 							ชำระเงิน
 						</div>
-						<div class="sub-title-right CURSOR" ng-click="backToEditBill();" style="right: 105px;" ng-show="findPayBill_toggle == false">
+						<div class="sub-title-right CURSOR" ng-click="backToEditBill();" style="right: 105px;" ng-show="findPayBill_toggle == false && DataPayBill.bill.bill_status == 0">
 							<i class="fa fa-wrench"></i>
-						</div>
+						</div>						
 						<div class="TEXT-RIGHT sub-title-right CURSOR">
 							<div ng-hide="findPayBill_toggle">
 								<form action="/send/print_uncleshop" method="post" target="_blanFk"  >
@@ -486,7 +486,7 @@
 											<label class="col-xs-4 col-sm-2 control-label" style="color: #45B39C;">สินค้า</label>
 											<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.product.length + '    รายการ'}}</label>
 											<label class="col-xs-4 col-sm-2 control-label" style="color: #1196d1;">ราคารวม</label>
-											<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{(DataPayBill.bill.bill_total_price-DataPayBill.bill.bill_interest)|number:0}} {{'    บาท'}}</label>
+											<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{(DataPayBill.bill.bill_price)|number:0}} {{'    บาท'}}</label>
 										</div>
 									</div>
 								</div>
@@ -564,7 +564,7 @@
 									</button>																						
 								</div>
 								<div class="row">
-									<button ng-click="onlyInterest()" ng-show="cutBill_toggle" style="position: relative; left: 50%; margin-left: -110px; margin-bottom: 5px; background-color: #FFA530; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 220px; font-size: 20px;">
+									<button ng-click="onlyInterest()" style="position: relative; left: 50%; margin-left: -110px; margin-bottom: 5px; background-color: #FFA530; color: #efefef; border: 0; border-radius: 3px; padding-left: 5px; padding-top: 3px; float:left; height: 44px; width: 220px; font-size: 20px;">
 										ชำระเงินเฉพาะ<i style="text-decoration: underline;">ดอกเบี้ย</i>เท่านั้น
 									</button>	
 								</div>
@@ -827,30 +827,28 @@
 							ประวัติชำระเงิน
 						</div>
 					</div>
+					
+					<div class="box-bill" style="height: 100%;">
+						  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6">
+						      <div class="input-group" style="margin-bottom: 15px;">  <!-- close-on-date-selection="al()" -->
+						        <input type="text" ng-enter="historyBill(1)" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+						        <span class="input-group-btn">
+						          <button type="button" style="height: 34px;" class="btn btn-default" ng-click="open($event)"><i style="margin-top: -2px;" class="glyphicon glyphicon-calendar"></i></button>
+						        <!-- </span> -->
+						        <!-- <span class="input-group-btn"> -->
+								    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 34px; padding-top: 4px;">
+								    <!-- ค้างชำระ -->
+									    <i class="fa fa-search" style="color: #3498db;"></i>
+								    	<i class="fa fa-caret-down" style="font-size: 15px;"></i>
+								    </button>
+								    <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px; font-family: 'thaisans_semibold';">
+								    	<li ng-click="optionSearchHistory = 'bill_detail_pay_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ชำระแล้ว</j></a></li>
+								        <li ng-click="optionSearchHistory = 'bill_detail_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ครบรอบชำระ</j></a></li>
+								    </ul>
+								</span>
+						      </div>
+						</div>
 
-					<div class="row">
-					  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6">
-					      <div class="input-group" style="margin-bottom: 15px;">  <!-- close-on-date-selection="al()" -->
-					        <input type="text" ng-enter="historyBill(1)" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
-					        <span class="input-group-btn">
-					          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-					        </span>
-					        <span class="input-group-btn">
-							    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 34px; padding-top: 4px;">
-							    <!-- ค้างชำระ -->
-								    <i class="fa fa-search" style="color: #3498db;"></i>
-							    	<i class="fa fa-caret-down" style="font-size: 15px;"></i>
-							    </button>
-							    <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px; font-family: 'thaisans_semibold';">
-							    	<li ng-click="optionSearchHistory = 'bill_detail_pay_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ชำระแล้ว</j></a></li>
-							        <li ng-click="optionSearchHistory = 'bill_detail_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ครบรอบชำระ</j></a></li>
-							    </ul>
-							</span>
-					      </div>
-					  </div>
-					</div>
-
-					<div class="box-bill" style="height: 96%;">
 						<div ng-show="optionSearchHistory == 'bill_detail_pay_date'" class="form-horizontal" style="height: 100%;">
 							<div class="wrapConResult" when-scrolled="historyBill(2)">
 								<div class="conResult">
@@ -1068,7 +1066,7 @@
 								<div  class="conResult">
 									<div ng-hide="adminToggle" ng-repeat="admin in admins" ng-click="editAdmin($index)">
 										<div class="resultUser">
-											<div class="wrap">
+											<div class="wrap" data-ng-class="{'border-super-admin': admin.admin_id == 1}">
 												<div class="icon">
 													<img src="img/icon-44.png" ng-show="admin.admin_sex == 'male'"> <!-- male -->
 													<img src="img/icon-user.png" ng-show="admin.admin_sex == 'female'"> <!-- female -->

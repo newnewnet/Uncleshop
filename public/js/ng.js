@@ -766,6 +766,25 @@ angular.module('uncleshopApp')
 			});
 		}
 
+		var payed_count = 0;
+		for(var i=0; i<$scope.dataEditBill.dateBill.length; i++){
+			if($scope.dataEditBill.dateBill[i].bill_detail_status != 0){
+				payed_count++;
+			}
+		}
+		console.log($scope.timeOfPayment);
+		console.log(payed_count);
+		if($scope.timeOfPayment <= payed_count){
+			console.log('yes');
+			count = false;
+			swal({
+				title: "ไม่สำเร็จ !!",   
+				text: "บิลนี้ชำระไปแล้ว " + payed_count + " ครั้ง จึงไม่สามารถแก้ไขจำนวนเวลา ให้ต่ำกว่าหรือเท่ากับได้",   
+				type: "error",
+				timer: 10000
+			});
+		}			
+
 		if(count != false){
 			var products = [];
 			for(var i=0; i<$scope.productData.length; i++){
@@ -779,37 +798,64 @@ angular.module('uncleshopApp')
 			for(var i=0; i<products.length; i++){
 				product.push(products[i]);
 			}
-			console.log(product);
-			var data = {
-				'bill_code': billCode,
-				// 'bill_interest' : $scope.dataEditBill.bill.bill_interest,
-				// 'bill_total_price' : $scope.dataEditBill.bill.bill_total_price,
-				// 'bill_date_amount' : $scope.dataEditBill.bill.bill_date_amount,
-				// 'bill_price': $scope.dataEditBill.bill.bill_price,
-				// 'bill_type': $scope.dataEditBill.bill.bill_type,
-				// 'bill_price_dow' : $scope.dataEditBill.bill.bill_price_dow,
-				// 'customers_id' : $scope.dataEditBill.customer.customers_id,
-				// 'admin_id': $rootScope.admin.admin_id,
-				// 'product': $scope.productData
+			
+			swal({   
+				title: "แก้ไขข้อมูลบิล ?",   
+				text: "คุณต้องการแก้ไขข้อมูลบิลใช่หรือไม่",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "ใช่, แก้ไข !",   
+				cancelButtonText: "ยกเลิก",
+				closeOnConfirm: false 
+			}, function(){
+				var data = {
+					'bill_code': billCode,
+					// 'bill_interest' : $scope.dataEditBill.bill.bill_interest,
+					// 'bill_total_price' : $scope.dataEditBill.bill.bill_total_price,
+					// 'bill_date_amount' : $scope.dataEditBill.bill.bill_date_amount,
+					// 'bill_price': $scope.dataEditBill.bill.bill_price,
+					// 'bill_type': $scope.dataEditBill.bill.bill_type,
+					// 'bill_price_dow' : $scope.dataEditBill.bill.bill_price_dow,
+					// 'customers_id' : $scope.dataEditBill.customer.customers_id,
+					// 'admin_id': $rootScope.admin.admin_id,
+					// 'product': $scope.productData
 
 
-				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
-				'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
-				'bill_interest' : $scope.interest,
-				'bill_type' : $scope.dataEditBill.bill.bill_type, //ชนิการผ่อน
-				'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
-				'admin_id' : $rootScope.admin.admin_id,
-				'customers_id' : $scope.dataEditBill.customer.customers_id,
-				'product' : $scope.productData
-			};		
+					'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
+					'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
+					'bill_interest' : $scope.interest,
+					'bill_type' : $scope.dataEditBill.bill.bill_type, //ชนิการผ่อน
+					'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
+					'admin_id' : $rootScope.admin.admin_id,
+					'customers_id' : $scope.dataEditBill.customer.customers_id,
+					'product' : $scope.productData
+				};		
 
-			data = {
-				data:JSON.stringify(data)
-			};
-			console.log(data);
-			manageBill.updateBill(data,function(data, status, headers, config){
-				console.log(data);
-			},500);
+				data = {
+					data:JSON.stringify(data)
+				};
+
+				manageBill.updateBill(data,function(data, status, headers, config){
+					if(data == 1){
+						swal({
+							title: "เรียบร้อย !!",   
+							text: "แก้ไขข้อมูลบิลเรียบร้อยแล้ว",   
+							type: "success",
+							timer: 1500
+						});
+						$scope.switchToPayBillTab(billCode);
+					}
+					else{
+						swal({
+							title: "ไม่สำเร็จ !!",   
+							text: "กรุณาลองใหม่อีกครั้ง",   
+							type: "error",
+							timer: 2000
+						});
+					}
+				},500);
+			});
 		}		
 	};
 
@@ -1227,7 +1273,7 @@ angular.module('uncleshopApp')
 
 	/*when init*/
 	$scope.init = function() {
-		$scope.changTab(2);
+		$scope.changTab(3);
 		$scope.today();
 		$scope.adminDefault();
 		$scope.customersDefault();
