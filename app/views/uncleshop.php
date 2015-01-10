@@ -121,7 +121,7 @@
 				    		<div class="text">เพิ่มบิล</div>
 				    	</div>
 
-				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill':tabColor==2, 'amount-bill':tabColor==2.1}">
+				    	<div class="box"  data-ng-click="changTab(2); switchMenu()" data-ng-class="{'amount-bill':tabColor==2 || tabColor==2.1}">
 				    		<span class="icon icon2" >
 				    			<img src="img/icon-22.png"/>
 				    		</span>
@@ -850,7 +850,7 @@
 					  </div>
 					</div>
 
-					<div class="box-bill" style="height: 100%;">
+					<div class="box-bill" style="height: 96%;">
 						<div ng-show="optionSearchHistory == 'bill_detail_pay_date'" class="form-horizontal" style="height: 100%;">
 							<div class="wrapConResult" when-scrolled="historyBill(2)">
 								<div class="conResult">

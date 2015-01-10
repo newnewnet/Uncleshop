@@ -68,7 +68,7 @@ return array(
 		// 	'host'      => 'localhost',
 		// 	'database'  => 'cpnstore_uncleshop',
 		// 	'username'  => 'cpnstore_base',
-		// 	'password'  => '4VeRte0lv',
+		// 	'password'  => 'X5SWrce9bf',
 		// 	'charset'   => 'utf8',
 		// 	'collation' => 'utf8_unicode_ci',
 		// 	'prefix'    => '',
