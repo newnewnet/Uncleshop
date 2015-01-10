@@ -95,7 +95,7 @@
 		}
 		public function getAdmin()
 		{
-			$result = $this->where('admin_status','=',0)->get();
+			$result = $this->get();
 			return  $result;
 		}
 		public function getAdminInterest()
