@@ -270,7 +270,7 @@
 								<div class="row">
 									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">ชื่อสินค้า</label>
 								  <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
-								   	<input type="text" ng-model="product.product_name" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
+								   	<input type="text" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
 									</div>
 
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ราคา</label>
@@ -716,17 +716,17 @@
 								<div class="row">
 									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">ชื่อสินค้า</label>
 								  <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
-								   	<input type="text" ng-model="product.product_name" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
+								   	<input type="text" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
 									</div>
 
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ราคา</label>
 								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
-								    	<input type="text" ng-model="product.product_price" class="form-control TEXT-RIGHT" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')">
+								    	<input type="text" ng-model="product.productPrice" class="form-control TEXT-RIGHT" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')">
 									</div>
 
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">จำนวน</label>
 								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
-								    	<input type="text" ng-model="product.product_amount" class="form-control TEXT-RIGHT"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')">
+								    	<input type="text" ng-model="product.productAmount" class="form-control TEXT-RIGHT"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')">
 									</div>
 
 									<div class="col-xs-offset-5 col-xs-2 col-sm-offset-0 col-sm-1 col-md-1 CURSOR" ng-show="$index==countProduct-1">

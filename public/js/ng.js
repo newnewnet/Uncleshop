@@ -661,7 +661,7 @@ angular.module('uncleshopApp')
 		$scope.billData = [];
 
 		for(var i = 0; i<$scope.productData.length; i++){
-			priceOfAllProduct +=  $scope.productData[i].product_price * $scope.productData[i].product_amount;
+			priceOfAllProduct +=  $scope.productData[i].productPrice * $scope.productData[i].productAmount;
 			console.log(priceOfAllProduct);
 		}
 		
@@ -690,12 +690,17 @@ angular.module('uncleshopApp')
 		manageBill.getBill(data,function(data, status, headers, config){
 			$scope.dataEditBill = data;
 			$scope.productData = [];
+			console.log(data.product);
 			// $scope.DataCustomersOfBill = data.customer; //customers
 			for(var i=0; i<data.product.length; i++){ //product
-				$scope.productData.push(data.product[i]);
+				$scope.productData.push({
+					'productName':data.product[i].product_name,
+					'productPrice':data.product[i].product_price,
+					'productAmount':data.product[i].product_amount
+				});
 			}
 			for(var i=0; i<$scope.productData.length; i++){ //product2
-				$scope.productData[i].product_price = parseInt($scope.productData[i].product_price);
+				$scope.productData[i].product_price = parseInt($scope.productData[i].productPrice);
 			}
 			console.log($scope.productData);
 
@@ -777,17 +782,30 @@ angular.module('uncleshopApp')
 			console.log(product);
 			var data = {
 				'bill_code': billCode,
-				'bill_start_date': $scope.dataEditBill.bill.bill_start_date,
-				'bill_total_price' : $scope.dataEditBill.bill.bill_total_price,
-				'bill_date_amount' : $scope.dataEditBill.bill.bill_date_amount,
-				'bill_price': $scope.dataEditBill.bill.bill_price,
-				'bill_type': $scope.dataEditBill.bill.bill_type,
-				'bill_price_dow' : $scope.dataEditBill.bill.bill_price_dow,
+				// 'bill_interest' : $scope.dataEditBill.bill.bill_interest,
+				// 'bill_total_price' : $scope.dataEditBill.bill.bill_total_price,
+				// 'bill_date_amount' : $scope.dataEditBill.bill.bill_date_amount,
+				// 'bill_price': $scope.dataEditBill.bill.bill_price,
+				// 'bill_type': $scope.dataEditBill.bill.bill_type,
+				// 'bill_price_dow' : $scope.dataEditBill.bill.bill_price_dow,
+				// 'customers_id' : $scope.dataEditBill.customer.customers_id,
+				// 'admin_id': $rootScope.admin.admin_id,
+				// 'product': $scope.productData
+
+
+				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
+				'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
+				'bill_interest' : $scope.interest,
+				'bill_type' : $scope.dataEditBill.bill.bill_type, //ชนิการผ่อน
+				'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
+				'admin_id' : $rootScope.admin.admin_id,
 				'customers_id' : $scope.dataEditBill.customer.customers_id,
-				'admin_id': $rootScope.admin.admin_id,
-				'product': product
+				'product' : $scope.productData
 			};		
 
+			data = {
+				data:JSON.stringify(data)
+			};
 			manageBill.updateBill(data,function(data, status, headers, config){
 				console.log(data);
 			},500);
@@ -1234,18 +1252,18 @@ angular.module('uncleshopApp')
 	{
 		$scope.productData = [];
 		$scope.productData[0]={
-			'product_name':'',
-			'product_price':'',
-			'product_amount':''
+			'productName':'',
+			'productPrice':'',
+			'productAmount':''
 		};
 		$scope.countProduct = $scope.productData.length;
 	};
 
 	$scope.positiveProduct = function() {
 		$scope.productData.push({
-			'product_name':'',
-			'product_price':'',
-			'product_amount':'',
+			'productName':'',
+			'productPrice':'',
+			'productAmount':''
 		});
 		$scope.countProduct = $scope.productData.length;
 	};
@@ -1279,17 +1297,17 @@ angular.module('uncleshopApp')
 		var count = true;
 		angular.forEach($scope.productData, function(products) {
 		
-			if(products.product_name == '')
+			if(products.productName  == '')
 			{
 				count = false;
 				products.productNameError = 'input-error';
 			}
-			if( products.product_price == '' )
+			if( products.productPrice  == '' )
 			{
 				count = false;
 				products.productPriceError = 'input-error';
 			}
-			if(products.product_amount == '')
+			if(products.productAmount  == '')
 			{
 				count = false;
 				products.productAmountError = 'input-error';

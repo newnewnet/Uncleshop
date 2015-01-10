@@ -256,13 +256,24 @@
 			$product = new Product;
 			$billDeatail = new BillDetail;
 			$customers = new Customers;
+
+
 			
 			$data = json_decode($array['data']);
+			$billData = $this->where('bill_code', '=', $data->bill_code)->select('bill_start_date')->first();
+
+			$billDatailStatus = DB::table('bill_detail')
+									->where('bill_code', '=', $data->bill_code)
+									->where('bill_detail_status', '>', 0)
+									->select('bill_detail_status','bill_detail_price')
+									->get();
+
+			$countbillDatailStatus = count($billDatailStatus);
 
 			DB::table('bill_detail')->where('bill_code', '=', $data->bill_code)->delete();
 			DB::table('product')->where('bill_code', '=', $data->bill_code)->delete();
 
-			$startDate = $data->bill_start_date;
+			$startDate = $billData->bill_start_date;
 			$day = 30;
 		
 			if($data->bill_type == 1)
@@ -274,19 +285,18 @@
 			$endDate = time() + ($day1 * 24 * 60 * 60);
 			$endDate  = date('Y-m-d',$endDate );
 
-			$customersId = $customers->where('customers_id_card','=',$data->customers_id_card)
-									->select('customers_id')->first();
+		
 
 			$this->where('bill_code','=',$data->bill_code)
 						->update(array(
-					'bill_start_date' => $data->bill_start_date,
+					'bill_start_date' => $billData->bill_start_date,
 					'bill_end_date' => $endDate,
 					'bill_interest' => $data->bill_interest,
 					'bill_date_amount' => $data->bill_date_amount,
 					'bill_price' => $data->bill_price,
 					'bill_type' => $data->bill_type,
 					'bill_price_dow' => $data->bill_price_dow,
-					'customers_id' => $customersId->customers_id,
+					'customers_id' => $data->customers_id,
 					'bill_total' => $data->bill_price_dow,
 					'admin_id' => $data->admin_id
 				));
@@ -303,17 +313,37 @@
 			}
 
 			for($i=0 ;$i<$data->bill_date_amount;$i++)
-			{		
+			{
 				$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
 				$startDate = date('Y-m-d',$startDate);	
-				$billDeatail->insert([
+
+				if($countbillDatailStatus > 0 )
+				{
+					$billDeatail->insert([
 						'bill_detail_date' => $startDate,
-						'bill_detail_status' => 0,
+						'bill_detail_status' => $billDatailStatus[$i]->bill_detail_status,
+						'bill_detail_price' => $billDatailStatus[$i]->bill_detail_price,
 						'bill_code' => $data->bill_code
-				]);
+					]);
+					$countbillDatailStatus--;
+				}
+				else 
+				{
+						$billDeatail->insert([
+							'bill_detail_date' => $startDate,
+							'bill_detail_status' => 0,
+							'bill_code' => $data->bill_code
+						]);
+				}
+
+					
 			}
 
-			return $billCode;
+
+
+
+
+			// return $billCode;
 		}
 
 		// public function insertBill()
