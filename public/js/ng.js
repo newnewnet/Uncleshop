@@ -695,7 +695,7 @@ angular.module('uncleshopApp')
 			for(var i=0; i<data.product.length; i++){ //product
 				$scope.productData.push({
 					'productName':data.product[i].product_name,
-					'productPrice':data.product[i].product_price,
+					'productPrice':parseInt(data.product[i].product_price),
 					'productAmount':data.product[i].product_amount
 				});
 			}
@@ -806,6 +806,7 @@ angular.module('uncleshopApp')
 			data = {
 				data:JSON.stringify(data)
 			};
+			console.log(data);
 			manageBill.updateBill(data,function(data, status, headers, config){
 				console.log(data);
 			},500);
@@ -1243,6 +1244,7 @@ angular.module('uncleshopApp')
 		$scope.interest = null;
 		$scope.timeOfPayment = null;
 		$scope.dataEditBill = null;
+		$scope.type_dow = 0;
 
 		$scope.priceDowError = '';
 		$scope.interestError = '';
@@ -1346,17 +1348,17 @@ angular.module('uncleshopApp')
 		}
 		if(count)
 		{
-			var billType = 0;
-			if($scope.type_dow == 'week')
-			{
-				billType = 1;
-			}
+			// var billType = 0;
+			// if($scope.type_dow == 'week')
+			// {
+			// 	billType = 1;
+			// }
 			var data = {
 				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
 				'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
 				// 'bill_interest' : $scope.billData.interestValue, 
 				'bill_interest' : $scope.interest,
-				'bill_type' : billType, //ชนิการผ่อน
+				'bill_type' : $scope.type_dow, //ชนิการผ่อน
 				'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
 				'customers_id_card' : $scope.DataCustomersOfBill.customers_id_card,
 				'admin_id':$rootScope.admin.admin_id ,

@@ -312,8 +312,8 @@
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ชนิด</label>
 									<div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
 										<select class="form-control" ng-model="type_dow" ng-click="calBill()">
-								     	<option value="month">เดือน</option>
-								     	<option value="week">วิก</option>          
+								     	<option value="0">เดือน</option>
+								     	<option value="1">วิก</option>          
 								    </select>
 							    </div>
 								</div>
