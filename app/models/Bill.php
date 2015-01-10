@@ -285,6 +285,8 @@
 			$endDate = strtotime($startDate) + ($day1 * 24 * 60 * 60);
 			$endDate  = date('Y-m-d',$endDate );
 
+			
+
 			$result = $this->where('bill_code','=',$data->bill_code)
 						->update(array(
 					'bill_start_date' => $billData->bill_start_date,

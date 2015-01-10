@@ -154,7 +154,7 @@
 				productPrice = commaNumber(productPrice);
 				divProduct+="<div class='text' style='width:85px; border:none'>"+productPrice+"</div></div>";
 				$('#product').append(divProduct);
-				productAmount+=products.product_amount;
+				productAmount+=parseFloat(products.product_amount);
 	  	});
 
 	    var billPrice = parseFloat(bill.bill_price);
