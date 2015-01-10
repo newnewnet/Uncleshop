@@ -260,7 +260,7 @@
 
 			
 			$data = json_decode($array['data']);
-			$billData = $this->where('bill_code', '=', $data->bill_code)->select('bill_start_date')->first();
+			$billData = $this->where('bill_code', '=', $data->bill_code)->select('bill_start_date','bill_pay_only_lnterest_amount')->first();
 
 			$billDatailStatus = DB::table('bill_detail')
 									->where('bill_code', '=', $data->bill_code)
@@ -281,13 +281,11 @@
 				$day = 15;
 			}
 
-			$day1 = $day * $data->bill_date_amount;
-			$endDate = time() + ($day1 * 24 * 60 * 60);
+			$day1 = $day * ($data->bill_date_amount+$billData->bill_pay_only_lnterest_amount);
+			$endDate = strtotime($startDate) + ($day1 * 24 * 60 * 60);
 			$endDate  = date('Y-m-d',$endDate );
 
-		
-
-			$this->where('bill_code','=',$data->bill_code)
+			$result = $this->where('bill_code','=',$data->bill_code)
 						->update(array(
 					'bill_start_date' => $billData->bill_start_date,
 					'bill_end_date' => $endDate,
@@ -312,7 +310,7 @@
 				]);
 			}
 
-			for($i=0 ;$i<$data->bill_date_amount;$i++)
+			for($i=0 ;$i<($data->bill_date_amount+$billData->bill_pay_only_lnterest_amount);$i++)
 			{
 				$startDate= strtotime($startDate) + ($day* 24 * 60 * 60);
 				$startDate = date('Y-m-d',$startDate);	
@@ -336,14 +334,11 @@
 						]);
 				}
 
-					
+				
 			}
 
+			return $result;
 
-
-
-
-			// return $billCode;
 		}
 
 		// public function insertBill()
