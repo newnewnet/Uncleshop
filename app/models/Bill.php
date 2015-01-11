@@ -263,14 +263,28 @@
 			$billDatailStatus = DB::table('bill_detail')
 									->where('bill_code', '=', $data->bill_code)
 									->where('bill_detail_status', '>', 0)
-									->select('bill_detail_status','bill_detail_price')
 									->get();
 			$countbillDatailStatus = count($billDatailStatus);
+
+			$number =  ceil((($data->bill_price+($data->bill_interest*$data->bill_date_amount))-$data->bill_price_dow)/$data->bill_date_amount);
+
+			$bill_total = $data->bill_price_dow;
+			for($i=0;$i<count($billDatailStatus);$i++)
+			{
+				if($billDatailStatus[$i]->bill_detail_status == 1)
+				{
+					$bill_total+=$number;
+				}
+				else if ($billDatailStatus[$i]->bill_detail_status == 3)
+				{
+					$bill_total+=$billDatailStatus[$i]->bill_detail_price;
+				}
+			}
 			DB::table('bill_detail')->where('bill_code', '=', $data->bill_code)->delete();
 			DB::table('product')->where('bill_code', '=', $data->bill_code)->delete();
 			$startDate = $billData->bill_start_date;
 			$day = 30;
-		
+
 			if($data->bill_type == 1)
 			{
 				$day = 15;
@@ -288,7 +302,7 @@
 					'bill_type' => $data->bill_type,
 					'bill_price_dow' => $data->bill_price_dow,
 					'customers_id' => $data->customers_id,
-					'bill_total' => $data->bill_price_dow,
+					'bill_total' => $bill_total,
 					'admin_id' => $data->admin_id
 				));
 			for($i=0;$i<count($data->product);$i++)
@@ -306,12 +320,30 @@
 				$startDate = date('Y-m-d',$startDate);	
 				if($countbillDatailStatus > 0 )
 				{
-					$billDeatail->insert([
-						'bill_detail_date' => $startDate,
-						'bill_detail_status' => $billDatailStatus[$i]->bill_detail_status,
-						'bill_detail_price' => $billDatailStatus[$i]->bill_detail_price,
-						'bill_code' => $data->bill_code
-					]);
+					if($billDatailStatus[$i]->bill_detail_status == 1)
+					{
+						$billDeatail->insert([
+							'bill_detail_date' => $startDate,
+							'bill_detail_status' => $billDatailStatus[$i]->bill_detail_status,
+							'bill_detail_price' => $number,
+							'admin_id' => $billDatailStatus[$i]->admin_id,
+							'bill_detail_time' => $billDatailStatus[$i]->bill_detail_time,
+							'bill_detail_pay_date' => $billDatailStatus[$i]->bill_detail_pay_date,
+							'bill_code' => $data->bill_code
+						]);
+					}
+					else if ($billDatailStatus[$i]->bill_detail_status == 3)
+					{
+						$billDeatail->insert([
+							'bill_detail_date' => $startDate,
+							'bill_detail_status' => $billDatailStatus[$i]->bill_detail_status,
+							'bill_detail_price' => $billDatailStatus[$i]->bill_detail_price,
+							'admin_id' => $billDatailStatus[$i]->admin_id,
+							'bill_detail_time' => $billDatailStatus[$i]->bill_detail_time,
+							'bill_detail_pay_date' => $billDatailStatus[$i]->bill_detail_pay_date,
+							'bill_code' => $data->bill_code
+						]);
+					}
 					$countbillDatailStatus--;
 				}
 				else 
