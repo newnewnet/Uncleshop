@@ -478,9 +478,6 @@ angular.module('uncleshopApp')
 			'bill_detail_id' : $scope.DataPayBill.dateBill[detail_index].bill_detail_id,
 			'bill_detail_price' : detail_price,
 			'admin_id' : $rootScope.admin.admin_id,
-			// 'bill_interest' : ($scope.DataPayBill.bill.bill_interest_to_mount*($scope.DataPayBill.bill.bill_date_amount-(detail_index+1))),
-			'bill_interest' : $scope.DataPayBill.bill.bill_interest,
-			'bill_date_amount' : parseInt(detail_index+1),
 			'bill_code' : $scope.DataPayBill.bill.bill_code
 		};
 
@@ -567,7 +564,7 @@ angular.module('uncleshopApp')
 
 				swal({
 					title: "คุณ " + $scope.DataPayBill.dateBill[index].admin_name.admin_name + " เป็นผู้รับการชำระเงิน"+type,   
-					text: "ประจำวันที่ " + $scope.DataPayBill.dateBill[index].bill_detail_date,   
+					text: "ประจำวันที่ " + $scope.DataPayBill.dateBill[index].bill_detail_date + " เป็นจำนวนเงิน "+ $scope.DataPayBill.dateBill[index].bill_detail_price,   
 				});
 			}
 		}		
@@ -811,21 +808,10 @@ angular.module('uncleshopApp')
 			}, function(){
 				var data = {
 					'bill_code': billCode,
-					// 'bill_interest' : $scope.dataEditBill.bill.bill_interest,
-					// 'bill_total_price' : $scope.dataEditBill.bill.bill_total_price,
-					// 'bill_date_amount' : $scope.dataEditBill.bill.bill_date_amount,
-					// 'bill_price': $scope.dataEditBill.bill.bill_price,
-					// 'bill_type': $scope.dataEditBill.bill.bill_type,
-					// 'bill_price_dow' : $scope.dataEditBill.bill.bill_price_dow,
-					// 'customers_id' : $scope.dataEditBill.customer.customers_id,
-					// 'admin_id': $rootScope.admin.admin_id,
-					// 'product': $scope.productData
-
-
 					'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
 					'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
 					'bill_interest' : $scope.interest,
-					'bill_type' : $scope.dataEditBill.bill.bill_type, //ชนิการผ่อน
+					'bill_type' : $scope.type_dow, //ชนิการผ่อน
 					'bill_price_dow' : $scope.priceDow, //ราคาเงินดาวน์
 					'admin_id' : $rootScope.admin.admin_id,
 					'customers_id' : $scope.dataEditBill.customer.customers_id,

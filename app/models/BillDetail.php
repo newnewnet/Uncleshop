@@ -72,10 +72,8 @@
 				$result = DB::table('bill')->where('bill_code','=',$array['bill_code'])
 								->update(array(
 											'bill_status' => 2,
-											'bill_interest' => $array['bill_interest'],
-											'bill_date_amount' => $array['bill_date_amount'],
+											// 'bill_date_amount' => $array['bill_date_amount'],
 											'bill_total' => $billData->bill_total
-											// 'bill_price' => $array['bill_price']
 								));
 
 				return $result;

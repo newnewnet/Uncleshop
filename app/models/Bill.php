@@ -84,7 +84,7 @@
 			$productData = $product->where('bill_code','=',$billCode)->get();
 			$customerData =  $customer->where('customers_id','=',$billData->customers_id)->first();
 			$adminData = $admin->where('admin_id','=',$billData->admin_id)->select('admin_name')->first();
-			$billDetailData = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status','admin_id')->get();
+			$billDetailData = $billDeatail->where('bill_code','=',$billCode)->select('bill_detail_id','bill_detail_date','bill_detail_status','admin_id','bill_detail_price')->get();
 			$billData['bill_total_price'] = $billData->bill_price+($billData->bill_interest*$billData->bill_date_amount);
 			$billData['bill_installments_price'] = ceil((($billData->bill_price+($billData->bill_interest*$billData->bill_date_amount))-$billData->bill_price_dow)/$billData->bill_date_amount);
 			$billData['bill_pay_price'] = (($billData->bill_price+($billData->bill_interest*$billData->bill_date_amount))-$billData->bill_price_dow);
