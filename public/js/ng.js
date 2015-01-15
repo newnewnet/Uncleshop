@@ -42,7 +42,7 @@ angular.module('uncleshopApp')
 
 	$scope.month = ['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','คุลาคม','พฤศจิกายน','ธันวาคม'];
 		
-	$scope.changTab = function(number)
+	$rootScope.changTab = function(number)
 	{
 		var text = ['','เพิ่มบิล','ค้นหาบิล','ประวัติบิล', 'ข้อมูลลูกค้า', 'ข้อมูลผู้ขาย']
 		$rootScope.tabColor=number;
@@ -1259,7 +1259,7 @@ angular.module('uncleshopApp')
 
 	/*when init*/
 	$scope.init = function() {
-		$scope.changTab(3);
+		$scope.changTab(1);
 		$scope.today();
 		$scope.adminDefault();
 		$scope.customersDefault();
@@ -1374,6 +1374,15 @@ angular.module('uncleshopApp')
 			swal({
 				title: "ไม่สำเร็จ !!",   
 				text: "กรุณาเพิ่มข้อมูลลูกค้าก่อน",   
+				type: "error",
+				timer: 2000
+			});
+		}
+		if($scope.billData.priceTermOfPayment <= 0){ //ถ้าราคาผ่อนส่งติดลบ
+			count = false;
+			swal({
+				title: "ไม่สำเร็จ !!",   
+				text: "ราคาผ่อนชำระไม่สามารถติดลบหรือเท่ากับ 0 ได้",   
 				type: "error",
 				timer: 2000
 			});

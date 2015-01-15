@@ -19,7 +19,7 @@ angular.module('uncleshopApp',['LocalStorageModule','directive.format','ui.boots
 		$scope.popupLogoutFlug = false;
 		$rootScope.tabColor=1;
 		localStorageService.add('admin',null);
-		$scope.focusItem('userName_focus');
+		$scope.focusItem('userName_focus');				
 	};
 
 	$scope.focusItem = function(value) {

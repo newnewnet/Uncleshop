@@ -7,22 +7,23 @@
 		<title>Uncleshop</title>
 
 		<!-- Angularjs -->
-		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-		<!-- <script src="https://code.angularjs.org/1.2.8/angular-animate.min.js"></script> -->
+		<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script> -->
+		<script src="js/angular.min.js"></script>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+	    <script src="js/jquery.min.js"></script>
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="js/bootstrap.min.js"></script>
 
 	    <script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
 
 	    <!-- Google Font -->
-	    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+	    <!-- <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 	    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-	    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'> -->
 
 		<!-- Javascript File -->
 		<script src="js/index.js"></script>
@@ -35,10 +36,10 @@
 		<!-- Sweet Alert -->
 		<script src="lib-sweet-alert/sweet-alert.js"></script>
 		<link rel="stylesheet" href="lib-sweet-alert/sweet-alert.css">
-		<!-- <link rel="stylesheet" href="css/datepicker.css"> -->
 
 		<!-- Font Awesome -->
-		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+		<link href="fonts/font-awesome.css" rel="stylesheet">
 
 		<link rel="stylesheet/less" type="text/css" href="css/styles.less" />
 		<!-- set options before less.js script -->
@@ -399,9 +400,9 @@
 								        <i class="fa fa-caret-down" style="font-size: 15px;"></i>
 								      </button>
 							        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px;">
-							          <li ng-click="optionSearchPayBill = 0; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ค้างชำระ</j></a></li>
-							          <li ng-click="optionSearchPayBill = 1; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ชำระแล้ว</j></a></li>
-							          <li ng-click="optionSearchPayBill = 2; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ทั้งหมด</j></a></li>
+							          <li ng-class="{'bg-li': optionSearchPayBill == 0}" ng-click="optionSearchPayBill = 0; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ค้างชำระ</j></a></li>
+							          <li ng-class="{'bg-li': optionSearchPayBill == 1}" ng-click="optionSearchPayBill = 1; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ชำระแล้ว</j></a></li>
+							          <li ng-class="{'bg-li': optionSearchPayBill == 2}" ng-click="optionSearchPayBill = 2; searchBillForPay(1);"><a>ค้นหา <j style="text-decoration: underline;">ทั้งหมด</j></a></li>
 							        </ul>
 							      </div><!-- /btn-group -->
 							    </div><!-- /input-group -->
@@ -448,7 +449,7 @@
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">สถานะ</label>
-								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left; text-decoration: underline;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
 
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
@@ -463,7 +464,7 @@
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">สถานะ</label>
-								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left; text-decoration: underline;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
 
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
@@ -515,8 +516,8 @@
 								<div class="form-group" style="margin-top: 5px; margin-bottom: 5px;">								
 									<div class="row" style="padding: 0px 0px 0px 15px; background-color: white; border-radius: 3px; border-width: 1px; border-style: dashed; border-color: #1196d1; margin-bottom: 0px;">
 										<div class="row">
-											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
-											<label class="col-xs-7 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">รับเงินแล้ว</label>
+											<label class="col-xs-7 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_total | number:0}} {{'    บาท'}}</label>											
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
 											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: left;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน ("+DataPayBill.bill.bill_date_amount+")เดือน" : "บาท/วิก ("+DataPayBill.bill.bill_date_amount+")วิก")}}</label>
 										</div>
@@ -544,6 +545,10 @@
 											<label class="col-xs-7 col-sm-3 control-label" style="text-align: right;">{{DataPayBill.bill.bill_pay_price | number:0}} {{'    บาท'}}</label>
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
 											<label class="col-xs-7 col-sm-5 control-label" style="text-decoration: underline; text-align: right;">{{DataPayBill.bill.bill_installments_price | number:0}} {{'   '}} {{(DataPayBill.bill.bill_type == "0" ? "บาท/เดือน ("+DataPayBill.bill.bill_date_amount+")เดือน" : "บาท/วิก ("+DataPayBill.bill.bill_date_amount+")วิก")}}</label>
+										</div>
+										<div class="row">
+											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">รับเงินแล้ว</label>
+											<label class="col-xs-7 col-sm-3 control-label" style="text-align: right;">{{DataPayBill.bill.bill_total | number:0}} {{'    บาท'}}</label>											
 										</div>
 									</div>
 								</div>
@@ -831,7 +836,7 @@
 					<div class="box-bill" style="height: 100%;">
 						  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6">
 						      <div class="input-group" style="margin-bottom: 15px;">  <!-- close-on-date-selection="al()" -->
-						        <input type="text" ng-enter="historyBill(1)" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+						        <input type="text" ng-enter="historyBill(1)" clear-text="ลบ" close-text="ปิด" current-text="วันนี้" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/> <!-- ref http://angular-ui.github.io/bootstrap/ -->
 						        <span class="input-group-btn">
 						          <button type="button" style="height: 34px;" class="btn btn-default" ng-click="open($event)"><i style="margin-top: -2px;" class="glyphicon glyphicon-calendar"></i></button>
 						        <!-- </span> -->
@@ -842,8 +847,8 @@
 								    	<i class="fa fa-caret-down" style="font-size: 15px;"></i>
 								    </button>
 								    <ul class="dropdown-menu dropdown-menu-right" role="menu" style="font-size: 20px; font-family: 'thaisans_semibold';">
-								    	<li ng-click="optionSearchHistory = 'bill_detail_pay_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ชำระแล้ว</j></a></li>
-								        <li ng-click="optionSearchHistory = 'bill_detail_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ครบรอบชำระ</j></a></li>
+								    	<li ng-class="{'bg-li': optionSearchHistory == 'bill_detail_pay_date'}" ng-click="optionSearchHistory = 'bill_detail_pay_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ชำระแล้ว</j></a></li>
+								        <li ng-class="{'bg-li': optionSearchHistory == 'bill_detail_date'}" ng-click="optionSearchHistory = 'bill_detail_date'; historyBill(1);"><a>ค้นหา <j style="text-decoration: underline;">บิลที่ครบรอบชำระ</j></a></li>
 								    </ul>
 								</span>
 						      </div>

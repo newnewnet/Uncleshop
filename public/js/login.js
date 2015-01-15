@@ -4,7 +4,8 @@ angular.module('uncleshopApp')
 
 	$scope.login = function()
 	{
-		$rootScope.loadingLogin = true;
+		$rootScope.loadingLogin = true;	
+		$rootScope.changTab(1);	
 		if($scope.userName != '' && $scope.passWord != '')
 		{
 			var data = {
