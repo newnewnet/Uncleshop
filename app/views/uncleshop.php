@@ -43,6 +43,7 @@
 		<link href="fonts/font-awesome.css" rel="stylesheet">
 
 		<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+
 		<link rel="stylesheet/less" type="text/css" href="css/styles.less" />
 		<!-- set options before less.js script -->
 		<script>
@@ -58,6 +59,7 @@
 		  };
 		</script>
 		<script src="js/less.js" type="text/javascript"></script>
+	
 		<!--script src="less.js"></script-->
 	</head>
 
