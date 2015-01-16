@@ -376,6 +376,7 @@ angular.module('uncleshopApp')
 		$scope.DataCustomer_toggle = false;
 		$scope.addProduct_toggle = true;
 		$scope.billCode = null;
+		$scope.disabledInput = false;
 		$scope.setBillDefault();
 	};
 
@@ -440,9 +441,6 @@ angular.module('uncleshopApp')
 				page: $scope.histPage,
 				column: $scope.optionSearchHistory
 			};
-			console.log($scope.optionSearchHistory);
-			console.log('yep');
-			console.log(data.date);
 			manageBill.timeLineBill(data,function(data, status, headers, config){
 				if(data == '' || data.page == 0){
 					$scope.noResultBill = true;
@@ -450,9 +448,7 @@ angular.module('uncleshopApp')
 				}
 
 				$scope.loadingBill = false;
-				console.log(data);
 				$scope.timeline = data;
-				console.log('history value 1');
 			},500);
 		}	
 
@@ -479,9 +475,7 @@ angular.module('uncleshopApp')
 						$scope.timeline.data.push(data.data[i]);
 					}
 				}
-				$scope.loadingBill = false;
-				console.log('history value 2');
-				
+				$scope.loadingBill = false;				
 			},500);
 		}
 
@@ -525,7 +519,6 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.onlyInterest = function() { // จ่ายเฉพาะดอกเบี้ย
-		console.log($scope.DataPayBill);
 		var detail_index = null;
 		for(var i = 0;i<$scope.DataPayBill.dateBill.length;i++){
 			if($scope.DataPayBill.dateBill[i].bill_detail_status == 99 || $scope.DataPayBill.dateBill[i].bill_detail_status == 3){
@@ -651,7 +644,6 @@ angular.module('uncleshopApp')
 							timer: 1500
 						});
 						$scope.payBillWithBillCode($scope.DataPayBill.bill.bill_code);
-						console.log(data);
 					}
 					else{
 						swal({
@@ -694,29 +686,22 @@ angular.module('uncleshopApp')
 		};
 		$scope.billCode = value;
 		manageBill.getBill(data,function(data, status, headers, config){
-			$scope.DataPayBill = data;		
-			console.log(data);				 
+			$scope.DataPayBill = data;				 
 			if($scope.DataPayBill.bill.bill_status == 0){
 				var length = $scope.DataPayBill.dateBill.length;
 
 				for(var i=0; i<length; i++){ // -1 or don't
 					if($scope.DataPayBill.dateBill[i].bill_detail_status == 0){
 						$scope.DataPayBill.dateBill[i].bill_detail_status = 99; // 99 คือ รอจ่ายเงิน
-						console.log('it 0');
 						i = length;
 					}				
 				}				
 
 				if($scope.DataPayBill.dateBill[length-1].bill_detail_status != 0){
 					$scope.cutBill_toggle = false;
-					// console.log('status = '+$scope.DataPayBill.dateBill[length-1].bill_detail_status);
-					// console.log('yes');
 				}
 				else
 					$scope.cutBill_toggle = true;
-
-				console.log('see');
-				console.log($scope.DataPayBill);
 			}
 		},500);
 		$scope.findPayBill_toggle = false;
@@ -746,8 +731,6 @@ angular.module('uncleshopApp')
 
 				if($scope.DataPayBill.dateBill[length-1].bill_detail_status != 0){
 					$scope.cutBill_toggle = false;
-					// console.log('status = '+$scope.DataPayBill.dateBill[length-1].bill_detail_status);
-					// console.log('yes');
 				}
 				else
 					$scope.cutBill_toggle = true;
@@ -771,7 +754,6 @@ angular.module('uncleshopApp')
 
 		for(var i = 0; i<$scope.productData.length; i++){
 			priceOfAllProduct +=  $scope.productData[i].productPrice * $scope.productData[i].productAmount;
-			console.log(priceOfAllProduct);
 		}
 		
 			if($scope.priceDow == null)
@@ -799,7 +781,6 @@ angular.module('uncleshopApp')
 		manageBill.getBill(data,function(data, status, headers, config){
 			$scope.dataEditBill = data;
 			$scope.productData = [];
-			console.log(data.product);
 			// $scope.DataCustomersOfBill = data.customer; //customers
 			for(var i=0; i<data.product.length; i++){ //product
 				$scope.productData.push({
@@ -811,7 +792,6 @@ angular.module('uncleshopApp')
 			for(var i=0; i<$scope.productData.length; i++){ //product2
 				$scope.productData[i].product_price = parseInt($scope.productData[i].productPrice);
 			}
-			console.log($scope.productData);
 
 			$scope.dataEditBill.bill.bill_price_dow = parseInt($scope.dataEditBill.bill.bill_price_dow);
 			$scope.dataEditBill.bill.bill_interest = parseInt($scope.dataEditBill.bill.bill_interest);
@@ -881,10 +861,7 @@ angular.module('uncleshopApp')
 				payed_count++;
 			}
 		}
-		console.log($scope.timeOfPayment);
-		console.log(payed_count);
 		if($scope.timeOfPayment <= payed_count){
-			console.log('yes');
 			count = false;
 			swal({
 				title: "ไม่สำเร็จ !!",   
@@ -1532,6 +1509,15 @@ angular.module('uncleshopApp')
 						timer: 1500
 					});
 					$scope.billCode = data;
+					$scope.disabledInput = true;
+				}
+				else{
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "กรุณาลองใหม่อีกครั้ง",   
+						type: "error",
+						timer: 2000
+					});
 				}
 			})
 		}

@@ -273,17 +273,17 @@
 								<div class="row">
 									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">ชื่อสินค้า</label>
 								  <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
-								   	<input type="text" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" >
+								   	<input type="text" ng-model="product.productName" class="form-control" ng-class="product.productNameError" ng-keyup="checkProductError($index,'productNameError')" ng-disabled="disabledInput">
 									</div>
 
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ราคา</label>
 								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
-								    	<input type="text" ng-model="product.productPrice" class="form-control TEXT-RIGHT" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')">
+								    	<input type="text" ng-model="product.productPrice" class="form-control TEXT-RIGHT" numbers-only="numbers-only" ng-class="product.productPriceError"  ng-keyup="checkProductError($index,'productPriceError')" ng-disabled="disabledInput">
 									</div>
 
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">จำนวน</label>
 								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
-								    	<input type="text" ng-model="product.productAmount" class="form-control TEXT-RIGHT"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')">
+								    	<input type="text" ng-model="product.productAmount" class="form-control TEXT-RIGHT"  numbers-only="numbers-only" ng-class="product.productAmountError"  ng-keyup="checkProductError($index,'productAmountError')" ng-disabled="disabledInput">
 									</div>
 
 									<div class="col-xs-offset-5 col-xs-2 col-sm-offset-0 col-sm-1 col-md-1 CURSOR" ng-show="$index==countProduct-1">
@@ -298,23 +298,23 @@
 								<div class="row">
 									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">เงินดาวน์</label>
 								    <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
-								    	<input type="text" numbers-only="numbers-only" ng-model="priceDow" class="form-control TEXT-RIGHT" ng-keyup="calBill('priceDow')" ng-class="priceDowError">
-										</div>
+								    	<input type="text" numbers-only="numbers-only" ng-model="priceDow" class="form-control TEXT-RIGHT" ng-keyup="calBill('priceDow')" ng-class="priceDowError" ng-disabled="disabledInput">
+									</div>
 
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ดอกเบี้ย</label>
 								    <div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
-								    	<input type="text" numbers-only="numbers-only" ng-model="interest" class="form-control TEXT-RIGHT" ng-keyup="calBill('interest')" ng-class="interestError">
+								    	<input type="text" numbers-only="numbers-only" ng-model="interest" class="form-control TEXT-RIGHT" ng-keyup="calBill('interest')" ng-class="interestError" ng-disabled="disabledInput">
 										</div>																	
 								</div>
 
 								<div class="row">
 									<label class="col-xs-4 col-sm-2 control-label TEXT-CENTER">เวลา</label>
 								    <div class="col-xs-8 col-sm-3" style="margin-bottom: 5px;">
-								    	<input type="text" numbers-only="numbers-only" ng-model="timeOfPayment" class="form-control TEXT-RIGHT" ng-keyup="calBill('timeOfPayment')" ng-class="timeOfPaymentError">
+								    	<input type="text" numbers-only="numbers-only" ng-model="timeOfPayment" class="form-control TEXT-RIGHT" ng-keyup="calBill('timeOfPayment')" ng-class="timeOfPaymentError" ng-disabled="disabledInput">
 										</div>	
 									<label class="col-xs-4 col-sm-1 control-label TEXT-CENTER">ชนิด</label>
 									<div class="col-xs-8 col-sm-2" style="margin-bottom: 5px;">
-										<select class="form-control" ng-model="type_dow" ng-click="calBill()">
+										<select class="form-control" ng-model="type_dow" ng-click="calBill()" ng-disabled="disabledInput">
 								     	<option value="0">เดือน</option>
 								     	<option value="1">วิก</option>          
 								    </select>
