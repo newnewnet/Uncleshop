@@ -306,6 +306,12 @@ angular.module('uncleshopApp')
 		}
 
 		else if(text.length == 0){
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false 
+			});
 			var data = {
 				'customers_id': $scope.EditCustomersId,
 				'customers_id_card': $scope.EditCustomersIdCard,
@@ -347,6 +353,12 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false 
+			});
 			var data = {
 				'customers_id': CustomerId
 			};
@@ -359,6 +371,7 @@ angular.module('uncleshopApp')
 						type: "success",
 						timer: 1500
 					});
+					$scope.backToEditCustomer();
 				}
 				else{
 					swal({
@@ -496,6 +509,12 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false 
+			});
 			manageBill.deleteBill(data,function(data, status, headers, config){
 				if(data == 1){
 					swal({
@@ -542,6 +561,13 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false 
+			});
+
 			manageBill.payOnlyInterest(data,function(data, status, headers, config){
 				if(data == 1){
 					swal({
@@ -596,6 +622,13 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false 
+			});
+
 			manageBill.cutBillDetail(data,function(data, status, headers, config){
 				if(data == 1){
 					swal({
@@ -630,6 +663,12 @@ angular.module('uncleshopApp')
 				cancelButtonText: "ยกเลิก",
 				closeOnConfirm: false 
 			}, function(){
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false 
+				});
 				var data = {
 					'bill_detail_id': $scope.DataPayBill.dateBill[index].bill_detail_id,
 					'bill_detail_price': $scope.DataPayBill.bill.bill_installments_price,
@@ -895,6 +934,12 @@ angular.module('uncleshopApp')
 				cancelButtonText: "ยกเลิก",
 				closeOnConfirm: false 
 			}, function(){
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false 
+				});
 				var data = {
 					'bill_code': billCode,
 					'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
@@ -1180,6 +1225,12 @@ angular.module('uncleshopApp')
 			
 			if(value == 1 && $scope.adminSubmitError == true)
 			{
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false 
+				});
 				manageAdmin.saveAdmin(data,function(data, status, headers, config)
 				{
 					if(data != 'error'){
@@ -1205,6 +1256,12 @@ angular.module('uncleshopApp')
 
 			else if(value == 2)
 			{
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false 
+				});
 				manageAdmin.updateAdmin(data,function(data, status, headers, config)
 				{
 					if(data == '1'){ //update success = 1
@@ -1322,10 +1379,16 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){   
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false 
+			});
+
 			manageAdmin.deleteAdmin(data,function(data, status, headers, config)
-			{
-				$scope.getAdmins();
-				$scope.adminToggle = false;
+			{				
+				console.log(data);
 				if(data == '1'){ //delete success = 1
 					swal({
 						title: "เรียบร้อย !!",   
@@ -1333,6 +1396,8 @@ angular.module('uncleshopApp')
 						type: "success",
 						timer: 1500
 					});
+					$scope.getAdmins();
+					$scope.adminToggle = false;
 				}
 				else{
 					swal({
@@ -1477,12 +1542,14 @@ angular.module('uncleshopApp')
 			});
 		}
 		if(count)
-		{
-			// var billType = 0;
-			// if($scope.type_dow == 'week')
-			// {
-			// 	billType = 1;
-			// }
+		{			
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false 
+			});
+
 			var data = {
 				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
 				'bill_date_amount' : $scope.timeOfPayment, // จำนวนงวด
@@ -1519,7 +1586,7 @@ angular.module('uncleshopApp')
 						timer: 2000
 					});
 				}
-			})
+			},500);
 		}
 	};
 

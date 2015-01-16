@@ -1137,7 +1137,7 @@
 
 								<div class="row"> <!-- col-xs-col-6 col-sm-offset-9 col-sm-col-2 -->
 									<div class="col-xs-6 col-xs-offset-3 col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
-										<button type="button" class="btn btn-danger " ng-click="removeAdmin()" ng-hide="editFlug">ลบ</button>
+										<button type="button" class="btn btn-danger " ng-click="removeAdmin()" ng-hide="editFlug || adminId == 1">ลบ</button>
 										<button type="button" class="btn btn-success" ng-click="register(2)" ng-hide="editFlug">แก้ไข</button>
 										<button type="button" style="margin-left: 53px;" class="btn btn-primary" ng-click="register(1)" ng-show="editFlug">เพิ่ม</button>
 									</div>
