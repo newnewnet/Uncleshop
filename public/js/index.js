@@ -1,4 +1,4 @@
-angular.module('uncleshopApp',['LocalStorageModule','directive.format','ui.bootstrap'])
+angular.module('uncleshopApp',['LocalStorageModule','directive.format','ui.bootstrap','ngLocale'])
 .controller('indexController', ['$scope','localStorageService','$rootScope', function($scope,localStorageService,$rootScope) 
 {
 	$scope.switchMenu = function(){

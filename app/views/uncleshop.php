@@ -7,8 +7,8 @@
 		<title>Uncleshop</title>
 
 		<!-- Angularjs -->
-		<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script> -->
 		<script src="js/angular.min.js"></script>
+		 <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script> -->
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,8 @@
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="js/bootstrap.min.js"></script>
 
-	    <script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+	   
+	    <script src="js/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
 
 	    <!-- Google Font -->
 	    <!-- <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
@@ -41,6 +42,7 @@
 		<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
 		<link href="fonts/font-awesome.css" rel="stylesheet">
 
+		<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
 		<link rel="stylesheet/less" type="text/css" href="css/styles.less" />
 		<!-- set options before less.js script -->
 		<script>
@@ -836,7 +838,8 @@
 					<div class="box-bill" style="height: 100%;">
 						  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6">
 						      <div class="input-group" style="margin-bottom: 15px;">  <!-- close-on-date-selection="al()" -->
-						        <input type="text" ng-enter="historyBill(1)" clear-text="ลบ" close-text="ปิด" current-text="วันนี้" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/> <!-- ref http://angular-ui.github.io/bootstrap/ -->
+						        <!-- <input type="text" class="form-control" datepicker-popup="fullDate" ng-model="dt" is-open="opened" ng-required="true" close-text="Close" /> -->
+						        <input type="text" ng-enter="historyBill(1)" clear-text="ลบ" close-text="ปิด" current-text="วันนี้" class="form-control" maxlength="10" ng-focus="historyBill(1)" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
 						        <span class="input-group-btn">
 						          <button type="button" style="height: 34px;" class="btn btn-default" ng-click="open($event)"><i style="margin-top: -2px;" class="glyphicon glyphicon-calendar"></i></button>
 						        <!-- </span> -->

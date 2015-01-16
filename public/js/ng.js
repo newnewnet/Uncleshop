@@ -1,7 +1,118 @@
 angular.module('uncleshopApp')
-.controller('uncleshopController', ['$scope','$rootScope','manageAdmin','manageCustomers','manageBill', function($scope,$rootScope,manageAdmin,manageCustomers,manageBill) 
+.controller('uncleshopController', ['$scope','$rootScope','$locale','$timeout','manageAdmin','manageCustomers','manageBill', function($scope,$rootScope,$locale,$timeout,manageAdmin,manageCustomers,manageBill) 
 {
 	/*----------------------------------------------------------------*/
+
+	var locales = {
+		fr: {
+	      "DATETIME_FORMATS": {
+	        "AMPMS": [
+	          "AM",
+	          "PM"
+	        ],
+	        "DAY": [
+	          "dimanche",
+	          "lundi",
+	          "mardi",
+	          "mercredi",
+	          "jeudi",
+	          "vendredi",
+	          "samedi"
+	        ],
+	        "MONTH": [
+	          "มกราคม",
+	          "กุมภาพันธ์",
+	          "มีนาคม",
+	          "เมษายน",
+	          "พฤษภาคม",
+	          "มิถุนายน",
+	          "กรกฏาคม",
+	          "สิงหาคม",
+	          "กันยายน",
+	          "ตุลาคม",
+	          "พฤศจิกายน",
+	          "ธันวาคม"
+	        ],
+	        "SHORTDAY": [
+	          "อาทิตย์",
+	          "จันทรื",
+	          "อังคาร",
+	          "พุธ",
+	          "พฤหัสบดี",
+	          "ศุกร์",
+	          "เสาร์"
+	        ],
+	        "SHORTMONTH": [
+	          "janv.",
+	          "f\u00e9vr.",
+	          "mars",
+	          "avr.",
+	          "mai",
+	          "juin",
+	          "juil.",
+	          "ao\u00fbt",
+	          "sept.",
+	          "oct.",
+	          "nov.",
+	          "d\u00e9c."
+	        ],
+	        "fullDate": "EEEE d MMMM y",
+	        "longDate": "d MMMM y",
+	        "medium": "d MMM y HH:mm:ss",
+	        "mediumDate": "d MMM y",
+	        "mediumTime": "HH:mm:ss",
+	        "short": "dd/MM/yy HH:mm",
+	        "shortDate": "dd/MM/yy",
+	        "shortTime": "HH:mm"
+	      },
+	      "NUMBER_FORMATS": {
+	        "CURRENCY_SYM": "\u20ac",
+	        "DECIMAL_SEP": ",",
+	        "GROUP_SEP": "\u00a0",
+	        "PATTERNS": [
+	          {
+	            "gSize": 3,
+	            "lgSize": 3,
+	            "macFrac": 0,
+	            "maxFrac": 3,
+	            "minFrac": 0,
+	            "minInt": 1,
+	            "negPre": "-",
+	            "negSuf": "",
+	            "posPre": "",
+	            "posSuf": ""
+	          },
+	          {
+	            "gSize": 3,
+	            "lgSize": 3,
+	            "macFrac": 0,
+	            "maxFrac": 2,
+	            "minFrac": 2,
+	            "minInt": 1,
+	            "negPre": "(",
+	            "negSuf": "\u00a0\u00a4)",
+	            "posPre": "",
+	            "posSuf": "\u00a0\u00a4"
+	          }
+	        ]
+	      },
+	      "id": "fr-fr",
+	      "pluralCat": function (n) {
+	        if (n >= 0 && n <= 2 && n != 2) {
+	          return PLURAL_CATEGORY.ONE;
+	        }
+	        return PLURAL_CATEGORY.OTHER;
+	      }
+	    }
+	};
+	angular.copy(locales['fr'], $locale);
+	$scope.open = function () {
+	    $timeout(function () {
+	      $scope.opened = true;
+	    });
+	  };
+
+
 	$scope.al = function () {
 		console.log('alert');
 	};
@@ -83,6 +194,7 @@ angular.module('uncleshopApp')
 			$scope.focusItem(null);
 	};
 
+	
 	/////เวลาส่งทำงี้นะ
 /*----------------------------  Customer  ---------------------------------*/
 	$scope.seachCustomers = function (type)
@@ -305,7 +417,6 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.historyBill = function(value) { // วันนี้ลูกค้าคนใดต้องมาจ่ายบ้าง ?
-		console.log('dt'+$scope.dt);
 
 		$scope.loadingBill = true;
 		$scope.noResultBill = false;
@@ -372,7 +483,8 @@ angular.module('uncleshopApp')
 				console.log('history value 2');
 				
 			},500);
-		}	
+		}
+
 	};
 
 	$scope.removeBill = function(index) {		
