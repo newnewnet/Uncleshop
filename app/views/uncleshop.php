@@ -64,9 +64,9 @@
 	</head>
 
 	<body ng-controller="indexController" style="height: 100%;">
-		<div class="loading" ng-show="isLoading"> <!-- isLoading -->
+		<!-- <div class="loading" ng-show="isLoading">
 			<img style="position: relative; width: 80px; height: 80px; left: 50%; top: 35%; margin-left: -40px; maring-top: -40px;" src="img/hourglass.gif">
-		</div>
+		</div> -->
 		<div class="blur-container" ng-show="menu_slide" ng-click="switchMenu()">
 		</div>		
 		<header ng-show="pageFlug">
@@ -1015,7 +1015,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="text" ng-model="EditCustomersIdCard" ng-keyup="keyCheckEditCustomer()" ng-class="EditCustomerError[0]" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus">
+								    	<input type="text" ng-model="EditCustomersIdCard" ng-keyup="checkCustomerId()" ng-class="EditCustomerError[0]" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus">
 									</div>
 								</div>
 								<div class="form-group">

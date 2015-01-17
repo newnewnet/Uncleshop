@@ -294,13 +294,34 @@ angular.module('uncleshopApp')
 		}
 	};
 
-	$scope.keyCheckCustomer = function (){
-		if($scope.customersIdCard == ''){
-			$scope.customersError[0] = 'input-error';
+	$scope.checkCustomerId = function(){
+		if($scope.EditCustomersIdCard.length != 13){
+			$scope.EditCustomerError[0] = 'input-error';
 		}
+
 		else{
-			$scope.customersError[0] = '1';
-		}
+			var data = {
+				'customers_id_card' : $scope.EditCustomersIdCard
+			};
+			manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
+			{
+				if(data == 'customers-same'){
+					$scope.EditCustomerError[0] = 'input-error';
+				}
+				else{
+					$scope.EditCustomerError[0] = '1';
+				}
+			});
+		}		
+	}
+
+	$scope.keyCheckCustomer = function (){
+		// if($scope.customersIdCard == ''){
+		// 	$scope.customersError[0] = 'input-error';
+		// }
+		// else{
+		// 	$scope.customersError[0] = '1';
+		// }
 
 		if($scope.customersName == ''){
 			$scope.customersError[1] = 'input-error';
@@ -358,54 +379,50 @@ angular.module('uncleshopApp')
 				cancelButtonText: "ยกเลิก",
 				closeOnConfirm: false 
 			}, function(){
-				$rootScope.isLoading = true;
-				
-				data = {
-					'customers_id_card' : $scope.EditCustomersIdCard
-				};
-				
-				manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
-					{
-						console.log(data);
-						if(data == 'customers-same'){
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false,
+			       confirmButtonText: "รอซักครู่"
+				});
+				if($scope.customersError[0] == 'input-error'){
+					swal({
+						title: "ไม่สำเร็จ !!",   
+						text: "เลขบัตรประชาชนนี้มีอยู่ในระบบแล้ว",   
+						type: "error",
+						timer: 2000
+					});
+				}
+				else{
+					var data = {
+						'customers_id': $scope.EditCustomersId,
+						'customers_id_card': $scope.EditCustomersIdCard,
+						'customers_name': $scope.EditCustomersName,
+						'customers_address': $scope.EditCustomersAddress,
+						'customers_sex': $scope.EditCustomersSex,
+						'customers_tel': $scope.EditCustomersTel
+					};
+
+					manageCustomers.updateCustomers(data,function(data, status, headers, config){
+						if(data == 1){
+							swal({
+								title: "เรียบร้อย !!",   
+								text: "แก้ไขข้อมูลเรียบร้อยแล้ว",   
+								type: "success",
+								timer: 1500
+							});
+						}
+						else{
 							swal({
 								title: "ไม่สำเร็จ !!",   
-								text: "เลขบัตรประชาชนนี้มีอยู่ในระบบแล้ว",   
+								text: "กรุณาลองใหม่อีกครั้ง",  
 								type: "error",
 								timer: 2000
 							});
 						}
-						else{
-							var data = {
-								'customers_id': $scope.EditCustomersId,
-								'customers_id_card': $scope.EditCustomersIdCard,
-								'customers_name': $scope.EditCustomersName,
-								'customers_address': $scope.EditCustomersAddress,
-								'customers_sex': $scope.EditCustomersSex,
-								'customers_tel': $scope.EditCustomersTel
-							};
-
-							manageCustomers.updateCustomers(data,function(data, status, headers, config){
-								if(data == 1){
-									$rootScope.isLoading = false;
-									swal({
-										title: "เรียบร้อย !!",   
-										text: "แก้ไขข้อมูลเรียบร้อยแล้ว",   
-										type: "success",
-										timer: 1500
-									});
-								}
-								else{
-									swal({
-										title: "ไม่สำเร็จ !!",   
-										text: "กรุณาลองใหม่อีกครั้ง",  
-										type: "error",
-										timer: 2000
-									});
-								}
-							});
-						}
-				}, 500);
+					});
+				}
 			});
 		}
 	};
@@ -421,15 +438,19 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
-			$rootScope.isLoading = true;
-
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false,
+			   confirmButtonText: "รอซักครู่"
+			});
 			var data = {
 				'customers_id': CustomerId
 			};
 			manageCustomers.deleteCustomers(data,function(data, status, headers, config)
 			{
 				if(data == 1){
-					$rootScope.isLoading = false;
 					swal({
 						title: "เรียบร้อย !!",   
 						text: "ลบข้อมูลลูกค้าเรียบร้อยแล้ว",   
@@ -579,10 +600,15 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
-			$rootScope.isLoading = true;
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false,
+			   confirmButtonText: "รอซักครู่"
+			});
 			manageBill.deleteBill(data,function(data, status, headers, config){
 				if(data == 1){
-					$rootScope.isLoading = false;
 					swal({
 						title: "เรียบร้อย !!",   
 						text: "ลบข้อมูลบิลเรียบร้อยแล้ว",   
@@ -627,11 +653,16 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
-			$rootScope.isLoading = true;
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false,
+			   confirmButtonText: "รอซักครู่"
+			});
 
 			manageBill.payOnlyInterest(data,function(data, status, headers, config){
 				if(data == 1){
-					$rootScope.isLoading = false;
 					swal({
 						title: "เรียบร้อย !!",   
 						text: "ชำระเงินเฉพาะดอกเบี้ยเรียบร้อยแล้ว",   
@@ -684,11 +715,16 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){
-			$rootScope.isLoading = true;
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false,
+			   confirmButtonText: "รอซักครู่"
+			});
 
 			manageBill.cutBillDetail(data,function(data, status, headers, config){
 				if(data == 1){
-					$rootScope.isLoading = false;
 					swal({
 						title: "เรียบร้อย !!",   
 						text: "ชำระเงินเรียบร้อยแล้ว",   
@@ -721,8 +757,13 @@ angular.module('uncleshopApp')
 				cancelButtonText: "ยกเลิก",
 				closeOnConfirm: false 
 			}, function(){
-				$rootScope.isLoading = true;
-
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false,
+			   	   confirmButtonText: "รอซักครู่"
+				});
 				var data = {
 					'bill_detail_id': $scope.DataPayBill.dateBill[index].bill_detail_id,
 					'bill_detail_price': $scope.DataPayBill.bill.bill_installments_price,
@@ -730,7 +771,6 @@ angular.module('uncleshopApp')
 				};	
 				manageBill.updateBillDetail(data,function(data, status, headers, config){			
 					if(data == 1){
-						$rootScope.isLoading = false;
 						swal({
 							title: "เรียบร้อย !!",   
 							text: "ชำระเงินเรียบร้อยแล้ว",   
@@ -989,8 +1029,14 @@ angular.module('uncleshopApp')
 				cancelButtonText: "ยกเลิก",
 				closeOnConfirm: false 
 			}, function(){
-				$rootScope.isLoading = true;
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false,
+				   confirmButtonText: "รอซักครู่"
 
+				});
 				var data = {
 					'bill_code': billCode,
 					'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
@@ -1009,7 +1055,6 @@ angular.module('uncleshopApp')
 
 				manageBill.updateBill(data,function(data, status, headers, config){
 					if(data == 1){
-						$rootScope.isLoading = false;
 						swal({
 							title: "เรียบร้อย !!",   
 							text: "แก้ไขข้อมูลบิลเรียบร้อยแล้ว",   
@@ -1290,12 +1335,16 @@ angular.module('uncleshopApp')
 			
 			if(value == 1 && $scope.adminSubmitError == true)
 			{
-				$rootScope.isLoading = true;
-
+				swal({
+				   title: "",   
+				   text: "",   
+				   imageUrl: "img/hourglass.gif",
+				   closeOnConfirm: false,
+				   confirmButtonText: "รอซักครู่"
+				});
 				manageAdmin.saveAdmin(data,function(data, status, headers, config)
 				{
 					if(data != 'error'){
-						$rootScope.isLoading = false;
 						swal({
 							title: "เรียบร้อย !!",   
 							text: "เพิ่มข้อมูลผู้ขายแล้ว",   
@@ -1328,12 +1377,16 @@ angular.module('uncleshopApp')
 					cancelButtonText: "ยกเลิก",
 					closeOnConfirm: false 
 				}, function(){
-					$rootScope.isLoading = true;
-
+					swal({
+					   title: "",   
+					   text: "",   
+					   imageUrl: "img/hourglass.gif",
+					   closeOnConfirm: false,
+				       confirmButtonText: "รอซักครู่"
+					});
 					manageAdmin.updateAdmin(data,function(data, status, headers, config)
 					{
 						if(data == '1'){ //update success = 1
-							$rootScope.isLoading = false;
 							swal({
 								title: "เรียบร้อย !!",   
 								text: "แก้ไขข้อมูลเรียบร้อยแล้ว",   
@@ -1412,23 +1465,20 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.checkAdminId = function(){
-		setTimeout(function()
+		var data = {
+			'admin_id_card': $scope.adminIdCard
+		};
+		manageAdmin.checkAdmin(data,function(data, status, headers, config)
 		{
-			var data = {
-				'admin_id_card': $scope.adminIdCard
-			};
-			manageAdmin.checkAdmin(data,function(data, status, headers, config)
-			{
-				if(data == 'adminId-same'){
-					$scope.adminError[0] = 'input-error';
-					$scope.adminSubmitError = false;
-				}
-				else{
-					$scope.adminError[0] = '';
-					$scope.adminSubmitError = true;
-				}
-			});
-		}, 500);
+			if(data == 'adminId-same'){
+				$scope.adminError[0] = 'input-error';
+				$scope.adminSubmitError = false;
+			}
+			else{
+				$scope.adminError[0] = '';
+				$scope.adminSubmitError = true;
+			}
+		});
 	}
 
 	$scope.checkAdminUserName = function(){
@@ -1491,13 +1541,18 @@ angular.module('uncleshopApp')
 			cancelButtonText: "ยกเลิก",
 			closeOnConfirm: false 
 		}, function(){   
-			$rootScope.isLoading = true;
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false,
+			   confirmButtonText: "รอซักครู่"
+			});
 
 			manageAdmin.deleteAdmin(data,function(data, status, headers, config)
 			{				
 				console.log(data);
 				if(data == '1'){ //delete success = 1
-					$rootScope.isLoading = false;
 					swal({
 						title: "เรียบร้อย !!",   
 						text: "ข้อมูลผู้ขายถูกลบแล้ว",   
@@ -1527,7 +1582,7 @@ angular.module('uncleshopApp')
 		$scope.customersDefault();
 		$scope.productDefault();
 		$scope.EditCustomerError = ['1','1','1','1'];
-		$rootScope.isLoading = false;
+		// $rootScope.isLoading = true;
 	};
 
 	/*----------------------------  prodcut---------------------------------*/
@@ -1652,7 +1707,13 @@ angular.module('uncleshopApp')
 		}
 		if(count)
 		{			
-			$rootScope.isLoading = true;
+			swal({
+			   title: "",   
+			   text: "",   
+			   imageUrl: "img/hourglass.gif",
+			   closeOnConfirm: false ,
+			   confirmButtonText: "รอซักครู่"
+			});
 
 			var data = {
 				'bill_price' : $scope.billData.priceOfAllProduct, // ราคาสินค้าทั้งหมด
@@ -1673,7 +1734,6 @@ angular.module('uncleshopApp')
 			{
 				if(data != '')
 				{	
-					$rootScope.isLoading = false;
 					swal({
 						title: "เรียบร้อย !!",   
 						text: "เพิ่มบิลเรียบร้อยแล้ว",   
