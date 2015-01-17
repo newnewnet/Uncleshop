@@ -64,8 +64,11 @@
 	</head>
 
 	<body ng-controller="indexController" style="height: 100%;">
-		<div class="blur-container" ng-show="menu_slide" ng-click="switchMenu()">
+		<div class="loading" ng-show="isLoading"> <!-- isLoading -->
+			<img style="position: relative; width: 80px; height: 80px; left: 50%; top: 35%; margin-left: -40px; maring-top: -40px;" src="img/hourglass.gif">
 		</div>
+		<div class="blur-container" ng-show="menu_slide" ng-click="switchMenu()">
+		</div>		
 		<header ng-show="pageFlug">
 			<div class="wrapper">
 			  <div class="separate">
@@ -90,8 +93,7 @@
 			  </div>
 			</div>
 	  </header>
-
-
+  	
 		<div class="container" style="margin-bottom: 50px; height: 80%;">
 			<!-- ///////////////////////////login///////////////////////////////////// -->
 			<div class="box-login"  ng-hide="pageFlug" ng-controller="loginController">
@@ -216,25 +218,26 @@
 							<div ng-hide="DataCustomer_search_toggle">
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
-								    <div class="col-sm-5 col-md-5">
-								    	<input type="text" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
+								    <div class="col-sm-5 col-md-5"> 
+								    	 <!-- ng-keyup="check_CustomersIdCard()"  -->
+								    	<input type="text" ng-keyup="keyCheckCustomer()" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" ng-class="customersError[0]">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="customersName" class="form-control" ng-class="customersError[1]">
+								    	<input type="text" ng-keyup="keyCheckCustomer()" ng-model="customersName" class="form-control" ng-class="customersError[1]">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
+								    	<input type="text" ng-keyup="keyCheckCustomer()" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[2]">
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-10 col-md-10">
-								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[4]"></textarea>
+								    	<textarea class="form-control" ng-keyup="keyCheckCustomer()" ng-model="customersAddress" rows="3"  ng-class="customersError[3]"></textarea>
 									</div>
 								</div>
 
@@ -667,7 +670,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="text" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
+								    	<input type="text" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="check_CustomersIdCard()" ng-class="customersError[0]">
 									</div>
 								</div>
 								<div class="form-group">
@@ -677,14 +680,14 @@
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
+								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[2]">
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-10 col-md-10">
-								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[4]"></textarea>
+								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[3]"></textarea>
 									</div>
 								</div>
 
@@ -969,24 +972,24 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="text" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="checkCustomersIdCard()" ng-class="customersError[0]">
+								    	<input type="text" ng-model="customersIdCard" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus" ng-keyup="check_CustomersIdCard()" ng-class="customersError[0]">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="customersName" class="form-control" ng-class="customersError[1]">
+								    	<input type="text" ng-model="customersName" class="form-control" ng-class="customersError[1]" ng-keyup="keyCheckCustomer()">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[3]">
+								    	<input type="text" ng-model="customersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10" ng-class="customersError[2]" ng-keyup="keyCheckCustomer()">
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-10 col-md-10">
-								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[4]"></textarea>
+								    	<textarea class="form-control" ng-model="customersAddress" rows="3"  ng-class="customersError[3]" ng-keyup="keyCheckCustomer()"></textarea>
 									</div>
 								</div>
 
@@ -1012,24 +1015,24 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-								    	<input type="text" ng-model="EditCustomersIdCard" maxlength="13" class="form-control" ng-disabled="true" numbers-only="numbers-only" focus-me="customers_id_focus">
+								    	<input type="text" ng-model="EditCustomersIdCard" ng-keyup="keyCheckEditCustomer()" ng-class="EditCustomerError[0]" maxlength="13" class="form-control" numbers-only="numbers-only" focus-me="customers_id_focus">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-keyup="keyCheckCustomer()" ng-class="EditCustomerError[0]" ng-model="EditCustomersName" class="form-control">
+								    	<input type="text" ng-keyup="keyCheckEditCustomer()" ng-class="EditCustomerError[1]" ng-model="EditCustomersName" class="form-control">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-keyup="keyCheckCustomer()" ng-class="EditCustomerError[1]" ng-model="EditCustomersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10">
+								    	<input type="text" ng-keyup="keyCheckEditCustomer()" ng-class="EditCustomerError[2]" ng-model="EditCustomersTel" class="form-control" numbers-only="numbers-only" ng-model="customersTel" maxlength="10">
 									</div>
 								</div>
 									
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-10 col-md-10">
-								    	<textarea class="form-control" ng-keyup="keyCheckCustomer()" ng-class="EditCustomerError[2]" ng-model="EditCustomersAddress" rows="3"></textarea>
+								    	<textarea class="form-control" ng-keyup="keyCheckEditCustomer()" ng-class="EditCustomerError[3]" ng-model="EditCustomersAddress" rows="3"></textarea>
 									</div>
 								</div>
 
@@ -1095,7 +1098,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 col-md-4 control-label">เลขบัตรประชาชน</label>
 								    <div class="col-sm-5 col-md-5">
-									   	<input type="text" ng-model="adminIdCard" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdminId()" ng-disabled="adminIdDisabled">
+									   	<input type="text" ng-model="adminIdCard" maxlength="13" class="form-control" ng-class="adminError[0]" numbers-only="numbers-only" focus-me="admin_id_focus" ng-keyup="checkAdminId()">
 									</div>
 								</div>
 
@@ -1112,17 +1115,17 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ชื่อ - สกุล</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="adminName" class="form-control">
+								    	<input type="text" ng-model="adminName" class="form-control" ng-class="adminError[3]" ng-keyup="keyCheckAdmin()">
 									</div>
 									<label class="col-sm-2 col-md-2 control-label">เบอร์โทร</label>
 								    <div class="col-sm-4 col-md-4">
-								    	<input type="text" ng-model="adminTel" class="form-control" numbers-only="numbers-only" ng-model="tel" maxlength="10">
+								    	<input type="text" ng-model="adminTel" class="form-control" numbers-only="numbers-only" ng-model="tel" maxlength="10" ng-class="adminError[4]" ng-keyup="keyCheckAdmin()">
 									</div>
 								</div>								
 								<div class="form-group">
 									<label class="col-sm-2 col-md-2 control-label">ที่อยู่</label>
 								    <div class="col-sm-10 col-md-10">
-								    	<textarea class="form-control" ng-model="adminAddress" rows="3"></textarea>
+								    	<textarea class="form-control" ng-model="adminAddress" rows="3" ng-class="adminError[5]" ng-keyup="keyCheckAdmin()"></textarea>
 									</div>
 								</div>
 								<div class="form-group">									
