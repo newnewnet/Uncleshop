@@ -42,23 +42,23 @@
 		<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
 		<link href="fonts/font-awesome.css" rel="stylesheet">
 
-		<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+		<link rel="stylesheet" type="text/css" href="css/main.css">
 
-		<link rel="stylesheet/less" type="text/css" href="css/styles.less" />
+		<!-- <link rel="stylesheet/less" type="text/css" href="css/styles.less" /> -->
 		<!-- set options before less.js script -->
-		<script>
-		  less = {
-		    env: "development",
-		    async: false,
-		    fileAsync: false,
-		    poll: 1000,
-		    functions: {},
-		    dumpLineNumbers: "comments",
-		    relativeUrls: false,
-		    rootpath: ":/a.com/"
-		  };
-		</script>
-		<script src="js/less.js" type="text/javascript"></script>
+	<!-- 	// <script>
+		//   less = {
+		//     env: "development",
+		//     async: false,
+		//     fileAsync: false,
+		//     poll: 1000,
+		//     functions: {},
+		//     dumpLineNumbers: "comments",
+		//     relativeUrls: false,
+		//     rootpath: ":/a.com/"
+		//   };
+		// </script>
+		// <script src="js/less.js" type="text/javascript"></script> -->
 	
 		<!--script src="less.js"></script-->
 	</head>
