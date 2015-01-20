@@ -53,6 +53,10 @@ Route::post('login','UncleshopApiController@loginAdmin');
 
 
 
+Route::get('backup','UncleshopApiController@backupDatabase');
+
+
+
 
 
 

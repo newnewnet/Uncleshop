@@ -52,27 +52,27 @@ return array(
 			'prefix'   => '',
 		),
 
-		// 'mysql' => array(
-		// 	'driver'    => 'mysql',
-		// 	'host'      => 'localhost',
-		// 	'database'  => 'uncleshop',
-		// 	'username'  => 'root',
-		// 	'password'  => '',
-		// 	'charset'   => 'utf8',
-		// 	'collation' => 'utf8_unicode_ci',
-		// 	'prefix'    => '',
-		// ),
-
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'cpnstore_uncleshop',
-			'username'  => 'cpnstore_base',
-			'password'  => 'X5SWrce9bf',
+			'database'  => 'uncleshop',
+			'username'  => 'root',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
+
+		// 'mysql' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'cpnstore_uncleshop',
+		// 	'username'  => 'cpnstore_base',
+		// 	'password'  => 'X5SWrce9bf',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

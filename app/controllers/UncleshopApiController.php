@@ -2,6 +2,7 @@
 
 	class UncleshopApiController extends Controller
 	{
+		
 		public function getCustomers()
 		{	
 			$customers = new Customers;
@@ -174,4 +175,22 @@
 			$bill = new Bill;
 			return $bill->deleteBill($billCode);
 		}
+		public function backupDatabase()
+		{
+			$sock = new HTTPSocket;
+			$sock->connect('cpnstore.com',2222);
+			$sock->set_login('cpnstore','Vj2z58h2gL');
+			$sock->set_method('POST');
+			$sock->query('/CMD_SITE_BACKUP',
+			array(
+			'action' => 'backup',
+			'domain' => 'cpnstore.com',
+			'select1' => 'database',
+			'create' => 'Create'
+			));
+
+			$result = $sock->fetch_body();
+			echo $result;
+		}
+		
 	}
