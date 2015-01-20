@@ -1636,6 +1636,7 @@ angular.module('uncleshopApp')
 	};
 	$scope.minusProduct = function(index) {
 		$scope.productData.splice(index,1);
+		$scope.calBill();
 		$scope.countProduct = $scope.productData.length;
 	};
  	$scope.checkProductError = function(index,nameError)
