@@ -1123,16 +1123,13 @@ angular.module('uncleshopApp')
 	};
 
 	$scope.addCustomers = function(value) {		
-		console.log(value);
 		if($scope.customersIdCard.length == 13 && $scope.customersName != '' && $scope.customersTel.length == 10 && $scope.customersAddress != '')	{
-			console.log($scope.customerSubmit);
 			data = {
 				'customers_id_card' : $scope.customersIdCard
 			};
 			
 			manageCustomers.checkCustomersIdCard(data,function(data, status, headers, config)
 				{
-					console.log(data);
 					if(data == 'customers-same'){
 						swal({
 							title: "ไม่สำเร็จ !!",   
@@ -1153,7 +1150,6 @@ angular.module('uncleshopApp')
 						};
 
 						manageCustomers.addCustomers(data,function(data, status, headers, config) {
-							console.log(data)
 							if(data != 'error'){
 								swal({
 									title: "เรียบร้อย !!",   
@@ -1571,7 +1567,6 @@ angular.module('uncleshopApp')
 
 			manageAdmin.deleteAdmin(data,function(data, status, headers, config)
 			{				
-				console.log(data);
 				if(data == '1'){ //delete success = 1
 					swal({
 						title: "เรียบร้อย !!",   
