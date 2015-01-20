@@ -253,7 +253,7 @@
 
 								<div class="row">
 									<div class="col-xs-2 col-xs-offset-5 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
-										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers()">เพิ่ม</button>
+										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers(1)">เพิ่ม</button>
 									</div>
 								</div>
 
@@ -703,7 +703,7 @@
 
 								<div class="row">
 									<div class="col-xs-2 col-xs-offset-5 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
-										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers()">เพิ่ม</button>
+										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers(2)">เพิ่ม</button>
 									</div>
 								</div>
 
@@ -1005,7 +1005,7 @@
 
 								<div class="row">
 									<div class="col-xs-2 col-xs-offset-5 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2">
-										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers()">เพิ่ม</button>
+										<button type="button" class="btn btn-primary button-primary" style="margin-left: -10px;" ng-click="addCustomers(2)">เพิ่ม</button>
 									</div>
 								</div>
 							</div>

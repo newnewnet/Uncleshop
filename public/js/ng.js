@@ -197,6 +197,19 @@ angular.module('uncleshopApp')
 	
 	/////เวลาส่งทำงี้นะ
 /*----------------------------  Customer  ---------------------------------*/
+	$scope.getOneCustomers = function (value){
+		var data = {
+			'key': value,
+			'perpage': 1,
+			'page': 1
+		}
+		manageCustomers.getCustomers(data,function(data, status, headers, config)
+		{
+			$scope.DataCustomers = data.data;		
+			$scope.addCustomerToBill(0);	
+		},500);
+	};
+
 	$scope.seachCustomers = function (type)
 	{
 		$scope.loadingCustomers = true;
@@ -1109,7 +1122,8 @@ angular.module('uncleshopApp')
 		$scope.customerSubmit = true;
 	};
 
-	$scope.addCustomers = function() {		
+	$scope.addCustomers = function(value) {		
+		console.log(value);
 		if($scope.customersIdCard.length == 13 && $scope.customersName != '' && $scope.customersTel.length == 10 && $scope.customersAddress != '')	{
 			console.log($scope.customerSubmit);
 			data = {
@@ -1139,6 +1153,7 @@ angular.module('uncleshopApp')
 						};
 
 						manageCustomers.addCustomers(data,function(data, status, headers, config) {
+							console.log(data)
 							if(data != 'error'){
 								swal({
 									title: "เรียบร้อย !!",   
@@ -1146,9 +1161,14 @@ angular.module('uncleshopApp')
 									type: "success",
 									timer: 1500
 								});
-								$scope.customersDefault();
+								if(value == 1){
+									$scope.getOneCustomers($scope.customersIdCard);									
+								}
+								else
+									$scope.customersDefault();
+
 								$scope.addProduct_toggle = true;
-								$scope.DataCustomer_toggle = false;
+								$scope.DataCustomer_toggle = false;								
 							}
 							else
 								swal({
