@@ -344,7 +344,7 @@
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #8e44ad; text-decoration: underline;">ราคาผ่อนส่ง</label>
 											<label class="col-xs-5 col-sm-3 control-label TEXT-RIGHT">{{(billData.priceWithoutDow < 0 ? 0 : billData.priceWithoutDow | number:0) + '    บาท'}}</label>
 											<label class="col-xs-5 col-sm-2 control-label" style="color: #45B39C; text-decoration: underline;">ผ่อนชำระ</label>
-											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "month" ? "บาท/เดือน ("+billData.timeOfPayment+")เดือน" : "บาท/วิก ("+billData.timeOfPayment+")วิก")}}</label>
+											<label class="col-xs-5 col-sm-3 control-label" style="text-decoration: underline;">{{billData.priceTermOfPayment | number:0}} {{'   ' + (type_dow == "0" ? "บาท/เดือน ("+billData.timeOfPayment+")เดือน" : "บาท/วิก ("+billData.timeOfPayment+")วิก")}}</label>
 										</div>								
 										<div class="row" style="padding-top: 20px;">
 											<div ng-hide="billCode!=null" class="col-xs-2 col-xs-offset-3 col-sm-2 col-sm-offset-4">

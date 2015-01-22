@@ -918,6 +918,7 @@ angular.module('uncleshopApp')
 					'priceWithoutDow': $scope.priceWithoutDow = (priceOfAllProduct+($scope.interest*$scope.timeOfPayment)) - $scope.priceDow,//ราคารวมดอกเบี้ยและหักเงินดาวน์
 					'priceTermOfPayment': $scope.priceWithoutDow / $scope.timeOfPayment //ราคาต่องวด
 				};
+				console.log($scope.billData);
 
 	};
 
