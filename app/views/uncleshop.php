@@ -375,20 +375,23 @@
 						<div class="TEXT-LEFT sub-title-left CURSOR" ng-click="backToPayBill()">
 							ชำระเงิน
 						</div>
-						<div class="sub-title-right CURSOR" ng-click="backToEditBill();" style="right: 105px;" ng-show="findPayBill_toggle == false && DataPayBill.bill.bill_status == 0">
-							<i class="fa fa-wrench"></i>
-						</div>						
-						<div class="TEXT-RIGHT sub-title-right CURSOR">
+
+						<div class="sub-title-right CURSOR" style="right: 150px;">
 							<div ng-hide="findPayBill_toggle">
 								<form action="/send/print_uncleshop" method="post" target="_blanFk"  >
 									<input type="hidden" name="billCode" value="{{billCode}}"> 
-									<button type="submit" value="ปริ้น" style="border: 0px; background-color: #EEEEEE;">
+									<button type="submit" value="ปริ้น" style="text-align: right; border: 0px; background-color: #EEEEEE;">
 										<i class="fa fa-print" style="color: #555;"> </i>
 									</button>
 								</form>
 							</div>
 						</div>
-						<div class="sub-title-right2 CURSOR" ng-click="removeBill(billCode)" ng-hide="findPayBill_toggle">
+
+						<div class="sub-title-right CURSOR" ng-click="backToEditBill();" style="right: 90px;" ng-show="findPayBill_toggle == false && DataPayBill.bill.bill_status == 0">
+							<i class="fa fa-wrench"></i>
+						</div>						
+						
+						<div class="sub-title-right2 CURSOR" ng-click="removeBill(billCode)" ng-hide="findPayBill_toggle" style="right: 30px;">
 							<i class="fa fa-trash" style="color: #e05b49;"> </i>
 						</div>
 					</div>	
@@ -433,7 +436,7 @@
 													<span class="tel" style="color: #1196d1;">รหัสบิล</span><span class="tel-data">{{data.bill_code}}</span>	
 													<span class="tel" style="color: #8e44ad;">สินค้า</span><span class="tel-data">{{data.product.product_name | limitTo:20}}</span>																										
 													<span class="tel" style="color: #6e2d89;">สถานะบิล</span>
-													<span class="tel-data">{{(data.bill_status==0) ? 'ค้างชำระ' : 'ชำระแล้ว'}} 
+													<span class="tel-data">{{(data.bill_status == 0) ? 'ค้างชำระ' : 'ชำระแล้ว'}} 
 														<i ng-show="data.bill_status != 0" class="fa fa-check" style="color: #1abc9c;"></i> 
 														<i ng-hide="data.bill_status != 0" class="fa fa-times" style="color: #e05b49;"></i> 
 													</span>
@@ -456,7 +459,7 @@
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">สถานะ</label>
-								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left; text-decoration: underline;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left; text-decoration: underline;">{{(DataPayBill.bill.bill_status != 0) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
 
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
@@ -471,7 +474,7 @@
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">รหัสบิล</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.bill.bill_code}}</label>
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e67e22;">สถานะ</label>
-								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left; text-decoration: underline;">{{(DataPayBill.bill.bill_status) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
+								<label class="col-xs-8 col-sm-5 control-label" style="text-align: left; text-decoration: underline;">{{(DataPayBill.bill.bill_status != 0) ? "ชำระครบแล้ว" : "ค้างชำระ"}}</label>	
 
 								<label class="col-xs-4 col-sm-2 control-label" style="color: #e05b49;">ผู้ขาย</label>
 								<label class="col-xs-8 col-sm-3 control-label" style="text-align: left;">{{DataPayBill.admin.admin_name}}</label>
