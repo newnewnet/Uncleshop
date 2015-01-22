@@ -44,6 +44,8 @@
 					'customers_id' => $customersId->customers_id,
 					'bill_create_time' => date('Y-m-d H:i:s'),
 					'bill_total' => $data->bill_price_dow,
+					'bill_installments_price' => $data->bill_installments_price,
+					'bill_pay_price' => $data->bill_pay_price,
 					'admin_id' => $data->admin_id
 			]);
 
@@ -107,29 +109,7 @@
 			// $billData['bill_pay_price'] = (($billData->bill_price+($billData->bill_interest*$billData->bill_date_amount))-$billData->bill_price_dow);
 			$billData['bill_interest_to_mount'] = (($billData->bill_interest*$billData->bill_date_amount)/$billData->bill_date_amount);
 			$count = 0;
-			// if($billDetailData[0]->bill_detail_price != null  && $billDetailData[0]->bill_detail_price != $billData->bill_price)
-			// {
-
-			// 	$totalBillDetail = 0;
-			// 	for($i=0;$i<count($billDetailData);$i++)
-			// 	{
-			// 		if($billDetailData[$i]->bill_detail_price != null &&  $billDetailData[$i]->bill_detail_status == 1)
-			// 		{
-			// 			$totalBillDetail+=$billDetailData[$i]->bill_detail_price;
-						
-			// 		}
-			// 		else if($billDetailData[$i]->bill_detail_price == null)
-			// 		{
-			// 			$count++;
-			// 		}
-
-			// 	}
-			// 	$billData['bill_pay_price'] = $billData['bill_pay_price']-$totalBillDetail ;
-			// 	// $billData['bill_total_price'] = $billData->bill_price+($billData->bill_interest*$billData->bill_date_amount);
-			// 	$billData['bill_installments_price'] = $billData['bill_pay_price']/$count;
-				
-			// 	// $billData['bill_interest_to_mount'] = (($billData->bill_interest*$billData->bill_date_amount)/$billData->bill_date_amount);
-			// }
+			
 	
 			$result['bill'] = $billData;
 			$result['product'] = $productData;
@@ -284,27 +264,41 @@
 			$customers = new Customers;
 			
 			$data = json_decode($array['data']);
-			$billData = $this->where('bill_code', '=', $data->bill_code)->select('bill_start_date','bill_pay_only_lnterest_amount')->first();
+			$billData = $this->where('bill_code', '=', $data->bill_code)->first();
 			$billDatailStatus = DB::table('bill_detail')
 									->where('bill_code', '=', $data->bill_code)
 									->where('bill_detail_status', '>', 0)
 									->get();
 			$countbillDatailStatus = count($billDatailStatus);
 
-			// $number =  ceil((($data->bill_price+($data->bill_interest*$data->bill_date_amount))-$data->bill_price_dow)/$data->bill_date_amount);
+			$count = DB::table('bill_detail')
+									->where('bill_code', '=', $data->bill_code)
+									->where('bill_detail_status', '=', 1)
+									->count();
 
-			// $bill_total = $data->bill_price_dow;
-			// for($i=0;$i<count($billDatailStatus);$i++)
-			// {
-			// 	if($billDatailStatus[$i]->bill_detail_status == 1)
-			// 	{
-			// 		$bill_total+=$number;
-			// 	}
-			// 	else if ($billDatailStatus[$i]->bill_detail_status == 3)
-			// 	{
-			// 		$bill_total+=$billDatailStatus[$i]->bill_detail_price;
-			// 	}
-			// }
+		
+			$totalBillDetail = 0;
+			for($i=0;$i<count($billDatailStatus);$i++)
+			{
+				if($billDatailStatus[$i]->bill_detail_price != null &&  $billDatailStatus[$i]->bill_detail_status == 1)
+				{
+					$totalBillDetail+=$billDatailStatus[$i]->bill_detail_price;
+					
+				}
+				else if($billDatailStatus[$i]->bill_detail_price == null)
+				{
+					$count++;
+				}
+
+			}
+
+			$bill_pay_price = (($data->bill_price+($data->bill_interest*$data->bill_date_amount))-$data->bill_price_dow);
+			$bill_pay_price1 = (($data->bill_price+($data->bill_interest*$data->bill_date_amount))-$data->bill_price_dow)-$totalBillDetail;
+
+			$bill_installments_price = ($bill_pay_price1/($data->bill_date_amount-$count));
+
+				
+
 			DB::table('bill_detail')->where('bill_code', '=', $data->bill_code)->delete();
 			DB::table('product')->where('bill_code', '=', $data->bill_code)->delete();
 			$startDate = $billData->bill_start_date;
@@ -327,6 +321,8 @@
 					'bill_type' => $data->bill_type,
 					'bill_price_dow' => $data->bill_price_dow,
 					'customers_id' => $data->customers_id,
+					'bill_pay_price' => $bill_pay_price,
+					'bill_installments_price' => $bill_installments_price,
 					// 'bill_total' => $bill_total,
 					'admin_id' => $data->admin_id
 				));
